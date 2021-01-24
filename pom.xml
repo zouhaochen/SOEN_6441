@@ -12,6 +12,9 @@
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>13.0.2</maven.compiler.source>
+        <maven.compiler.target>13.0.2</maven.compiler.target>
+        <maven.compiler.compilerVersion>13.0.2</maven.compiler.compilerVersion>
     </properties>
 
 
