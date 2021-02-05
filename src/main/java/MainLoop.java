@@ -23,6 +23,10 @@ public class MainLoop {
         }
         else
             System.out.println("invalid enter");
+
+        int player_flag = 1;
+        String winner = null;
+        int i;
     }
 }
 
