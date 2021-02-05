@@ -14,7 +14,15 @@ public class MainLoop {
         System.out.println("      WELCOME TO WARZONE !     ");
         Scanner scan = new Scanner(System.in);
         System.out.println("Do you want load the game from previously saved game (yes/no)?");
-        String ans = scan.next();
+        String ans = scan.nextLine();
+        if (ans.equals("yes") ){
+            System.out.println("loading previous game");
+        }
+        else if(ans.equals("no")){
+            System.out.println("starting a new game ");
+        }
+        else
+            System.out.println("invalid enter");
     }
 }
 
