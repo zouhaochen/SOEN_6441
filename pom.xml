@@ -6,7 +6,6 @@
 
     <groupId>team05</groupId>
     <artifactId>SOEN_6441</artifactId>
-    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -21,9 +20,9 @@
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>13.0.2</maven.compiler.source>
-        <maven.compiler.target>13.0.2</maven.compiler.target>
-        <maven.compiler.compilerVersion>13.0.2</maven.compiler.compilerVersion>
+        <maven.compiler.source>13</maven.compiler.source>
+        <maven.compiler.target>13</maven.compiler.target>
+        <maven.compiler.compilerVersion>13</maven.compiler.compilerVersion>
     </properties>
 
 
