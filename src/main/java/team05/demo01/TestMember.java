@@ -8,6 +8,7 @@ public class TestMember {
         System.out.println(t2.getName()+','+t2.getEmail());
         TeamMember t3=new TeamMember("Jiaming Han","jiamingtom@gmail.com");
         System.out.println(t3.getName()+','+t3.getEmail());
+        System.out.println();
         TeamMember t4=new TeamMember("Yongtang Lu","wilsonluyongtang_2005@hotmail.com");
         System.out.println(t4.getName()+','+t4.getEmail());
         TeamMember t5=new TeamMember("Zitao Wang","wangzitao9@gmail.com");
