@@ -11,5 +11,7 @@ public class TestMember {
 
         TeamMember t4=new TeamMember("Yongtang Lu","wilsonluyongtang_2005@hotmail.com");
         System.out.println(t4.getName()+','+t4.getEmail());
+        TeamMember t5=new TeamMember("Zitao Wang","wangzitao9@gmail.com");
+        System.out.println(t4.getName()+','+t5.getEmail());
     }
 }
