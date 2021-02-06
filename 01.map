@@ -1,0 +1,18 @@
+<map>//判断文件是不是地图，有这个tag才继续读取
+<continent>//大陆tag，读取这个tag往下的内容都是大陆
+aisa 2//continentID continentvalue
+europe 2
+<country>//国家tag，读取这个tag往下的内容都是国家
+china asia//countryID continentID
+korea asia
+russia europe
+finland europe
+<neighbour>//相邻tag，读取这个tag往下的内容都是相邻关系
+china korean//countryID neighbourcountryID
+china russia
+korea china
+korea russia
+russia china
+russia korea
+russia finland
+finland russia
