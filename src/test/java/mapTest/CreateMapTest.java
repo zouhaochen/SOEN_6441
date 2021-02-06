@@ -1,7 +1,6 @@
-package MapTest;
+package mapTest;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * This class is for testing the function of creating map
