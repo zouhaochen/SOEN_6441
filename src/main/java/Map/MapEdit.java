@@ -21,6 +21,7 @@ public class MapEdit {
         String command = sc.nextLine();
         while(!command.startsWith("editmap ")) {
             System.out.println("invalid command");
+            System.out.println("Please type in your command:");
             command = sc.nextLine();
         }
         String[] s = command.split("editmap ");
