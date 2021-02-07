@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 
 public class MapEdit {
-    private static String dirName = "file";
+    private static String dirName = "domination";
     public static void main(String[] args) throws IOException {
         System.out.println("Please type in your command:");
         Scanner sc = new Scanner(System.in);
