@@ -1,5 +1,4 @@
-package Map;
-import java.util.Scanner;
+package map;
 
 /**
  * This class is to Divide Army and Country to the Players accordingly.

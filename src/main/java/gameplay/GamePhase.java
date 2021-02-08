@@ -1,4 +1,4 @@
-package gamePlay;
+package gameplay;
 
 /**
  * Phase of the game
