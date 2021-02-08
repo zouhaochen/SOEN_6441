@@ -1,8 +1,7 @@
-package gamePlay;
+package gameplay;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * this is game main controller
