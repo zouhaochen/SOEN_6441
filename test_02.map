@@ -1,0 +1,35 @@
+[Map]
+
+author=Zitao Wang
+mapname=test_02
+dimensions=
+image=
+
+[files]
+
+pic=
+
+[continents]
+Asia 5
+Africa 3
+Europe 4
+
+[countries]
+
+1 China 1
+2 Japan 1
+
+3 South Africa 2
+4 Egypt 2
+
+5 France 3
+6 Germany 3 
+
+[borders]
+1 2 3 4
+2 1 3
+3 1 2 4 5 6
+4 1 3 5
+5 3 4 6
+6 3 5
+

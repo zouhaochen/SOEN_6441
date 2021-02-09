@@ -7,7 +7,7 @@ package map;
  * @version 1.0.0
  * */
 
-public class CreateMap {
+public class MapCreate {
 
     public void createMap(){
 
