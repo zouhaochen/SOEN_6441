@@ -6,6 +6,7 @@ import java.util.Scanner;
  * @author hanjiaming
  * @version  1.0.0
  */
+
 public class MainLoop {
     public static void main(String[] args){
 
