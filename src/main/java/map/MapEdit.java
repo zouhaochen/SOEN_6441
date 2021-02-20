@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * This is the map editor
+ * Handle the operations to generate, edit and control the map
+ *
  * @Auther: Haochen Zou
- * @Date: 2021/2/6 - 上午9:55
- * @Description: map
+ * @Date: 2021/2/6
  * @version: 1.0
  */
 
@@ -16,9 +18,19 @@ public class MapEdit {
     private static String dirName = "domination";
     private static Scanner sc = new Scanner(System.in);
 
+    /**
+     *
+     * Loop read the user input commands
+     * Main method in map editor
+     *
+     * @param args receive parameters from the console
+     * @throws IOException if command invalid
+     */
     public static void main(String[] args) throws IOException {
+        System.out.println("You are in the map editor.");
         String command = "";
         for (;;) {
+            System.out.println("Please type in your command:");
             command = sc.nextLine();
             if (command.startsWith("editmap ")) {
                 editmap(command);
@@ -41,6 +53,13 @@ public class MapEdit {
         }
     }
 
+    /**
+     * Load a map from an existing "domination" map file
+     * or create a new map form scratch if the file does not exist
+     *
+     * @param command command user input
+     * @throws IOException if command invalid
+     */
     private static void editmap(String command) throws IOException {
         String[] s = command.split("editmap ");
         if (s.length == 0) {
@@ -50,14 +69,18 @@ public class MapEdit {
         String filename = s[1];
         File f3 = getFile(filename);
         if (f3.exists()) {
-            // read file
             showmap(f3);
         } else {
-            // create file
             f3.createNewFile();
         }
     }
 
+    /**
+     * Get a map file from an existing "domination" map file
+     *
+     * @param filename path to file
+     * @throws IOException if file not found or cannot read
+     */
     private static File getFile(String filename) throws IOException {
         File f = new File("");
         String path = f.getCanonicalPath();
@@ -69,11 +92,23 @@ public class MapEdit {
         return f3;
     }
 
+    /**
+     * Edit continent to map
+     *
+     * @param command command user input
+     * @throws IOException if command invalid
+     */
     private static void editcontinent(String command) throws IOException {
-        // editcontinent -add America 4 -add Africa 3 -remove Asia -remove Europe
         tempSave(command, "editcontinent ", "[continents]");
     }
 
+    /**
+     * Add and remove continents or countries to map file
+     *
+     * @param suffix add or command commands suffix
+     * @param adds store add command
+     * @param rems store remove command
+     */
     private static void optType(String suffix, List<String> adds, List<String> rems) {
         String str1 = "";
         if (suffix.startsWith("-add ")) {
@@ -135,6 +170,14 @@ public class MapEdit {
         optType(str1, adds, rems);
     }
 
+    /**
+     * Edit contents of map file
+     *
+     * @param command command user input
+     * @param editType split command for program to operate according to content
+     * @param head label used for classification in map file
+     * @throws IOException if file not found or cannot read
+     */
     private static void tempSave(String command, String editType, String head) throws IOException {
         String[] s = command.split(editType);
         if (s.length == 0) {
@@ -147,7 +190,7 @@ public class MapEdit {
         optType(suffix, adds, rems);
         File f3 = getFile("01.map");
         BufferedReader br = new BufferedReader(new FileReader(f3));
-        BufferedWriter bw = new BufferedWriter(new FileWriter("temp666.map"));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("temp.map"));
         String line = "";
         StringBuffer sb = new StringBuffer();
         boolean flag = false;
@@ -188,16 +231,32 @@ public class MapEdit {
         br.close();
     }
 
+    /**
+     * Edit country to map
+     *
+     * @param command command user input
+     * @throws IOException if command invalid
+     */
     private static void editcountry(String command) throws IOException {
-        //editcountry -add 1 China 1 -add 2 Korean 2 -remove 3 Russia 2 -remove 4 Finland 2
         tempSave(command, "editcountry ", "[countries]");
     }
 
+    /**
+     * Edit connectivity to map
+     *
+     * @param command command user input
+     * @throws IOException if command invalid
+     */
     private static void editneighbour(String command) throws IOException {
-        //editneighbour -add 1 2 3 -add 2 1 3 -remove 3 1 2 -remove 4 3
         tempSave(command, "editneighbour ", "[borders]");
     }
 
+    /**
+     * Display the map as text
+     *
+     * @param f3 filename user input in editmap command
+     * @throws IOException if file not find
+     */
     private static void showmap(File f3) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(f3));
         String line = "";
@@ -207,6 +266,12 @@ public class MapEdit {
         br.close();
     }
 
+    /**
+     * Save a map to a text file exactly as edited.
+     *
+     * @param command command user input
+     * @throws IOException if command invalid
+     */
     private static void save(String command) throws IOException {
         String[] s = command.split("savemap ");
         if (s.length == 0) {
@@ -215,7 +280,7 @@ public class MapEdit {
         }
         String filename = s[1];
         File file = getFile(filename);
-        File readFile = new File("temp666.map");
+        File readFile = new File("temp.map");
         if(readFile.exists()) {
             BufferedReader br = new BufferedReader(new FileReader(readFile));
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
