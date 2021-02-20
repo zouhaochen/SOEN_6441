@@ -39,6 +39,7 @@ public class MapLineAccessTest {
     }
 
     @Test
+
     /**
      * This method is test case1 for country lines in the map file.
      */
