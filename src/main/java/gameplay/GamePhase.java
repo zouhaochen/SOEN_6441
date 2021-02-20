@@ -9,7 +9,11 @@ public enum GamePhase {
     REINFORCEMENT(2),
     ATTACK(3),
     FORTIFICATION(4),
-    END_OF_GAME(5);
+    END_OF_GAME(5),
+    MAP_EDIT(6),
+    STARTUP(7),
+    ISSUE_ORDER(8);
+
 
     private final int phase;
 

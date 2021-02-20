@@ -1,5 +1,9 @@
 package gameelements;
 
+import command.CommandValidator;
+import gameelements.order.Order;
+import gameelements.order.OrderFactory;
+
 import java.util.*;
 
 public class Player {
@@ -11,12 +15,14 @@ public class Player {
 	private Map<String, Country> d_countriesInControl;
 	private Deque<Order> d_ordersInCurrentTurn;
 	private int d_reinforcementArmies;
+	private CommandValidator d_commandValidator;
 
-	public Player(String p_colour) {
+	public Player(String p_colour, CommandValidator p_commandValidator) {
 		d_id = ++d_count;
 		d_colour = p_colour;
 		d_countriesInControl = new HashMap<>();
 		d_ordersInCurrentTurn = new ArrayDeque<>();
+		d_commandValidator = p_commandValidator;
 	}
 
 	public static int getCount() {
@@ -44,7 +50,7 @@ public class Player {
 	}
 
 	public void assignCountry(Country p_country) {
-		d_countriesInControl.put(p_country.getName(), p_country);
+		d_countriesInControl.put(p_country.getName().toLowerCase(), p_country);
 	}
 
 	public Deque<Order> getOrdersInCurrentTurn() {
@@ -68,7 +74,21 @@ public class Player {
 	}
 
 	public void issueOrder() {
-		addOrderToList(new Order());
+		// read the command from a player
+		String l_command;
+		do {
+			System.out.println("\nPlease enter the command: \n");
+			Scanner l_scanner = new Scanner(System.in);
+			l_command = l_scanner.nextLine();
+		} while (!d_commandValidator.validate(l_command));
+
+		// create an order
+		String[] l_command_arr = l_command.split(" ");
+		Order l_order = OrderFactory.CreateOrder(l_command_arr, this);
+		if (l_order != null) {
+			addOrderToList(l_order);
+		}
+
 	}
 
 	public Order nextOrder() {
