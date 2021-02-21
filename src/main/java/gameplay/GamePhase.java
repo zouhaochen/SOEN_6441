@@ -15,6 +15,9 @@ package gameplay;
     ISSUE_ORDER(8);
 
 
+   /**
+    * the integer that can represent the game phase for easier checking current game phase
+    */
     private final int d_Phase;
 
     /**

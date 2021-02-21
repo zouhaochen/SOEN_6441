@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Game engine test unit
  */
@@ -35,7 +37,7 @@ public class GameEngineTest {
         System.out.println("1.check add Player");
         d_GameEngine.addNewPlayer("red");
         System.out.println("2.check removed Player");
-        d_GameEngine.removePlayer(d_GameEngine.d_GameData.getD_PlayerList().get(0));
+        d_GameEngine.removePlayer(d_GameEngine.d_GameData.getPlayerList().get(0));
 
     }
 
@@ -49,6 +51,7 @@ public class GameEngineTest {
         System.out.println(d_GameData.getCurrentPhase());
         d_GameEngine.d_GameData.setCurrentPhase(GamePhase.ATTACK);
         System.out.println(d_GameData.getCurrentPhase());
+        assertEquals(GamePhase.ATTACK,d_GameEngine.d_GameData.getCurrentPhase());
     }
 
     /**
@@ -58,7 +61,7 @@ public class GameEngineTest {
     public void testShowMap() {
         System.out.println("4. check show map");
         d_GameEngine.addNewPlayer("black");
-        Player l_Player=d_GameEngine.d_GameData.getD_PlayerList().get(0);
+        Player l_Player=d_GameEngine.d_GameData.getPlayerList().get(0);
 
         Country l_Country1=new Country("China");
         l_Country1.setArmies(10);

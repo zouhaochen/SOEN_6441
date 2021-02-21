@@ -45,7 +45,7 @@ public class GameEngine {
      */
     public void addNewPlayer(String p_colour) {
         //new temp player list
-        ArrayList<Player> l_NewPlayerList = d_GameData.getD_PlayerList();
+        ArrayList<Player> l_NewPlayerList = d_GameData.getPlayerList();
         Player l_NewPlayer = new Player(p_colour, d_CommandValidator);
         // add to temp player list
         l_NewPlayerList.add(l_NewPlayer);
@@ -62,7 +62,7 @@ public class GameEngine {
     public void removePlayer(Player p_Player) {
         System.out.println("NOTICE: The Player " + p_Player.getId() + " [" + p_Player.getColour() + "] has been removed from the game.");
         //new temp player list
-        ArrayList<Player> l_PlayerList = d_GameData.getD_PlayerList();
+        ArrayList<Player> l_PlayerList = d_GameData.getPlayerList();
         // remove it
         l_PlayerList.remove(p_Player);
         // set to game data player list
@@ -77,7 +77,7 @@ public class GameEngine {
 
         // set game phase to "attack"
         d_GameData.setCurrentPhase(GamePhase.ATTACK);
-        for (Player l_Player : d_GameData.getD_PlayerList()) {
+        for (Player l_Player : d_GameData.getPlayerList()) {
             // player executes order till order list is empty
             while (l_Player.nextOrder() != null) {
                 l_Player.nextOrder().execute();
