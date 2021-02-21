@@ -1,36 +1,91 @@
 package gameplay;
 
+import command.CommandValidator;
+import gameelements.Player;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * this is game main controller
  */
 public class GameEngine {
 
-    int d_total_players;
-    int d_total_country;
-    ArrayList<String> country_name;
-    ArrayList<String> country_list;
-    ArrayList<String> continent_list;
-    HashMap<String, Integer> army_per_country = new HashMap<String, Integer>();
-//    Map map;
+
+    /**
+     * the GameData you design from the MainLoop
+     */
+    public GameData d_GameData;
+
+    /**
+     * the commandValidator each player will use.
+     */
+    CommandValidator d_CommandValidator;
+
 
     /**
      * GameEngine Constructor
-     * @param total_country for import total country
-     * @param total_players import total players number
-     * @param country_list country list
-     * @param continent_list continent list
+     *
+     * @param p_GameData you should pass reference that Game Data you used
      */
-    public GameEngine(int total_country,int total_players,ArrayList<String> country_list,ArrayList<String> continent_list){
-        d_total_country=total_country;
-        d_total_players=total_players;
-        this.continent_list=country_list;
-        this.continent_list = continent_list;
+    public GameEngine(GameData p_GameData) {
+
+        // new gameData here
+        d_GameData = p_GameData;
+        // command validator initialize here
+        d_CommandValidator = new CommandValidator(d_GameData);
     }
+
+
+    /**
+     * add new player to the game
+     *
+     * @param p_colour you custom player color
+     */
+    public void addNewPlayer(String p_colour) {
+        //new temp player list
+        ArrayList<Player> l_NewPlayerList = d_GameData.getD_PlayerList();
+        Player l_NewPlayer = new Player(p_colour, d_CommandValidator);
+        // add to temp player list
+        l_NewPlayerList.add(l_NewPlayer);
+        // set to game data player list
+        d_GameData.setD_PlayerList(l_NewPlayerList);
+        System.out.println("NOTICE: New Player " + p_colour + " has been added to the game.");
+    }
+
+    /**
+     * remove player from the game
+     *
+     * @param p_Player the player you want to remove
+     */
+    public void removePlayer(Player p_Player) {
+        System.out.println("NOTICE: The Player " + p_Player.getColour() + " has been removed from the game.");
+        //new temp player list
+        ArrayList<Player> l_PlayerList = d_GameData.getD_PlayerList();
+        // remove it
+        l_PlayerList.remove(p_Player);
+        // set to game data player list
+        d_GameData.setD_PlayerList(l_PlayerList);
+    }
+
+
+    /**
+     * this method is current player phase process, player's order will be processed here.
+     */
+    public void phaseProcess() {
+        // if not End of Game
+        while (d_GameData.getCurrentPhase().getGamePhaseAsInt() == 5) {
+            // set game phase to "attack"
+            d_GameData.setCurrentPhase(GamePhase.ATTACK);
+            for (Player l_Player : d_GameData.getD_PlayerList()) {
+                // player executes order till order list is empty
+                while (l_Player.nextOrder() != null) {
+                    l_Player.nextOrder().execute();
+                }
+
+            }
+        }
+    }
+
     /**
      * this method used to show map in game
      */
@@ -38,44 +93,4 @@ public class GameEngine {
 
     }
 
-    /**
-     * this method is current player phase process, player's order will be processed here.
-     *
-     */
-    public void phaseProcess(){
-
-    }
-
-    /**
-     * This method will calculate reinforcement armies ()
-     * @param countries This parameter contains list of countries for current player.
-     * @param continent_country_count This parameter contains continents and total number of countries in each continent.
-     * @param country_continent This parameter contains countries mapped to it's continent.
-     * @return This method will return calculated reinforced armies.
-     */
-    public Integer calReinforcementArmies(List<String> countries, Map<String, Integer> continent_country_count, Map<String, String> country_continent, Map<String, Integer> continent_value) {
-        int reinforced_armies = Math.max(countries.size() / 3, 3);
-        int n = countries.size();
-        List<String> new_continent = new ArrayList<String>();
-        for(int i=0;i<n;i++) {
-            String continent = country_continent.get(countries.get(i));
-            if(new_continent.contains(continent)) {
-                break;
-            }
-            new_continent.add(continent);
-            int continent_have_countries = continent_country_count.get(continent);
-            int flag = continent_have_countries;
-            for(int j=0;j<n;j++) {
-                if(continent == country_continent.get(countries.get(j))) {
-                    flag--;
-                }
-                if(flag == 0)
-                    break;
-            }
-            if(flag == 0) {
-                reinforced_armies += continent_value.get(continent);
-            }
-        }
-        return reinforced_armies;
-    }
 }
