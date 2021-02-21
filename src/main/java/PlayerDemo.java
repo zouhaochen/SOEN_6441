@@ -9,9 +9,7 @@ public class PlayerDemo {
 	public static void main(String[] args) {
 
 		GameData gameData = new GameData();
-		gameData.setCurrentPhase(GamePhase.WAITING_TO_TURN);
-		System.out.println(gameData.getCurrentPhase());
-		gameData.setCurrentPhase(GamePhase.ATTACK);
+		gameData.setCurrentPhase(GamePhase.ISSUE_ORDER);
 		System.out.println(gameData.getCurrentPhase());
 
 		CommandValidator commandValidator = new CommandValidator(gameData);
@@ -27,6 +25,5 @@ public class PlayerDemo {
 		player.issueOrder();
 		player.nextOrder().execute();
 
-		System.out.println("\nArmies left: " + player.getReinforcementArmies());
 	}
 }
