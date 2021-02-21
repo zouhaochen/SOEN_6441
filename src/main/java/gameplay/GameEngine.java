@@ -30,7 +30,7 @@ public class GameEngine {
     public GameEngine(GameData p_GameData) {
 
         // new gameData here
-        d_GameData = new GameData();
+        d_GameData = p_GameData;
         // command validator initialize here
         d_CommandValidator = new CommandValidator(d_GameData);
     }
@@ -39,7 +39,7 @@ public class GameEngine {
     /**
      * add new player to the game
      *
-     * @param p_colour           you custom player color
+     * @param p_colour you custom player color
      */
     public void addNewPlayer(String p_colour) {
         //new temp player list
@@ -57,7 +57,7 @@ public class GameEngine {
      *
      * @param p_Player the player you want to remove
      */
-    public void RemovePlayer(Player p_Player) {
+    public void removePlayer(Player p_Player) {
         System.out.println("NOTICE: The Player " + p_Player.getColour() + " has been removed from the game.");
         //new temp player list
         ArrayList<Player> l_PlayerList = d_GameData.getD_PlayerList();
@@ -72,7 +72,18 @@ public class GameEngine {
      * this method is current player phase process, player's order will be processed here.
      */
     public void phaseProcess() {
+        // if not End of Game
+        while (d_GameData.getCurrentPhase().getGamePhaseAsInt() == 5) {
+            // set game phase to "attack"
+            d_GameData.setCurrentPhase(GamePhase.ATTACK);
+            for (Player l_Player : d_GameData.getD_PlayerList()) {
+                // player executes order till order list is empty
+                while (l_Player.nextOrder() != null) {
+                    l_Player.nextOrder().execute();
+                }
 
+            }
+        }
     }
 
     /**

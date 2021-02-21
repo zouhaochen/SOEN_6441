@@ -1,6 +1,4 @@
-package MainLoop;
-
-import java.util.Scanner;
+package mainloop;
 
 /** The class is to run main activity for the game
  * @author hanjiaming

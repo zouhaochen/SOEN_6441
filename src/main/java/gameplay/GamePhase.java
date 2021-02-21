@@ -15,15 +15,15 @@ public enum GamePhase {
     ISSUE_ORDER(8);
 
 
-    private final int phase;
+    private final int d_Phase;
 
     /**
      * private constructor
      *
-     * @param phase the phase
+     * @param p_Phase the phase
      */
-    GamePhase(int phase) {
-        this.phase = phase;
+    GamePhase(int p_Phase) {
+        this.d_Phase = p_Phase;
     }
 
     /**
@@ -32,6 +32,7 @@ public enum GamePhase {
      * @return number re-present the game phase
      */
     public int getGamePhaseAsInt() {
-        return phase;
+        return d_Phase;
     }
+
 }

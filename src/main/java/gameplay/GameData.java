@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class GameData {
 
-	private GamePhase d_currentPhase;
+	private GamePhase d_CurrentPhase;
 	private int d_TotalPlayer;
 	private int d_total_country;
 	private ArrayList<String> d_CountryName;
@@ -22,18 +22,11 @@ public class GameData {
 	 * game data constructor
 	 */
 	public GameData() {
-		this.d_currentPhase = GamePhase.WAITING_TO_TURN;
+
 		this.d_PlayerList = new ArrayList<>();
 	}
 
 
-	public GamePhase getD_currentPhase() {
-		return d_currentPhase;
-	}
-
-	public void setD_currentPhase(GamePhase d_currentPhase) {
-		this.d_currentPhase = d_currentPhase;
-	}
 
 	public int getD_TotalPlayer() {
 		return d_TotalPlayer;
@@ -87,10 +80,11 @@ public class GameData {
 
 
 	public GamePhase getCurrentPhase() {
-		return d_currentPhase;
+		return d_CurrentPhase;
 	}
 
 	public void setCurrentPhase(GamePhase p_currentPhase) {
-		d_currentPhase = p_currentPhase;
+		d_CurrentPhase = p_currentPhase;
 	}
 }
+
