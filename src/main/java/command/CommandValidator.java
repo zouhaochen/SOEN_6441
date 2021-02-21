@@ -188,7 +188,7 @@ public class CommandValidator {
 			return false;
 		}
 
-		try  {
+		try {
 			Integer.parseInt(p_Command_arr[2]);
 		} catch (Exception p_Exception) {
 			printInvalidArguments();

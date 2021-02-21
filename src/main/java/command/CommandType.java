@@ -8,6 +8,10 @@ import java.util.stream.Stream;
 public enum CommandType {
 
 	/**
+	 * Void command type.
+	 */
+	VOID("void"),
+	/**
 	 * Edit continent command type.
 	 */
 	EDIT_CONTINENT("editcontinent"),
@@ -74,6 +78,17 @@ public enum CommandType {
 	 * @return a object of type CommandType
 	 */
 	public static CommandType getCommandFromLabel(String p_Label) {
-		return Stream.of(CommandType.values()).filter(c->c.d_label.toLowerCase().equals(p_Label)).findFirst().orElse(null);
+		return Stream.of(CommandType.values()).filter(c -> c.d_label.equalsIgnoreCase(p_Label)).findFirst().orElse(null);
 	}
+
+	/**
+	 * Gets the label of an object of CommandType
+	 *
+	 * @param p_CommandType the object of CommandType
+	 * @return the label of the command
+	 */
+	public static String getLabel(CommandType p_CommandType) {
+		return p_CommandType.d_label;
+	}
+
 }
