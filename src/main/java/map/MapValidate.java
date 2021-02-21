@@ -31,14 +31,11 @@ public class MapValidate {
                 int l_x = Integer.parseInt((String)l_string[l_j]);
                 String[] l_stringconnected = l_neighbourlist.get(l_x-1);
                 for(int l_k = 0; l_k < l_stringconnected.length; l_k++){
-                    if (l_string[0].equals(l_stringconnected[l_k])){
+                    if (l_string[0].equals(l_stringconnected[l_k])) {
                         l_flag++;
                         System.out.println(l_flag);
                         break;
                     }
-                    /*else{
-                        System.out.println("A country is not connected!");
-                    }*/
                 }
             }
         }
@@ -53,7 +50,7 @@ public class MapValidate {
         return l_state;
     }
 
-    /*
+
     public static void main(String arg[]){
 
         MapValidate m = new MapValidate();
@@ -62,5 +59,5 @@ public class MapValidate {
         int c = m.validatecountryconnection(l_file);
         System.out.println(c);
 
-    }*/
+    }
 }
