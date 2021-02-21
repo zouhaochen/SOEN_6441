@@ -1,5 +1,7 @@
 package gameplay;
 
+import gameelements.Continent;
+import gameelements.Country;
 import gameelements.Player;
 
 import java.util.ArrayList;
@@ -9,82 +11,91 @@ import java.util.ArrayList;
  */
 public class GameData {
 
-	private GamePhase d_CurrentPhase;
-	private int d_TotalPlayer;
-	private int d_total_country;
-	private ArrayList<String> d_CountryName;
-	private ArrayList<String> d_CountryList;
-	private ArrayList<String> d_ContinentList;
-	private ArrayList<Player> d_PlayerList;
+    private GamePhase d_CurrentPhase;
+    private int d_TotalPlayer;
+    private int d_TotalCountry;
 
 
-	/**
-	 * game data constructor
-	 */
-	public GameData() {
-
-		this.d_PlayerList = new ArrayList<>();
-	}
+    private ArrayList<Country> d_CountryList;
+    private ArrayList<Continent> d_ContinentList;
+    private ArrayList<Player> d_PlayerList;
 
 
+    /**
+     * game data constructor
+     */
+    public GameData() {
 
-	public int getD_TotalPlayer() {
-		return d_TotalPlayer;
-	}
+        this.d_PlayerList = new ArrayList<>();
+    }
 
-	public void setD_TotalPlayer(int d_TotalPlayer) {
-		this.d_TotalPlayer = d_TotalPlayer;
-	}
+    public ArrayList<Country> getD_CountryList() {
+        return d_CountryList;
+    }
 
-	public int getD_total_country() {
-		return d_total_country;
-	}
+    public void setD_CountryList(ArrayList<Country> d_CountryList) {
+        this.d_CountryList = d_CountryList;
+    }
 
-	public void setD_total_country(int d_total_country) {
-		this.d_total_country = d_total_country;
-	}
+    public ArrayList<Continent> getD_ContinentList() {
+        return d_ContinentList;
+    }
 
-	public ArrayList<String> getD_CountryName() {
-		return d_CountryName;
-	}
+    public void setD_ContinentList(ArrayList<Continent> d_ContinentList) {
+        this.d_ContinentList = d_ContinentList;
+    }
 
-	public void setD_CountryName(ArrayList<String> d_CountryName) {
-		this.d_CountryName = d_CountryName;
-	}
+    public int getD_TotalPlayer() {
+        return d_TotalPlayer;
+    }
 
-	public ArrayList<String> getD_CountryList() {
-		return d_CountryList;
-	}
+    public void setD_TotalPlayer(int d_TotalPlayer) {
+        this.d_TotalPlayer = d_TotalPlayer;
+    }
 
-	public void setD_CountryList(ArrayList<String> d_CountryList) {
-		this.d_CountryList = d_CountryList;
-	}
+    public int getD_TotalCountry() {
+        return d_TotalCountry;
+    }
 
-	public ArrayList<String> getD_ContinentList() {
-		return d_ContinentList;
-	}
-
-	public void setD_ContinentList(ArrayList<String> d_ContinentList) {
-		this.d_ContinentList = d_ContinentList;
-	}
-
-	public ArrayList<Player> getD_PlayerList() {
-		return d_PlayerList;
-	}
-
-	public void setD_PlayerList(ArrayList<Player> d_PlayerList) {
-		// set total player number to list length
-		this.d_PlayerList = d_PlayerList;
-		d_TotalPlayer=d_PlayerList.size();
-	}
+    public void setD_TotalCountry(int d_TotalCountry) {
+        this.d_TotalCountry = d_TotalCountry;
+    }
 
 
-	public GamePhase getCurrentPhase() {
-		return d_CurrentPhase;
-	}
+    public ArrayList<Player> getD_PlayerList() {
+        return d_PlayerList;
+    }
 
-	public void setCurrentPhase(GamePhase p_currentPhase) {
-		d_CurrentPhase = p_currentPhase;
-	}
+    public void setD_PlayerList(ArrayList<Player> d_PlayerList) {
+        // set total player number to list length
+        this.d_PlayerList = d_PlayerList;
+        d_TotalPlayer = d_PlayerList.size();
+    }
+
+
+    public GamePhase getCurrentPhase() {
+        return d_CurrentPhase;
+    }
+
+    public void setCurrentPhase(GamePhase p_currentPhase) {
+        d_CurrentPhase = p_currentPhase;
+    }
+
+    /**
+     * @param p_Player the player you want in player list
+     * @return <ul>
+     *              <li>specific player that you want</li>
+     *              <li>player no found return null</li>
+     *          </ul>
+     */
+    public Player getTargetPlayer(Player p_Player) {
+        for (Player l_Player : d_PlayerList) {
+            if (l_Player.getId() == p_Player.getId()) {
+                return l_Player;
+            }
+        }
+        System.out.println("ERROR: Player No Found.");
+        return null;
+    }
 }
 

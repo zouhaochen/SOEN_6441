@@ -1,5 +1,6 @@
 package gamePlayTest;
 
+import gameelements.Player;
 import gameplay.GameData;
 import gameplay.GameEngine;
 import gameplay.GamePhase;
@@ -30,19 +31,31 @@ public class GameEngineTest {
     public void testAddRemovePlayer() {
         System.out.println("1.check add Player");
         d_GameEngine.addNewPlayer("red");
-        System.out.println("1.check removed Player");
+        System.out.println("2.check removed Player");
         d_GameEngine.removePlayer(d_GameEngine.d_GameData.getD_PlayerList().get(0));
+
     }
 
     /**
      * test game phase change.
      */
     @Test
-    public void testPhaseChange(){
+    public void testPhaseChange() {
         System.out.println("3.check phase change");
         d_GameEngine.d_GameData.setCurrentPhase(GamePhase.WAITING_TO_TURN);
         System.out.println(d_GameData.getCurrentPhase());
         d_GameEngine.d_GameData.setCurrentPhase(GamePhase.ATTACK);
         System.out.println(d_GameData.getCurrentPhase());
+    }
+
+    /**
+     * test show map function
+     */
+    @Test
+    public void testShowMap() {
+        System.out.println("4. check show map");
+        d_GameEngine.addNewPlayer("black");
+        Player l_Player=d_GameEngine.d_GameData.getD_PlayerList().get(0);
+        d_GameEngine.showMap(l_Player);
     }
 }

@@ -1,9 +1,11 @@
 package gameplay;
 
 import command.CommandValidator;
+import gameelements.Country;
 import gameelements.Player;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * this is game main controller
@@ -49,7 +51,7 @@ public class GameEngine {
         l_NewPlayerList.add(l_NewPlayer);
         // set to game data player list
         d_GameData.setD_PlayerList(l_NewPlayerList);
-        System.out.println("NOTICE: New Player " + p_colour + " has been added to the game.");
+        System.out.println("NOTICE: New Player " + l_NewPlayer.getId() + " " + l_NewPlayer.getColour() + " has been added to the game.");
     }
 
     /**
@@ -58,7 +60,7 @@ public class GameEngine {
      * @param p_Player the player you want to remove
      */
     public void removePlayer(Player p_Player) {
-        System.out.println("NOTICE: The Player " + p_Player.getColour() + " has been removed from the game.");
+        System.out.println("NOTICE: The Player " + p_Player.getId() + " " + p_Player.getColour() + " has been removed from the game.");
         //new temp player list
         ArrayList<Player> l_PlayerList = d_GameData.getD_PlayerList();
         // remove it
@@ -72,24 +74,34 @@ public class GameEngine {
      * this method is current player phase process, player's order will be processed here.
      */
     public void phaseProcess() {
-        // if not End of Game
-        while (d_GameData.getCurrentPhase().getGamePhaseAsInt() == 5) {
-            // set game phase to "attack"
-            d_GameData.setCurrentPhase(GamePhase.ATTACK);
-            for (Player l_Player : d_GameData.getD_PlayerList()) {
-                // player executes order till order list is empty
-                while (l_Player.nextOrder() != null) {
-                    l_Player.nextOrder().execute();
-                }
 
+        // set game phase to "attack"
+        d_GameData.setCurrentPhase(GamePhase.ATTACK);
+        for (Player l_Player : d_GameData.getD_PlayerList()) {
+            // player executes order till order list is empty
+            while (l_Player.nextOrder() != null) {
+                l_Player.nextOrder().execute();
             }
+
         }
+        d_GameData.setCurrentPhase(GamePhase.WAITING_TO_TURN);
     }
 
+
     /**
-     * this method used to show map in game
+     * this method used to player show map in game
+     * @param p_Player input the playerID you want to show its map
      */
-    public void showMap() {
+    public void showMap(Player p_Player) {
+        Player l_Player = d_GameData.getTargetPlayer(p_Player);
+        System.out.println("Player " + l_Player.getColour() + " your current army force show below: ");
+        // iterate each country in player's map
+        for (Map.Entry<String, Country> l_CountryEntry : l_Player.getCountriesInControl().entrySet()) {
+            String l_CountryName = l_CountryEntry.getKey();
+            Country l_Country = l_CountryEntry.getValue();
+            int ArmyNum = l_Country.getArmies();
+            System.out.println(l_CountryName + "has " + ArmyNum + " Armies.");
+        }
 
     }
 
