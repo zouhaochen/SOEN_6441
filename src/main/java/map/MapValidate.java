@@ -50,7 +50,7 @@ public class MapValidate {
         return l_state;
     }
 
-    /*
+
     public static void main(String arg[]){
 
         MapValidate m = new MapValidate();
@@ -59,5 +59,5 @@ public class MapValidate {
         int c = m.validatecountryconnection(l_file);
         System.out.println(c);
 
-    }*/
+    }
 }
