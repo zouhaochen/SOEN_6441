@@ -3,7 +3,7 @@ package gameplay;
 /**
  * Phase of the game
  */
-public enum GamePhase {
+ public enum GamePhase {
     LOST(0),
     WAITING_TO_TURN(1),
     REINFORCEMENT(2),
