@@ -9,9 +9,7 @@ public class PlayerDemo {
 	public static void main(String[] args) {
 
 		GameData gameData = new GameData();
-		gameData.setCurrentPhase(GamePhase.WAITING_TO_TURN);
-		System.out.println(gameData.getCurrentPhase());
-		gameData.setCurrentPhase(GamePhase.ATTACK);
+		gameData.setCurrentPhase(GamePhase.STARTUP);
 		System.out.println(gameData.getCurrentPhase());
 
 		CommandValidator commandValidator = new CommandValidator(gameData);
