@@ -3,14 +3,14 @@ package MainLoopTest;
 import org.junit.Test;
 
 /**
- * Game engine test unit
+ *MainLoop test unit
  */
 public class MainLoopTest {
     @Test
     /**
      * this method used to test MainLoop Class
      */
-    public void testGameEngine() {
+    public void MainLoopTest() {
         System.out.println("MainLoop class Tested");
     }
 }
