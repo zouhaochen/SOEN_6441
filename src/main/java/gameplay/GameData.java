@@ -29,35 +29,31 @@ public class GameData {
         this.d_PlayerList = new ArrayList<>();
     }
 
-    public ArrayList<Country> getD_CountryList() {
+    public ArrayList<Country> getCountryList() {
         return d_CountryList;
     }
 
-    public void setD_CountryList(ArrayList<Country> d_CountryList) {
+    public void setCountryList(ArrayList<Country> d_CountryList) {
         this.d_CountryList = d_CountryList;
     }
 
-    public ArrayList<Continent> getD_ContinentList() {
+    public ArrayList<Continent> getContinentList() {
         return d_ContinentList;
     }
 
-    public void setD_ContinentList(ArrayList<Continent> d_ContinentList) {
+    public void setContinentList(ArrayList<Continent> d_ContinentList) {
         this.d_ContinentList = d_ContinentList;
     }
 
-    public int getD_TotalPlayer() {
+    public int getTotalPlayer() {
         return d_TotalPlayer;
     }
 
-    public void setD_TotalPlayer(int d_TotalPlayer) {
-        this.d_TotalPlayer = d_TotalPlayer;
-    }
-
-    public int getD_TotalCountry() {
+    public int getTotalCountry() {
         return d_TotalCountry;
     }
 
-    public void setD_TotalCountry(int d_TotalCountry) {
+    public void setTotalCountry(int d_TotalCountry) {
         this.d_TotalCountry = d_TotalCountry;
     }
 
@@ -66,7 +62,7 @@ public class GameData {
         return d_PlayerList;
     }
 
-    public void setD_PlayerList(ArrayList<Player> d_PlayerList) {
+    public void setPlayerList(ArrayList<Player> d_PlayerList) {
         // set total player number to list length
         this.d_PlayerList = d_PlayerList;
         d_TotalPlayer = d_PlayerList.size();

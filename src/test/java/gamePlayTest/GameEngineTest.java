@@ -1,10 +1,13 @@
 package gamePlayTest;
 
+import gameelements.Country;
 import gameelements.Player;
 import gameplay.GameData;
 import gameplay.GameEngine;
 import gameplay.GamePhase;
 import org.junit.Test;
+
+import java.util.Map;
 
 /**
  * Game engine test unit
@@ -56,6 +59,14 @@ public class GameEngineTest {
         System.out.println("4. check show map");
         d_GameEngine.addNewPlayer("black");
         Player l_Player=d_GameEngine.d_GameData.getD_PlayerList().get(0);
+
+        Country l_Country1=new Country("China");
+        l_Country1.setArmies(10);
+        Country l_Country2=new Country("India");
+        l_Country2.setArmies(5);
+        Map<String,Country> l_TempCountryMap=l_Player.getCountriesInControl();
+        l_TempCountryMap.put(l_Country1.getName(),l_Country1);
+        l_TempCountryMap.put(l_Country2.getName(),l_Country2);
         d_GameEngine.showMap(l_Player);
     }
 }

@@ -50,8 +50,8 @@ public class GameEngine {
         // add to temp player list
         l_NewPlayerList.add(l_NewPlayer);
         // set to game data player list
-        d_GameData.setD_PlayerList(l_NewPlayerList);
-        System.out.println("NOTICE: New Player " + l_NewPlayer.getId() + " " + l_NewPlayer.getColour() + " has been added to the game.");
+        d_GameData.setPlayerList(l_NewPlayerList);
+        System.out.println("NOTICE: New Player " + l_NewPlayer.getId() + " [" + l_NewPlayer.getColour() + "] has been added to the game.");
     }
 
     /**
@@ -60,13 +60,13 @@ public class GameEngine {
      * @param p_Player the player you want to remove
      */
     public void removePlayer(Player p_Player) {
-        System.out.println("NOTICE: The Player " + p_Player.getId() + " " + p_Player.getColour() + " has been removed from the game.");
+        System.out.println("NOTICE: The Player " + p_Player.getId() + " [" + p_Player.getColour() + "] has been removed from the game.");
         //new temp player list
         ArrayList<Player> l_PlayerList = d_GameData.getD_PlayerList();
         // remove it
         l_PlayerList.remove(p_Player);
         // set to game data player list
-        d_GameData.setD_PlayerList(l_PlayerList);
+        d_GameData.setPlayerList(l_PlayerList);
     }
 
 
@@ -94,13 +94,13 @@ public class GameEngine {
      */
     public void showMap(Player p_Player) {
         Player l_Player = d_GameData.getTargetPlayer(p_Player);
-        System.out.println("Player " + l_Player.getColour() + " your current army force show below: ");
+        System.out.println("Player [" + l_Player.getColour() + "] your current army force show below: ");
         // iterate each country in player's map
         for (Map.Entry<String, Country> l_CountryEntry : l_Player.getCountriesInControl().entrySet()) {
             String l_CountryName = l_CountryEntry.getKey();
             Country l_Country = l_CountryEntry.getValue();
             int ArmyNum = l_Country.getArmies();
-            System.out.println(l_CountryName + "has " + ArmyNum + " Armies.");
+            System.out.println(l_CountryName + " has " + ArmyNum + " Armies.");
         }
 
     }
