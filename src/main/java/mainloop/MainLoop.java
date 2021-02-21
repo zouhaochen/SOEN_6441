@@ -72,10 +72,6 @@ public class MainLoop extends GameEngine {
 
                 //循环遍历所有player, 调用player的issue_order()获取玩家输入的指令并存储, 直到所有玩家都结束下达指令, 将指令存储在Player的orders中
                 for (int i = 0; i < o_GameData.getD_TotalPlayer(); i++) {
-                    //我觉得这应该有个 if条件
-                    // if（deployReinforcementArmies（p_armyNum）) {
-                    //o_player.issueOrder();
-                    // }
                     o_player.issueOrder();
                 }
 
