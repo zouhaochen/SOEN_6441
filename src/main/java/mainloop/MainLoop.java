@@ -54,18 +54,18 @@ public class MainLoop extends GameEngine {
         //获取player的数量和所有player的ID
         System.out.println("Please enter for how many player are going to play: ");
         int p_playerNum = sc.nextInt();
-        o_GameData.setD_TotalPlayer(p_playerNum);
+        o_GameData.setTotalPlayer(p_playerNum);
 
         System.out.println("Please enter the name for a player: ");
-        for (int i = 0; i < o_GameData.getD_TotalPlayer(); i++) {
+        for (int i = 0; i < o_GameData.getTotalPlayer(); i++) {
             String p_playerName = sc.nextLine();
            // o_GameEngine.addNewPlayer(p_playerName);
         }
 
         System.out.println("please enter how many country in total: ");
         int p_countryNum = sc.nextInt();
-        o_GameData.setD_TotalCountry(p_countryNum);
-        System.out.println(o_GameData.getD_TotalCountry() + " contries have already set !");
+        o_GameData.setTotalCountry(p_countryNum);
+        System.out.println(o_GameData.getTotalCountry() + " contries have already set !");
 
 /*
         while(o_GameData.getCurrentPhase().getGamePhaseAsInt() == '5' ) {

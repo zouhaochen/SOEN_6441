@@ -45,6 +45,10 @@ public class GameData {
         this.d_ContinentList = d_ContinentList;
     }
 
+    public void setTotalPlayer(int p_PlayerNum) {
+        this.d_TotalPlayer=p_PlayerNum;
+    }
+
     public int getTotalPlayer() {
         return d_TotalPlayer;
     }
@@ -93,5 +97,7 @@ public class GameData {
         System.out.println("ERROR: Player No Found.");
         return null;
     }
+
+
 }
 
