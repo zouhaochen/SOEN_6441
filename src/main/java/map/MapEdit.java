@@ -39,6 +39,11 @@ public class MapEdit {
                 }
             } else if (l_Command.startsWith("savemap ")) {
                 saveMap(l_Command);
+            } else if (l_Command.startsWith("validatemap")) {
+                File l_File = getFile(OPTFILE);
+                if(l_File.exists()) {
+                    map.MapCheck.check(l_File);
+                }
             } else {
                 System.out.println("invalid command");
             }
@@ -63,6 +68,9 @@ public class MapEdit {
         File l_F3 = getFile(l_FileName);
         if (l_F3.exists()) {
             showMap(l_F3);
+            System.out.println("");
+            System.out.println("Map validate:");
+            map.MapCheck.check(l_F3);
         } else {
             l_F3.createNewFile();
             BufferedWriter l_bw = new BufferedWriter(new FileWriter(l_F3));
@@ -71,6 +79,7 @@ public class MapEdit {
                     "[borders]");
             l_bw.flush();
             l_bw.close();
+            map.MapCheck.check(l_F3);
         }
     }
 

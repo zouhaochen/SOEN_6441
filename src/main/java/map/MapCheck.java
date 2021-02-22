@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class MapCheck {
 
-    public void check(File p_file){
+    public static void check(File p_file){
 
         MapValidate l_new = new MapValidate();
         int l_continentconnected = 0;
@@ -28,10 +28,12 @@ public class MapCheck {
 
     }
 
-    public static void main(String arg[]){
+/*    public static void main(String arg[]){
 
         MapCheck m = new MapCheck();
         File l_file = new File("test_06_incorrect.map");
         m.check(l_file);
     }
+
+ */
 }

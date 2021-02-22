@@ -1,11 +1,5 @@
 package map;
 
-/**
- * @Auther: Haochen Zou
- * @Date: 2021/2/6 - 上午11:24
- * @Description: map
- * @version: 1.0
- */
 public final class MapEditCommand {
     public static final String EDITCONTINENT = "editcontinent";
     public static final String EDITCOUNTRY = "editcountry";
