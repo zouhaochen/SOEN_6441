@@ -196,12 +196,24 @@ public class MapListing extends MapDetailAccess{
 
         for(int l_i = 0; l_i < country.size(); l_i++){
             if (country.get(l_i).equals(p_search)){
-
                 l_a = country.indexOf(p_search);
+
+
+                if(l_a >= l_totalneighbourlist.size()){
+                    System.out.println("The map has undefined countries!");
+                    l_a--;
+                }
 
                 for(int l_j = 0; l_j < l_totalneighbourlist.get(l_a).length; l_j++){
                     l_countryno = Integer.parseInt((String)l_totalneighbourlist.get(l_a)[l_j]);
-                    neighbour.add(country.get(l_countryno-1));
+
+                    try {
+                        neighbour.add(country.get(l_countryno-1));
+                    } catch (IndexOutOfBoundsException e) {
+                        e.printStackTrace();
+
+                    }
+
                 }
             }
         }

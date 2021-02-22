@@ -19,6 +19,7 @@ public class MapCheck {
         int l_countryconnected = 0;
         l_continentconnected = l_new.validatecontinentconnection(p_file);
         l_countryconnected = l_new.validatecountryconnection(p_file);
+
         if(l_continentconnected == 1){
             System.out.println("All continents are connected!");
         }
@@ -34,13 +35,18 @@ public class MapCheck {
         }
 
     }
-    /**
+
     public static void main(String arg[]){
 
         MapCheck m = new MapCheck();
-        File l_file = new File("test_05_incorrect.map");
-        m.check(l_file);
+        File l_file = new File("test_07_incorrect.map");
+
+
+        try {
+            m.check(l_file);
+        } catch (IndexOutOfBoundsException e) {
+        }
     }
-     **/
+
 
 }
