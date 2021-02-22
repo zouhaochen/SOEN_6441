@@ -20,25 +20,25 @@ public class MapEdit {
      */
     public static void main(String[] args) throws IOException {
         System.out.println("You are in the map editor.");
-        String l_command = "";
+        String l_Command = "";
         for (;;) {
             System.out.println("Please type in your command:");
-            l_command = sc.nextLine();
-            if (l_command.startsWith("editmap ")) {
-                editmap(l_command);
-            } else if (l_command.startsWith("editcontinent ")) {
-                editcontinent(l_command);
-            } else if (l_command.startsWith("editcountry ")) {
-                editcountry(l_command);
-            } else if (l_command.startsWith("editneighbour ")) {
-                editneighbour(l_command);
-            } else if ("showmap".equals(l_command)) {
-                File file = getFile(optFile);
-                if(file.exists()) {
-                    showmap(file);
+            l_Command = sc.nextLine();
+            if (l_Command.startsWith("editmap ")) {
+                editMap(l_Command);
+            } else if (l_Command.startsWith("editcontinent ")) {
+                editContinent(l_Command);
+            } else if (l_Command.startsWith("editcountry ")) {
+                editCountry(l_Command);
+            } else if (l_Command.startsWith("editneighbour ")) {
+                editNeighbour(l_Command);
+            } else if ("showmap".equals(l_Command)) {
+                File l_File = getFile(optFile);
+                if(l_File.exists()) {
+                    showmap(l_File);
                 }
-            } else if (l_command.startsWith("savemap ")) {
-                save(l_command);
+            } else if (l_Command.startsWith("savemap ")) {
+                save(l_Command);
             } else {
                 System.out.println("invalid command");
             }
@@ -49,28 +49,28 @@ public class MapEdit {
      * Load a map from an existing "domination" map file
      * or create a new map form scratch if the file does not exist
      *
-     * @param command command user input
+     * @param p_Command command user input
      * @throws IOException if command invalid
      */
-    private static void editmap(String command) throws IOException {
-        String[] s = command.split("editmap ");
-        if (s.length == 0) {
+    private static void editMap(String p_Command) throws IOException {
+        String[] l_String = p_Command.split("editmap ");
+        if (l_String.length == 0) {
             System.out.println("filename input error");
             return;
         }
-        String filename = s[1];
-        optFile = filename;
-        File f3 = getFile(filename);
-        if (f3.exists()) {
-            showmap(f3);
+        String l_FileName = l_String[1];
+        optFile = l_FileName;
+        File l_F3 = getFile(l_FileName);
+        if (l_F3.exists()) {
+            showmap(l_F3);
         } else {
-            f3.createNewFile();
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f3));
-            bw.write("[continents]\n\n" +
+            l_F3.createNewFile();
+            BufferedWriter l_bw = new BufferedWriter(new FileWriter(l_F3));
+            l_bw.write("[continents]\n\n" +
                     "[countries]\n\n" +
                     "[borders]");
-            bw.flush();
-            bw.close();
+            l_bw.flush();
+            l_bw.close();
         }
     }
 
@@ -97,7 +97,7 @@ public class MapEdit {
      * @param command command user input
      * @throws IOException if command invalid
      */
-    private static void editcontinent(String command) throws IOException {
+    private static void editContinent(String command) throws IOException {
         tempSave(command, "editcontinent ", "[continents]");
     }
 
@@ -236,7 +236,7 @@ public class MapEdit {
      * @param command command user input
      * @throws IOException if command invalid
      */
-    private static void editcountry(String command) throws IOException {
+    private static void editCountry(String command) throws IOException {
         tempSave(command, "editcountry ", "[countries]");
     }
 
@@ -246,7 +246,7 @@ public class MapEdit {
      * @param command command user input
      * @throws IOException if command invalid
      */
-    private static void editneighbour(String command) throws IOException {
+    private static void editNeighbour(String command) throws IOException {
         tempSave(command, "editneighbour ", "[borders]");
     }
 
