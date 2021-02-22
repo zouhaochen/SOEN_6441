@@ -1,13 +1,9 @@
-package mainloop;
+package gameplay;
 
 import command.CommandValidator;
 import gameelements.Country;
 import gameelements.Player;
-import gameplay.GameData;
-import gameplay.GameEngine;
-import gameplay.GamePhase;
 import map.MapCheck;
-import map.MapDetailAccess;
 import map.MapEdit;
 
 
@@ -24,7 +20,7 @@ import java.util.Scanner;
 public class MainLoop {
     public static GameData d_GameData;
     private static GameEngine d_GameEngine;
-    private static GamePhase d_GamePhase;
+    public GamePhase d_GamePhase;
     public  Player d_Player;
     public  CommandValidator d_commandValidator;
     public  String d_colour;
@@ -33,7 +29,13 @@ public class MainLoop {
     private static Map<String, Country> d_countryList;
     private static String OPTFILE = "";
 
-    public void MainLoop(){
+
+    /**
+     * Constructor
+     * @param p_FilePath
+     */
+    public MainLoop(String p_FilePath){
+        this.d_MapFile=new File(p_FilePath);
         this.d_Player = new Player(d_colour, d_commandValidator);
         this.d_GameData = new GameData(d_MapFile);
         this.d_GameEngine = new GameEngine(d_GameData);
@@ -93,13 +95,13 @@ public class MainLoop {
         }
     }
 
-    public static void mainLoopRun() {
+    public void mainLoopRun() {
         Scanner sc = new Scanner(System.in);
 
         //---------cannot read scan input------------
         System.out.println("Please enter for how many player are going to play: ");
         int p_playerNum = sc.nextInt();
-        d_GameData.setTotalPlayer(p_playerNum);
+        d_GameEngine.d_GameData.setTotalPlayer(p_playerNum);
 
         for (int i = 0; i < p_playerNum; i++) {
             System.out.println("Please enter the name for each of player: ");
@@ -118,8 +120,9 @@ public class MainLoop {
                                 }
                             }
                             */
+        this.d_GamePhase=GamePhase.REINFORCEMENT;
         //游戏机制开始， 循环每一轮, 直到有人获胜
-        while (MainLoop.d_GamePhase.getGamePhaseAsInt() == 5) {
+        while (this.d_GamePhase.getGamePhaseAsInt() != 5) {
             //Assign Reinforcement phase 调用gameplay里的方法将每回合新增援的兵数分配给每个玩家
 
             //循环遍历所有player, 调用player的issue_order()获取玩家输入的指令并存储, 直到所有玩家都结束下达指令, 将指令存储在Player的orders中
@@ -143,9 +146,17 @@ public class MainLoop {
         }
 
     }
+
+    /**
+     * main method
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-
+        System.out.println("please enter your file path:");
+        String l_TempFilePath=sc.next();
+        MainLoop l_MainLoop=new MainLoop(l_TempFilePath);
         System.out.println("Welcome to warzone! ");
         System.out.println("do you want to load previous saved map? (y/n)");
         String p_CheckSave = sc.next();
@@ -155,7 +166,7 @@ public class MainLoop {
         }
         else if (p_CheckSave.equalsIgnoreCase("n")) {
             //     mainLoopMapEdit();
-            mainLoopRun();
+            l_MainLoop.mainLoopRun();
         }
     }
 }
