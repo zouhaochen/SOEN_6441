@@ -250,6 +250,11 @@ public class GameData {
     }
 
 
+    /**
+     * load map function
+     * @param p_MapFile the custom map you want to play
+     * @throws FileNotFoundException if file not found
+     */
     public void loadMap(File p_MapFile) throws FileNotFoundException {
         Scanner l_MapScanner;
         String[] l_one;
