@@ -45,8 +45,8 @@ public class MainLoop extends GameEngine {
         o_GameData.setTotalPlayer(p_playerNum);
 
         System.out.println("Please enter the name for each of player: ");
-        for (int i = 0; i < o_GameData.getTotalPlayer(); i++) {
-            String p_playerName = sc.next();
+            String  p_playerName = sc.next();
+        for (int i = 0; i < p_playerNum; i++) {
             o_GameEngine.addNewPlayer(p_playerName);
         }
 
