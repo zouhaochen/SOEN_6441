@@ -39,13 +39,10 @@ public class MapCheck {
     public static void main(String arg[]){
 
         MapCheck m = new MapCheck();
-        File l_file = new File("test_07_incorrect.map");
+        File l_file = new File("test_08_incorrect.map");
 
+        m.check(l_file);
 
-        try {
-            m.check(l_file);
-        } catch (IndexOutOfBoundsException e) {
-        }
     }
 
 
