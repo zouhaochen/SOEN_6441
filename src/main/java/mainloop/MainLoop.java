@@ -12,21 +12,12 @@ import java.util.Scanner;
  * @version  1.0.0
  */
 
-public class MainLoop extends GameEngine {
+public class MainLoop {
 
     private static GameData p_GameData;
     private static String p_colour;
     private static CommandValidator d_commandValidator;
 
-
-    /**
-     * GameEngine Constructor
-     *
-     * @param p_GameData you should pass reference that Game Data you used
-     */
-    public MainLoop(GameData p_GameData) {
-        super(p_GameData);
-    }
 
 
     public static void main(String[] args) {
