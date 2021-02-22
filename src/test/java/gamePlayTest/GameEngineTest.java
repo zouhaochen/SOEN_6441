@@ -8,6 +8,7 @@ import gameplay.GamePhase;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -77,14 +78,15 @@ public class GameEngineTest {
         System.out.println("4. check show map");
         d_GameEngine.addNewPlayer("black");
         Player l_Player=d_GameEngine.d_GameData.getPlayerList().get(0);
+        try{
+            d_GameEngine.d_GameData.loadMap();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
 
         Country l_Country1=new Country("China");
         l_Country1.setArmies(10);
-        Country l_Country2=new Country("India");
-        l_Country2.setArmies(5);
-        Map<String,Country> l_TempCountryMap=l_Player.getCountriesInControl();
-        l_TempCountryMap.put(l_Country1.getName(),l_Country1);
-        l_TempCountryMap.put(l_Country2.getName(),l_Country2);
+        l_Player.getCountriesInControl().put(l_Country1.getName(),l_Country1);
         d_GameEngine.showMap(l_Player);
     }
 }

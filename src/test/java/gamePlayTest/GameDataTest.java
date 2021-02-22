@@ -40,9 +40,8 @@ public class GameDataTest {
     public void loadMapTest(){
         System.out.println("2.check load map function");
         try{
-            d_GameData.loadMap(d_File);
+            d_GameData.loadMap();
         }catch(FileNotFoundException e){
-//            System.out.println("ERROR: map file no found.");
             e.printStackTrace();
         }
 

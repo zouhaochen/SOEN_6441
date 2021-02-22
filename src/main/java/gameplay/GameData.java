@@ -4,6 +4,7 @@ import gameelements.Continent;
 import gameelements.Country;
 import gameelements.Player;
 import map.MapDetailAccess;
+import map.MapListing;
 
 
 import java.io.File;
@@ -23,9 +24,14 @@ public class GameData {
     File d_MapFile;
 
     /**
-     * Map Object
+     * Map Object,read only
      */
     public MapDetailAccess d_MapDetailAccess;
+
+    /**
+     * used to get/set current map
+     */
+    public MapListing d_MapListing;
 
     /**
      * Game current phase
@@ -63,15 +69,18 @@ public class GameData {
 
     /**
      * game data constructor
+     *
+     * @param p_MapFile the custom map that needed to build this game data
      */
     public GameData(File p_MapFile) {
-
+        this.d_MapFile = p_MapFile;
         this.d_PlayerList = new ArrayList<>();
         this.d_MapDetailAccess = new MapDetailAccess();
         this.d_MapDetailAccess.countrynumber(p_MapFile);
         this.d_ContinentList = new ArrayList<>();
         this.d_CountryList = new ArrayList<>();
         this.d_BorderList = new ArrayList<>();
+        this.d_MapListing = new MapListing();
     }
 
     /**
@@ -228,7 +237,7 @@ public class GameData {
      * @return a Player object
      */
     public Player getPlayerByName(String p_Name) {
-        return d_PlayerList.stream().filter(p->p.getColour().equalsIgnoreCase(p_Name)).findFirst().orElse(null);
+        return d_PlayerList.stream().filter(p -> p.getColour().equalsIgnoreCase(p_Name)).findFirst().orElse(null);
     }
 
     /**
@@ -262,13 +271,13 @@ public class GameData {
 
     /**
      * load map function
-     * @param p_MapFile the custom map you want to play
+     *
      * @throws FileNotFoundException if file not found
      */
-    public void loadMap(File p_MapFile) throws FileNotFoundException {
+    public void loadMap() throws FileNotFoundException {
         Scanner l_MapScanner;
         String[] l_one;
-        l_MapScanner = new Scanner(p_MapFile);
+        l_MapScanner = new Scanner(d_MapFile);
         ArrayList<String[]> l_StringList = new ArrayList<>();
         while (l_MapScanner.hasNextLine()) {
             switch (l_MapScanner.nextLine()) {
@@ -307,7 +316,7 @@ public class GameData {
                     break;
             }
         }
-        for(String[] l_StringArray:d_BorderList){
+        for (String[] l_StringArray : d_BorderList) {
             System.out.println(Arrays.deepToString(l_StringArray));
         }
 

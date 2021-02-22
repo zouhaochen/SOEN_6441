@@ -112,10 +112,15 @@ public class GameEngine {
 		System.out.println("Player [" + l_Player.getColour() + "] your current army force show below: ");
 		// iterate each country in player's map
 		for (Map.Entry<String, Country> l_CountryEntry : l_Player.getCountriesInControl().entrySet()) {
+			// get name and army separately
 			String l_CountryName = l_CountryEntry.getKey();
 			Country l_Country = l_CountryEntry.getValue();
+			//print military force first
 			int ArmyNum = l_Country.getArmies();
 			System.out.println(l_CountryName + " has " + ArmyNum + " Armies.");
+			// get neighbour country into string arrayList
+			ArrayList<String>l_CountryConetivity=d_GameData.d_MapListing.getneighbour(d_GameData.d_MapFile,l_CountryName);
+			System.out.println("["+l_CountryName+"] connect to "+l_CountryConetivity);
 		}
 
 	}
