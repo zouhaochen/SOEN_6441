@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MapEdit {
-    private static String dirName = "domination";
-    private static Scanner sc = new Scanner(System.in);
-    private static String optFile = "";
+    private static String DIRNAME = "domination";
+    private static Scanner SC = new Scanner(System.in);
+    private static String OPTFILE = "";
 
     /**
      *
@@ -23,17 +23,17 @@ public class MapEdit {
         String l_Command = "";
         for (;;) {
             System.out.println("Please type in your command:");
-            l_Command = sc.nextLine();
+            l_Command = SC.nextLine();
             if (l_Command.startsWith("editmap ")) {
                 editMap(l_Command);
             } else if (l_Command.startsWith("editcontinent ")) {
                 editContinent(l_Command);
             } else if (l_Command.startsWith("editcountry ")) {
                 editCountry(l_Command);
-            } else if (l_Command.startsWith("editneighbour ")) {
-                editNeighbour(l_Command);
+            } else if (l_Command.startsWith("editneighbor ")) {
+                editNeighbor(l_Command);
             } else if ("showmap".equals(l_Command)) {
-                File l_File = getFile(optFile);
+                File l_File = getFile(OPTFILE);
                 if(l_File.exists()) {
                     showMap(l_File);
                 }
@@ -59,7 +59,7 @@ public class MapEdit {
             return;
         }
         String l_FileName = l_String[1];
-        optFile = l_FileName;
+        OPTFILE = l_FileName;
         File l_F3 = getFile(l_FileName);
         if (l_F3.exists()) {
             showMap(l_F3);
@@ -83,7 +83,7 @@ public class MapEdit {
     private static File getFile(String p_FileName) throws IOException {
         File l_F = new File("");
         String path = l_F.getCanonicalPath();
-        File l_F2 = new File(path + "/" + dirName);
+        File l_F2 = new File(path + "/" + DIRNAME);
         if (!l_F2.exists()) {
             l_F2.mkdir();
         }
@@ -187,7 +187,7 @@ public class MapEdit {
         List<String> l_Adds = new ArrayList<>();
         List<String> l_Rems = new ArrayList<>();
         optType(l_suffix, l_Adds, l_Rems);
-        File l_F3 = getFile(optFile);
+        File l_F3 = getFile(OPTFILE);
         BufferedReader l_br = new BufferedReader(new FileReader(l_F3));
         BufferedWriter l_bw = new BufferedWriter(new FileWriter("temp.map"));
         String l_line = "";
@@ -246,8 +246,8 @@ public class MapEdit {
      * @param p_Command command user input
      * @throws IOException if command invalid
      */
-    private static void editNeighbour(String p_Command) throws IOException {
-        tempSave(p_Command, "editneighbour ", "[borders]");
+    private static void editNeighbor(String p_Command) throws IOException {
+        tempSave(p_Command, "editneighbor ", "[borders]");
     }
 
     /**
