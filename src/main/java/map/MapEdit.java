@@ -20,25 +20,25 @@ public class MapEdit {
      */
     public static void main(String[] args) throws IOException {
         System.out.println("You are in the map editor.");
-        String command = "";
+        String l_command = "";
         for (;;) {
             System.out.println("Please type in your command:");
-            command = sc.nextLine();
-            if (command.startsWith("editmap ")) {
-                editmap(command);
-            } else if (command.startsWith("editcontinent ")) {
-                editcontinent(command);
-            } else if (command.startsWith("editcountry ")) {
-                editcountry(command);
-            } else if (command.startsWith("editneighbour ")) {
-                editneighbour(command);
-            } else if ("showmap".equals(command)) {
+            l_command = sc.nextLine();
+            if (l_command.startsWith("editmap ")) {
+                editmap(l_command);
+            } else if (l_command.startsWith("editcontinent ")) {
+                editcontinent(l_command);
+            } else if (l_command.startsWith("editcountry ")) {
+                editcountry(l_command);
+            } else if (l_command.startsWith("editneighbour ")) {
+                editneighbour(l_command);
+            } else if ("showmap".equals(l_command)) {
                 File file = getFile(optFile);
                 if(file.exists()) {
                     showmap(file);
                 }
-            } else if (command.startsWith("savemap ")) {
-                save(command);
+            } else if (l_command.startsWith("savemap ")) {
+                save(l_command);
             } else {
                 System.out.println("invalid command");
             }
