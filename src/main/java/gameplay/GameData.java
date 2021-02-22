@@ -222,6 +222,16 @@ public class GameData {
     }
 
     /**
+     * Gets a Player object by the name(colour) of the player
+     *
+     * @param p_Name the player's name(colour)
+     * @return a Player object
+     */
+    public Player getPlayerByName(String p_Name) {
+        return d_PlayerList.stream().filter(p->p.getColour().equalsIgnoreCase(p_Name)).findFirst().orElse(null);
+    }
+
+    /**
      * add new country to country list
      *
      * @param p_CountryName String new country name
