@@ -7,6 +7,7 @@ import gameplay.GameEngine;
 import gameplay.GamePhase;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -16,7 +17,19 @@ import static org.junit.Assert.assertEquals;
  */
 
 public class GameEngineTest {
-    GameData d_GameData = new GameData();
+
+    /**
+     * test map file
+     */
+    File d_File = new File("test_02.map");
+
+    /**
+     * test game data object
+     */
+    GameData d_GameData = new GameData(d_File);
+    /**
+     * test game engine object
+     */
     GameEngine d_GameEngine = new GameEngine(d_GameData);
 
 
@@ -49,8 +62,10 @@ public class GameEngineTest {
         System.out.println("3.check phase change");
         d_GameEngine.d_GameData.setCurrentPhase(GamePhase.WAITING_TO_TURN);
         System.out.println(d_GameData.getCurrentPhase());
+        System.out.println(d_GameData.getCurrentPhase().getGamePhaseAsInt());
         d_GameEngine.d_GameData.setCurrentPhase(GamePhase.ATTACK);
         System.out.println(d_GameData.getCurrentPhase());
+        System.out.println(d_GameData.getCurrentPhase().getGamePhaseAsInt());
         assertEquals(GamePhase.ATTACK,d_GameEngine.d_GameData.getCurrentPhase());
     }
 

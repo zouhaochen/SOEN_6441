@@ -4,13 +4,21 @@ import gameplay.GameData;
 import gameplay.GamePhase;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import static org.junit.Assert.*;
 
 public class GameDataTest {
+
+    /**
+     * test map file
+     */
+    File d_File = new File("test_02.map");
     /**
      * Test object GameData.
      */
-    GameData d_GameData = new GameData();
+    GameData d_GameData = new GameData(d_File);
 
     /**
      * this is GameData class, GamePhase dMember Test
@@ -23,5 +31,20 @@ public class GameDataTest {
         d_GameData.setCurrentPhase(GamePhase.ATTACK);
         System.out.println(d_GameData.getCurrentPhase());
         assertEquals(GamePhase.ATTACK,d_GameData.getCurrentPhase());
+    }
+
+    /**
+     * this is load map function test
+     */
+    @Test
+    public void loadMapTest(){
+        System.out.println("2.check load map function");
+        try{
+            d_GameData.loadMap(d_File);
+        }catch(FileNotFoundException e){
+//            System.out.println("ERROR: map file no found.");
+            e.printStackTrace();
+        }
+
     }
 }

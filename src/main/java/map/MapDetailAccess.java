@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class MapDetailAccess {
 
     File l_file = new File("test_02.map");
-    MapLineAccess l_mla = new MapLineAccess();
+    public MapLineAccess l_mla = new MapLineAccess();
 
     /**
      This method is to calculate continent lines in text file
@@ -92,6 +92,7 @@ public class MapDetailAccess {
         File l_file = new File("test_02.map");
         ArrayList<String[]> a = new ArrayList<String[]>();
         a = m.neighbourlist(l_file);
+
     }
 
 

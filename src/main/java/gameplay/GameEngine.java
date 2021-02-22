@@ -3,6 +3,7 @@ package gameplay;
 import command.CommandValidator;
 import gameelements.Country;
 import gameelements.Player;
+import map.MapDetailAccess;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -22,6 +23,8 @@ public class GameEngine {
      * the commandValidator each player will use.
      */
     CommandValidator d_CommandValidator;
+
+
 
 
     /**
@@ -86,6 +89,8 @@ public class GameEngine {
         }
         d_GameData.setCurrentPhase(GamePhase.WAITING_TO_TURN);
     }
+
+
 
 
     /**
