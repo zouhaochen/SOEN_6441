@@ -61,31 +61,25 @@ public class MapDetailAccess {
 
         int l_n = l_mla.getcountrylines(l_file);
         while(sc.hasNextLine()) {
-            if (sc.nextLine().equals("[borders]")){
-                for (int i = 0; i < l_a-1; i++) {
+            if (sc.nextLine().equals("[borders]")) {
+                for (int i = 0; i < l_a - 1; i++) {
 
-                    if(!sc.hasNext()) {
+                    if (!sc.hasNext()) {
                         break;
                     }
 
-                    String l_text =  sc.nextLine();
+                    String l_text = sc.nextLine();
                     String[] l_one = l_text.split(" ");
                     l_neighbourlist.add(l_one);
-                    /*
-                    System.out.println(l_one.length);
-                    for(int j = 0; j<l_one.length;j++){
-                        System.out.print(l_one[j]);
-                    }
-                    System.out.println();
-                    */
                 }
-                break;
+
             }
         }
-
         return l_neighbourlist;
     }
 
+
+    /**
     public static void main(String arg[]){
 
         MapDetailAccess m = new MapDetailAccess();
@@ -93,10 +87,17 @@ public class MapDetailAccess {
         ArrayList<String[]> a = new ArrayList<String[]>();
         a = m.neighbourlist(l_file);
 
-    }
+        String[] b = null;
 
 
+        for(int i = 0;i<a.size(); i++){
+            b = a.get(i);
+            for(int j=0;j <b.length;j++){
+                System.out.print(b[j]);
+            }
+            System.out.println();
+        }
 
-
+    }**/
 
 }

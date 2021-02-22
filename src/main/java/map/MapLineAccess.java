@@ -17,7 +17,6 @@ public class MapLineAccess {
     /**
      *This method is to count the number of lines
      * @return count the total lines
-     * @throws FileNotFoundException
      */
     public int getlines(File p_file) {
 
@@ -36,7 +35,7 @@ public class MapLineAccess {
     }
 
     /**
-     * his method is to return the continent lines
+     * This method is to return the continent lines
      * @param p_file the map file
      * @return return the continent lines
      */
@@ -63,7 +62,7 @@ public class MapLineAccess {
 
 
     /***
-     * his method is to return the country lines
+     * This method is to return the country lines
      * @param p_file the map file
      * @return return the country lines
      */
@@ -89,7 +88,7 @@ public class MapLineAccess {
     }
 
     /***
-     * his method is to return the borders lines
+     * This method is to return the borders lines
      * @param p_file the map file
      * @return return the borders lines
      */
@@ -113,7 +112,7 @@ public class MapLineAccess {
         }
         return l_borderline;
     }
-
+    /**
     public static void main(String arg[]){
 
         MapLineAccess l_Map = new MapLineAccess();
@@ -123,7 +122,7 @@ public class MapLineAccess {
         int l_c = l_Map.getcountrylines(l_file);
         int l_d = l_Map.getborderlines(l_file);
         System.out.println( l_a + " " + l_b + " " + l_c + " " + l_d);
-    }
+    }**/
 }
 
 
