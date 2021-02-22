@@ -5,18 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * This is the map editor
- * Handle the operations to generate, edit and control the map
- *
- * @Auther: Haochen Zou
- * @Date: 2021/2/6
- * @version: 1.0
- */
-
 public class MapEdit {
     private static String dirName = "domination";
     private static Scanner sc = new Scanner(System.in);
+    private static String optFile = "";
 
     /**
      *
@@ -41,7 +33,7 @@ public class MapEdit {
             } else if (command.startsWith("editneighbour ")) {
                 editneighbour(command);
             } else if ("showmap".equals(command)) {
-                File file = getFile("01.map");
+                File file = getFile(optFile);
                 if(file.exists()) {
                     showmap(file);
                 }
@@ -67,11 +59,18 @@ public class MapEdit {
             return;
         }
         String filename = s[1];
+        optFile = filename;
         File f3 = getFile(filename);
         if (f3.exists()) {
             showmap(f3);
         } else {
             f3.createNewFile();
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f3));
+            bw.write("[continents]\n\n" +
+                    "[countries]\n\n" +
+                    "[borders]");
+            bw.flush();
+            bw.close();
         }
     }
 
@@ -188,7 +187,7 @@ public class MapEdit {
         List<String> adds = new ArrayList<>();
         List<String> rems = new ArrayList<>();
         optType(suffix, adds, rems);
-        File f3 = getFile("01.map");
+        File f3 = getFile(optFile);
         BufferedReader br = new BufferedReader(new FileReader(f3));
         BufferedWriter bw = new BufferedWriter(new FileWriter("temp.map"));
         String line = "";
