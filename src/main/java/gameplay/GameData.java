@@ -46,7 +46,6 @@ public class GameData {
      */
     private int d_TotalCountry;
 
-
     /**
      * Country object array list
      */
