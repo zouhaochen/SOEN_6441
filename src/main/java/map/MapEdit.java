@@ -35,10 +35,10 @@ public class MapEdit {
             } else if ("showmap".equals(l_Command)) {
                 File l_File = getFile(optFile);
                 if(l_File.exists()) {
-                    showmap(l_File);
+                    showMap(l_File);
                 }
             } else if (l_Command.startsWith("savemap ")) {
-                save(l_Command);
+                saveMap(l_Command);
             } else {
                 System.out.println("invalid command");
             }
@@ -62,7 +62,7 @@ public class MapEdit {
         optFile = l_FileName;
         File l_F3 = getFile(l_FileName);
         if (l_F3.exists()) {
-            showmap(l_F3);
+            showMap(l_F3);
         } else {
             l_F3.createNewFile();
             BufferedWriter l_bw = new BufferedWriter(new FileWriter(l_F3));
@@ -256,7 +256,7 @@ public class MapEdit {
      * @param p_F3 filename user input in editmap command
      * @throws IOException if file not find
      */
-    private static void showmap(File p_F3) throws IOException {
+    private static void showMap(File p_F3) throws IOException {
         BufferedReader l_br = new BufferedReader(new FileReader(p_F3));
         String l_line = "";
         while ((l_line = l_br.readLine()) != null) {
@@ -271,8 +271,10 @@ public class MapEdit {
      * @param p_Command command user input
      * @throws IOException if command invalid
      */
-    private static void save(String p_Command) throws IOException {
+    private static void saveMap(String p_Command) throws IOException {
         String[] l_s = p_Command.split("savemap ");
+        System.out.println("Warning: You should check map VALID");
+        System.out.println("         only valid map can be played");
         if (l_s.length == 0) {
             System.out.println("filename input error");
             return;
