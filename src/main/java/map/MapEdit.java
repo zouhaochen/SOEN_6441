@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MapEdit {
-    private static String DIRNAME = "domination";
-    private static Scanner SC = new Scanner(System.in);
-    private static String OPTFILE = "";
+    private static String d_DirName = "domination";
+    private static Scanner d_Sc = new Scanner(System.in);
+    private static String d_OptFile = "";
 
     /**
      *
@@ -23,7 +23,7 @@ public class MapEdit {
         String l_Command = "";
         for (;;) {
             System.out.println("Please type in your command:");
-            l_Command = SC.nextLine();
+            l_Command = d_Sc.nextLine();
             if (l_Command.startsWith("editmap ")) {
                 editMap(l_Command);
             } else if (l_Command.startsWith("editcontinent ")) {
@@ -33,14 +33,14 @@ public class MapEdit {
             } else if (l_Command.startsWith("editneighbor ")) {
                 editNeighbor(l_Command);
             } else if ("showmap".equals(l_Command)) {
-                File l_File = getFile(OPTFILE);
+                File l_File = getFile(d_OptFile);
                 if(l_File.exists()) {
                     showMap(l_File);
                 }
             } else if (l_Command.startsWith("savemap ")) {
                 saveMap(l_Command);
             } else if (l_Command.startsWith("validatemap")) {
-                File l_File = getFile(OPTFILE);
+                File l_File = getFile(d_OptFile);
                 if(l_File.exists()) {
                     map.MapCheck.check(l_File);
                 }
@@ -64,7 +64,7 @@ public class MapEdit {
             return;
         }
         String l_FileName = l_String[1];
-        OPTFILE = l_FileName;
+        d_OptFile = l_FileName;
         File l_F3 = getFile(l_FileName);
         if (l_F3.exists()) {
             showMap(l_F3);
@@ -92,7 +92,7 @@ public class MapEdit {
     public static File getFile(String p_FileName) throws IOException {
         File l_F = new File("");
         String path = l_F.getCanonicalPath();
-        File l_F2 = new File(path + "/" + DIRNAME);
+        File l_F2 = new File(path + "/" + d_DirName);
         if (!l_F2.exists()) {
             l_F2.mkdir();
         }
@@ -196,7 +196,7 @@ public class MapEdit {
         List<String> l_Adds = new ArrayList<>();
         List<String> l_Rems = new ArrayList<>();
         optType(l_suffix, l_Adds, l_Rems);
-        File l_F3 = getFile(OPTFILE);
+        File l_F3 = getFile(d_OptFile);
         BufferedReader l_br = new BufferedReader(new FileReader(l_F3));
         BufferedWriter l_bw = new BufferedWriter(new FileWriter("temp.map"));
         String l_line = "";
