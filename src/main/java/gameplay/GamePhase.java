@@ -12,7 +12,9 @@ package gameplay;
     END_OF_GAME(5),
     MAP_EDIT(6),
     STARTUP(7),
-    ISSUE_ORDER(8);
+    ISSUE_ORDER(8),
+    WIN(9);
+
 
 
    /**
