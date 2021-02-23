@@ -24,7 +24,7 @@ public class MapLineAccessTest {
 	public void test1() {
 		File file = new File("test_02.map");
 		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getlines(file);
+		int l_a = l_case1.getLines(file);
 		assertEquals(25, l_a);
 	}
 
@@ -35,7 +35,7 @@ public class MapLineAccessTest {
 	public void test2() {
 		File file = new File("test_02.map");
 		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getcontinentlines(file);
+		int l_a = l_case1.getContinentLines(file);
 		assertEquals(8, l_a);
 	}
 
@@ -46,7 +46,7 @@ public class MapLineAccessTest {
 	public void test3() {
 		File file = new File("test_02.map");
 		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getcountrylines(file);
+		int l_a = l_case1.getCountryLines(file);
 		assertEquals(11, l_a);
 	}
 
@@ -57,7 +57,7 @@ public class MapLineAccessTest {
 	public void test4() {
 		File file = new File("test_02.map");
 		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getborderlines(file);
+		int l_a = l_case1.getBorderLines(file);
 		assertEquals(16, l_a);
 	}
 

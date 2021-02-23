@@ -25,7 +25,7 @@ public class MapValidate {
         int l_state = 1;
 
         ArrayList<String> l_continentlist = new ArrayList<String>();
-        l_continentlist = d_ml.continentlist(p_file);
+        l_continentlist = d_ml.getContinentList(p_file);
 
         ArrayList<String> l_countrylist = new ArrayList<String>();
         ArrayList<String> l_continentconnection = new ArrayList<String>();
@@ -80,7 +80,7 @@ public class MapValidate {
         l_continentneighbourlist = continentlist(p_file);
 
         ArrayList<String> l_continentno = new ArrayList<String>();
-        l_continentno = d_ml.continentlist(p_file);
+        l_continentno = d_ml.getContinentList(p_file);
 
 
         for(int l_i = 0; l_i < l_borderlength; l_i++){
@@ -176,7 +176,7 @@ public class MapValidate {
 
     public int validateConnectedContinents(File p_file){
         ArrayList<String> neighbour_country = new ArrayList<String>();
-        ArrayList<String> continent_list = d_ml.continentlist(p_file);
+        ArrayList<String> continent_list = d_ml.getContinentList(p_file);
         ArrayList<String> new_continent_list = continent_list;
         ArrayList<String> country_list = d_ml.countrylist(p_file);
         HashMap<String,String> country_continent = d_ml.getcountrycontinent(p_file);

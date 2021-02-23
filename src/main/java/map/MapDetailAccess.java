@@ -22,10 +22,10 @@ public class MapDetailAccess {
      *
      */
     public int continentnumber(File p_file){
-        int l_tlines = l_mla.getlines(p_file);
-        int l_continentlines = l_mla.getcontinentlines(p_file);
-        int l_countrylines = l_mla.getcountrylines(p_file);
-        int l_borderlines = l_mla.getborderlines(p_file);
+        int l_tlines = l_mla.getLines(p_file);
+        int l_continentlines = l_mla.getContinentLines(p_file);
+        int l_countrylines = l_mla.getCountryLines(p_file);
+        int l_borderlines = l_mla.getBorderLines(p_file);
         int l_continentnumber = l_countrylines - l_continentlines - 1;
         return l_continentnumber;
     }
@@ -36,10 +36,10 @@ public class MapDetailAccess {
      * @return number of continent lines
      */
     public int countrynumber(File p_file){
-        int l_tlines = l_mla.getlines(p_file);
-        int l_continentlines = l_mla.getcontinentlines(p_file);
-        int l_countrylines = l_mla.getcountrylines(p_file);
-        int l_borderlines = l_mla.getborderlines(p_file);
+        int l_tlines = l_mla.getLines(p_file);
+        int l_continentlines = l_mla.getContinentLines(p_file);
+        int l_countrylines = l_mla.getCountryLines(p_file);
+        int l_borderlines = l_mla.getBorderLines(p_file);
         int l_countrynumber = l_borderlines - l_countrylines - 1;
         return l_countrynumber;
     }
@@ -53,7 +53,7 @@ public class MapDetailAccess {
 
         ArrayList<String[]> l_neighbourlist = new ArrayList<String[]>();
 
-        int l_a = l_mla.getborderlines(p_file);
+        int l_a = l_mla.getBorderLines(p_file);
         int l_i = 0;
 
         Scanner sc = null;
@@ -63,7 +63,7 @@ public class MapDetailAccess {
             e.printStackTrace();
         }
 
-        int l_n = l_mla.getcountrylines(p_file);
+        int l_n = l_mla.getCountryLines(p_file);
         while(sc.hasNextLine()) {
             if (sc.nextLine().equals("[borders]")) {
                 for (int i = 0; i < l_a - 1; i++) {
