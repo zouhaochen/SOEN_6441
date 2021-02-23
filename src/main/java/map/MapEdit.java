@@ -57,7 +57,7 @@ public class MapEdit {
      * @param p_Command command user input
      * @throws IOException if command invalid
      */
-    private static void editMap(String p_Command) throws IOException {
+    public static void editMap(String p_Command) throws IOException {
         String[] l_String = p_Command.split("editmap ");
         if (l_String.length == 0) {
             System.out.println("filename input error");
@@ -89,7 +89,7 @@ public class MapEdit {
      * @param p_FileName path to file
      * @throws IOException if file not found or cannot read
      */
-    private static File getFile(String p_FileName) throws IOException {
+    public static File getFile(String p_FileName) throws IOException {
         File l_F = new File("");
         String path = l_F.getCanonicalPath();
         File l_F2 = new File(path + "/" + DIRNAME);
@@ -106,7 +106,7 @@ public class MapEdit {
      * @param p_Command command user input
      * @throws IOException if command invalid
      */
-    private static void editContinent(String p_Command) throws IOException {
+    public static void editContinent(String p_Command) throws IOException {
         tempSave(p_Command, "editcontinent ", "[continents]");
     }
 
@@ -245,7 +245,7 @@ public class MapEdit {
      * @param p_Command command user input
      * @throws IOException if command invalid
      */
-    private static void editCountry(String p_Command) throws IOException {
+    public static void editCountry(String p_Command) throws IOException {
         tempSave(p_Command, "editcountry ", "[countries]");
     }
 
@@ -255,7 +255,7 @@ public class MapEdit {
      * @param p_Command command user input
      * @throws IOException if command invalid
      */
-    private static void editNeighbor(String p_Command) throws IOException {
+    public static void editNeighbor(String p_Command) throws IOException {
         tempSave(p_Command, "editneighbor ", "[borders]");
     }
 
@@ -265,7 +265,7 @@ public class MapEdit {
      * @param p_F3 filename user input in editmap command
      * @throws IOException if file not find
      */
-    private static void showMap(File p_F3) throws IOException {
+    public static void showMap(File p_F3) throws IOException {
         BufferedReader l_br = new BufferedReader(new FileReader(p_F3));
         String l_line = "";
         while ((l_line = l_br.readLine()) != null) {
@@ -280,7 +280,7 @@ public class MapEdit {
      * @param p_Command command user input
      * @throws IOException if command invalid
      */
-    private static void saveMap(String p_Command) throws IOException {
+    public static void saveMap(String p_Command) throws IOException {
         String[] l_s = p_Command.split("savemap ");
         System.out.println("Warning: You should check map VALID");
         System.out.println("         only valid map can be played");

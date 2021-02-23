@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * This class is to get country and continent list from map file
- *
+ * This class is to get some lists and correspondence from the map file
+ * Including: the continent list, the total country list , the country list from a continent and the list of neighbour countries.
  * @author Zitao Wang
  * @version 1.0.0
  */
@@ -17,8 +17,8 @@ public class MapListing extends MapDetailAccess{
 
     /**
      * This method returns the continent list
-     * @return returns total continents
-     * @return
+     * @param p_file contains the file path of a map
+     * @return l_list the continent list
      */
     public ArrayList<String> continentlist(File p_file){
         ArrayList<String> l_list = new ArrayList<String>();
@@ -51,6 +51,11 @@ public class MapListing extends MapDetailAccess{
         return l_list;
     }
 
+    /**
+     * This method returns the country list
+     * @param p_file contains the file path of a map
+     * @return l_list the continent list
+     */
     public ArrayList<String> countrylist(File p_file){
         ArrayList<String> l_list = new ArrayList<String>();
         String l_search = " ";
@@ -85,7 +90,7 @@ public class MapListing extends MapDetailAccess{
     /**
      * This method returns continent and countries
      * @param p_file contains the file path of a map
-     * @return returns continent name and no of countries in continent
+     * @return continentcountry continent name and no of countries in continent
      */
     public HashMap<String, Integer> getcontinentinclude(File p_file){
 
@@ -134,7 +139,7 @@ public class MapListing extends MapDetailAccess{
     /**
      * This method returns country from a continent
      * @param p_file contains the file path of a map
-     * @return returns country name of a continent
+     * @return countrycontinent country name of a continent
      */
     public HashMap<String, String> getcountrycontinent(File p_file){
         ArrayList<String> continent = new ArrayList<String>();
@@ -177,7 +182,7 @@ public class MapListing extends MapDetailAccess{
      * This method is used to get neighbour countries for given country.
      * @param p_file This is the map file.
      * @param p_search This parameter contains country name.
-     * @return This method will return array list of neighbour countries.
+     * @return neighbour This method will return array list of neighbour countries.
      */
     public ArrayList<String> getneighbour(File p_file, String p_search){
 
@@ -191,12 +196,31 @@ public class MapListing extends MapDetailAccess{
 
         for(int l_i = 0; l_i < country.size(); l_i++){
             if (country.get(l_i).equals(p_search)){
-
                 l_a = country.indexOf(p_search);
 
+
+                if(l_a >= l_totalneighbourlist.size()){
+                    System.out.println("There is an unconnected country");
+                    l_a--;
+                }
+
                 for(int l_j = 0; l_j < l_totalneighbourlist.get(l_a).length; l_j++){
+
                     l_countryno = Integer.parseInt((String)l_totalneighbourlist.get(l_a)[l_j]);
-                    neighbour.add(country.get(l_countryno-1));
+
+
+                    if(l_countryno > country.size()){
+                        System.out.println("The map has undefined countries!");
+                        break;
+                    }
+
+                    try {
+                        neighbour.add(country.get(l_countryno-1));
+                    } catch (IndexOutOfBoundsException e) {
+                        e.printStackTrace();
+
+                    }
+
                 }
             }
         }

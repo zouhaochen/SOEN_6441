@@ -82,13 +82,12 @@ public enum CommandType {
 	}
 
 	/**
-	 * Gets the label of an object of CommandType
+	 * Returns the label of the CommandType object.
 	 *
-	 * @param p_CommandType the object of CommandType
-	 * @return the label of the command
+	 * @return the label of command type
 	 */
-	public static String getLabel(CommandType p_CommandType) {
-		return p_CommandType.d_label;
+	public String getLabel() {
+		return d_label;
 	}
 
 }

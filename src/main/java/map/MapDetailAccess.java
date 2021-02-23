@@ -5,6 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class is to get the number of continents , countries and the border list.
+ * @author Zitao Wang
+ * @version 1.0.0
+ */
 public class MapDetailAccess {
 
     File l_file = new File("test_02.map");
@@ -47,19 +52,18 @@ public class MapDetailAccess {
     public ArrayList<String[]> neighbourlist(File p_file){
 
         ArrayList<String[]> l_neighbourlist = new ArrayList<String[]>();
-        File l_file = new File("test_02.map");
-        p_file = l_file;
-        int l_a = l_mla.getborderlines(l_file);
+
+        int l_a = l_mla.getborderlines(p_file);
         int l_i = 0;
 
         Scanner sc = null;
         try {
-             sc = new Scanner(l_file);
+             sc = new Scanner(p_file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        int l_n = l_mla.getcountrylines(l_file);
+        int l_n = l_mla.getcountrylines(p_file);
         while(sc.hasNextLine()) {
             if (sc.nextLine().equals("[borders]")) {
                 for (int i = 0; i < l_a - 1; i++) {
@@ -98,6 +102,7 @@ public class MapDetailAccess {
             System.out.println();
         }
 
-    }**/
+    }
+     **/
 
 }

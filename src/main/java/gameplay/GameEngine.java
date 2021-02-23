@@ -1,5 +1,6 @@
 package gameplay;
 
+import command.CommandType;
 import command.CommandValidator;
 import gameelements.Country;
 import gameelements.Player;
@@ -138,10 +139,10 @@ public class GameEngine {
 			Scanner l_scanner = new Scanner(System.in);
 			l_Command = l_scanner.nextLine();
 			l_CommandArr = l_Command.split(" ");
-			if (!l_CommandArr[0].equalsIgnoreCase("gameplayer")) {
+			if (!l_CommandArr[0].equalsIgnoreCase(CommandType.ADD_PLAYER.getLabel())) {
 				System.out.println("\nInvalid command.");
 			}
-		} while (!l_CommandArr[0].equalsIgnoreCase("gameplayer") || !d_CommandValidator.validate(l_Command));
+		} while (!l_CommandArr[0].equalsIgnoreCase(CommandType.ADD_PLAYER.getLabel()) || !d_CommandValidator.validate(l_Command));
 
 		// iterate through the command arguments to perform the operations
 		for (int l_Index = 1; l_Index < l_CommandArr.length - 1; ) {

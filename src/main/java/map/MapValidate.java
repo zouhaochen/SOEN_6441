@@ -4,6 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+/**
+ * This class implements check the verification of map correctness.
+ * @author Zitao Wang
+ * @version 1.0.0
+ */
 public class MapValidate {
 
     MapLineAccess d_mla = new MapLineAccess();
@@ -25,7 +31,7 @@ public class MapValidate {
         ArrayList<String> l_continentconnection = new ArrayList<String>();
 
         l_countrylist = d_ml.countrylist(p_file);
-        System.out.println(l_countrylist);
+        /*System.out.println(l_countrylist);*/
         HashMap<String,String> l_continentcountry = new HashMap<String,String>();
         l_continentcountry = d_ml.getcountrycontinent(p_file);
 
@@ -34,7 +40,7 @@ public class MapValidate {
 
             ArrayList<String> l_neighbourlist = new ArrayList<String>();
             l_neighbourlist = d_ml.getneighbour(p_file,l_countrylist.get(l_i));
-            System.out.println(l_neighbourlist);
+            /*System.out.println(l_neighbourlist);*/
 
             l_continentconnection.clear();
             for(int l_j = 0; l_j < l_neighbourlist.size(); l_j++) {
@@ -50,13 +56,13 @@ public class MapValidate {
             l_totalcontinentconnection.add(l_connection);
         }
         String[] b;
-        for(int i = 0;i<l_totalcontinentconnection.size(); i++){
+        /*for(int i = 0;i<l_totalcontinentconnection.size(); i++){
             b = l_totalcontinentconnection.get(i);
             for(int j=0;j <b.length;j++){
                 System.out.print(b[j]);
             }
             System.out.println();
-        }
+        }*/
         return l_totalcontinentconnection;
     }
 
@@ -80,7 +86,13 @@ public class MapValidate {
         for(int l_i = 0; l_i < l_borderlength; l_i++){
 
             String[] l_string = l_continentneighbourlist.get(l_i);
+            /*for(int y = 0; y < l_continentneighbourlist.get(l_i).length ; y++){
+                System.out.print(l_continentneighbourlist.get(l_i)[y] + " ");
+            }*/
+
             l_totalsize += l_string.length;
+            /*System.out.println(l_totalsize);*/
+
             for(int l_j = 1; l_j < l_string.length; l_j++){
 
                 int l_x = Integer.parseInt((String)l_string[l_j]);
@@ -88,14 +100,14 @@ public class MapValidate {
                 for(int l_k = 0; l_k < l_stringconnected.length; l_k++){
                     if (l_string[0].equals(l_stringconnected[l_k])) {
                         l_flag++;
-                        System.out.println(l_flag);
+                        /*System.out.println(l_flag);*/
                         break;
                     }
                 }
             }
         }
-
-        if (l_flag == l_totalsize-l_borderlength){
+        /*System.out.println("l_totalsize:"+l_totalsize +"l_flag:"+ l_flag);*/
+        if (l_flag*2 >= l_totalsize){
             l_state = 1;
         }
         else{
@@ -121,7 +133,15 @@ public class MapValidate {
         for(int l_i = 0; l_i < l_borderlength; l_i++){
 
             String[] l_string = l_neighbourlist.get(l_i);
+
+            /*for(int y = 0; y < l_neighbourlist.get(l_i).length ; y++){
+                System.out.print(l_neighbourlist.get(l_i)[y] + " ");
+            }*/
+
             l_totalsize += l_string.length;
+            /*System.out.println(l_totalsize);*/
+
+
             for(int l_j = 1; l_j < l_string.length; l_j++){
 
                 int l_x = Integer.parseInt((String)l_string[l_j]);
@@ -135,7 +155,7 @@ public class MapValidate {
                 }
             }
         }
-        /*System.out.println(l_totalsize);*/
+        /*System.out.println("l_totalsize:"+l_totalsize +"l_flag:"+ l_flag);*/
         if (l_flag == l_totalsize-l_borderlength){
             l_state = 1;
         }
@@ -146,4 +166,13 @@ public class MapValidate {
         return l_state;
     }
 
+    /**
+    public static void main(String arg[]){
+
+        MapValidate m = new MapValidate();
+        File l_file = new File("test_04_incorrect.map");
+        File r_file = new File("test_02.map");
+        m.validatecontinentconnection(l_file);
+    }
+     **/
 }
