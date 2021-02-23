@@ -112,6 +112,9 @@ public class MainLoop {
         }
         //获取地图信息, 包括所有的country和country的领主信息, 根据规则和player拥有的领土信息分配军队数量
 
+        // randomly assign countries
+        d_GameEngine.assignCountries();
+
 
         //回合前检查玩家是否占领了大陆上足够多的国家来在每回合额外分配兵力
         int currentReinForcement = 5;
@@ -123,9 +126,9 @@ public class MainLoop {
         //this.d_GamePhase=GamePhase.REINFORCEMENT;
         this.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.REINFORCEMENT);
         System.out.println(d_GameData.getCurrentPhase());
-        int l_countTotalPlayer = this.d_GameEngine.d_GameData.getTotalPlayer();
+        int l_countTotalPlayer = this.d_GameEngine.d_GameData.getPlayerList().size();
 
-        while (this.d_GamePhase != GamePhase.END_OF_GAME) {
+        while (d_GameData.getCurrentPhase() != GamePhase.END_OF_GAME) {
             int l_TempReforcementArmy;
             /**
              * Assign Reinforcement phase, Call the method in gameplay to allocate the number of ReinforcementArmies in each round to each player
@@ -208,6 +211,8 @@ public class MainLoop {
                 String l_TempFilePath2 = sc.next();
                 // mainloop for game play
                 l_MainLoop = new MainLoop(l_TempFilePath2);
+                d_GameData.loadMap();
+                d_GameData.setCurrentPhase(GamePhase.STARTUP);
                 l_MainLoop.mainLoopGameEngine();
                 System.out.println("------The End of Game------ ");
         }

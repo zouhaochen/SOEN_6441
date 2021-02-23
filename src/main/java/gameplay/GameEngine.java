@@ -5,9 +5,7 @@ import command.CommandValidator;
 import gameelements.Country;
 import gameelements.Player;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * this is game main controller
@@ -93,7 +91,7 @@ public class GameEngine {
 
 		for (Player l_Player : d_GameData.getPlayerList()) {
 			// player executes order till order list is empty
-			while (l_Player.nextOrder() != null) {
+			while (!l_Player.getOrdersInCurrentTurn().isEmpty()) {
 				l_Player.nextOrder().execute();
 				this.showMap(l_Player);
 			}
@@ -159,6 +157,45 @@ public class GameEngine {
 			}
 
 			l_Index += 2;
+		}
+	}
+
+	public void assignCountries() {
+		String l_Command;
+		String[] l_CommandArr;
+
+		// validate the command from console
+		do {
+			System.out.println("\nPlease enter command to randomly assign countries to all players: ");
+			Scanner l_scanner = new Scanner(System.in);
+			l_Command = l_scanner.nextLine();
+			l_CommandArr = l_Command.split(" ");
+			if (!l_CommandArr[0].equalsIgnoreCase(CommandType.ASSIGN_COUNTRIES.getLabel())) {
+				System.out.println("\nInvalid command.");
+			}
+		} while (!l_CommandArr[0].equalsIgnoreCase(CommandType.ASSIGN_COUNTRIES.getLabel()) || !d_CommandValidator.validate(l_Command));
+
+		// randomly assign countries
+		int l_NumberOfPlayer = d_GameData.getPlayerList().size();
+		int l_NumberOfCountry = d_GameData.getCountryList().size();
+		int l_Quotient = l_NumberOfCountry / l_NumberOfPlayer;
+		Stack<Country> l_CountryStack = new Stack<>();
+		l_CountryStack.addAll(d_GameData.getCountryList());
+		Collections.shuffle(l_CountryStack);
+
+		// first step: try to assign same amounts of countries to each player
+		for (Player l_Player :
+				d_GameData.getPlayerList()) {
+			for (int l_Count = 0; l_Count < l_Quotient; ++l_Count) {
+				l_Player.assignCountry(l_CountryStack.pop());
+			}
+		}
+
+		// second step: if there are any countries left
+		Random l_Random = new Random();
+		while (!l_CountryStack.empty()) {
+			int l_RandomPlayerIndex = l_Random.nextInt(d_GameData.getTotalPlayer());
+			d_GameData.getPlayerList().get(l_RandomPlayerIndex).assignCountry(l_CountryStack.pop());
 		}
 	}
 
