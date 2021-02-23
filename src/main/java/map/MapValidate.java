@@ -127,11 +127,15 @@ public class MapValidate {
         int l_flag = 0;
         int l_totalsize = 0;
         int l_borderlength = d_mdl.countrynumber(p_file);
+        int l_couuntrylength = d_mdl.countrynumber(p_file);
         ArrayList<String[]> l_neighbourlist = new ArrayList<String[]>();
         l_neighbourlist = d_mdl.neighbourlist(p_file);
 
-        for(int l_i = 0; l_i < l_borderlength; l_i++){
+        for(int l_i = 0; l_i < l_couuntrylength; l_i++){
 
+            if(l_couuntrylength > l_neighbourlist.size()){
+                break;
+            }
             String[] l_string = l_neighbourlist.get(l_i);
 
             /*for(int y = 0; y < l_neighbourlist.get(l_i).length ; y++){
@@ -145,6 +149,10 @@ public class MapValidate {
             for(int l_j = 1; l_j < l_string.length; l_j++){
 
                 int l_x = Integer.parseInt((String)l_string[l_j]);
+
+                if(l_x > l_neighbourlist.size()){
+                    break;
+                }
                 String[] l_stringconnected = l_neighbourlist.get(l_x-1);
                 for(int l_k = 0; l_k < l_stringconnected.length; l_k++){
                     if (l_string[0].equals(l_stringconnected[l_k])) {

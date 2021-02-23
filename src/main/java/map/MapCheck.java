@@ -42,7 +42,6 @@ public class MapCheck {
         File l_file = new File("test_08_incorrect.map");
 
         m.check(l_file);
-
     }
 
 
