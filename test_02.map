@@ -11,7 +11,6 @@ pic=3
 [continents]
 Asia 5 yellow
 Africa 3 red
-Europe 4 brown
 
 [countries]
 1 China 1 630 140

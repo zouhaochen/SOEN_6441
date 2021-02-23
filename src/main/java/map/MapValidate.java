@@ -174,13 +174,55 @@ public class MapValidate {
         return l_state;
     }
 
-    /**
+    public int validateConnectedContinents(File p_file){
+        ArrayList<String> neighbour_country = new ArrayList<String>();
+        ArrayList<String> continent_list = d_ml.continentlist(p_file);
+        ArrayList<String> new_continent_list = continent_list;
+        ArrayList<String> country_list = d_ml.countrylist(p_file);
+        HashMap<String,String> country_continent = d_ml.getcountrycontinent(p_file);
+        int l_n = country_list.size();
+        String l_country=" ", continent = " ", continent1 = " ";
+        int l_flag=0, l_a=0;
+
+        for(int l_i = 0; l_i < l_n; l_i++){
+
+            if(new_continent_list.isEmpty()) {
+                l_a = 1;
+                break;
+            }
+            l_country = country_list.get(l_i);
+
+            if(l_flag == 0) {
+                continent = country_continent.get(l_country);
+                l_flag = 1;
+            }
+
+            neighbour_country = d_ml.getneighbour(p_file, l_country);
+
+            neighbour_country.remove(0);
+
+            for(int l_j = 0; l_j < neighbour_country.size(); l_j++){
+
+                continent1 = country_continent.get(neighbour_country.get(l_j));
+
+                 if(country_continent.get(l_country) != country_continent.get(neighbour_country.get(l_j))){
+                    new_continent_list.remove(continent);
+                    continent = continent1;
+                }
+            }
+
+        }
+
+        return l_a;
+    }
+
     public static void main(String arg[]){
 
         MapValidate m = new MapValidate();
-        File l_file = new File("test_04_incorrect.map");
+        File l_file = new File("test_05_incorrect.map");
         File r_file = new File("test_02.map");
-        m.validatecontinentconnection(l_file);
+        int c = m.validateConnectedContinents(l_file);
+        System.out.println(c);
     }
-     **/
+
 }

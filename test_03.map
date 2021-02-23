@@ -1,13 +1,17 @@
-1
-2
-3
-4
-5
-6 7
+[Map]
+
+author=Zitao Wang
+mapname=test_02
+dimensions=1
+image=2
+
+[files]
+pic=3
 
 [continents]
 
-8
-9
 
 [countries]
+
+
+[borders]
