@@ -70,7 +70,7 @@ public class MapEdit {
             showMap(l_F3);
             System.out.println("");
             System.out.println("Map validate:");
-//            map.MapCheck.check(l_F3);
+            map.MapCheck.check(l_F3);
         } else {
             l_F3.createNewFile();
             BufferedWriter l_bw = new BufferedWriter(new FileWriter(l_F3));
@@ -79,7 +79,7 @@ public class MapEdit {
                     "[borders]");
             l_bw.flush();
             l_bw.close();
-//            map.MapCheck.check(l_F3);
+            map.MapCheck.check(l_F3);
         }
     }
 
@@ -302,7 +302,7 @@ public class MapEdit {
             }
             l_br.close();
             l_bw.close();
-//            map.MapCheck.check(l_file);
+            map.MapCheck.check(l_file);
         }
     }
 }
