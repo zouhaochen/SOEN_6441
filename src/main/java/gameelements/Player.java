@@ -18,7 +18,8 @@ public class Player {
 	private CommandValidator d_commandValidator;
 
 	public Player(String p_colour, CommandValidator p_commandValidator) {
-		d_id = ++d_count;
+		d_id += d_count;
+		d_count++;
 		d_colour = p_colour;
 		d_countriesInControl = new HashMap<>();
 		d_ordersInCurrentTurn = new ArrayDeque<>();
@@ -90,6 +91,7 @@ public class Player {
 		}
 
 	}
+	public Order getLastOrderFromQueue(){return d_ordersInCurrentTurn.peekLast();}
 
 	public Order nextOrder() {
 		return d_ordersInCurrentTurn.poll();

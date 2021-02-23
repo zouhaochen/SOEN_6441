@@ -14,7 +14,7 @@ public class GameDataTest {
     /**
      * test map file
      */
-    File d_File = new File("test_02.map");
+    File d_File = new File("germany.map");
     /**
      * Test object GameData.
      */

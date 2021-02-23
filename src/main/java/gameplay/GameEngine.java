@@ -90,16 +90,15 @@ public class GameEngine {
 	 */
 	public void phaseProcess() {
 
-		// set game phase to "attack"
-		d_GameData.setCurrentPhase(GamePhase.ATTACK);
+
 		for (Player l_Player : d_GameData.getPlayerList()) {
 			// player executes order till order list is empty
 			while (l_Player.nextOrder() != null) {
 				l_Player.nextOrder().execute();
+				this.showMap(l_Player);
 			}
 
 		}
-		d_GameData.setCurrentPhase(GamePhase.WAITING_TO_TURN);
 	}
 
 
