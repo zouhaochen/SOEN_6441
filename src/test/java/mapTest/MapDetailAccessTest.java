@@ -24,7 +24,7 @@ public class MapDetailAccessTest {
     @Test
     public void test1() {
         int l_a = l_case1.continentnumber(l_file);
-        assertEquals(3, l_a);
+        assertEquals(2, l_a);
     }
 
     /**
