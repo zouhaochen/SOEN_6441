@@ -51,9 +51,7 @@ public class MainLoop {
      */
     public void mainLoopMapEdit() throws IOException {
         Scanner sc = new Scanner(System.in);
-
-
-
+        System.out.println("You are in the map editor.");
         String l_Command = "";
         for (; ; ) {
             System.out.println("Please type in your command:");
@@ -82,6 +80,7 @@ public class MainLoop {
                 System.out.println("invalid command");
             }
 
+
             System.out.println("any other option? (y/n)");
             String p_CheckOption = sc.next();
             if (p_CheckOption.equalsIgnoreCase("n")) {
@@ -90,6 +89,7 @@ public class MainLoop {
             if (p_CheckOption.equalsIgnoreCase("y")) {
                 continue;
             }
+            sc.close();
         }
 
 
@@ -132,18 +132,22 @@ public class MainLoop {
              */
             for (Player l_Player :  this.d_GameEngine.d_GameData.getPlayerList()) {
                 l_Player.setReinforcementArmies(currentReinForcement);
-                l_TempReforcementArmy=l_Player.getReinforcementArmies();
+
+            }
                 /**
                  * Issue order phase,Loop through all players, until all players finish issuing the instructions, and save the order in player`s order list.
                  */
+            for (Player l_Player :  this.d_GameEngine.d_GameData.getPlayerList()) {
                 this.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.ISSUE_ORDER);
                 System.out.println( this.d_GameEngine.d_GameData.getCurrentPhase());
+
+                l_TempReforcementArmy=l_Player.getReinforcementArmies();
                 while (l_TempReforcementArmy > 0) {
                     System.out.println("==== Now Player ["+l_Player.getColour()+"]'s turn to issue order ====");
                     System.out.println(" Player ["+l_Player.getColour()+"] have "+l_TempReforcementArmy
                             +" Reinforcement Armies.");
                     l_Player.issueOrder();
-                    l_TempReforcementArmy-=l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
+                    l_TempReforcementArmy -= l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
                 }
             }
 
@@ -164,13 +168,8 @@ public class MainLoop {
         sc.close();
     }
 
-    /**
-     * main method， Show each game phase for player, and run the game according to the rules of the game
-     *
-     * @param args
-     * @throws IOException
-     */
-    public static void main(String[] args) throws IOException {
+
+    public static void MainLogic() throws IOException {
         Scanner sc = new Scanner(System.in);
         MainLoop l_MainLoop;
 
@@ -189,12 +188,15 @@ public class MainLoop {
                     String l_TempFilePath3 = sc.next();
                     l_MainLoop = new MainLoop(l_TempFilePath3);
                     l_MainLoop.mainLoopMapEdit();
+                    System.out.println("------The End of Map Editing------ ");
                     break;
+
                 } else if (l_Command1 == 2) {
-                    System.out.println("please enter your file path:");
+                    System.out.println("please enter a file path for new map:");
                     String l_TempFilePath4 = sc.next();
                     l_MainLoop = new MainLoop(l_TempFilePath4);
                     l_MainLoop.mainLoopMapEdit();
+                    System.out.println("------The End of Map Editing------ ");
                     break;
                 }
                 System.out.println("invalid input! ");
@@ -207,10 +209,21 @@ public class MainLoop {
                 // mainloop for game play
                 l_MainLoop = new MainLoop(l_TempFilePath2);
                 l_MainLoop.mainLoopGameEngine();
+                System.out.println("------The End of Game------ ");
         }
 
         sc.close();
-        System.out.println("------The End of Game------ ");
+
+    }
+
+    /**
+     * main method， Show each game phase for player, and run the game according to the rules of the game
+     *
+     * @param args
+     * @throws IOException
+     */
+    public static void main(String[] args) throws IOException {
+        MainLogic();
     }
 
 }
