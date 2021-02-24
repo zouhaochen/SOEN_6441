@@ -105,6 +105,7 @@ public class MapEdit {
      *
      * @param p_FileName path to file
      * @throws IOException if file not found or cannot read
+     * @return the map file
      */
     public static File getFile(String p_FileName) throws IOException {
         File l_F = new File("");

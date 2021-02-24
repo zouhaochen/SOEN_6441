@@ -33,7 +33,7 @@ public class MainLoop {
     /**
      * Constructor
      * the main game loop that to control game phases.
-     * @param p_FilePath
+     * @param p_FilePath the map file
      */
     public MainLoop(String p_FilePath) {
         this.d_MapFile = new File(p_FilePath);
