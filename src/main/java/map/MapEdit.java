@@ -18,7 +18,7 @@ public class MapEdit {
      * @param args receive parameters from the console
      * @throws IOException if command invalid
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         System.out.println("You are in the map editor.");
         String l_Command = "";
         // map editor loop
@@ -44,6 +44,9 @@ public class MapEdit {
                 if(l_File.exists()) {
                     showMap(l_File);
                 }
+                System.out.println("");
+                System.out.println("Map graph as follow:");
+                map.MapGraph.printTable(d_OptFile);
             // call the savemap method
             } else if (l_Command.startsWith("savemap ")) {
                 saveMap(l_Command);
