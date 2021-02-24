@@ -22,7 +22,6 @@ public class MapEdit {
      * Loop read the user input commands
      * Main method in map editor
      *
-     * @param args receive parameters from the console
      * @throws IOException if command invalid
      */
     public static void mapEditLoop() throws Exception {
