@@ -7,11 +7,15 @@ import java.util.Scanner;
 
 /**
  * This is the map editor
+ * @Auther: Haochen Zou
+ * @version 1.0
  */
 public class MapEdit {
-    private static String d_DirName = "domination";
-    private static Scanner d_Sc = new Scanner(System.in);
-    private static String d_OptFile = "";
+    private static String DIRNAME = "domination";
+    private static Scanner SC = new Scanner(System.in);
+    private static String OPTFILE = "";
+    public static int FLAG=0;
+
 
     /**
      *
@@ -27,7 +31,7 @@ public class MapEdit {
         // map editor loop
         for (;;) {
             System.out.println("Please type in your command:");
-            l_Command = d_Sc.nextLine();
+            l_Command = SC.nextLine();
             // call methods according to user's commands
             // call the editmap method
             if (l_Command.startsWith("editmap ")) {
@@ -43,20 +47,20 @@ public class MapEdit {
                 editNeighbor(l_Command);
             // call the showmap method
             } else if ("showmap".equals(l_Command)) {
-                File l_File = getFile(d_OptFile);
+                File l_File = getFile(OPTFILE);
                 if(l_File.exists()) {
                     showMap(l_File);
                 }
                 System.out.println("");
                 System.out.println("Map graph as follow:");
                 System.out.println("");
-                map.MapGraph.printTable(d_OptFile);
+                map.MapGraph.printTable(OPTFILE);
             // call the savemap method
             } else if (l_Command.startsWith("savemap ")) {
                 saveMap(l_Command);
             // call the validatemap method
             } else if (l_Command.startsWith("validatemap")) {
-                File l_File = getFile(d_OptFile);
+                File l_File = getFile(OPTFILE);
                 if(l_File.exists()) {
                     // check map validation
                     map.MapCheck.check(l_File);
@@ -78,11 +82,12 @@ public class MapEdit {
         String[] l_String = p_Command.split("editmap ");
         if (l_String.length == 0) {
             System.out.println("filename input error");
+            FLAG = 1;
             return;
         }
         // read filename
         String l_FileName = l_String[1];
-        d_OptFile = l_FileName;
+        OPTFILE = l_FileName;
         File l_F3 = getFile(l_FileName);
         // load and show the map if the file exists
         if (l_F3.exists()) {
@@ -91,8 +96,11 @@ public class MapEdit {
             System.out.println("Map validate:");
             // check map validation
             map.MapCheck.check(l_F3);
+            FLAG = 2;
+
+        }
         // create a new map if the file does not exists
-        } else {
+        else {
             l_F3.createNewFile();
             BufferedWriter l_bw = new BufferedWriter(new FileWriter(l_F3));
             // add [continents] [countries] [borders]
@@ -104,6 +112,7 @@ public class MapEdit {
             l_bw.close();
             // check map validation
             map.MapCheck.check(l_F3);
+            FLAG = 3;
         }
     }
 
@@ -117,7 +126,7 @@ public class MapEdit {
     public static File getFile(String p_FileName) throws IOException {
         File l_F = new File("");
         String l_path = l_F.getCanonicalPath();
-        File l_F2 = new File(l_path + "/" + d_DirName);
+        File l_F2 = new File(l_path + "/" + DIRNAME);
         if (!l_F2.exists()) {
             l_F2.mkdir();
         }
@@ -242,7 +251,7 @@ public class MapEdit {
         List<String> l_Rems = new ArrayList<>();
         optType(l_suffix, l_Adds, l_Rems);
         // read file name
-        File l_F3 = getFile(d_OptFile);
+        File l_F3 = getFile(OPTFILE);
         // read map file
         BufferedReader l_br = new BufferedReader(new FileReader(l_F3));
         // write content in a temptation file
@@ -366,4 +375,16 @@ public class MapEdit {
             map.MapCheck.check(l_file);
         }
     }
+
+    public static int flagEditMap(String p_Command)
+    {
+        MapEdit l_flagEditMap = new MapEdit();
+        try {
+            MapEdit.editMap(p_Command);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return FLAG;
+    }
 }
+

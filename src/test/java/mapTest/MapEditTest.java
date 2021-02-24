@@ -1,50 +1,41 @@
 package mapTest;
 
+import map.MapEdit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
-/**
+/** This class is for test MapEditor
  * @Auther: Haochen Zou
  * @version: 1.0
  */
 public class MapEditTest {
     @Test
-    public void testEditMap() {
-
+    /**
+     * test open null
+     */
+    public void testEditMapEmpty() throws IOException {
+        int l_testFlag1 = map.MapEdit.flagEditMap("editmap ");
+        assertEquals(1, l_testFlag1);
     }
     @Test
-    public void testGetFile(){
-
+    /**
+     * test open exist map
+     */
+    public void testEditMapExist() throws IOException {
+        int l_testFlag2 = map.MapEdit.flagEditMap("editmap testmap.map");
+        assertEquals(2, l_testFlag2);
     }
     @Test
-    public void testEditContinent(){
-
-    }
-    @Test
-    public void testOptType(){
-
-    }
-    @Test
-    public void testTempSave(){
-
-    }
-    @Test
-    public void testEditCountry(){
-
-    }
-    @Test
-    public void testEditNeighbor(){
-
-    }
-    @Test
-    public void testShowMap(){
-
-    }
-    @Test
-    public void testSaveMap(){
-
+    /**
+     * test open new map
+     */
+    public void testEditMapNew() throws IOException {
+        int l_testFlag3 = map.MapEdit.flagEditMap("editmap testnewmap.map");
+        assertEquals(3, l_testFlag3);
     }
 }
