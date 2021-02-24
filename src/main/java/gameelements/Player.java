@@ -7,39 +7,38 @@ import gameelements.order.OrderFactory;
 import java.util.*;
 
 /**
- *  player object that reprsent in game.
- *
+ * player object that reprsent in game.
  */
 public class Player {
 
-	/**
-	 *   id counter (increment)
-	 */
+    /**
+     * id counter (increment)
+     */
     private static int d_count = 0;
 
-	/**
-	 * player id
-	 */
+    /**
+     * player id
+     */
     private int d_id;
-	/**
-	 * player name /color
-	 */
+    /**
+     * player name /color
+     */
     private String d_colour;
-	/**
-	 * hash map used to represent countries owned by player
-	 */
+    /**
+     * hash map used to represent countries owned by player
+     */
     private Map<String, Country> d_countriesInControl;
-	/**
-	 *  current player order list
-	 */
+    /**
+     * current player order list
+     */
     private Deque<Order> d_ordersInCurrentTurn;
-	/**
-	 * number of reinforcement armies
-	 */
+    /**
+     * number of reinforcement armies
+     */
     private int d_reinforcementArmies;
-	/**
-	 * command validator.
-	 */
+    /**
+     * command validator.
+     */
     private CommandValidator d_commandValidator;
 
     /**
