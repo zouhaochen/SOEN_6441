@@ -5,6 +5,8 @@ import command.CommandValidator;
 import gameelements.Country;
 import gameelements.Player;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -123,6 +125,26 @@ public class GameEngine {
 		}
 	}
 
+	public String loadmap() throws IOException {
+		String l_Command;
+		String[] l_CommandArr;
+
+		// validate the command from console
+		do {
+			System.out.println("\nPlease enter command to load the map for the game: ");
+			Scanner l_scanner = new Scanner(System.in);
+			l_Command = l_scanner.nextLine();
+			l_CommandArr = l_Command.split(" ");
+			if (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel())) {
+				System.out.println("\nInvalid command.");
+			}
+		} while (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel()) || !d_CommandValidator.validate(l_Command));
+
+		String l_ProjectPath = new File("").getCanonicalPath();
+//		File l_File = new File(l_ProjectPath + "/domination/" + l_CommandArr[1]);
+		return l_ProjectPath + "/domination/" + l_CommandArr[1];
+	}
+
 	/**
 	 * Allows the user to create/remove the players for the game by typing command.
 	 */
@@ -160,6 +182,9 @@ public class GameEngine {
 		}
 	}
 
+	/**
+	 * Randomly assign all the countries to the players.
+	 */
 	public void assignCountries() {
 		String l_Command;
 		String[] l_CommandArr;

@@ -182,12 +182,12 @@ public class MainLoop {
 
             // input edit to get into map edit model playing game model.
             else if (l_GameOptionCommand.equalsIgnoreCase("Play")) {
-                System.out.println("please enter your file path to load game map: ");
-                String l_TempLoadmapFilePath = l_Scanner.next();
+//                System.out.println("please enter your file path to load game map: ");
+//                String l_TempLoadmapFilePath = l_Scanner.next();
                 // mainloop for game play
-                l_MainLoop = new MainLoop(l_TempLoadmapFilePath);
-                d_GameData.loadMap();
                 d_GameData.setCurrentPhase(GamePhase.STARTUP);
+                l_MainLoop = new MainLoop(d_GameEngine.loadmap());
+                d_GameData.loadMap();
                 l_MainLoop.mainGamePhaseLoop();
                 System.out.println("------The End of Game------ ");
                 break;
