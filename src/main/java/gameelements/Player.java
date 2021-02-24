@@ -230,13 +230,15 @@ public class Player {
     }
 
     /**
-     * to check whether the order can be executed.
+     * Subtract the armies from the reinforcement pool.
      *
      * @param p_armyNumber add number of armies as int.
-     * @return return true if the order can be executed, and otherwise return false.
+     * @return return true if the number of the remaining armies is not less than the number to deploy,
+     * and otherwise return false.
      */
     public boolean deployReinforcementArmies(int p_armyNumber) {
         if (p_armyNumber > d_reinforcementArmies) {
+            d_reinforcementArmies = 0;
             return false;
         }
         d_reinforcementArmies -= p_armyNumber;
