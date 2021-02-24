@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class MapDetailAccessTest {
 
-    File d_file = new File("test_02.map");
+    File d_file = new File("domination//test_02.map");
     MapDetailAccess d_case1 = new MapDetailAccess();
 
     /**

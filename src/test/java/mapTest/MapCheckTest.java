@@ -22,8 +22,8 @@ public class MapCheckTest {
      * Map file: test_02.map
      */
     @Test
-    public void test1() {
-        File l_file = new File("test_02.map");
+    public void testOne() {
+        File l_file = new File("domination//test_02.map");
         MapCheck l_case1 = new MapCheck();
         int l_a = l_case1.check(l_file);
         assertEquals(0, l_a);
@@ -34,8 +34,8 @@ public class MapCheckTest {
      * Map file: test_04_incorrect.map
      */
     @Test
-    public void test2() {
-        File l_file = new File("test_04_incorrect.map");
+    public void testTwo() {
+        File l_file = new File("domination//test_04_incorrect.map");
         MapCheck l_case1 = new MapCheck();
         int l_a = l_case1.check(l_file);
         assertEquals(6, l_a);
@@ -46,8 +46,8 @@ public class MapCheckTest {
      * Map file: test_05_incorrect.map
      */
     @Test
-    public void test3() {
-        File l_file = new File("test_05_incorrect.map");
+    public void testThree() {
+        File l_file = new File("domination//test_05_incorrect.map");
         MapCheck l_case1 = new MapCheck();
         int l_a = l_case1.check(l_file);
         assertEquals(4, l_a);
@@ -58,8 +58,8 @@ public class MapCheckTest {
      * Map file: test_06_incorrect.map
      */
     @Test
-    public void test4() {
-        File l_file = new File("test_06_incorrect.map");
+    public void testFour() {
+        File l_file = new File("domination//test_06_incorrect.map");
         MapCheck l_case1 = new MapCheck();
         int l_a = l_case1.check(l_file);
         assertEquals(5, l_a);
