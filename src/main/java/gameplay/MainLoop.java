@@ -1,6 +1,5 @@
 package gameplay;
 
-import command.CommandValidator;
 import gameelements.Country;
 import gameelements.Player;
 import map.MapCheck;
@@ -186,7 +185,7 @@ public class MainLoop {
 //                String l_TempLoadmapFilePath = l_Scanner.next();
                 // mainloop for game play
                 d_GameData.setCurrentPhase(GamePhase.STARTUP);
-                l_MainLoop = new MainLoop(d_GameEngine.loadmap());
+                l_MainLoop = new MainLoop(d_GameEngine.getMapFilePath());
                 d_GameData.loadMap();
                 l_MainLoop.mainGamePhaseLoop();
                 System.out.println("------The End of Game------ ");

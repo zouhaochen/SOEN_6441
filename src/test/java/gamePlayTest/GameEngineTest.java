@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -22,7 +24,7 @@ public class GameEngineTest {
     /**
      * test map file
      */
-    File d_File = new File("test_02.map");
+    File d_File = new File("germany.map");
 
     /**
      * test game data object
@@ -83,8 +85,7 @@ public class GameEngineTest {
         }catch(FileNotFoundException e){
             e.printStackTrace();
         }
-
-        Country l_Country1=new Country("China");
+        Country l_Country1=new Country("Ostfriesland");
         l_Country1.setArmies(10);
         l_Player.getCountriesInControl().put(l_Country1.getName(),l_Country1);
         d_GameEngine.showMap(l_Player);

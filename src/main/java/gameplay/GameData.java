@@ -241,6 +241,15 @@ public class GameData {
     }
 
     /**
+     * get a Country object by the name of country
+     * @param p_CountryName the Country name you want to find in list
+     * @return Country object
+     */
+    public Country getCountryByName(String p_CountryName){
+        return d_CountryList.stream().filter(p-> p.getName().equalsIgnoreCase(p_CountryName)).findFirst().orElse(null);
+    }
+
+    /**
      * add new country to country list
      *
      * @param p_CountryName String new country name
@@ -269,7 +278,7 @@ public class GameData {
 
 
     /**
-     * load map function
+     * load map function from .map file
      *
      * @throws FileNotFoundException if file not found
      */
