@@ -96,8 +96,10 @@ public class MainLoop {
                     System.out.println("==== Now Player [" + l_Player.getColour() + "]'s turn to issue order ====");
                     System.out.println(" Player [" + l_Player.getColour() + "] have " + l_TempReforcementArmy
                             + " Reinforcement Armies.");
-                    l_Player.issueOrder();
+                    l_Player.issueDeployOrder();
+
                     l_TempReforcementArmy -= l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
+                    l_Player.setReinforcementArmies(l_TempReforcementArmy);
                 }
             }
             //execute orders phase,  execute player`s order, assigning a number of armies to move towards the target country.
