@@ -13,6 +13,8 @@ import java.util.Map;
 /**
  * This is the method to convert a map into
  * a connected directed graph
+ * @Auther: Haochen Zou
+ * @version 1.0
  */
 public class MapGraph {
 

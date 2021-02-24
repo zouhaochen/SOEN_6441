@@ -14,18 +14,35 @@ import static org.junit.Assert.*;
 public class MapGraphTest {
     @Test
     /**
-     * test all contents are get
+     * test all border are get
      */
-    public void testPrintTable() throws Exception {
+    public void testPrintTableBorder() throws Exception {
         MapGraph l_test = new MapGraph();
         String l_lineTest = "";
-
         boolean l_borderTest = l_test.equals(l_lineTest);
-        boolean l_countryTest = l_test.equals(l_lineTest);
-        boolean l_continentTest = l_test.equals(l_lineTest);
         map.MapGraph.printTable("testmap.map");
         assertFalse(l_borderTest);
+    }
+    @Test
+    /**
+     * test all border are get
+     */
+    public void testPrintTableCountry() throws Exception {
+        MapGraph l_test = new MapGraph();
+        String l_lineTest = "";
+        boolean l_countryTest = l_test.equals(l_lineTest);
+        map.MapGraph.printTable("testmap.map");
         assertFalse(l_countryTest);
+    }
+    @Test
+    /**
+     * test all border are get
+     */
+    public void testPrintTableContinent() throws Exception {
+        MapGraph l_test = new MapGraph();
+        String l_lineTest = "";
+        boolean l_continentTest = l_test.equals(l_lineTest);
+        map.MapGraph.printTable("testmap.map");
         assertFalse(l_continentTest);
     }
 }
