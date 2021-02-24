@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 
 public class MainLoop {
-    private static String d_DirName = "domination";
+    private static String DIRNAME = "domination";
     public static GameData d_GameData;
     private static GameEngine d_GameEngine;
     public File d_MapFile;
@@ -46,7 +46,7 @@ public class MainLoop {
     public void mainLoopMapEdit() throws Exception {
         Scanner l_Scanner = new Scanner(System.in);
         System.out.println("You are in the map editor.");
-        String l_Command;
+        String l_Command = "";
 
         for (;;) {
             System.out.println("Please type in your command:");
@@ -189,7 +189,7 @@ public class MainLoop {
             String l_GameOptionCommand = l_Scanner.nextLine();
             // input edit to get into map editing model.
             if (l_GameOptionCommand.equalsIgnoreCase("Edit")) {
-                mainLoopMapEdit();
+                map.MapEdit.mapEditLoop();
             }
 
             // input edit to get into map edit model playing game model.
