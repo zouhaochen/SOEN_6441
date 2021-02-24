@@ -12,120 +12,117 @@ import java.util.Map;
 
 public class MapGraph {
 
-    private static String dirName = "domination";
-
-    public static void main(String[] args) throws Exception {
-        printTable("germany.map");
-    }
+    private static String d_DirName = "domination";
 
     /**
      * print table
-     * @param filename file name
+     *
+     * @param p_Filename file name
      * @throws Exception
      */
-    public static void printTable(String filename) throws Exception {
-        BufferedReader bw = new BufferedReader(new FileReader(getFile(filename)));
-        BufferedReader bw2 = new BufferedReader(new FileReader(getFile(filename)));
-        String line = "";
-        boolean border = false;
-        boolean country = false;
-        boolean continent = false;
-        boolean flag = false;
-        int num = 1;
-        int count = 0;
-        List<String> continentList = new ArrayList<>();
-        //get line num
-        while((line = bw2.readLine()) != null) {
-            if(flag && !"".equals(line)) {
-                count++;
+    public static void printTable(String p_Filename) throws Exception {
+        BufferedReader l_bw = new BufferedReader(new FileReader(getFile(p_Filename)));
+        BufferedReader l_bw2 = new BufferedReader(new FileReader(getFile(p_Filename)));
+        String l_line = "";
+        boolean l_border = false;
+        boolean l_country = false;
+        boolean l_continent = false;
+        boolean l_flag = false;
+        int l_num = 1;
+        int l_count = 0;
+        List<String> l_continentList = new ArrayList<>();
+        //get line number
+        while((l_line = l_bw2.readLine()) != null) {
+            if(l_flag && !"".equals(l_line)) {
+                l_count++;
             }
-            if("[borders]".equals(line)) {
-                flag = true;
+            if("[borders]".equals(l_line)) {
+                l_flag = true;
             }
         }
-        StringBuffer buff = new StringBuffer(" ");
-        for(int i = 1;i <= count;i++) {
-            buff.append(" "+i);
+        StringBuffer l_buff = new StringBuffer(" ");
+        for(int l_i = 1;l_i <= l_count;l_i++) {
+            l_buff.append(" "+l_i);
         }
-        buff.append("\n"+num);
-        Map<String,List<String>> map = new LinkedHashMap<>();
-        while((line = bw.readLine()) != null) {
+        l_buff.append("\n"+l_num);
+        Map<String,List<String>> l_map = new LinkedHashMap<>();
+        while((l_line = l_bw.readLine()) != null) {
             //create table
-            if(border && !"".equals(line)) {
-                List<String> list = Arrays.asList(line.split(" "));
-                for(int i = 1;i <= count;i++) {
-                    if(list.contains(i+"")) {
-                        for(int a = 0;a < (i+"").length();a++) {
-                            buff.append(" ");
+            if(l_border && !"".equals(l_line)) {
+                List<String> l_list = Arrays.asList(l_line.split(" "));
+                for(int l_i = 1;l_i <= l_count;l_i++) {
+                    if(l_list.contains(l_i+"")) {
+                        for(int l_a = 0;l_a < (l_i+"").length();l_a++) {
+                            l_buff.append(" ");
                         }
-                        buff.append("x");
+                        l_buff.append("x");
                     } else {
-                        for(int a = 0;a < (i+"").length()+1;a++) {
-                            buff.append(" ");
+                        for(int l_a = 0;l_a < (l_i+"").length()+1;l_a++) {
+                            l_buff.append(" ");
                         }
                     }
                 }
-                buff.append("\n"+(++num));
+                l_buff.append("\n"+(++l_num));
             }
             //get continent
-            if(continent && !"".equals(line) && !"[countries]".equals(line)) {
-                continentList.add(line.split(" ")[0]);
+            if(l_continent && !"".equals(l_line) && !"[countries]".equals(l_line)) {
+                l_continentList.add(l_line.split(" ")[0]);
             }
             //get country
-            if(country && !"".equals(line) && !"[borders]".equals(line)) {
-                int conLine = Integer.parseInt(line.split(" ")[2]);
-                String countryName = line.split(" ")[1];
-                String conti = continentList.get(conLine - 1);
-                if(map.get(conti) != null) {
-                    map.get(conti).add(countryName);
+            if(l_country && !"".equals(l_line) && !"[borders]".equals(l_line)) {
+                int l_conLine = Integer.parseInt(l_line.split(" ")[2]);
+                String l_countryName = l_line.split(" ")[1];
+                String l_continet = l_continentList.get(l_conLine - 1);
+                if(l_map.get(l_continet) != null) {
+                    l_map.get(l_continet).add(l_countryName);
                 } else {
-                    List<String> list = new ArrayList<>();
-                    list.add(countryName);
-                    map.put(conti, list);
+                    List<String> l_list = new ArrayList<>();
+                    l_list.add(l_countryName);
+                    l_map.put(l_continet, l_list);
                 }
             }
-            if("[continents]".equals(line)) {
-                continent = true;
+            if("[continents]".equals(l_line)) {
+                l_continent = true;
             }
-            if("[countries]".equals(line)) {
-                country = true;
-                continent = false;
+            if("[countries]".equals(l_line)) {
+                l_country = true;
+                l_continent = false;
             }
-            if("[borders]".equals(line)) {
-                border = true;
-                country = false;
+            if("[borders]".equals(l_line)) {
+                l_border = true;
+                l_country = false;
             }
         }
-        String str2 = "";
-        for(Map.Entry<String, List<String>> en : map.entrySet()) {
-            String key = en.getKey();
-            List<String> value = en.getValue();
-            str2 += key+":";
-            for(String s : value) {
-                str2 += " " + s;
+        String l_str2 = "";
+        for(Map.Entry<String, List<String>> l_en : l_map.entrySet()) {
+            String l_key = l_en.getKey();
+            List<String> l_value = l_en.getValue();
+            l_str2 += l_key+":";
+            for(String l_s : l_value) {
+                l_str2 += " " + l_s;
             }
-            str2 += "\n";
+            l_str2 += "\n";
         }
-        String str = buff.substring(0,buff.toString().lastIndexOf("\n"));
-        System.out.println(str+"\n\n"+str2);
-        bw.close();
-        bw2.close();
+        String l_str = l_buff.substring(0,l_buff.toString().lastIndexOf("\n"));
+        System.out.println(l_str+"\n\n"+l_str2);
+        l_bw.close();
+        l_bw2.close();
     }
 
     /**
      * Get a map file from an existing "domination" map file
      *
-     * @param filename path to file
+     * @param p_Filename path to file
      * @throws IOException if file not found or cannot read
      */
-    private static File getFile(String filename) throws IOException {
-        File f = new File("");
-        String path = f.getCanonicalPath();
-        File f2 = new File(path + "/" + dirName);
-        if (!f2.exists()) {
-            f2.mkdir();
+    private static File getFile(String p_Filename) throws IOException {
+        File l_F = new File("");
+        String l_path = l_F.getCanonicalPath();
+        File l_F2 = new File(l_path + "/" + d_DirName);
+        if (!l_F2.exists()) {
+            l_F2.mkdir();
         }
-        File f3 = new File(f2.getAbsolutePath() + "/" + filename);
-        return f3;
+        File l_F3 = new File(l_F2.getAbsolutePath() + "/" + p_Filename);
+        return l_F3;
     }
 }

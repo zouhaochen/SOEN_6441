@@ -46,6 +46,7 @@ public class MapEdit {
                 }
                 System.out.println("");
                 System.out.println("Map graph as follow:");
+                System.out.println("");
                 map.MapGraph.printTable(d_OptFile);
             // call the savemap method
             } else if (l_Command.startsWith("savemap ")) {
@@ -112,8 +113,8 @@ public class MapEdit {
      */
     public static File getFile(String p_FileName) throws IOException {
         File l_F = new File("");
-        String path = l_F.getCanonicalPath();
-        File l_F2 = new File(path + "/" + d_DirName);
+        String l_path = l_F.getCanonicalPath();
+        File l_F2 = new File(l_path + "/" + d_DirName);
         if (!l_F2.exists()) {
             l_F2.mkdir();
         }
