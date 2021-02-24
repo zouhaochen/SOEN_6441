@@ -21,12 +21,15 @@ public class MapCheck {
 
         int l_a = l_mdl.getContinentNumber(p_file);
 
+        //Checking the number of continents
         if(l_a == 0){
             System.out.println("There is no continents!");
             l_state = 1;
             return l_state;
 
         }
+
+        //Checking the number of countries
         int l_b = l_mdl.getCountryNumber(p_file);
         if(l_b == 0){
             System.out.println("There is no countries!");
@@ -34,6 +37,7 @@ public class MapCheck {
             return l_state;
         }
 
+        //Checking the number of borders
         int l_c = l_neighbourlist.size();
         if(l_c == 0){
             System.out.println("There is no borders!");
@@ -46,6 +50,7 @@ public class MapCheck {
             return l_state;
         }
 
+        //Checking countries Connectivity
         int l_countryconnected = l_new.validateCountryConnection(p_file);
         if(l_countryconnected == -1){
             l_state = 5;
@@ -56,6 +61,7 @@ public class MapCheck {
             System.out.println("Countries are connected!");
         }
 
+        //Checking Continental Connectivity
         int l_continentconnected = l_new.validateContinentConnection(p_file);
         if(l_continentconnected == 0){
             l_state = 6;
