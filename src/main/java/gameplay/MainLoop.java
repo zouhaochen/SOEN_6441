@@ -28,6 +28,7 @@ public class MainLoop {
     /**
      * Constructor
      * the main game loop that to control game phases.
+     *
      * @param p_FilePath the map file
      */
     public MainLoop(String p_FilePath) {
@@ -42,35 +43,47 @@ public class MainLoop {
      *
      * @throws IOException if files are not found
      */
-    public void mainLoopMapEdit() throws IOException {
+    public void mainLoopMapEdit() throws Exception {
         Scanner l_Scanner = new Scanner(System.in);
         System.out.println("You are in the map editor.");
         String l_Command;
-        for (; ; ) {
+
+        for (;;) {
             System.out.println("Please type in your command:");
             l_Command = l_Scanner.nextLine();
+            // call methods according to user's commands
+            // call the editmap method
             if (l_Command.startsWith("editmap ")) {
                 MapEdit.editMap(l_Command);
+                // call the editcontinent method
             } else if (l_Command.startsWith("editcontinent ")) {
                 MapEdit.editContinent(l_Command);
+                // call the editcountry method
             } else if (l_Command.startsWith("editcountry ")) {
                 MapEdit.editCountry(l_Command);
+                // call the editneighbor method
             } else if (l_Command.startsWith("editneighbor ")) {
                 MapEdit.editNeighbor(l_Command);
+                // call the showmap method
             } else if ("showmap".equals(l_Command)) {
                 File l_File = MapEdit.getFile(OPTFILE);
-                if (l_File.exists()) {
+                if(l_File.exists()) {
                     MapEdit.showMap(l_File);
                 }
+
+                System.out.println("\\n Map graph as follow: \n");
+
+                map.MapGraph.printTable(OPTFILE);
+                // call the savemap method
             } else if (l_Command.startsWith("savemap ")) {
                 MapEdit.saveMap(l_Command);
+                // call the validatemap method
             } else if (l_Command.startsWith("validatemap")) {
                 File l_File = MapEdit.getFile(OPTFILE);
-                if (l_File.exists()) {
-                    MapCheck.check(l_File);
+                if(l_File.exists()) {
+                    // check map validation
+                    map.MapCheck.check(l_File);
                 }
-            } else if (l_Command.startsWith("exit")) {
-                break;
             } else {
                 System.out.println("invalid command");
             }
@@ -139,7 +152,7 @@ public class MainLoop {
                 this.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.ISSUE_ORDER);
                 System.out.println(this.d_GameEngine.d_GameData.getCurrentPhase());
 
-                //
+
                 l_TempReforcementArmy = l_Player.getReinforcementArmies();
                 while (l_TempReforcementArmy > 0) {
                     System.out.println("==== Now Player [" + l_Player.getColour() + "]'s turn to issue order ====");
@@ -164,7 +177,7 @@ public class MainLoop {
      *
      * @throws IOException if files are not found
      */
-    public void MainLogic() throws IOException {
+    public void MainLogic() throws Exception {
         Scanner l_Scanner = new Scanner(System.in);
         MainLoop l_MainLoop;
 
@@ -183,6 +196,7 @@ public class MainLoop {
             else if (l_GameOptionCommand.equalsIgnoreCase("Play")) {
 //                System.out.println("please enter your file path to load game map: ");
 //                String l_TempLoadmapFilePath = l_Scanner.next();
+
                 // mainloop for game play
                 d_GameData.setCurrentPhase(GamePhase.STARTUP);
                 l_MainLoop = new MainLoop(d_GameEngine.getMapFilePath());
@@ -209,7 +223,7 @@ public class MainLoop {
      * @param args To get parameters from console
      * @throws IOException if file does not exist
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         String file = "test_02.map";
         MainLoop mainLoop = new MainLoop(file);
         mainLoop.MainLogic();
