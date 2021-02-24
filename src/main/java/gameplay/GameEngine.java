@@ -5,6 +5,8 @@ import command.CommandValidator;
 import gameelements.Country;
 import gameelements.Player;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -116,11 +118,31 @@ public class GameEngine {
 			//print military force first
 			int ArmyNum = l_Country.getArmies();
 			System.out.println(l_CountryName + " has " + ArmyNum + " Armies.");
+
 			// get neighbour country into string arrayList
 			ArrayList<String>l_CountryConetivity=d_GameData.d_MapListing.getNeighbour(d_GameData.d_MapFile,l_CountryName);
 			System.out.println("["+l_CountryName+"] connect to "+l_CountryConetivity);
 		}
+	}
 
+	public String loadmap() throws IOException {
+		String l_Command;
+		String[] l_CommandArr;
+
+		// validate the command from console
+		do {
+			System.out.println("\nPlease enter command to load the map for the game: ");
+			Scanner l_scanner = new Scanner(System.in);
+			l_Command = l_scanner.nextLine();
+			l_CommandArr = l_Command.split(" ");
+			if (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel())) {
+				System.out.println("\nInvalid command.");
+			}
+		} while (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel()) || !d_CommandValidator.validate(l_Command));
+
+		String l_ProjectPath = new File("").getCanonicalPath();
+//		File l_File = new File(l_ProjectPath + "/domination/" + l_CommandArr[1]);
+		return l_ProjectPath + "/domination/" + l_CommandArr[1];
 	}
 
 	/**
@@ -160,6 +182,9 @@ public class GameEngine {
 		}
 	}
 
+	/**
+	 * Randomly assign all the countries to the players.
+	 */
 	public void assignCountries() {
 		String l_Command;
 		String[] l_CommandArr;
@@ -187,6 +212,7 @@ public class GameEngine {
 		for (Player l_Player :
 				d_GameData.getPlayerList()) {
 			for (int l_Count = 0; l_Count < l_Quotient; ++l_Count) {
+				l_CountryStack.peek().setOwner(l_Player);
 				l_Player.assignCountry(l_CountryStack.pop());
 			}
 		}
@@ -195,7 +221,9 @@ public class GameEngine {
 		Random l_Random = new Random();
 		while (!l_CountryStack.empty()) {
 			int l_RandomPlayerIndex = l_Random.nextInt(d_GameData.getTotalPlayer());
-			d_GameData.getPlayerList().get(l_RandomPlayerIndex).assignCountry(l_CountryStack.pop());
+			Player l_RandomPlayer = d_GameData.getPlayerList().get(l_RandomPlayerIndex);
+			l_CountryStack.peek().setOwner(l_RandomPlayer);
+			l_RandomPlayer.assignCountry(l_CountryStack.pop());
 		}
 	}
 

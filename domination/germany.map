@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ; Sven Lommatzsch
 ; Germany Map
 
@@ -130,3 +131,10 @@ Sueddeutschland 3 brown
 53 46 48 51 54 
 54 51 52 53 55
 55 52 54
+=======
+[continents]
+
+[countries]
+
+[borders]
+>>>>>>> 9bca744f1757790a17093e39f4f73b6640225e77

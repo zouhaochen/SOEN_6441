@@ -1,24 +1,32 @@
 package gameelements;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Continent extends Territory{
 
+	private int d_ContinentValue;
+	private Map<String, Country> d_Countries;
 
-	private int d_continentValue;
-
-	public Continent(String p_name, int p_continentValue) {
+	public Continent(String p_name, int p_ContinentValue) {
 		super(p_name);
-		d_continentValue = p_continentValue;
+		d_ContinentValue = p_ContinentValue;
+		d_Countries = new HashMap<>();
 	}
 
 	public int getContinentValue() {
-		return d_continentValue;
+		return d_ContinentValue;
 	}
 
-	public void setContinentValue(int d_continentValue) {
-		this.d_continentValue = d_continentValue;
+	public void setContinentValue(int p_ContinentValue) {
+		this.d_ContinentValue = p_ContinentValue;
 	}
 
+	public Map<String, Country> getCountries() {
+		return d_Countries;
+	}
 
-
-
+	public void setCountries(Map<String, Country> p_Countries) {
+		this.d_Countries = p_Countries;
+	}
 }

@@ -10,7 +10,7 @@ public class Player {
 
 	private static int d_count = 0;
 
-	private int d_id;
+	private int d_id ;
 	private String d_colour;
 	private Map<String, Country> d_countriesInControl;
 	private Deque<Order> d_ordersInCurrentTurn;
@@ -18,8 +18,7 @@ public class Player {
 	private CommandValidator d_commandValidator;
 
 	public Player(String p_colour, CommandValidator p_commandValidator) {
-		d_id += d_count;
-		d_count++;
+		d_id = ++d_count;
 		d_colour = p_colour;
 		d_countriesInControl = new HashMap<>();
 		d_ordersInCurrentTurn = new ArrayDeque<>();

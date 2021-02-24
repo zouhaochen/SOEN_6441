@@ -275,29 +275,36 @@ public class GameData {
      */
     public void loadMap() throws FileNotFoundException {
         Scanner l_MapScanner;
-        String[] l_one;
+        String[] l_One;
         l_MapScanner = new Scanner(d_MapFile);
         while (l_MapScanner.hasNextLine()) {
             switch (l_MapScanner.nextLine()) {
                 case "[continents]":
                     while (l_MapScanner.hasNextLine()) {
-                        l_one = l_MapScanner.nextLine().split(" ");
-                        if (l_one.length == 1) {
+                        l_One = l_MapScanner.nextLine().split(" ");
+                        if (l_One.length == 1) {
                             break;
                         } else {
                             // format continentName continentValue
-                            this.addContinent(l_one[0], l_one[1]);
+                            this.addContinent(l_One[0], l_One[1]);
                         }
                     }
                     break;
                 case "[countries]":
                     while (l_MapScanner.hasNextLine()) {
-                        l_one = l_MapScanner.nextLine().split(" ");
-                        if (l_one.length == 1) {
+                        l_One = l_MapScanner.nextLine().split(" ");
+                        if (l_One.length == 1) {
                             break;
                         } else {
-                            //format id countryName countryArmy
-                            this.addCountry(l_one[1], l_one[0]);
+                            //format countryName id
+                            this.addCountry(l_One[1], l_One[0]);
+
+                            // get the country object and add it to the hash map of the corresponding continent object
+                            int l_CountryId = Integer.parseInt(l_One[0]);
+                            int l_ContinentId = Integer.parseInt(l_One[2]);
+                            Continent l_Continent = d_ContinentList.get(l_ContinentId-1);
+                            Country l_CountryToAdd = d_CountryList.get(l_CountryId-1);
+                            l_Continent.getCountries().put(l_CountryToAdd.getName(), l_CountryToAdd);
                         }
 
                     }
@@ -305,8 +312,20 @@ public class GameData {
                 case "[borders]":
                     while (l_MapScanner.hasNextLine()) {
 
-                        l_one = l_MapScanner.nextLine().split(" ");
-                        d_BorderList.add(l_one);
+                        // read the boarders section to add border countries to an object of type Country
+                        l_One = l_MapScanner.nextLine().split(" ");
+                        if (l_One.length > 1) {
+                            int l_CountryId = Integer.parseInt(l_One[0]);
+                            Country l_Country = d_CountryList.get(l_CountryId-1);
+
+                            // add the border countries to the hash map of boarderCountries
+                            for (int l_Index = 1; l_Index < l_One.length; ++l_Index) {
+                                int l_BorderIndex = Integer.parseInt(l_One[l_Index]);
+                                Country l_BorderCountry = d_CountryList.get(l_BorderIndex-1);
+                                l_Country.getBorderCountries().put(l_BorderCountry.getName(), l_BorderCountry);
+                            }
+                        }
+                        d_BorderList.add(l_One);
                         if (!l_MapScanner.hasNext()) {
                             break;
                         }
