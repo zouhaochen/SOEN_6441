@@ -31,13 +31,13 @@ public class CommandValidator {
 	 * @return true if the command is valid, false otherwise
 	 */
 	public boolean validate(String p_Command) {
-		if (p_Command == null || p_Command.isEmpty()) {
+		if (p_Command == null || p_Command.isEmpty() || p_Command.trim().isEmpty()) {
 			System.out.println("\nNo command is entered!");
 			return false;
 		}
 
 		// validate the command based on the current game phase
-		String[] l_Command_arr = p_Command.split(" ");
+		String[] l_Command_arr = p_Command.trim().split(" ");
 		boolean l_Valid;
 		switch (d_GameData.getCurrentPhase()) {
 			case MAP_EDIT:

@@ -187,6 +187,7 @@ public class GameEngine {
 		for (Player l_Player :
 				d_GameData.getPlayerList()) {
 			for (int l_Count = 0; l_Count < l_Quotient; ++l_Count) {
+				l_CountryStack.peek().setOwner(l_Player);
 				l_Player.assignCountry(l_CountryStack.pop());
 			}
 		}
@@ -195,7 +196,9 @@ public class GameEngine {
 		Random l_Random = new Random();
 		while (!l_CountryStack.empty()) {
 			int l_RandomPlayerIndex = l_Random.nextInt(d_GameData.getTotalPlayer());
-			d_GameData.getPlayerList().get(l_RandomPlayerIndex).assignCountry(l_CountryStack.pop());
+			Player l_RandomPlayer = d_GameData.getPlayerList().get(l_RandomPlayerIndex);
+			l_CountryStack.peek().setOwner(l_RandomPlayer);
+			l_RandomPlayer.assignCountry(l_CountryStack.pop());
 		}
 	}
 
