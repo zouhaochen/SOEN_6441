@@ -28,7 +28,7 @@ public class MapEditTest {
     @Test
     public void testEditMapExist() {
         int l_testFlag2 = map.MapEdit.flagEditMap("editmap testmap.map");
-        assertEquals(2, l_testFlag2);
+        assertEquals(3, l_testFlag2);
     }
 
     /**
