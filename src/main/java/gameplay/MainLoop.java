@@ -157,7 +157,6 @@ public class MainLoop {
             /**
              *execute orders phase,  execute player`s order, assigning a number of armies to move towards the target country.
              */
-            System.out.println(d_GameEngine.d_GameData.getPlayerList().get(0).getOrdersInCurrentTurn());
             this.d_GameEngine.phaseProcess();
 
             if (l_countTotalPlayer < 2) {
