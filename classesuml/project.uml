@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>gameplay</OriginalElement>
+  <nodes>
+    <node x="572.5" y="1308.0">gameelements.order.DeployOrder</node>
+    <node x="280.5" y="1753.0">gameelements.order.OrderFactory</node>
+    <node x="1698.8799789057443" y="314.0">map.MapDetailAccess</node>
+    <node x="1631.9032630007832" y="759.5">map.MapListing</node>
+    <node x="1991.9032630007832" y="1264.0">map.MapValidate</node>
+    <node x="1444.9032630007832" y="781.0">map.MapGraph</node>
+    <node x="957.2857142857142" y="3107.0">gameplay.MainLoop</node>
+    <node x="756.8385852802849" y="2762.0">gameplay.GameEngine</node>
+    <node x="1086.8062745778402" y="659.0">gameplay.GamePhase</node>
+    <node x="657.9841455724107" y="170.0">command.CommandType</node>
+    <node x="483.1600138517134" y="2516.0">gameelements.Country</node>
+    <node x="1973.238206492406" y="1764.0">map.MapCheck</node>
+    <node x="20.125" y="336.0">gameelements.Territory</node>
+    <node x="312.9341455724108" y="314.5">gameelements.order.OrderInfo</node>
+    <node x="1950.0049789057443" y="0.0">map.MapLineAccess</node>
+    <node x="549.4841455724107" y="769.5">gameelements.order.Order</node>
+    <node x="623.5" y="2031.0">gameelements.Player</node>
+    <node x="1066.5661417886618" y="1631.0">command.CommandValidator</node>
+    <node x="21.5" y="781.0">gameelements.Continent</node>
+    <node x="1314.3630927596587" y="1142.0">gameplay.GameData</node>
+    <node x="1579.3630927596587" y="2032.0">map.MapEdit</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="map.MapListing" target="map.MapDetailAccess">
+      <point x="-109.33333333333331" y="-71.0" />
+      <point x="1686.5699296674497" y="639.0" />
+      <point x="1774.1577566835222" y="639.0" />
+      <point x="-60.22222222222223" y="60.5" />
+    </edge>
+    <edge source="gameelements.Country" target="gameelements.Territory">
+      <point x="-95.07142857142844" y="-83.0" />
+      <point x="509.088585280285" y="2486.0" />
+      <point x="11.0" y="2486.0" />
+      <point x="11.0" y="629.0" />
+      <point x="70.75" y="629.0" />
+      <point x="-16.875" y="38.5" />
+    </edge>
+    <edge source="gameelements.order.DeployOrder" target="gameelements.order.Order">
+      <point x="36.0" y="-38.5" />
+      <point x="680.5" y="1122.0" />
+      <point x="633.4841455724107" y="1122.0" />
+      <point x="12.0" y="61.0" />
+    </edge>
+    <edge source="gameelements.Continent" target="gameelements.Territory">
+      <point x="51.25" y="-49.5" />
+      <point x="175.25" y="639.0" />
+      <point x="138.25" y="639.0" />
+      <point x="50.625" y="38.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.3661475168968557" x="1152.5" y="1691.5" />
+  <SelectedNodes>
+    <node>map.MapEdit</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
