@@ -13,7 +13,6 @@ import java.util.Scanner;
  * @author hanjiaming
  * @version 1.0.0
  */
-
 public class MainLoop {
     public GameData d_GameData;
     public GameEngine d_GameEngine;
@@ -46,9 +45,9 @@ public class MainLoop {
                     d_GameEngine.gamePlayerCommand();
                 }
                 // since the number of player range is 2 to 5. no more player can be add in.
-                else if (d_GameData.getPlayerList().size() > 5) {
+                else if (d_GameData.getPlayerList().size() >= 5) {
                     System.out.println("number of player out of limit ");
-                    l_isTrue = false;
+                    continue;
                 }
             } else if (l_askUser.equalsIgnoreCase("n")) {
                 // since the number of player range is 2 to 5. no more player can be remove in.
@@ -59,10 +58,10 @@ public class MainLoop {
                     l_isTrue = false;
                 }
             } else {
-                System.out.println("Invalid command, please type (y/n): ");
+                System.out.println("ERROR: Invalid command, please type again: ");
             }
         }
-
+        System.out.println("---------START UP PHASE-----------\n");
         // randomly assign countries for each player
         d_GameEngine.assignCountries();
 
@@ -96,11 +95,13 @@ public class MainLoop {
                     System.out.println("==== Now Player [" + l_Player.getColour() + "]'s turn to issue order ====");
                     System.out.println(" Player [" + l_Player.getColour() + "] have " + l_TempReforcementArmy
                             + " Reinforcement Armies.");
+
+                    // issue deploy order at here.
                     l_Player.issueDeployOrder();
 
                     l_TempReforcementArmy -= l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
-                    l_Player.setReinforcementArmies(l_TempReforcementArmy);
-                }
+//                    l_Player.setReinforcementArmies(l_TempReforcementArmy);
+               }
             }
             //execute orders phase,  execute player`s order, assigning a number of armies to move towards the target country.
             this.d_GameEngine.phaseProcess();
