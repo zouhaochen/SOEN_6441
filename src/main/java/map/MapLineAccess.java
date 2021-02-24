@@ -19,7 +19,6 @@ public class MapLineAccess {
      * @return count the total lines
      */
     public int getLines(File p_file) {
-
         Scanner l_scan = null;
         try {
             l_scan = new Scanner(p_file);
@@ -48,7 +47,7 @@ public class MapLineAccess {
         } catch (FileNotFoundException l_e) {
             l_e.printStackTrace();
         }
-
+        //To get the location of the continents in the map file.
         while(l_sca.hasNextLine()){
             l_continentlines++;
 
@@ -59,7 +58,6 @@ public class MapLineAccess {
         }
         return l_continentlines;
     }
-
 
     /***
      * This method is to return the country lines
@@ -75,7 +73,7 @@ public class MapLineAccess {
         } catch (FileNotFoundException l_e) {
             l_e.printStackTrace();
         }
-
+        //To get the location of the countries in the map file.
         while(l_scan.hasNextLine()){
             l_countryline++;
 
@@ -101,7 +99,7 @@ public class MapLineAccess {
         } catch (FileNotFoundException l_e) {
             l_e.printStackTrace();
         }
-
+        //To get the location of the borders in the map file.
         while(l_scan.hasNextLine()){
             l_borderline++;
 

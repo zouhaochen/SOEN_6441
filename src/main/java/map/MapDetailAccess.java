@@ -52,33 +52,28 @@ public class MapDetailAccess {
     public ArrayList<String[]> getNeighbourList(File p_file){
 
         ArrayList<String[]> l_neighbourlist = new ArrayList<String[]>();
-
         int l_a = d_Mla.getBorderLines(p_file);
-        int l_i = 0;
-
         Scanner sc = null;
         try {
              sc = new Scanner(p_file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        int l_n = d_Mla.getCountryLines(p_file);
+        //To get the location of borders in the map file.
         while(sc.hasNextLine()) {
             if (sc.nextLine().equals("[borders]")) {
-                for (int i = 0; i < l_a - 1; i++) {
-
+                for (int l_i = 0; l_i < l_a - 1; l_i++) {
                     if (!sc.hasNext()) {
                         break;
                     }
-
+                    // Getting the connection table for the country
                     String l_text = sc.nextLine();
                     String[] l_one = l_text.split(" ");
                     l_neighbourlist.add(l_one);
                 }
-
             }
         }
+        //To return the whole neighbour list
         return l_neighbourlist;
     }
 
