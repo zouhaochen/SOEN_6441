@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This is the map editor
+ */
 public class MapEdit {
     private static String d_DirName = "domination";
     private static Scanner d_Sc = new Scanner(System.in);

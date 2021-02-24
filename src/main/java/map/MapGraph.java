@@ -10,6 +10,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This is the method to convert a map into
+ * a connected directed graph
+ */
 public class MapGraph {
 
     private static String d_DirName = "domination";
