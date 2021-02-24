@@ -2,6 +2,7 @@ package gameplay;
 
 import gameelements.Country;
 import gameelements.Player;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Scanner;
  * @author hanjiaming
  * @version 1.0.0
  */
+
 public class MainLoop {
     public GameData d_GameData;
     public GameEngine d_GameEngine;
@@ -21,6 +23,7 @@ public class MainLoop {
     /**
      * Constructor
      * the main game loop that to control game phases.
+     *
      * @param p_FilePath the map file
      */
     public MainLoop(String p_FilePath) {
@@ -45,9 +48,9 @@ public class MainLoop {
                     d_GameEngine.gamePlayerCommand();
                 }
                 // since the number of player range is 2 to 5. no more player can be add in.
-                else if (d_GameData.getPlayerList().size() >= 5) {
+                else if (d_GameData.getPlayerList().size() > 5) {
                     System.out.println("number of player out of limit ");
-                    continue;
+                    l_isTrue = false;
                 }
             } else if (l_askUser.equalsIgnoreCase("n")) {
                 // since the number of player range is 2 to 5. no more player can be remove in.
@@ -58,28 +61,29 @@ public class MainLoop {
                     l_isTrue = false;
                 }
             } else {
-                System.out.println("ERROR: Invalid command, please type again: ");
+                System.out.println("Invalid command, please type (y/n): ");
             }
         }
-        System.out.println("---------START UP PHASE-----------\n");
+
         // randomly assign countries for each player
         d_GameEngine.assignCountries();
 
         //start up the game, according to the game rules to start game engine, and determine if any players are eliminated at the end of each round.
-        int l_currentReinForcement = 5;
+        int l_CurrentReinforcement = 5;
         while (d_GameData.getCurrentPhase() != GamePhase.END_OF_GAME) {
-            int l_TempReforcementArmy;
+            int l_TempReinforcementArmy;
 
             // Assign Reinforcement phase, Call the method in gameplay to allocate the number of ReinforcementArmies in each round to each player
             this.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.REINFORCEMENT);
             System.out.println(d_GameData.getCurrentPhase());
 
             for (Player l_Player : this.d_GameEngine.d_GameData.getPlayerList()) {
-                l_Player.setReinforcementArmies(l_currentReinForcement);
-                System.out.println(l_currentReinForcement + " Reinforcement Armies are assigned to " + " Player [" + l_Player.getColour() + "]  ");
+                l_CurrentReinforcement += d_GameEngine.getReinforcementBonus(l_Player);
+                l_Player.setReinforcementArmies(l_CurrentReinforcement);
+                System.out.println(l_CurrentReinforcement + " Reinforcement Armies are assigned to " + " Player [" + l_Player.getColour() + "]  ");
 
                 for (Map.Entry<String, Country> l_CountryEntry : l_Player.getCountriesInControl().entrySet()) {
-                    System.out.println("Controling countries: " + l_CountryEntry.getKey());
+                    System.out.println("Controlling countries: " + l_CountryEntry.getKey());
                 }
             }
 
@@ -90,18 +94,16 @@ public class MainLoop {
                 this.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.ISSUE_ORDER);
                 System.out.println(this.d_GameEngine.d_GameData.getCurrentPhase());
 
-                l_TempReforcementArmy = l_Player.getReinforcementArmies();
-                while (l_TempReforcementArmy > 0) {
+                l_TempReinforcementArmy = l_Player.getReinforcementArmies();
+                while (l_TempReinforcementArmy > 0) {
                     System.out.println("==== Now Player [" + l_Player.getColour() + "]'s turn to issue order ====");
-                    System.out.println(" Player [" + l_Player.getColour() + "] have " + l_TempReforcementArmy
+                    System.out.println(" Player [" + l_Player.getColour() + "] have " + l_TempReinforcementArmy
                             + " Reinforcement Armies.");
-
-                    // issue deploy order at here.
                     l_Player.issueDeployOrder();
 
-                    l_TempReforcementArmy -= l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
-//                    l_Player.setReinforcementArmies(l_TempReforcementArmy);
-               }
+                    l_TempReinforcementArmy -= l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
+                    l_Player.setReinforcementArmies(l_TempReinforcementArmy);
+                }
             }
             //execute orders phase,  execute player`s order, assigning a number of armies to move towards the target country.
             this.d_GameEngine.phaseProcess();
