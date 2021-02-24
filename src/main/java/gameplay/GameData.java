@@ -4,6 +4,7 @@ import gameelements.Continent;
 import gameelements.Country;
 import gameelements.Player;
 import map.MapDetailAccess;
+import map.MapGraph;
 import map.MapListing;
 
 
@@ -342,9 +343,13 @@ public class GameData {
                     break;
             }
         }
-        for (String[] l_StringArray : d_BorderList) {
-            System.out.println(Arrays.deepToString(l_StringArray));
+        try{
+            System.out.println("\nMain Graph show below:");
+            MapGraph.printTable(d_MapFile.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
 
     }
 
