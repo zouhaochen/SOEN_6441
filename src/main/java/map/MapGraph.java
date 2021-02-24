@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * This is the method to convert a map into
  * a connected directed graph
- * @Auther: Haochen Zou
+ * @author Haochen Zou
  * @version 1.0
  */
 public class MapGraph {
@@ -24,7 +24,7 @@ public class MapGraph {
      * print table
      *
      * @param p_Filename file name
-     * @throws Exception
+     * @throws Exception if file is not found
      */
     public static void printTable(String p_Filename) throws Exception {
         BufferedReader l_bw = new BufferedReader(new FileReader(getFile(p_Filename)));
