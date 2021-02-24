@@ -29,12 +29,7 @@ public class MainLoop {
     /**
      * Constructor
      * the main game loop that to control game phases.
-     <<<<<<< HEAD
-     *
-     * @param p_FilePath
-    =======
      * @param p_FilePath the map file
-    >>>>>>> origin/master
      */
     public MainLoop(String p_FilePath) {
         this.d_MapFile = new File(p_FilePath);
@@ -49,12 +44,12 @@ public class MainLoop {
      * @throws IOException if files are not found
      */
     public void mainLoopMapEdit() throws IOException {
-        Scanner l_scanner = new Scanner(System.in);
+        Scanner l_Scanner = new Scanner(System.in);
         System.out.println("You are in the map editor.");
-        String l_Command = "";
+        String l_Command;
         for (; ; ) {
             System.out.println("Please type in your command:");
-            l_Command = l_scanner.nextLine();
+            l_Command = l_Scanner.nextLine();
             if (l_Command.startsWith("editmap ")) {
                 MapEdit.editMap(l_Command);
             } else if (l_Command.startsWith("editcontinent ")) {
@@ -107,7 +102,6 @@ public class MainLoop {
                 // since the number of player range is 2 to 5. no more player can be remove in.
                 if (d_GameData.getPlayerList().size() < 2) {
                     System.out.println("number of player is not enough, please add more ");
-                    continue;
                 } else {
                     System.out.println("All player have already set ");
                     l_isTrue = false;
@@ -172,15 +166,15 @@ public class MainLoop {
      * @throws IOException if files are not found
      */
     public void MainLogic() throws IOException {
-        Scanner l_scanner = new Scanner(System.in);
+        Scanner l_Scanner = new Scanner(System.in);
         MainLoop l_MainLoop;
 
-        int l_checkState = 1;
-        while (l_checkState != 0) {
+        int l_CheckState = 1;
+        while (l_CheckState != 0) {
             System.out.println("Welcome to warzone! ");
             System.out.println("Do you want to edit map or play game (Edit/Play/Exit)");
             System.out.println("( Edit for edit map / Play for play the game / Exit for exit the game )");
-            String l_GameOptionCommand = l_scanner.nextLine();
+            String l_GameOptionCommand = l_Scanner.nextLine();
             // input edit to get into map editing model.
             if (l_GameOptionCommand.equalsIgnoreCase("Edit")) {
                 mainLoopMapEdit();
@@ -189,7 +183,7 @@ public class MainLoop {
             // input edit to get into map edit model playing game model.
             else if (l_GameOptionCommand.equalsIgnoreCase("Play")) {
                 System.out.println("please enter your file path to load game map: ");
-                String l_TempLoadmapFilePath = l_scanner.next();
+                String l_TempLoadmapFilePath = l_Scanner.next();
                 // mainloop for game play
                 l_MainLoop = new MainLoop(l_TempLoadmapFilePath);
                 d_GameData.loadMap();
@@ -200,21 +194,21 @@ public class MainLoop {
             }
             // input exit to close the game.
             else if (l_GameOptionCommand.equalsIgnoreCase("Exit")) {
-                l_checkState = 0;
+                l_CheckState = 0;
                 System.out.println("Exiting Warzone Game see you next time!");
             }
-            // Error handolling for user input
+            // Error handling for user input
             else
                 System.out.println("Invalid input, try again !");
         }
-        l_scanner.close();
+        l_Scanner.close();
     }
 
     /**
      * main method， Show each game phase from GameEngine, and run the game according to the game rules
      *
      * @param args To get parameters from console
-     * @throws IOException
+     * @throws IOException if file does not exist
      */
     public static void main(String[] args) throws IOException {
         String file = "test_02.map";
