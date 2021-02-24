@@ -4,10 +4,9 @@ import org.junit.Test;
 import team05.demo01.TeamMember;
 
 /**
- * @Auther: Haochen Zou
- * @Date: 2021/1/26 - 上午8:47
- * @Description: team05.test01
- * @version: 1.0
+ * @author Haochen Zou
+ *
+ * @version 1.0
  */
 public class TeamTest {
     @Test
