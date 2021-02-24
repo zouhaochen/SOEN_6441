@@ -246,10 +246,9 @@ public class GameData {
      * @param p_CountryName String new country name
      * @param p_CountryId   String new country id
      */
-    public void addCountry(String p_CountryName, String p_CountryId, String p_CountryArmy) {
+    public void addCountry(String p_CountryName, String p_CountryId) {
         Country l_NewCountry = new Country(p_CountryName);
         l_NewCountry.setCountryId(Integer.parseInt(p_CountryId));
-        l_NewCountry.setArmies(Integer.parseInt(p_CountryArmy));
         System.out.println("NOTICE: the new country [" + l_NewCountry.getName() + "] has been added to the map, ID:"
                 + l_NewCountry.getCountryId() + " Armies:" + l_NewCountry.getArmies());
         d_CountryList.add(l_NewCountry);
@@ -278,7 +277,6 @@ public class GameData {
         Scanner l_MapScanner;
         String[] l_one;
         l_MapScanner = new Scanner(d_MapFile);
-        ArrayList<String[]> l_StringList = new ArrayList<>();
         while (l_MapScanner.hasNextLine()) {
             switch (l_MapScanner.nextLine()) {
                 case "[continents]":
@@ -299,7 +297,7 @@ public class GameData {
                             break;
                         } else {
                             //format id countryName countryArmy
-                            this.addCountry(l_one[1], l_one[0], l_one[2]);
+                            this.addCountry(l_one[1], l_one[0]);
                         }
 
                     }
