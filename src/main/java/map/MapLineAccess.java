@@ -13,12 +13,11 @@ import java.util.Scanner;
 
 public class MapLineAccess {
 
-    File l_file = new File("test_02.map");
     /**
      *This method is to count the number of lines
      * @return count the total lines
      */
-    public int getlines(File p_file) {
+    public int getLines(File p_file) {
 
         Scanner l_scan = null;
         try {
@@ -39,7 +38,7 @@ public class MapLineAccess {
      * @param p_file the map file
      * @return return the continent lines
      */
-    public int getcontinentlines(File p_file){
+    public int getContinentLines(File p_file){
 
         int l_continentlines = 0;
         Scanner l_sca = null;
@@ -66,7 +65,7 @@ public class MapLineAccess {
      * @param p_file the map file
      * @return return the country lines
      */
-    public int getcountrylines(File p_file){
+    public int getCountryLines(File p_file){
 
         int l_countryline = 0;
         Scanner l_scan = null;
@@ -92,7 +91,7 @@ public class MapLineAccess {
      * @param p_file the map file
      * @return return the borders lines
      */
-    public int getborderlines(File p_file){
+    public int getBorderLines(File p_file){
 
         int l_borderline = 0;
         Scanner l_scan = null;
@@ -112,17 +111,7 @@ public class MapLineAccess {
         }
         return l_borderline;
     }
-    /**
-    public static void main(String arg[]){
 
-        MapLineAccess l_Map = new MapLineAccess();
-        File l_file = new File("test_02.map");
-        int l_a = l_Map.getlines(l_file);
-        int l_b = l_Map.getcontinentlines(l_file);
-        int l_c = l_Map.getcountrylines(l_file);
-        int l_d = l_Map.getborderlines(l_file);
-        System.out.println( l_a + " " + l_b + " " + l_c + " " + l_d);
-    }**/
 }
 
 

@@ -20,7 +20,7 @@ public class MapListing extends MapDetailAccess{
      * @param p_file contains the file path of a map
      * @return l_list the continent list
      */
-    public ArrayList<String> continentlist(File p_file){
+    public ArrayList<String> getContinentList(File p_file){
         ArrayList<String> l_list = new ArrayList<String>();
         String l_search = " ";
         Scanner l_sc = null;
@@ -95,7 +95,7 @@ public class MapListing extends MapDetailAccess{
     public HashMap<String, Integer> getcontinentinclude(File p_file){
 
         ArrayList<String> continent = new ArrayList<String>();
-        continent = continentlist(p_file);
+        continent = getContinentList(p_file);
         HashMap<String, Integer> continentcountry = new HashMap<String, Integer>();
         int l_i = 0;
 
@@ -143,7 +143,7 @@ public class MapListing extends MapDetailAccess{
      */
     public HashMap<String, String> getcountrycontinent(File p_file){
         ArrayList<String> continent = new ArrayList<String>();
-        continent = continentlist(p_file);
+        continent = getContinentList(p_file);
         HashMap<String, String> countrycontinent = new HashMap<String, String>();
         int l_i = 0;
 
