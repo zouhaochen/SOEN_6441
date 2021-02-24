@@ -15,8 +15,8 @@ import java.util.Scanner;
  */
 
 public class MainLoop {
-    public  GameData d_GameData;
-    public  GameEngine d_GameEngine;
+    public GameData d_GameData;
+    public GameEngine d_GameEngine;
     public File d_MapFile;
 
     /**
@@ -39,7 +39,7 @@ public class MainLoop {
         boolean l_isTrue = true;
         while (l_isTrue) {
             System.out.println("do you want to add or remove player (Number of player limit is 2 to 5)? (y/n) ");
-            String l_askUser = l_scanner.next();
+            String l_askUser = l_scanner.nextLine().trim();
 
             if (l_askUser.equalsIgnoreCase("y")) {
                 if (d_GameData.getPlayerList().size() < 5) {
@@ -132,9 +132,12 @@ public class MainLoop {
             else if (l_GameOptionCommand.equalsIgnoreCase("Play")) {
                 // mainloop for game play
                 d_GameData.setCurrentPhase(GamePhase.STARTUP);
-                l_MainLoop = new MainLoop(d_GameEngine.getMapFilePath());
+                this.d_MapFile = new File(d_GameEngine.getMapFilePath());
+                d_GameData = new GameData(d_MapFile);
+                d_GameData.setCurrentPhase(GamePhase.STARTUP);
+                d_GameEngine = new GameEngine(d_GameData);
                 d_GameData.loadMap();
-                l_MainLoop.mainGamePhaseLoop();
+                mainGamePhaseLoop();
                 System.out.println("------The End of Game------ ");
                 break;
             }
@@ -161,4 +164,5 @@ public class MainLoop {
         MainLoop mainLoop = new MainLoop(file);
         mainLoop.MainLogic();
     }
+
 }

@@ -120,16 +120,15 @@ public class GameEngine {
             System.out.println(l_CountryName + " has " + ArmyNum + " Armies.");
 
             // get neighbour country into string arrayList
-            System.out.println(l_CountryName+" connected to :");
-            for(Map.Entry<String, Country> l_BorderCountryEntry : d_GameData.getCountryByName(l_CountryName).getBorderCountries().entrySet()){
-                System.out.print(l_BorderCountryEntry.getValue().getName()+"\t");
+            System.out.println(l_CountryName + " connected to :");
+            for (Map.Entry<String, Country> l_BorderCountryEntry : d_GameData.getCountryByName(l_CountryName).getBorderCountries().entrySet()) {
+                System.out.print(l_BorderCountryEntry.getValue().getName() + "\t");
             }
 
             System.out.println();
         }
 
     }
-
 
 
     /**
@@ -233,7 +232,7 @@ public class GameEngine {
         // second step: if there are any countries left
         Random l_Random = new Random();
         while (!l_CountryStack.empty()) {
-            int l_RandomPlayerIndex = l_Random.nextInt(d_GameData.getTotalPlayer());
+            int l_RandomPlayerIndex = l_Random.nextInt(d_GameData.getPlayerList().size());
             Player l_RandomPlayer = d_GameData.getPlayerList().get(l_RandomPlayerIndex);
             l_CountryStack.peek().setOwner(l_RandomPlayer);
             l_RandomPlayer.assignCountry(l_CountryStack.pop());
