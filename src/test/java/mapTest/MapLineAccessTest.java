@@ -21,10 +21,10 @@ public class MapLineAccessTest {
 	 * This method is test case1 for total lines in the map file.
 	 */
 	@Test
-	public void test1() {
-		File file = new File("test_02.map");
+	public void testOne() {
+		File l_file = new File("test_02.map");
 		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getLines(file);
+		int l_a = l_case1.getLines(l_file);
 		assertEquals(25, l_a);
 	}
 
@@ -32,10 +32,10 @@ public class MapLineAccessTest {
 	 * This method is test case1 for continent lines in the map file.
 	 */
 	@Test
-	public void test2() {
-		File file = new File("test_02.map");
+	public void testTwo() {
+		File l_file = new File("test_02.map");
 		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getContinentLines(file);
+		int l_a = l_case1.getContinentLines(l_file);
 		assertEquals(8, l_a);
 	}
 
@@ -43,10 +43,10 @@ public class MapLineAccessTest {
 	 * This method is test case1 for country lines in the map file.
 	 */
 	@Test
-	public void test3() {
-		File file = new File("test_02.map");
+	public void testThree() {
+		File l_file = new File("test_02.map");
 		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getCountryLines(file);
+		int l_a = l_case1.getCountryLines(l_file);
 		assertEquals(11, l_a);
 	}
 
@@ -54,10 +54,10 @@ public class MapLineAccessTest {
 	 * This method is test case1 for borders lines in the map file.
 	 */
 	@Test
-	public void test4() {
-		File file = new File("test_02.map");
+	public void testFour() {
+		File l_file = new File("test_02.map");
 		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getBorderLines(file);
+		int l_a = l_case1.getBorderLines(l_file);
 		assertEquals(16, l_a);
 	}
 

@@ -2,7 +2,6 @@ package map;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * This class implements check the verification of map correctness.
@@ -16,56 +15,58 @@ public class MapCheck {
         MapValidate l_new = new MapValidate();
         MapDetailAccess l_mdl = new MapDetailAccess();
         ArrayList<String[]> l_neighbourlist = new ArrayList<String[]>();
-        l_neighbourlist = l_mdl.neighbourlist(p_file);
+        l_neighbourlist = l_mdl.getNeighbourList(p_file);
 
-        int l_a = l_mdl.continentnumber(p_file);
+        int l_state = 0;
+
+        int l_a = l_mdl.getContinentNumber(p_file);
 
         if(l_a == 0){
             System.out.println("There is no continents!");
-            return 0;
+            l_state = 1;
+            return l_state;
+
         }
-        int l_b = l_mdl.countrynumber(p_file);
+        int l_b = l_mdl.getCountryNumber(p_file);
         if(l_b == 0){
             System.out.println("There is no countries!");
-            return 0;
+            l_state = 2;
+            return l_state;
         }
 
         int l_c = l_neighbourlist.size();
         if(l_c == 0){
             System.out.println("There is no borders!");
-            return 0;
+            l_state = 3;
+            return l_state;
         }
         if(l_c != l_b){
             System.out.println("The borders is incomplete!");
-            return 0;
+            l_state = 4;
+            return l_state;
         }
 
-        int l_countryconnected = l_new.validatecountryconnection(p_file);
+        int l_countryconnected = l_new.validateCountryConnection(p_file);
         if(l_countryconnected == -1){
+            l_state = 5;
             System.out.println("Countries are not connected!");
+            return l_state;
         }
         if(l_countryconnected == 1){
             System.out.println("Countries are connected!");
         }
 
-        int l_continentconnected = l_new.validateConnectedContinents(p_file);
+        int l_continentconnected = l_new.validateContinentConnection(p_file);
         if(l_continentconnected == 0){
+            l_state = 6;
             System.out.println("Continents are not connected!");
+            return l_state;
         }
         if(l_continentconnected == 1){
             System.out.println("Continents are connected!");
         }
 
-        return 0;
+        return l_state;
     }
-
-    public static void main(String arg[]){
-
-        MapCheck m = new MapCheck();
-        File l_file = new File("test_06_incorrect.map");
-
-        m.check(l_file);
-    }
-
 
 }

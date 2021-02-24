@@ -117,7 +117,7 @@ public class GameEngine {
 			int ArmyNum = l_Country.getArmies();
 			System.out.println(l_CountryName + " has " + ArmyNum + " Armies.");
 			// get neighbour country into string arrayList
-			ArrayList<String>l_CountryConetivity=d_GameData.d_MapListing.getneighbour(d_GameData.d_MapFile,l_CountryName);
+			ArrayList<String>l_CountryConetivity=d_GameData.d_MapListing.getNeighbour(d_GameData.d_MapFile,l_CountryName);
 			System.out.println("["+l_CountryName+"] connect to "+l_CountryConetivity);
 		}
 

@@ -5,6 +5,7 @@ import map.MapLineAccess;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,15 +16,15 @@ import static org.junit.Assert.assertEquals;
  */
 public class MapDetailAccessTest {
 
-    File l_file = new File("test_02.map");
-    MapDetailAccess l_case1 = new MapDetailAccess();
+    File d_file = new File("test_02.map");
+    MapDetailAccess d_case1 = new MapDetailAccess();
 
     /**
      * This method is test case1 for continent lines in the map file.
      */
     @Test
-    public void test1() {
-        int l_a = l_case1.continentnumber(l_file);
+    public void testOne() {
+        int l_a = d_case1.getContinentNumber(d_file);
         assertEquals(2, l_a);
     }
 
@@ -31,9 +32,19 @@ public class MapDetailAccessTest {
      * This method is test case1 for country lines in the map file.
      */
     @Test
-    public void test2() {
-        int l_a = l_case1.countrynumber(l_file);
+    public void testTwo() {
+        int l_a = d_case1.getCountryNumber(d_file);
         assertEquals(4, l_a);
+    }
+
+    /**
+     * This method is test case1 for the neighbour list.
+     */
+    @Test
+    public void testThree() {
+        ArrayList<String[]> l_neighbourlist = new ArrayList<String[]>();
+        l_neighbourlist = d_case1.getNeighbourList(d_file);
+        assertEquals(4, l_neighbourlist.size());
     }
 
 }

@@ -76,7 +76,7 @@ public class GameData {
         this.d_MapFile = p_MapFile;
         this.d_PlayerList = new ArrayList<>();
         this.d_MapDetailAccess = new MapDetailAccess();
-        this.d_MapDetailAccess.countrynumber(p_MapFile);
+        this.d_MapDetailAccess.getCountryNumber(p_MapFile);
         this.d_ContinentList = new ArrayList<>();
         this.d_CountryList = new ArrayList<>();
         this.d_BorderList = new ArrayList<>();

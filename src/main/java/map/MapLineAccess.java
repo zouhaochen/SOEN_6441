@@ -15,6 +15,7 @@ public class MapLineAccess {
 
     /**
      *This method is to count the number of lines
+     * @param p_file the map file
      * @return count the total lines
      */
     public int getLines(File p_file) {

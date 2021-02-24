@@ -12,35 +12,35 @@ import java.util.HashMap;
  */
 public class MapValidate {
 
-    MapLineAccess d_mla = new MapLineAccess();
-    MapDetailAccess d_mdl = new MapDetailAccess();
-    MapListing d_ml = new MapListing();
+    MapLineAccess d_Mla = new MapLineAccess();
+    MapDetailAccess d_Mdl = new MapDetailAccess();
+    MapListing d_Ml = new MapListing();
 
     /**
      * This method is to get the list of neighbour of continents in text file
      * @param p_file the map file
      * @return the list of the neighbour of continents
      */
-    public ArrayList<String[]> continentlist(File p_file){
+    public ArrayList<String[]> getContinentBorderList(File p_file){
         int l_state = 1;
 
         ArrayList<String> l_continentlist = new ArrayList<String>();
-        l_continentlist = d_ml.getContinentList(p_file);
+        l_continentlist = d_Ml.getContinentList(p_file);
 
         ArrayList<String> l_countrylist = new ArrayList<String>();
         ArrayList<String> l_continentconnection = new ArrayList<String>();
 
-        l_countrylist = d_ml.countrylist(p_file);
-        /*System.out.println(l_countrylist);*/
+        l_countrylist = d_Ml.getCountryList(p_file);
+
         HashMap<String,String> l_continentcountry = new HashMap<String,String>();
-        l_continentcountry = d_ml.getcountrycontinent(p_file);
+        l_continentcountry = d_Ml.getCountryContinent(p_file);
 
         ArrayList<String[]> l_totalcontinentconnection = new ArrayList<String[]>();
         for(int l_i = 0; l_i < l_countrylist.size(); l_i++){
 
             ArrayList<String> l_neighbourlist = new ArrayList<String>();
-            l_neighbourlist = d_ml.getneighbour(p_file,l_countrylist.get(l_i));
-            /*System.out.println(l_neighbourlist);*/
+            l_neighbourlist = d_Ml.getNeighbour(p_file,l_countrylist.get(l_i));
+
 
             l_continentconnection.clear();
             for(int l_j = 0; l_j < l_neighbourlist.size(); l_j++) {
@@ -55,14 +55,7 @@ public class MapValidate {
             l_connection =(String[]) l_continentconnection.toArray(l_connection);
             l_totalcontinentconnection.add(l_connection);
         }
-        String[] b;
-        /*for(int i = 0;i<l_totalcontinentconnection.size(); i++){
-            b = l_totalcontinentconnection.get(i);
-            for(int j=0;j <b.length;j++){
-                System.out.print(b[j]);
-            }
-            System.out.println();
-        }*/
+
         return l_totalcontinentconnection;
     }
 
@@ -71,42 +64,29 @@ public class MapValidate {
      * @param p_file This parameter contains file path.
      * @return This method returns value 1 if continents are connected or else -1.
      */
-    public int validatecontinentconnection(File p_file){
+    public int validateContinent(File p_file){
         int l_state = 0;
         int l_flag = 0;
         int l_totalsize = 0;
-        int l_borderlength = d_mdl.countrynumber(p_file);
+        int l_borderlength = d_Mdl.getCountryNumber(p_file);
         ArrayList<String[]> l_continentneighbourlist = new ArrayList<String[]>();
-        l_continentneighbourlist = continentlist(p_file);
-
+        l_continentneighbourlist = getContinentBorderList(p_file);
         ArrayList<String> l_continentno = new ArrayList<String>();
-        l_continentno = d_ml.getContinentList(p_file);
-
-
+        l_continentno = d_Ml.getContinentList(p_file);
         for(int l_i = 0; l_i < l_borderlength; l_i++){
-
             String[] l_string = l_continentneighbourlist.get(l_i);
-            /*for(int y = 0; y < l_continentneighbourlist.get(l_i).length ; y++){
-                System.out.print(l_continentneighbourlist.get(l_i)[y] + " ");
-            }*/
-
             l_totalsize += l_string.length;
-            /*System.out.println(l_totalsize);*/
-
             for(int l_j = 1; l_j < l_string.length; l_j++){
-
                 int l_x = Integer.parseInt((String)l_string[l_j]);
                 String[] l_stringconnected = l_continentneighbourlist.get(l_x);
                 for(int l_k = 0; l_k < l_stringconnected.length; l_k++){
                     if (l_string[0].equals(l_stringconnected[l_k])) {
                         l_flag++;
-                        /*System.out.println(l_flag);*/
                         break;
                     }
                 }
             }
         }
-        /*System.out.println("l_totalsize:"+l_totalsize +"l_flag:"+ l_flag);*/
         if (l_flag*2 >= l_totalsize){
             l_state = 1;
         }
@@ -121,15 +101,15 @@ public class MapValidate {
      * @param p_file This parameter contains file path.
      * @return This method returns value 1 if countries are connected or else -1.
      */
-    public int validatecountryconnection(File p_file){
+    public int validateCountryConnection(File p_file){
 
         int l_state = 0;
         int l_flag = 0;
         int l_totalsize = 0;
-        int l_borderlength = d_mdl.countrynumber(p_file);
-        int l_couuntrylength = d_mdl.countrynumber(p_file);
+        int l_borderlength = d_Mdl.getCountryNumber(p_file);
+        int l_couuntrylength = d_Mdl.getCountryNumber(p_file);
         ArrayList<String[]> l_neighbourlist = new ArrayList<String[]>();
-        l_neighbourlist = d_mdl.neighbourlist(p_file);
+        l_neighbourlist = d_Mdl.getNeighbourList(p_file);
 
         for(int l_i = 0; l_i < l_couuntrylength; l_i++){
 
@@ -138,12 +118,9 @@ public class MapValidate {
             }
             String[] l_string = l_neighbourlist.get(l_i);
 
-            /*for(int y = 0; y < l_neighbourlist.get(l_i).length ; y++){
-                System.out.print(l_neighbourlist.get(l_i)[y] + " ");
-            }*/
 
             l_totalsize += l_string.length;
-            /*System.out.println(l_totalsize);*/
+
 
 
             for(int l_j = 1; l_j < l_string.length; l_j++){
@@ -157,7 +134,7 @@ public class MapValidate {
                 for(int l_k = 0; l_k < l_stringconnected.length; l_k++){
                     if (l_string[0].equals(l_stringconnected[l_k])) {
                         l_flag++;
-                        /*System.out.println(l_flag);*/
+
                         break;
                     }
                 }
@@ -174,12 +151,12 @@ public class MapValidate {
         return l_state;
     }
 
-    public int validateConnectedContinents(File p_file){
+    public int validateContinentConnection(File p_file){
         ArrayList<String> neighbour_country = new ArrayList<String>();
-        ArrayList<String> continent_list = d_ml.getContinentList(p_file);
+        ArrayList<String> continent_list = d_Ml.getContinentList(p_file);
         ArrayList<String> new_continent_list = continent_list;
-        ArrayList<String> country_list = d_ml.countrylist(p_file);
-        HashMap<String,String> country_continent = d_ml.getcountrycontinent(p_file);
+        ArrayList<String> country_list = d_Ml.getCountryList(p_file);
+        HashMap<String,String> country_continent = d_Ml.getCountryContinent(p_file);
         int l_n = country_list.size();
         String l_country=" ", continent = " ", continent1 = " ";
         int l_flag=0, l_a=0;
@@ -197,7 +174,7 @@ public class MapValidate {
                 l_flag = 1;
             }
 
-            neighbour_country = d_ml.getneighbour(p_file, l_country);
+            neighbour_country = d_Ml.getNeighbour(p_file, l_country);
 
             neighbour_country.remove(0);
 
@@ -214,15 +191,6 @@ public class MapValidate {
         }
 
         return l_a;
-    }
-
-    public static void main(String arg[]){
-
-        MapValidate m = new MapValidate();
-        File l_file = new File("test_05_incorrect.map");
-        File r_file = new File("test_02.map");
-        int c = m.validateConnectedContinents(l_file);
-        System.out.println(c);
     }
 
 }

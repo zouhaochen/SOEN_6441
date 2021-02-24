@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -30,7 +29,7 @@ public class MapListing extends MapDetailAccess{
             e.printStackTrace();
         }
         int l_i,l_j = 0,l_k;
-        int  l_continentnumber = continentnumber(p_file);
+        int  l_continentnumber = getContinentNumber(p_file);
         while(l_sc.hasNextLine()){
             if (l_j == 1){
                 break;
@@ -56,7 +55,7 @@ public class MapListing extends MapDetailAccess{
      * @param p_file contains the file path of a map
      * @return l_list the continent list
      */
-    public ArrayList<String> countrylist(File p_file){
+    public ArrayList<String> getCountryList(File p_file){
         ArrayList<String> l_list = new ArrayList<String>();
         String l_search = " ";
         Scanner l_sc = null;
@@ -66,7 +65,7 @@ public class MapListing extends MapDetailAccess{
             e.printStackTrace();
         }
         int l_i,l_j = 0,l_k;
-        int  l_countrynumber = countrynumber(p_file);
+        int  l_countrynumber = getCountryNumber(p_file);
         while(l_sc.hasNextLine()){
             if (l_j == 1){
                 break;
@@ -92,7 +91,7 @@ public class MapListing extends MapDetailAccess{
      * @param p_file contains the file path of a map
      * @return continentcountry continent name and no of countries in continent
      */
-    public HashMap<String, Integer> getcontinentinclude(File p_file){
+    public HashMap<String, Integer> getContinentInclude(File p_file){
 
         ArrayList<String> continent = new ArrayList<String>();
         continent = getContinentList(p_file);
@@ -107,7 +106,7 @@ public class MapListing extends MapDetailAccess{
             e.printStackTrace();
         }
         int l_j = 0,l_k;
-        int  l_countrynumber = countrynumber(p_file);
+        int  l_countrynumber = getCountryNumber(p_file);
 
         while(l_sc.hasNextLine()){
             if (l_j == 1){
@@ -141,7 +140,7 @@ public class MapListing extends MapDetailAccess{
      * @param p_file contains the file path of a map
      * @return countrycontinent country name of a continent
      */
-    public HashMap<String, String> getcountrycontinent(File p_file){
+    public HashMap<String, String> getCountryContinent(File p_file){
         ArrayList<String> continent = new ArrayList<String>();
         continent = getContinentList(p_file);
         HashMap<String, String> countrycontinent = new HashMap<String, String>();
@@ -155,7 +154,7 @@ public class MapListing extends MapDetailAccess{
             e.printStackTrace();
         }
         int l_j = 0,l_k;
-        int  l_countrynumber = countrynumber(p_file);
+        int  l_countrynumber = getCountryNumber(p_file);
 
         while(l_sc.hasNextLine()){
             if (l_j == 1){
@@ -184,35 +183,26 @@ public class MapListing extends MapDetailAccess{
      * @param p_search This parameter contains country name.
      * @return neighbour This method will return array list of neighbour countries.
      */
-    public ArrayList<String> getneighbour(File p_file, String p_search){
+    public ArrayList<String> getNeighbour(File p_file, String p_search){
 
         int l_a = 0;
         int l_countryno = 0;
         MapDetailAccess l_mda = new MapDetailAccess();
         ArrayList<String[]> l_totalneighbourlist = new ArrayList<String[]>();
-        l_totalneighbourlist = l_mda.neighbourlist(p_file);
+        l_totalneighbourlist = l_mda.getNeighbourList(p_file);
         ArrayList<String> neighbour = new ArrayList<String>();
-        ArrayList<String> country = countrylist(p_file);
+        ArrayList<String> country = getCountryList(p_file);
 
         for(int l_i = 0; l_i < country.size(); l_i++){
             if (country.get(l_i).equals(p_search)){
                 l_a = country.indexOf(p_search);
 
 
-                /*if(l_a >= l_totalneighbourlist.size()){
-                    System.out.println("There is an unconnected country");
-                    break;
-                }*/
 
                 for(int l_j = 0; l_j < l_totalneighbourlist.get(l_a).length; l_j++){
 
                     l_countryno = Integer.parseInt((String)l_totalneighbourlist.get(l_a)[l_j]);
 
-
-                    /*if(l_countryno > country.size()){
-                        System.out.println("The map has undefined countries!");
-                        break;
-                    }*/
 
                     try {
                         neighbour.add(country.get(l_countryno-1));
@@ -226,34 +216,4 @@ public class MapListing extends MapDetailAccess{
         }
         return neighbour;
     }
-    /**
-    public static void main(String arg[]){
-
-        MapListing m = new MapListing();
-        File l_file = new File("test_02.map");
-        ArrayList<String> a = new ArrayList<String>();
-        try {
-            a = m.countrylist(l_file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        HashMap<String,Integer> country_continent = new HashMap<String,Integer>();
-        country_continent = m.getcontinentinclude(l_file);
-        System.out.println(country_continent);
-
-        HashMap<String,String> continentcountry = new HashMap<String,String>();
-        continentcountry = m.getcountrycontinent(l_file);
-        System.out.println(continentcountry);
-
-
-
-        ArrayList<String> neighbour = new ArrayList<String>();
-        neighbour = m.getneighbour(l_file,"Japan");
-        System.out.println(neighbour);
-        for (int i = 0; i < a.size(); i++){
-            neighbour = m.getneighbour(l_file,a.get(i));
-            System.out.println(neighbour);
-        }
-    }
-     **/
 }
