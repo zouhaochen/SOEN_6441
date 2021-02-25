@@ -14,6 +14,7 @@ public class MapEdit {
     private static String DIRNAME = "domination";
     private static Scanner SC = new Scanner(System.in);
     private static String OPTFILE = "";
+    // flag for junit test
     public static int FLAG=0;
 
 
@@ -25,7 +26,6 @@ public class MapEdit {
      * @throws IOException if command invalid
      */
     public static void mapEditLoop() throws Exception {
-//  public static void main(String[] args) throws Exception {
         System.out.println("You are in the map editor.");
         String l_Command = "";
         // map editor loop
@@ -380,6 +380,12 @@ public class MapEdit {
         }
     }
 
+    /**
+     * get flag number from different state
+     *
+     * @param p_Command command user input
+     * @return flag number
+     */
     public static int flagEditMap(String p_Command)
     {
         MapEdit l_flagEditMap = new MapEdit();
