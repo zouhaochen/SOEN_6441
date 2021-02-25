@@ -13,7 +13,9 @@ import java.util.Scanner;
  */
 public class MapDetailAccess {
 
-
+    /**
+     * The d_Mla MapLineAccess.
+     */
     public MapLineAccess d_Mla = new MapLineAccess();
 
     /**

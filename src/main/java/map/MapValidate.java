@@ -14,11 +14,11 @@ import java.util.HashMap;
 public class MapValidate {
 
     /**
-     * The mdl.
+     * The mdl MapDetailAccess.
      */
     MapDetailAccess d_Mdl = new MapDetailAccess();
     /**
-     * The ml.
+     * The ml MapListing.
      */
     MapListing d_Ml = new MapListing();
 
