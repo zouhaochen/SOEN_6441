@@ -248,16 +248,14 @@ public class GameEngine {
      */
     public int getReinforcementBonus(Player p_Player) {
         int l_ReinforcementBonus = 0;
-        for (Continent l_Continent:
-                d_GameData.getContinentList()) {
+        for (Continent l_Continent : d_GameData.getContinentList()) {
 
             // go through all the countries in the current continent to check if the owner is the same as
             // the passed-in player object
             Map<String, Country> l_Countries = l_Continent.getCountries();
             boolean l_ContinentConquered = true;
             Player l_Owner;
-            for (Country l_Country:
-                 l_Countries.values()) {
+            for (Country l_Country : l_Countries.values()) {
                 l_Owner = l_Country.getOwner();
                 if (l_Owner.getId() != p_Player.getId()) {
                     l_ContinentConquered = false;

@@ -65,19 +65,19 @@ public class Country extends Territory {
     /**
      * current country Army number setter
      *
-     * @param p_armies new Armies number
+     * @param p_Armies new Armies number
      */
-    public void setArmies(int p_armies) {
-        d_Armies = p_armies;
+    public void setArmies(int p_Armies) {
+        d_Armies = p_Armies;
     }
 
     /**
      * deploy armies on this country
      *
-     * @param p_armies armies you want to deploy on current country
+     * @param p_Armies armies you want to deploy on current country
      */
-    public void deployArmies(int p_armies) {
-        d_Armies += p_armies;
+    public void deployArmies(int p_Armies) {
+        d_Armies += p_Armies;
     }
 
     /**

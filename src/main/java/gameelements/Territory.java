@@ -12,10 +12,10 @@ public class Territory {
     /**
      * Instantiates a new Territory.
      *
-     * @param p_name the name of the territory
+     * @param p_Name the name of the territory
      */
-    public Territory(String p_name) {
-        d_Name = p_name;
+    public Territory(String p_Name) {
+        d_Name = p_Name;
     }
 
     /**
@@ -30,9 +30,9 @@ public class Territory {
     /**
      * Sets name.
      *
-     * @param p_name the name of the territory
+     * @param p_Name the name of the territory
      */
-    public void setName(String p_name) {
-        d_Name = p_name;
+    public void setName(String p_Name) {
+        d_Name = p_Name;
     }
 }

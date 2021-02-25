@@ -243,11 +243,12 @@ public class GameData {
 
     /**
      * get a Country object by the name of country
+     *
      * @param p_CountryName the Country name you want to find in list
      * @return Country object
      */
-    public Country getCountryByName(String p_CountryName){
-        return d_CountryList.stream().filter(p-> p.getName().equalsIgnoreCase(p_CountryName)).findFirst().orElse(null);
+    public Country getCountryByName(String p_CountryName) {
+        return d_CountryList.stream().filter(p -> p.getName().equalsIgnoreCase(p_CountryName)).findFirst().orElse(null);
     }
 
     /**
@@ -312,8 +313,8 @@ public class GameData {
                             // get the country object and add it to the hash map of the corresponding continent object
                             int l_CountryId = Integer.parseInt(l_One[0]);
                             int l_ContinentId = Integer.parseInt(l_One[2]);
-                            Continent l_Continent = d_ContinentList.get(l_ContinentId-1);
-                            Country l_CountryToAdd = d_CountryList.get(l_CountryId-1);
+                            Continent l_Continent = d_ContinentList.get(l_ContinentId - 1);
+                            Country l_CountryToAdd = d_CountryList.get(l_CountryId - 1);
                             l_Continent.getCountries().put(l_CountryToAdd.getName(), l_CountryToAdd);
                         }
 
@@ -326,12 +327,12 @@ public class GameData {
                         l_One = l_MapScanner.nextLine().split(" ");
                         if (l_One.length > 1) {
                             int l_CountryId = Integer.parseInt(l_One[0]);
-                            Country l_Country = d_CountryList.get(l_CountryId-1);
+                            Country l_Country = d_CountryList.get(l_CountryId - 1);
 
                             // add the border countries to the hash map of boarderCountries
                             for (int l_Index = 1; l_Index < l_One.length; ++l_Index) {
                                 int l_BorderIndex = Integer.parseInt(l_One[l_Index]);
-                                Country l_BorderCountry = d_CountryList.get(l_BorderIndex-1);
+                                Country l_BorderCountry = d_CountryList.get(l_BorderIndex - 1);
                                 l_Country.getBorderCountries().put(l_BorderCountry.getName(), l_BorderCountry);
                             }
                         }
@@ -343,7 +344,7 @@ public class GameData {
                     break;
             }
         }
-        try{
+        try {
             System.out.println("\nMain Graph show below:");
             MapGraph.printTable(d_MapFile.getName());
         } catch (Exception e) {

@@ -17,32 +17,32 @@ public class MapGraphTest {
      * test all border are get
      */
     public void testPrintTableBorder() throws Exception {
-        MapGraph l_test = new MapGraph();
-        String l_lineTest = "";
-        boolean l_borderTest = l_test.equals(l_lineTest);
+        MapGraph l_Test = new MapGraph();
+        String l_LineTest = "";
+        boolean l_BorderTest = l_Test.equals(l_LineTest);
         map.MapGraph.printTable("testmap.map");
-        assertFalse(l_borderTest);
+        assertFalse(l_BorderTest);
     }
     @Test
     /**
      * test all border are get
      */
     public void testPrintTableCountry() throws Exception {
-        MapGraph l_test = new MapGraph();
-        String l_lineTest = "";
-        boolean l_countryTest = l_test.equals(l_lineTest);
+        MapGraph l_Test = new MapGraph();
+        String l_LineTest = "";
+        boolean l_CountryTest = l_Test.equals(l_LineTest);
         map.MapGraph.printTable("testmap.map");
-        assertFalse(l_countryTest);
+        assertFalse(l_CountryTest);
     }
     @Test
     /**
      * test all border are get
      */
     public void testPrintTableContinent() throws Exception {
-        MapGraph l_test = new MapGraph();
-        String l_lineTest = "";
-        boolean l_continentTest = l_test.equals(l_lineTest);
+        MapGraph l_Test = new MapGraph();
+        String l_LineTest = "";
+        boolean l_ContinentTest = l_Test.equals(l_LineTest);
         map.MapGraph.printTable("testmap.map");
-        assertFalse(l_continentTest);
+        assertFalse(l_ContinentTest);
     }
 }

@@ -22,10 +22,10 @@ public class MapLineAccessTest {
 	 */
 	@Test
 	public void testOne() {
-		File l_file = new File("domination//test_02.map");
-		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getLines(l_file);
-		assertEquals(25, l_a);
+		File l_File = new File("domination//test_02.map");
+		MapLineAccess l_Case1 = new MapLineAccess();
+		int l_A = l_Case1.getLines(l_File);
+		assertEquals(25, l_A);
 	}
 
 	/**
@@ -33,10 +33,10 @@ public class MapLineAccessTest {
 	 */
 	@Test
 	public void testTwo() {
-		File l_file = new File("domination//test_02.map");
-		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getContinentLines(l_file);
-		assertEquals(8, l_a);
+		File l_File = new File("domination//test_02.map");
+		MapLineAccess l_Case1 = new MapLineAccess();
+		int l_A = l_Case1.getContinentLines(l_File);
+		assertEquals(8, l_A);
 	}
 
 	/**
@@ -44,10 +44,10 @@ public class MapLineAccessTest {
 	 */
 	@Test
 	public void testThree() {
-		File l_file = new File("domination//test_02.map");
-		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getCountryLines(l_file);
-		assertEquals(11, l_a);
+		File l_File = new File("domination//test_02.map");
+		MapLineAccess l_Case1 = new MapLineAccess();
+		int l_A = l_Case1.getCountryLines(l_File);
+		assertEquals(11, l_A);
 	}
 
 	/**
@@ -55,10 +55,10 @@ public class MapLineAccessTest {
 	 */
 	@Test
 	public void testFour() {
-		File l_file = new File("domination//test_02.map");
-		MapLineAccess l_case1 = new MapLineAccess();
-		int l_a = l_case1.getBorderLines(l_file);
-		assertEquals(16, l_a);
+		File l_File = new File("domination//test_02.map");
+		MapLineAccess l_Case1 = new MapLineAccess();
+		int l_A = l_Case1.getBorderLines(l_File);
+		assertEquals(16, l_A);
 	}
 
 }
