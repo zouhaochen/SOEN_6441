@@ -20,11 +20,11 @@ public class Continent extends Territory {
     /**
      * Continent Object Constructor
      *
-     * @param p_name           continent name you need to give
+     * @param p_Name           continent name you need to give
      * @param p_ContinentValue continent value you need to set
      */
-    public Continent(String p_name, int p_ContinentValue) {
-        super(p_name);
+    public Continent(String p_Name, int p_ContinentValue) {
+        super(p_Name);
         d_ContinentValue = p_ContinentValue;
         d_Countries = new HashMap<>();
     }

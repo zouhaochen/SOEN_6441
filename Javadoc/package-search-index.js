@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"command"},{"l":"gameelements"},{"l":"gameelements.order"},{"l":"gameplay"},{"l":"gamePlayTest"},{"l":"MainLoopTest"},{"l":"map"},{"l":"mapTest"},{"l":"team05.demo01"},{"l":"team05.test01"},{"l":"所有程序包","url":"allpackages-index.html"}]

@@ -7,7 +7,7 @@ package gameelements;
  */
 public class Territory {
 
-    private String d_name;
+    private String d_Name;
 
     /**
      * Instantiates a new Territory.
@@ -15,7 +15,7 @@ public class Territory {
      * @param p_name the name of the territory
      */
     public Territory(String p_name) {
-        d_name = p_name;
+        d_Name = p_name;
     }
 
     /**
@@ -24,7 +24,7 @@ public class Territory {
      * @return the name of the territory
      */
     public String getName() {
-        return d_name;
+        return d_Name;
     }
 
     /**
@@ -33,6 +33,6 @@ public class Territory {
      * @param p_name the name of the territory
      */
     public void setName(String p_name) {
-        d_name = p_name;
+        d_Name = p_name;
     }
 }

@@ -11,7 +11,7 @@ public class Country extends Territory {
     /**
      * the army number now in this country
      */
-    private int d_armies;
+    private int d_Armies;
     /**
      * the country id
      */
@@ -28,10 +28,10 @@ public class Country extends Territory {
     /**
      * Country Object Constructor
      *
-     * @param p_name new Country name for constructor
+     * @param p_Name new Country name for constructor
      */
-    public Country(String p_name) {
-        super(p_name);
+    public Country(String p_Name) {
+        super(p_Name);
         d_BorderCountries = new HashMap<>();
     }
 
@@ -59,7 +59,7 @@ public class Country extends Territory {
      * @return current country army number
      */
     public int getArmies() {
-        return d_armies;
+        return d_Armies;
     }
 
     /**
@@ -68,7 +68,7 @@ public class Country extends Territory {
      * @param p_armies new Armies number
      */
     public void setArmies(int p_armies) {
-        d_armies = p_armies;
+        d_Armies = p_armies;
     }
 
     /**
@@ -77,7 +77,7 @@ public class Country extends Territory {
      * @param p_armies armies you want to deploy on current country
      */
     public void deployArmies(int p_armies) {
-        d_armies += p_armies;
+        d_Armies += p_armies;
     }
 
     /**

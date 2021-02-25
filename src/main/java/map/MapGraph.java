@@ -27,92 +27,92 @@ public class MapGraph {
      * @throws Exception if file is not found
      */
     public static void printTable(String p_Filename) throws Exception {
-        BufferedReader l_bw = new BufferedReader(new FileReader(getFile(p_Filename)));
-        BufferedReader l_bw2 = new BufferedReader(new FileReader(getFile(p_Filename)));
-        String l_line = "";
-        boolean l_border = false;
-        boolean l_country = false;
-        boolean l_continent = false;
-        boolean l_flag = false;
-        int l_num = 1;
-        int l_count = 0;
-        List<String> l_continentList = new ArrayList<>();
+        BufferedReader l_Bw = new BufferedReader(new FileReader(getFile(p_Filename)));
+        BufferedReader l_Bw2 = new BufferedReader(new FileReader(getFile(p_Filename)));
+        String l_Line = "";
+        boolean l_Border = false;
+        boolean l_Country = false;
+        boolean l_Continent = false;
+        boolean l_Flag = false;
+        int l_Num = 1;
+        int l_Count = 0;
+        List<String> l_ContinentList = new ArrayList<>();
         //get line number
-        while((l_line = l_bw2.readLine()) != null) {
-            if(l_flag && !"".equals(l_line)) {
-                l_count++;
+        while((l_Line = l_Bw2.readLine()) != null) {
+            if(l_Flag && !"".equals(l_Line)) {
+                l_Count++;
             }
-            if("[borders]".equals(l_line)) {
-                l_flag = true;
+            if("[borders]".equals(l_Line)) {
+                l_Flag = true;
             }
         }
-        StringBuffer l_buff = new StringBuffer(" ");
-        for(int l_i = 1;l_i <= l_count;l_i++) {
-            l_buff.append(" "+l_i);
+        StringBuffer l_Buff = new StringBuffer(" ");
+        for(int l_I = 1;l_I <= l_Count;l_I++) {
+            l_Buff.append(" "+l_I);
         }
-        l_buff.append("\n"+l_num);
-        Map<String,List<String>> l_map = new LinkedHashMap<>();
-        while((l_line = l_bw.readLine()) != null) {
+        l_Buff.append("\n"+l_Num);
+        Map<String,List<String>> l_Map = new LinkedHashMap<>();
+        while((l_Line = l_Bw.readLine()) != null) {
             //create table
-            if(l_border && !"".equals(l_line)) {
-                List<String> l_list = Arrays.asList(l_line.split(" "));
-                for(int l_i = 1;l_i <= l_count;l_i++) {
-                    if(l_list.contains(l_i+"")) {
-                        for(int l_a = 0;l_a < (l_i+"").length();l_a++) {
-                            l_buff.append(" ");
+            if(l_Border && !"".equals(l_Line)) {
+                List<String> l_List = Arrays.asList(l_Line.split(" "));
+                for(int l_I = 1;l_I <= l_Count;l_I++) {
+                    if(l_List.contains(l_I+"")) {
+                        for(int l_A = 0;l_A < (l_I+"").length();l_A++) {
+                            l_Buff.append(" ");
                         }
-                        l_buff.append("x");
+                        l_Buff.append("x");
                     } else {
-                        for(int l_a = 0;l_a < (l_i+"").length()+1;l_a++) {
-                            l_buff.append(" ");
+                        for(int l_A = 0;l_A < (l_I+"").length()+1;l_A++) {
+                            l_Buff.append(" ");
                         }
                     }
                 }
-                l_buff.append("\n"+(++l_num));
+                l_Buff.append("\n"+(++l_Num));
             }
             //get continent
-            if(l_continent && !"".equals(l_line) && !"[countries]".equals(l_line)) {
-                l_continentList.add(l_line.split(" ")[0]);
+            if(l_Continent && !"".equals(l_Line) && !"[countries]".equals(l_Line)) {
+                l_ContinentList.add(l_Line.split(" ")[0]);
             }
             //get country
-            if(l_country && !"".equals(l_line) && !"[borders]".equals(l_line)) {
-                int l_conLine = Integer.parseInt(l_line.split(" ")[2]);
-                String l_countryName = l_line.split(" ")[1];
-                String l_continet = l_continentList.get(l_conLine - 1);
-                if(l_map.get(l_continet) != null) {
-                    l_map.get(l_continet).add(l_countryName);
+            if(l_Country && !"".equals(l_Line) && !"[borders]".equals(l_Line)) {
+                int l_ConLine = Integer.parseInt(l_Line.split(" ")[2]);
+                String l_CountryName = l_Line.split(" ")[1];
+                String l_Continet = l_ContinentList.get(l_ConLine - 1);
+                if(l_Map.get(l_Continet) != null) {
+                    l_Map.get(l_Continet).add(l_CountryName);
                 } else {
-                    List<String> l_list = new ArrayList<>();
-                    l_list.add(l_countryName);
-                    l_map.put(l_continet, l_list);
+                    List<String> l_List = new ArrayList<>();
+                    l_List.add(l_CountryName);
+                    l_Map.put(l_Continet, l_List);
                 }
             }
-            if("[continents]".equals(l_line)) {
-                l_continent = true;
+            if("[continents]".equals(l_Line)) {
+                l_Continent = true;
             }
-            if("[countries]".equals(l_line)) {
-                l_country = true;
-                l_continent = false;
+            if("[countries]".equals(l_Line)) {
+                l_Country = true;
+                l_Continent = false;
             }
-            if("[borders]".equals(l_line)) {
-                l_border = true;
-                l_country = false;
+            if("[borders]".equals(l_Line)) {
+                l_Border = true;
+                l_Country = false;
             }
         }
-        String l_str2 = "";
-        for(Map.Entry<String, List<String>> l_en : l_map.entrySet()) {
-            String l_key = l_en.getKey();
-            List<String> l_value = l_en.getValue();
-            l_str2 += l_key+":";
+        String l_Str2 = "";
+        for(Map.Entry<String, List<String>> l_En : l_Map.entrySet()) {
+            String l_key = l_En.getKey();
+            List<String> l_value = l_En.getValue();
+            l_Str2 += l_key+":";
             for(String l_s : l_value) {
-                l_str2 += " " + l_s;
+                l_Str2 += " " + l_s;
             }
-            l_str2 += "\n";
+            l_Str2 += "\n";
         }
-        String l_str = l_buff.substring(0,l_buff.toString().lastIndexOf("\n"));
-        System.out.println(l_str+"\n\n"+l_str2);
-        l_bw.close();
-        l_bw2.close();
+        String l_Str = l_Buff.substring(0,l_Buff.toString().lastIndexOf("\n"));
+        System.out.println(l_Str+"\n\n"+l_Str2);
+        l_Bw.close();
+        l_Bw2.close();
     }
 
     /**
@@ -123,8 +123,8 @@ public class MapGraph {
      */
     private static File getFile(String p_Filename) throws IOException {
         File l_F = new File("");
-        String l_path = l_F.getCanonicalPath();
-        File l_F2 = new File(l_path + "/" + d_DirName);
+        String l_Path = l_F.getCanonicalPath();
+        File l_F2 = new File(l_Path + "/" + d_DirName);
         if (!l_F2.exists()) {
             l_F2.mkdir();
         }

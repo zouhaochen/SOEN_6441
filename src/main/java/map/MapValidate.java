@@ -66,19 +66,19 @@ public class MapValidate {
 
     /**
      * This method checks if all the countries given in the map is connected or not
-     * @param p_file This parameter contains file path.
+     * @param p_File This parameter contains file path.
      * @return This method returns value 1 if countries are connected or else -1.
      */
-    public int validateCountryConnection(File p_file){
+    public int validateCountryConnection(File p_File){
 
         int l_state = 0;
         int l_flag = 0;
         int l_totalsize = 0;
-        int l_borderlength = d_Mdl.getCountryNumber(p_file);
-        int l_couuntrylength = d_Mdl.getCountryNumber(p_file);
+        int l_borderlength = d_Mdl.getCountryNumber(p_File);
+        int l_couuntrylength = d_Mdl.getCountryNumber(p_File);
         //To get the whole country connection list.
         ArrayList<String[]> l_neighbourlist = new ArrayList<String[]>();
-        l_neighbourlist = d_Mdl.getNeighbourList(p_file);
+        l_neighbourlist = d_Mdl.getNeighbourList(p_File);
 
         for(int l_i = 0; l_i < l_couuntrylength; l_i++){
             if(l_couuntrylength > l_neighbourlist.size()){
@@ -120,12 +120,12 @@ public class MapValidate {
         return l_state;
     }
 
-    public int validateContinentConnection(File p_file){
+    public int validateContinentConnection(File p_File){
         ArrayList<String> l_neighbourcountry = new ArrayList<String>();
-        ArrayList<String> l_continentlist = d_Ml.getContinentList(p_file);
+        ArrayList<String> l_continentlist = d_Ml.getContinentList(p_File);
         ArrayList<String> l_newcontinentlist = l_continentlist;
-        ArrayList<String> country_list = d_Ml.getCountryList(p_file);
-        HashMap<String,String> country_continent = d_Ml.getCountryContinent(p_file);
+        ArrayList<String> country_list = d_Ml.getCountryList(p_File);
+        HashMap<String,String> country_continent = d_Ml.getCountryContinent(p_File);
         int l_n = country_list.size();
         String l_country=" ", continent = " ", continent1 = " ";
         int l_flag=0, l_a=0;
@@ -147,7 +147,7 @@ public class MapValidate {
                 l_flag = 1;
             }
 
-            l_neighbourcountry = d_Ml.getNeighbour(p_file, l_country);
+            l_neighbourcountry = d_Ml.getNeighbour(p_File, l_country);
 
             l_neighbourcountry.remove(0);
 

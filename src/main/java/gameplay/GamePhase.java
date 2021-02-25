@@ -3,12 +3,11 @@ package gameplay;
 /**
  * Phase of the game
  */
- public enum GamePhase {
+public enum GamePhase {
     /**
      * to tag some player is lost
      */
     LOST(0),
-
     /**
      * waiting to turn phase
      */
@@ -47,10 +46,9 @@ package gameplay;
     WIN(9);
 
 
-
-   /**
-    * the integer that can represent the game phase for easier checking current game phase
-    */
+    /**
+     * the integer that can represent the game phase for easier checking current game phase
+     */
     private final int d_Phase;
 
     /**
