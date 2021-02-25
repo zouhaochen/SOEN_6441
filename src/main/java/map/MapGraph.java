@@ -19,6 +19,9 @@ import java.util.Map;
  */
 public class MapGraph {
 
+    /**
+     * The Map File Directory prefix
+     */
     private static String D_DIRNAME = "domination";
 
     /**

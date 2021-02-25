@@ -12,10 +12,22 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class MapEdit {
+    /**
+     * Directory Name
+     */
     private static String DIRNAME = "domination";
+    /**
+     * Map file scanner
+     */
     private static Scanner SC = new Scanner(System.in);
+    /**
+     * Map file path
+     */
     private static String OPTFILE = "";
     // flag for junit test
+    /**
+     * Flag, used to block edit process
+     */
     public static int FLAG = 0;
 
 

@@ -38,6 +38,9 @@ public class MapValidateTest {
         assertEquals(1, l_A);
     }
 
+    /**
+     * This method is test case1 for the continent connection in the map file.
+     */
     @Test
     public void testThree() {
         File l_File = new File("domination//test_06_incorrect.map");

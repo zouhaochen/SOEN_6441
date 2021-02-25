@@ -7,6 +7,9 @@ package gameelements;
  */
 public class Territory {
 
+    /**
+     * Territory name
+     */
     private String d_Name;
 
     /**
