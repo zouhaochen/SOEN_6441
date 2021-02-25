@@ -1,21 +1,21 @@
 package mapTest;
 
 import map.MapGraph;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/** This class is for test MapGraph
+/**
+ * This class is for test MapGraph
+ *
  * @author Haochen Zou
  * @version 1.0
  */
 public class MapGraphTest {
-    @Test
     /**
      * test all border are get
      */
+    @Test
     public void testPrintTableBorder() throws Exception {
         MapGraph l_Test = new MapGraph();
         String l_LineTest = "";
@@ -23,10 +23,11 @@ public class MapGraphTest {
         map.MapGraph.printTable("testmap.map");
         assertFalse(l_BorderTest);
     }
-    @Test
+
     /**
      * test all border are get
      */
+    @Test
     public void testPrintTableCountry() throws Exception {
         MapGraph l_Test = new MapGraph();
         String l_LineTest = "";
@@ -34,10 +35,11 @@ public class MapGraphTest {
         map.MapGraph.printTable("testmap.map");
         assertFalse(l_CountryTest);
     }
-    @Test
+
     /**
      * test all border are get
      */
+    @Test
     public void testPrintTableContinent() throws Exception {
         MapGraph l_Test = new MapGraph();
         String l_LineTest = "";

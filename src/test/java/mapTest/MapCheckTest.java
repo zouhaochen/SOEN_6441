@@ -1,7 +1,6 @@
 package mapTest;
 
 import map.MapCheck;
-import map.MapLineAccess;
 import org.junit.Test;
 
 import java.io.File;
