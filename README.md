@@ -74,5 +74,7 @@ command: **1. editcontinent -add continentID continentValue (example: editcontin
  
  
  Type **exit** if user  want to exit the game.
+ 
+ 
 ##Build 1 Architecture UML
  ![Build1](classesuml/project.png)
