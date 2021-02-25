@@ -18,17 +18,16 @@ import static org.junit.Assert.assertEquals;
 
 public class MapListingTest {
 
-    File d_File = new File("domination//test_02.map");
-    MapListing d_Case = new MapListing();
-
     /**
      * This method is test case1 for the country connection in the map file.
      */
     @Test
     public void testOne() {
 
-        ArrayList<String> l_List = new ArrayList<String>();
-        l_List = d_Case.getCountryList(d_File);
+        File l_file = new File("domination//test_02.map");
+        MapListing l_case = new MapListing();
+        ArrayList<String> l_List;
+        l_List = l_case.getCountryList(l_file);
         int l_A = l_List.size();
         assertEquals(4, l_A);
     }
@@ -38,9 +37,10 @@ public class MapListingTest {
      */
     @Test
     public void testTwo() {
-
-        ArrayList<String> l_List = new ArrayList<String>();
-        l_List = d_Case.getContinentList(d_File);
+        File l_file = new File("domination//test_02.map");
+        MapListing l_case = new MapListing();
+        ArrayList<String> l_List;
+        l_List = l_case.getContinentList(l_file);
         int l_A = l_List.size();
         assertEquals(2, l_A);
     }
@@ -50,9 +50,10 @@ public class MapListingTest {
      */
     @Test
     public void testThree() {
-
-        HashMap<String, String> l_CountryContinent = new HashMap<String, String>();
-        l_CountryContinent = d_Case.getCountryContinent(d_File);
+        File l_file = new File("domination//test_02.map");
+        MapListing l_case = new MapListing();
+        HashMap<String, String> l_CountryContinent;
+        l_CountryContinent = l_case.getCountryContinent(l_file);
         int l_A = l_CountryContinent.size();
         assertEquals(4, l_A);
     }
@@ -62,9 +63,10 @@ public class MapListingTest {
      */
     @Test
     public void testFour() {
-
-        ArrayList<String> l_List = new ArrayList<String>();
-        l_List = d_Case.getNeighbour(d_File, "China");
+        File l_file = new File("domination//test_02.map");
+        MapListing l_case = new MapListing();
+        ArrayList<String> l_List;
+        l_List = l_case.getNeighbour(l_file, "China");
         int l_A = l_List.size();
         assertEquals(4, l_A);
     }
