@@ -2,6 +2,7 @@ package gameplay;
 
 import command.CommandType;
 import command.CommandValidator;
+import gameelements.Continent;
 import gameelements.Country;
 import gameelements.Player;
 
@@ -120,16 +121,15 @@ public class GameEngine {
             System.out.println(l_CountryName + " has " + ArmyNum + " Armies.");
 
             // get neighbour country into string arrayList
-            System.out.println(l_CountryName+" connected to :");
-            for(Map.Entry<String, Country> l_BorderCountryEntry : d_GameData.getCountryByName(l_CountryName).getBorderCountries().entrySet()){
-                System.out.print(l_BorderCountryEntry.getValue().getName()+"\t");
+            System.out.println(l_CountryName + " connected to :");
+            for (Map.Entry<String, Country> l_BorderCountryEntry : d_GameData.getCountryByName(l_CountryName).getBorderCountries().entrySet()) {
+                System.out.print(l_BorderCountryEntry.getValue().getName() + "\t");
             }
 
             System.out.println();
         }
 
     }
-
 
 
     /**
@@ -233,11 +233,43 @@ public class GameEngine {
         // second step: if there are any countries left
         Random l_Random = new Random();
         while (!l_CountryStack.empty()) {
-            int l_RandomPlayerIndex = l_Random.nextInt(d_GameData.getTotalPlayer());
+            int l_RandomPlayerIndex = l_Random.nextInt(d_GameData.getPlayerList().size());
             Player l_RandomPlayer = d_GameData.getPlayerList().get(l_RandomPlayerIndex);
             l_CountryStack.peek().setOwner(l_RandomPlayer);
             l_RandomPlayer.assignCountry(l_CountryStack.pop());
         }
+    }
+
+    /**
+     * Calculate the reinforcement armies to be award.
+     *
+     * @param p_Player the player object to be checked
+     * @return the number of reinforcement
+     */
+    public int getReinforcementBonus(Player p_Player) {
+        int l_ReinforcementBonus = 0;
+        for (Continent l_Continent:
+                d_GameData.getContinentList()) {
+
+            // go through all the countries in the current continent to check if the owner is the same as
+            // the passed-in player object
+            Map<String, Country> l_Countries = l_Continent.getCountries();
+            boolean l_ContinentConquered = true;
+            Player l_Owner;
+            for (Country l_Country:
+                 l_Countries.values()) {
+                l_Owner = l_Country.getOwner();
+                if (l_Owner.getId() != p_Player.getId()) {
+                    l_ContinentConquered = false;
+                    break;
+                }
+            }
+
+            if (l_ContinentConquered) {
+                l_ReinforcementBonus += l_Continent.getContinentValue();
+            }
+        }
+        return l_ReinforcementBonus;
     }
 
 }

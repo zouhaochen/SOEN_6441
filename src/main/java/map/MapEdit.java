@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * This is the map editor
- * @Auther: Haochen Zou
+ * @author Haochen Zou
  * @version 1.0
  */
 public class MapEdit {
