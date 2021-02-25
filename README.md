@@ -26,13 +26,13 @@ Type **edit** if user  want to get into Map Editor model.
           **4. validatemap          (example: validatemap)**
           
  1. if enter command **editmap filename**: you will be continue to asked the following command to edit the map you selected.
-command: **1. editcontinent -add continentID continentValue (example: editcontinent -add Asia 1)**
-         **2. editcountry -add countryID continentID (example: editcontinent -add China Asia)**
-         **3. editneighbor -add countryID neighborcountryID (example: editneighbor -add China Japan)**
+command: **1. editcontinent -add continentID continentValue (example: editcontinent -add Asia 1 -add Europe 2)**
+         **2. editcountry -add countryID continentID (example: editcountry -add 1 China 1 -add 2 Korea 1)**
+         **3. editneighbor -add countryID neighborcountryID (example: editneighbor -add 1 2)**
           
-    **4. editcontinent -remove continentID  (example: editcontinent -remove Asia)**
-    **5. editcountry -remove countryID  (example: editcountry -remove China)**
-    **6. editneighbor -remove countryID neighborcountryID (example: editneighbor -remove China Japan)**
+    **4. editcontinent -remove continentID  (example: editcontinent -remove Asia -remove Egypt)**
+    **5. editcountry -remove countryID  (example: editcountry -remove 3 Russia 2 -remove 4 Finland 2)**
+    **6. editneighbor -remove countryID neighborcountryID (example: editneighbor -remove 4 3 -remove 3 1)**
  
  2. if enter command **savemap filename**: your current edit map will be saved.
  
