@@ -16,15 +16,24 @@ import java.util.Scanner;
  */
 
 public class MainLoop {
+    /**
+     * get Game data as an object, used to be the input parameter for GameEngine class
+     */
     public GameData d_GameData;
+    /**
+     * get game engine as an object that used to call the function from GameEngine class
+     */
     public GameEngine d_GameEngine;
+    /**
+     * map file that use to load represent game map.
+     */
     public File d_MapFile;
 
     /**
      * Constructor
      * the main game loop that to control game phases.
      *
-     * @param p_FilePath the map file
+     * @param p_FilePath the map file path that use to load game map.
      */
     public MainLoop(String p_FilePath) {
         this.d_MapFile = new File(p_FilePath);
@@ -101,6 +110,7 @@ public class MainLoop {
                             + " Reinforcement Armies.");
                     l_Player.issueOrder();
 
+                    //Reduce the corresponding amount of reinforcements after deploying.
                     l_TempReinforcementArmy -= l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
                 }
             }
@@ -120,7 +130,6 @@ public class MainLoop {
      */
     public void MainLogic() throws Exception {
         Scanner l_Scanner = new Scanner(System.in);
-        MainLoop l_MainLoop;
 
         int l_CheckState = 1;
         while (l_CheckState != 0) {
