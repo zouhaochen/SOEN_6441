@@ -183,33 +183,7 @@ public class Player {
         }
     }
 
-    /**
-     * check whether the number of deployed  armies is over assigned armies for each turn.
-     */
-//    public void issueDeployOrder() {
-//        // read the command from a player
-//        String l_command;
-//        String[] l_command_arr;
-//        do {
-//            System.out.println("\nPlease enter the command: \n");
-//            Scanner l_scanner = new Scanner(System.in);
-//            l_command = l_scanner.nextLine();
-//            l_command_arr = l_command.split(" ");
-//            // check whether user input army number larger than reinforcement limit.
-//            if (Integer.parseInt(l_command_arr[2]) > this.getReinforcementArmies()) {
-//                System.out.println("ERROR: You can't input reinforcement army larger than" + getReinforcementArmies());
-//                continue;
-//            }
-//        } while (!d_commandValidator.validate(l_command));
-//
-//        // create an order
-//
-//        Order l_order = OrderFactory.CreateOrder(l_command_arr, this);
-//        if (l_order != null) {
-//            addOrderToList(l_order);
-//        }
-//
-//    }
+
 
     /**
      * return the last order in orderlist.
