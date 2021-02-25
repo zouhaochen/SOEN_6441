@@ -381,7 +381,7 @@ public class MapEdit {
     }
 
     /**
-     * get flag number from different state
+     * Get flag number from different state
      *
      * @param p_Command command user input
      * @return flag number
