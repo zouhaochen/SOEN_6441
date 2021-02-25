@@ -120,6 +120,7 @@ public class MapGraph {
      *
      * @param p_Filename path to file
      * @throws IOException if file not found or cannot read
+     * @return File
      */
     private static File getFile(String p_Filename) throws IOException {
         File l_F = new File("");
