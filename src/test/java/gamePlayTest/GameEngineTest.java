@@ -85,8 +85,8 @@ public class GameEngineTest {
         Player l_Player = d_GameEngine.d_GameData.getPlayerList().get(0);
         try {
             d_GameEngine.d_GameData.loadMap();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException l_E) {
+            l_E.printStackTrace();
         }
         Country l_Country1 = new Country("Ostfriesland");
         l_Country1.setArmies(10);

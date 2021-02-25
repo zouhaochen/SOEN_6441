@@ -19,8 +19,8 @@ public class MapEditTest {
      */
     @Test
     public void testEditMapEmpty() {
-        int l_testFlag1 = map.MapEdit.flagEditMap("editmap ");
-        assertEquals(1, l_testFlag1);
+        int l_TestFlag1 = map.MapEdit.flagEditMap("editmap ");
+        assertEquals(1, l_TestFlag1);
     }
 
     /**
@@ -28,8 +28,8 @@ public class MapEditTest {
      */
     @Test
     public void testEditMapExist() {
-        int l_testFlag2 = map.MapEdit.flagEditMap("editmap testmap.map");
-        assertEquals(2, l_testFlag2);
+        int l_TestFlag2 = map.MapEdit.flagEditMap("editmap testmap.map");
+        assertEquals(2, l_TestFlag2);
     }
 
     /**
@@ -38,9 +38,9 @@ public class MapEditTest {
      */
     @Test
     public void testEditMapNew() throws IOException {
-        int l_testFlag3 = map.MapEdit.flagEditMap("editmap testnewmap.map");
-        assertEquals(3, l_testFlag3);
-        File l_file = map.MapEdit.getFile("testnewmap.map");
-        l_file.delete();
+        int l_TestFlag3 = map.MapEdit.flagEditMap("editmap testnewmap.map");
+        assertEquals(3, l_TestFlag3);
+        File l_File = map.MapEdit.getFile("testnewmap.map");
+        l_File.delete();
     }
 }

@@ -27,10 +27,10 @@ public class MapListingTest {
     @Test
     public void testOne() {
 
-        ArrayList<String> l_list = new ArrayList<String>();
-        l_list = d_Case.getCountryList(d_File);
-        int l_a = l_list.size();
-        assertEquals(4, l_a);
+        ArrayList<String> l_List = new ArrayList<String>();
+        l_List = d_Case.getCountryList(d_File);
+        int l_A = l_List.size();
+        assertEquals(4, l_A);
     }
 
     /**
@@ -39,10 +39,10 @@ public class MapListingTest {
     @Test
     public void testTwo() {
 
-        ArrayList<String> l_list = new ArrayList<String>();
-        l_list = d_Case.getContinentList(d_File);
-        int l_a = l_list.size();
-        assertEquals(2, l_a);
+        ArrayList<String> l_List = new ArrayList<String>();
+        l_List = d_Case.getContinentList(d_File);
+        int l_A = l_List.size();
+        assertEquals(2, l_A);
     }
 
     /**
@@ -51,10 +51,10 @@ public class MapListingTest {
     @Test
     public void testThree() {
 
-        HashMap<String, String> l_countrycontinent = new HashMap<String, String>();
-        l_countrycontinent = d_Case.getCountryContinent(d_File);
-        int l_a = l_countrycontinent.size();
-        assertEquals(4, l_a);
+        HashMap<String, String> l_CountryContinent = new HashMap<String, String>();
+        l_CountryContinent = d_Case.getCountryContinent(d_File);
+        int l_A = l_CountryContinent.size();
+        assertEquals(4, l_A);
     }
 
     /**
@@ -63,9 +63,9 @@ public class MapListingTest {
     @Test
     public void testFour() {
 
-        ArrayList<String> l_list = new ArrayList<String>();
-        l_list = d_Case.getNeighbour(d_File, "China");
-        int l_a = l_list.size();
-        assertEquals(4, l_a);
+        ArrayList<String> l_List = new ArrayList<String>();
+        l_List = d_Case.getNeighbour(d_File, "China");
+        int l_A = l_List.size();
+        assertEquals(4, l_A);
     }
 }

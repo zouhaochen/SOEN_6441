@@ -171,13 +171,13 @@ public class Player {
         String l_Command;
         do {
             System.out.println("\nPlease enter the command: \n");
-            Scanner l_scanner = new Scanner(System.in);
-            l_Command = l_scanner.nextLine();
+            Scanner l_Scanner = new Scanner(System.in);
+            l_Command = l_Scanner.nextLine();
         } while (!d_CommandValidator.validate(l_Command));
 
         // create an order
-        String[] l_command_arr = l_Command.split(" ");
-        Order l_Order = OrderFactory.CreateOrder(l_command_arr, this);
+        String[] l_CommandArr = l_Command.split(" ");
+        Order l_Order = OrderFactory.CreateOrder(l_CommandArr, this);
         if (l_Order != null) {
             addOrderToList(l_Order);
         }
