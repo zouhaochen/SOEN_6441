@@ -48,9 +48,9 @@ public class MainLoop {
                     d_GameEngine.gamePlayerCommand();
                 }
                 // since the number of player range is 2 to 5. no more player can be add in.
-                else if (d_GameData.getPlayerList().size() > 5) {
+                else if (d_GameData.getPlayerList().size() >= 5) {
                     System.out.println("number of player out of limit ");
-                    l_isTrue = false;
+                    continue;
                 }
             } else if (l_askUser.equalsIgnoreCase("n")) {
                 // since the number of player range is 2 to 5. no more player can be remove in.
@@ -61,7 +61,7 @@ public class MainLoop {
                     l_isTrue = false;
                 }
             } else {
-                System.out.println("Invalid command, please type (y/n): ");
+                System.out.println("Invalid command, please try again (y/n): ");
             }
         }
 
@@ -99,7 +99,7 @@ public class MainLoop {
                     System.out.println("==== Now Player [" + l_Player.getColour() + "]'s turn to issue order ====");
                     System.out.println(" Player [" + l_Player.getColour() + "] have " + l_TempReinforcementArmy
                             + " Reinforcement Armies.");
-                    l_Player.issueDeployOrder();
+                    l_Player.issueOrder();
 
                     l_TempReinforcementArmy -= l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
                     l_Player.setReinforcementArmies(l_TempReinforcementArmy);
@@ -116,6 +116,7 @@ public class MainLoop {
 
     /**
      * According to user input to check in which model that user are going to get in.
+     *
      * @throws IOException if files are not found
      */
     public void MainLogic() throws Exception {
@@ -160,6 +161,7 @@ public class MainLoop {
 
     /**
      * main method， Show each game phase from GameEngine, and run the game according to the game rules
+     *
      * @param args To get parameters from console
      * @throws IOException if file does not exist
      */

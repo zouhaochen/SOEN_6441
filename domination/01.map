@@ -1,19 +1,6 @@
-[map]
-author=haochen zou
-mapname=01.map
-
 [continents]
-Asia 3
-Europe 4
+Afcia 5
 
 [countries]
-1 China 1
-2 Korea 1
-3 Russia 2
-4 Finland 2
 
 [borders]
-1 2 3
-2 1 3
-3 1 2 4
-4 3
