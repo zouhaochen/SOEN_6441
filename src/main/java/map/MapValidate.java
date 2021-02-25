@@ -159,11 +159,16 @@ public class MapValidate {
                 //Then, Let the similar continent be the target to check the connection.
                  if(country_continent.get(l_country) != country_continent.get(l_neighbourcountry.get(l_j))){
                      l_newcontinentlist.remove(continent);
+
                     continent = continent1;
                 }
             }
-
         }
+        if(l_newcontinentlist.isEmpty()) {
+            //If new_continent_list is empty, all continents are connected.
+            l_a = 1;
+        }
+
         return l_a;
     }
 
