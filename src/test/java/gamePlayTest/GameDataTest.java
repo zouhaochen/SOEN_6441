@@ -9,12 +9,15 @@ import java.io.FileNotFoundException;
 
 import static org.junit.Assert.*;
 
+/**
+ *  game data test class
+ */
 public class GameDataTest {
 
     /**
      * test map file
      */
-    File d_File = new File("germany.map");
+    File d_File = new File("domination/germany.map");
     /**
      * Test object GameData.
      */

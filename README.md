@@ -44,6 +44,7 @@ command: **1. editcontinent -add continentID continentValue (example: editcontin
  Type **play** if user  want to get into playing game model.
  
  **if you are in playing game model:**
+
  
 1. you will be asked to enter the following **command** to load the game
   command: **Loadmap filename   (example: Loadmap 01.map)**
@@ -73,3 +74,5 @@ command: **1. editcontinent -add continentID continentValue (example: editcontin
  
  
  Type **exit** if user  want to exit the game.
+##Build 1 Architecture UML
+ ![Build1](classesuml/project.png)

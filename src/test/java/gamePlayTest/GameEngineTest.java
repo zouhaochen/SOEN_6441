@@ -24,7 +24,7 @@ public class GameEngineTest {
     /**
      * test map file
      */
-    File d_File = new File("germany.map");
+    File d_File = new File("domination/germany.map");
 
     /**
      * test game data object
