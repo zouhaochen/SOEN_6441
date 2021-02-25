@@ -2,6 +2,7 @@ package mapTest;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 
 import static org.junit.Assert.*;
@@ -35,8 +36,10 @@ public class MapEditTest {
      * test open new map
      */
     @Test
-    public void testEditMapNew() {
+    public void testEditMapNew() throws IOException {
         int l_testFlag3 = map.MapEdit.flagEditMap("editmap testnewmap.map");
         assertEquals(3, l_testFlag3);
+        File l_file = map.MapEdit.getFile("testnewmap.map");
+        l_file.delete();
     }
 }
