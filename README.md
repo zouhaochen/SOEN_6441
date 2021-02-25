@@ -1,5 +1,5 @@
 # Soen 6441 Team_05 Project WarZone
-##Build 1:
+## Build 1:
 
 **Group 5**
 Group Member:
@@ -74,5 +74,6 @@ command: **1. editcontinent -add continentID continentValue (example: editcontin
  
  
  Type **exit** if user  want to exit the game.
-##Build 1 Architecture UML
+ 
+## Build 1 Architecture UML
  ![Build1](classesuml/project.png)
