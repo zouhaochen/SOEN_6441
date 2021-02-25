@@ -8,8 +8,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /** This class is for test MapGraph
- * @Auther: Haochen Zou
- * @version: 1.0
+ * @author Haochen Zou
+ * @version 1.0
  */
 public class MapGraphTest {
     @Test

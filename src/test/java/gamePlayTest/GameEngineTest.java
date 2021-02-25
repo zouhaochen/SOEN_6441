@@ -1,7 +1,5 @@
 package gamePlayTest;
 
-import command.CommandValidator;
-import gameelements.Continent;
 import gameelements.Country;
 import gameelements.Player;
 import gameplay.GameData;
@@ -12,11 +10,10 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
 /**
  * Game engine test unit
@@ -92,70 +89,5 @@ public class GameEngineTest {
         l_Country1.setArmies(10);
         l_Player.getCountriesInControl().put(l_Country1.getName(),l_Country1);
         d_GameEngine.showMap(l_Player);
-    }
-
-    /**
-     * Test reinforcement armies calculation with bonus
-     */
-    @Test
-    public void testReinforcementCalculationWithBonus() {
-        // given: one continent has only one country
-        int l_ExpectedContinentValue = 8;
-        CommandValidator l_CommandValidator = mock(CommandValidator.class);
-        Continent l_Continent = new Continent("NorthAmerica", l_ExpectedContinentValue);
-        Country l_Country = new Country("Canada");
-
-        // the player owns the continent
-        Player l_Player = new Player("Red", l_CommandValidator);
-        l_Country.setOwner(l_Player);
-
-        l_Continent.getCountries().put(l_Country.getName(), l_Country);
-        List<Continent> l_ContinentList = new ArrayList<>();
-        l_ContinentList.add(l_Continent);
-
-        // mock and stub
-        GameData l_GameData = mock(GameData.class);
-        given(l_GameData.getContinentList()).willReturn((ArrayList<Continent>) l_ContinentList);
-        GameEngine l_GameEngine = new GameEngine(l_GameData);
-
-        // when
-        int l_ReinforcementBonus = l_GameEngine.getReinforcementBonus(l_Player);
-
-        // then
-        assertEquals(l_ExpectedContinentValue, l_ReinforcementBonus);
-
-    }
-
-    /**
-     * Test reinforcement armies calculation without bonus
-     */
-    @Test
-    public void testReinforcementCalculationWithoutBonus() {
-        // given: one continent has only one country
-        int l_ContinentValue = 8;
-        CommandValidator l_CommandValidator = mock(CommandValidator.class);
-        Continent l_Continent = new Continent("NorthAmerica", l_ContinentValue);
-        Country l_Country = new Country("Canada");
-
-        // the continent is not owned by the player to be tested
-        Player l_Player = new Player("Red", l_CommandValidator);
-        Player l_AnotherPlayer = new Player("Blue",l_CommandValidator);
-        l_Country.setOwner(l_AnotherPlayer);
-
-        l_Continent.getCountries().put(l_Country.getName(), l_Country);
-        List<Continent> l_ContinentList = new ArrayList<>();
-        l_ContinentList.add(l_Continent);
-
-        // mock and stub
-        GameData l_GameData = mock(GameData.class);
-        given(l_GameData.getContinentList()).willReturn((ArrayList<Continent>) l_ContinentList);
-        GameEngine l_GameEngine = new GameEngine(l_GameData);
-
-        // when
-        int l_ReinforcementBonus = l_GameEngine.getReinforcementBonus(l_Player);
-
-        // then
-        assertEquals(0, l_ReinforcementBonus);
-
     }
 }

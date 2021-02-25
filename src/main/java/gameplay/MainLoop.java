@@ -2,6 +2,8 @@ package gameplay;
 
 import gameelements.Country;
 import gameelements.Player;
+import map.MapCheck;
+import map.MapEdit;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,9 +18,12 @@ import java.util.Scanner;
  */
 
 public class MainLoop {
-    public GameData d_GameData;
-    public GameEngine d_GameEngine;
+    private static String DIRNAME = "domination";
+    public static GameData d_GameData;
+    private static GameEngine d_GameEngine;
     public File d_MapFile;
+    private static Map<String, Country> d_countryList;
+    private static String OPTFILE = "";
 
     /**
      * Constructor
@@ -30,6 +35,59 @@ public class MainLoop {
         this.d_MapFile = new File(p_FilePath);
         this.d_GameData = new GameData(d_MapFile);
         this.d_GameEngine = new GameEngine(d_GameData);
+
+    }
+
+    /**
+     * Call functions from MapEdit class to edit or creat a map for the game, and the new create map is showing up at domination file.
+     *
+     * @throws IOException if files are not found
+     */
+    public void mainLoopMapEdit() throws Exception {
+        Scanner l_Scanner = new Scanner(System.in);
+        System.out.println("You are in the map editor.");
+        String l_Command = "";
+
+        for (;;) {
+            System.out.println("Please type in your command:");
+            l_Command = l_Scanner.nextLine();
+            // call methods according to user's commands
+            // call the editmap method
+            if (l_Command.startsWith("editmap ")) {
+                MapEdit.editMap(l_Command);
+                // call the editcontinent method
+            } else if (l_Command.startsWith("editcontinent ")) {
+                MapEdit.editContinent(l_Command);
+                // call the editcountry method
+            } else if (l_Command.startsWith("editcountry ")) {
+                MapEdit.editCountry(l_Command);
+                // call the editneighbor method
+            } else if (l_Command.startsWith("editneighbor ")) {
+                MapEdit.editNeighbor(l_Command);
+                // call the showmap method
+            } else if ("showmap".equals(l_Command)) {
+                File l_File = MapEdit.getFile(OPTFILE);
+                if(l_File.exists()) {
+                    MapEdit.showMap(l_File);
+                }
+
+                System.out.println("\\n Map graph as follow: \n");
+
+                map.MapGraph.printTable(OPTFILE);
+                // call the savemap method
+            } else if (l_Command.startsWith("savemap ")) {
+                MapEdit.saveMap(l_Command);
+                // call the validatemap method
+            } else if (l_Command.startsWith("validatemap")) {
+                File l_File = MapEdit.getFile(OPTFILE);
+                if(l_File.exists()) {
+                    // check map validation
+                    map.MapCheck.check(l_File);
+                }
+            } else {
+                System.out.println("invalid command");
+            }
+        }
     }
 
     /**
@@ -41,16 +99,16 @@ public class MainLoop {
         boolean l_isTrue = true;
         while (l_isTrue) {
             System.out.println("do you want to add or remove player (Number of player limit is 2 to 5)? (y/n) ");
-            String l_askUser = l_scanner.nextLine().trim();
+            String l_askUser = l_scanner.next();
 
             if (l_askUser.equalsIgnoreCase("y")) {
                 if (d_GameData.getPlayerList().size() < 5) {
                     d_GameEngine.gamePlayerCommand();
                 }
                 // since the number of player range is 2 to 5. no more player can be add in.
-                else if (d_GameData.getPlayerList().size() >= 5) {
+                else if (d_GameData.getPlayerList().size() > 5) {
                     System.out.println("number of player out of limit ");
-                    continue;
+                    l_isTrue = false;
                 }
             } else if (l_askUser.equalsIgnoreCase("n")) {
                 // since the number of player range is 2 to 5. no more player can be remove in.
@@ -61,7 +119,7 @@ public class MainLoop {
                     l_isTrue = false;
                 }
             } else {
-                System.out.println("Invalid command, please try again (y/n): ");
+                System.out.println("Invalid command, please type (y/n): ");
             }
         }
 
@@ -69,44 +127,44 @@ public class MainLoop {
         d_GameEngine.assignCountries();
 
         //start up the game, according to the game rules to start game engine, and determine if any players are eliminated at the end of each round.
-        int l_CurrentReinforcement = 5;
+        int l_currentReinForcement = 5;
         while (d_GameData.getCurrentPhase() != GamePhase.END_OF_GAME) {
-            int l_TempReinforcementArmy;
+            int l_TempReforcementArmy;
 
             // Assign Reinforcement phase, Call the method in gameplay to allocate the number of ReinforcementArmies in each round to each player
             this.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.REINFORCEMENT);
             System.out.println(d_GameData.getCurrentPhase());
 
             for (Player l_Player : this.d_GameEngine.d_GameData.getPlayerList()) {
-                l_CurrentReinforcement += d_GameEngine.getReinforcementBonus(l_Player);
-                l_Player.setReinforcementArmies(l_CurrentReinforcement);
-                System.out.println(l_CurrentReinforcement + " Reinforcement Armies are assigned to " + " Player [" + l_Player.getColour() + "]  ");
+                l_Player.setReinforcementArmies(l_currentReinForcement);
+                System.out.println(l_currentReinForcement + " Reinforcement Armies are assigned to " + " Player [" + l_Player.getColour() + "]  ");
 
                 for (Map.Entry<String, Country> l_CountryEntry : l_Player.getCountriesInControl().entrySet()) {
-                    System.out.println("Controlling countries: " + l_CountryEntry.getKey());
+                    System.out.println("Controling countries: " + l_CountryEntry.getKey());
                 }
             }
 
             System.out.println("---------REINFORCEMENT PHASE COMPLETE-----------\n");
+
 
             // Issue order phase,Loop through all players, until all players finish issuing the instructions, and save the order in player`s order list.
             for (Player l_Player : this.d_GameEngine.d_GameData.getPlayerList()) {
                 this.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.ISSUE_ORDER);
                 System.out.println(this.d_GameEngine.d_GameData.getCurrentPhase());
 
-                l_TempReinforcementArmy = l_Player.getReinforcementArmies();
-                while (l_TempReinforcementArmy > 0) {
+
+                l_TempReforcementArmy = l_Player.getReinforcementArmies();
+                while (l_TempReforcementArmy > 0) {
                     System.out.println("==== Now Player [" + l_Player.getColour() + "]'s turn to issue order ====");
-                    System.out.println(" Player [" + l_Player.getColour() + "] have " + l_TempReinforcementArmy
+                    System.out.println(" Player [" + l_Player.getColour() + "] have " + l_TempReforcementArmy
                             + " Reinforcement Armies.");
                     l_Player.issueOrder();
-
-                    l_TempReinforcementArmy -= l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
-                    l_Player.setReinforcementArmies(l_TempReinforcementArmy);
+                    l_TempReforcementArmy -= l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
                 }
             }
             //execute orders phase,  execute player`s order, assigning a number of armies to move towards the target country.
             this.d_GameEngine.phaseProcess();
+
             //game phase turning to END OF GAME.
             d_GameEngine.d_GameData.setCurrentPhase(GamePhase.END_OF_GAME);
             System.out.println(d_GameEngine.d_GameData.getCurrentPhase());
@@ -136,14 +194,14 @@ public class MainLoop {
 
             // input edit to get into map edit model playing game model.
             else if (l_GameOptionCommand.equalsIgnoreCase("Play")) {
+//                System.out.println("please enter your file path to load game map: ");
+//                String l_TempLoadmapFilePath = l_Scanner.next();
+
                 // mainloop for game play
                 d_GameData.setCurrentPhase(GamePhase.STARTUP);
-                this.d_MapFile = new File(d_GameEngine.getMapFilePath());
-                d_GameData = new GameData(d_MapFile);
-                d_GameData.setCurrentPhase(GamePhase.STARTUP);
-                d_GameEngine = new GameEngine(d_GameData);
+                l_MainLoop = new MainLoop(d_GameEngine.getMapFilePath());
                 d_GameData.loadMap();
-                mainGamePhaseLoop();
+                l_MainLoop.mainGamePhaseLoop();
                 System.out.println("------The End of Game------ ");
                 break;
             }
@@ -166,7 +224,6 @@ public class MainLoop {
      * @throws IOException if file does not exist
      */
     public static void main(String[] args) throws Exception {
-        //filename initial
         String file = "test_02.map";
         MainLoop mainLoop = new MainLoop(file);
         mainLoop.MainLogic();
