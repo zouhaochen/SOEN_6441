@@ -1,7 +1,6 @@
 package mapTest;
 
 import map.MapListing;
-import map.MapValidate;
 import org.junit.Test;
 
 import java.io.File;
@@ -21,6 +20,7 @@ public class MapListingTest {
 
     File d_File = new File("domination//test_02.map");
     MapListing d_Case = new MapListing();
+
     /**
      * This method is test case1 for the country connection in the map file.
      */

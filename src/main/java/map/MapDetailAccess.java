@@ -25,12 +25,12 @@ public class MapDetailAccess {
      * @return number of continent lines
      */
     public int getContinentNumber(File p_File) {
-        int l_Tlines = d_Mla.getLines(p_File);
-        int l_Continentlines = d_Mla.getContinentLines(p_File);
-        int l_Countrylines = d_Mla.getCountryLines(p_File);
-        int l_Borderlines = d_Mla.getBorderLines(p_File);
-        int l_Continentnumber = l_Countrylines - l_Continentlines - 1;
-        return l_Continentnumber;
+        int l_TLines = d_Mla.getLines(p_File);
+        int l_ContinentLines = d_Mla.getContinentLines(p_File);
+        int l_CountryLines = d_Mla.getCountryLines(p_File);
+        int l_BorderLines = d_Mla.getBorderLines(p_File);
+        int l_ContinentNumber = l_CountryLines - l_ContinentLines - 1;
+        return l_ContinentNumber;
     }
 
     /**
@@ -40,12 +40,12 @@ public class MapDetailAccess {
      * @return number of continent lines
      */
     public int getCountryNumber(File p_File) {
-        int l_Tlines = d_Mla.getLines(p_File);
-        int l_Continentlines = d_Mla.getContinentLines(p_File);
-        int l_Countrylines = d_Mla.getCountryLines(p_File);
+        int l_TLines = d_Mla.getLines(p_File);
+        int l_ContinentLines = d_Mla.getContinentLines(p_File);
+        int l_CountryLines = d_Mla.getCountryLines(p_File);
         int l_Borderlines = d_Mla.getBorderLines(p_File);
-        int l_Countrynumber = l_Borderlines - l_Countrylines - 1;
-        return l_Countrynumber;
+        int l_CountryNumber = l_Borderlines - l_CountryLines - 1;
+        return l_CountryNumber;
     }
 
     /**
@@ -56,7 +56,7 @@ public class MapDetailAccess {
      */
     public ArrayList<String[]> getNeighbourList(File p_File) {
 
-        ArrayList<String[]> l_Neighbourlist = new ArrayList<String[]>();
+        ArrayList<String[]> l_NeighbourList = new ArrayList<String[]>();
         int l_A = d_Mla.getBorderLines(p_File);
         Scanner l_Sc = null;
         try {
@@ -74,12 +74,12 @@ public class MapDetailAccess {
                     // Getting the connection table for the country
                     String l_Text = l_Sc.nextLine();
                     String[] l_One = l_Text.split(" ");
-                    l_Neighbourlist.add(l_One);
+                    l_NeighbourList.add(l_One);
                 }
             }
         }
         //To return the whole neighbour list
-        return l_Neighbourlist;
+        return l_NeighbourList;
     }
 
 }

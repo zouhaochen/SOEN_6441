@@ -10,6 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * This class is for testing MapLineAccess
+ *
  * @author Zitao Wang
  * @version 1.0.0
  */

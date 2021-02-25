@@ -34,6 +34,7 @@ public class MapEditTest {
 
     /**
      * test open new map
+     *
      * @throws IOException not find file
      */
     @Test
