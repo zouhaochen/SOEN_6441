@@ -5,7 +5,6 @@ mapname=01.map
 [continents]
 Asia 3
 Europe 4
-America 4
 
 [countries]
 1 China 1

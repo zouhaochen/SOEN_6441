@@ -175,7 +175,7 @@ public class MainLoop {
      */
     public static void main(String[] args) throws Exception {
         //filename initial
-        String file = "domination/test_02.map";
+        String file = "./domination/test_02.map";
         MainLoop mainLoop = new MainLoop(file);
         mainLoop.MainLogic();
     }

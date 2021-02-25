@@ -258,7 +258,7 @@ public class MapEdit {
         // read map file
         BufferedReader l_Br = new BufferedReader(new FileReader(l_F3));
         // write content in a temptation file
-        BufferedWriter l_Bw = new BufferedWriter(new FileWriter("temp.map"));
+        BufferedWriter l_Bw = new BufferedWriter(new FileWriter("./domination/temp.map"));
         String l_Line = "";
         StringBuffer l_Sb = new StringBuffer();
         // set flag
@@ -361,7 +361,7 @@ public class MapEdit {
         // get file name
         File l_File = getFile(l_FileName);
         // get temporary file
-        File l_ReadFile = new File("temp.map");
+        File l_ReadFile = new File("./domination/temp.map");
         // convert temporary file content to map file
         if (l_ReadFile.exists()) {
             BufferedReader l_Br = new BufferedReader(new FileReader(l_ReadFile));
