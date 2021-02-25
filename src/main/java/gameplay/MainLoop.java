@@ -102,7 +102,6 @@ public class MainLoop {
                     l_Player.issueOrder();
 
                     l_TempReinforcementArmy -= l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
-                    l_Player.setReinforcementArmies(l_TempReinforcementArmy);
                 }
             }
             //execute orders phase,  execute player`s order, assigning a number of armies to move towards the target country.
