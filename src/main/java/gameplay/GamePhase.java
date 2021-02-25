@@ -4,15 +4,46 @@ package gameplay;
  * Phase of the game
  */
  public enum GamePhase {
+    /**
+     * to tag some player is lost
+     */
     LOST(0),
+
+    /**
+     * waiting to turn phase
+     */
     WAITING_TO_TURN(1),
+    /**
+     * reinforcement phase
+     */
     REINFORCEMENT(2),
+    /**
+     * attack phase
+     */
     ATTACK(3),
+    /**
+     * fortification phase
+     */
     FORTIFICATION(4),
+    /**
+     * end of game phase
+     */
     END_OF_GAME(5),
+    /**
+     * map edit phase
+     */
     MAP_EDIT(6),
+    /**
+     * start up phase
+     */
     STARTUP(7),
+    /**
+     * issue order phase
+     */
     ISSUE_ORDER(8),
+    /**
+     * player win tag, when player win the game
+     */
     WIN(9);
 
 

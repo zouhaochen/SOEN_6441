@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 
 import static org.junit.Assert.*;
 
+/**
+ *  game data test class
+ */
 public class GameDataTest {
 
     /**
