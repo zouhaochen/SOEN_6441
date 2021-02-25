@@ -168,7 +168,7 @@ public class MainLoop {
     }
 
     /**
-     * main method， Show each game phase from GameEngine, and run the game according to the game rules
+     * main method, Show each game phase from GameEngine, and run the game according to the game rules
      *
      * @param args To get parameters from console
      * @throws IOException if file does not exist
