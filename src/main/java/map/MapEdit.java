@@ -20,12 +20,12 @@ public class MapEdit {
     /**
      *
      * Loop read the user input commands
-     * Main method in map editor
+     * Main loop method in map editor
      *
-     * @param args receive parameters from the console
      * @throws IOException if command invalid
      */
     public static void mapEditLoop() throws Exception {
+//  public static void main(String[] args) throws Exception {
         System.out.println("You are in the map editor.");
         String l_Command = "";
         // map editor loop
