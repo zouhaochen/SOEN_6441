@@ -183,8 +183,6 @@ public class Player {
         }
     }
 
-
-
     /**
      * return the last order in orderlist.
      *
