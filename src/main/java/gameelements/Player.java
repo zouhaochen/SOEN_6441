@@ -14,45 +14,45 @@ public class Player {
     /**
      * id counter (increment)
      */
-    private static int d_count = 0;
+    private static int D_COUNT = 0;
 
     /**
      * player id
      */
-    private int d_id;
+    private int d_Id;
     /**
      * player name /color
      */
-    private String d_colour;
+    private String d_Colour;
     /**
      * hash map used to represent countries owned by player
      */
-    private Map<String, Country> d_countriesInControl;
+    private Map<String, Country> d_CountriesInControl;
     /**
      * current player order list
      */
-    private Deque<Order> d_ordersInCurrentTurn;
+    private Deque<Order> d_OrdersInCurrentTurn;
     /**
      * number of reinforcement armies
      */
-    private int d_reinforcementArmies;
+    private int d_ReinforcementArmies;
     /**
      * command validator.
      */
-    private CommandValidator d_commandValidator;
+    private CommandValidator d_CommandValidator;
 
     /**
      * Player class constructor
      *
-     * @param p_colour           get player name as string type.
-     * @param p_commandValidator add new commandValidator object
+     * @param p_Colour           get player name as string type.
+     * @param p_CommandValidator add new commandValidator object
      */
-    public Player(String p_colour, CommandValidator p_commandValidator) {
-        d_id = ++d_count;
-        d_colour = p_colour;
-        d_countriesInControl = new HashMap<>();
-        d_ordersInCurrentTurn = new ArrayDeque<>();
-        d_commandValidator = p_commandValidator;
+    public Player(String p_Colour, CommandValidator p_CommandValidator) {
+        d_Id = ++D_COUNT;
+        d_Colour = p_Colour;
+        d_CountriesInControl = new HashMap<>();
+        d_OrdersInCurrentTurn = new ArrayDeque<>();
+        d_CommandValidator = p_CommandValidator;
     }
 
     /**
@@ -61,7 +61,7 @@ public class Player {
      * @return return the number of player as int
      */
     public static int getCount() {
-        return d_count;
+        return D_COUNT;
     }
 
     /**
@@ -70,7 +70,7 @@ public class Player {
      * @return return the player ID as int.
      */
     public int getId() {
-        return d_id;
+        return d_Id;
     }
 
     /**
@@ -79,16 +79,16 @@ public class Player {
      * @return return the value of player name.
      */
     public String getColour() {
-        return d_colour;
+        return d_Colour;
     }
 
     /**
      * set player name.
      *
-     * @param p_colour set the player name as data withstring type
+     * @param p_Colour set the player name as data withstring type
      */
-    public void setColour(String p_colour) {
-        d_colour = p_colour;
+    public void setColour(String p_Colour) {
+        d_Colour = p_Colour;
     }
 
     /**
@@ -97,25 +97,25 @@ public class Player {
      * @return return the data mebmer value of countriesinControl.
      */
     public Map<String, Country> getCountriesInControl() {
-        return d_countriesInControl;
+        return d_CountriesInControl;
     }
 
     /**
      * to set countries for each player in control
      *
-     * @param p_countryList add countrylist, and map the countries name to country object
+     * @param p_CountryList add countrylist, and map the countries name to country object
      */
-    public void setCountriesInControl(Map<String, Country> p_countryList) {
-        d_countriesInControl = p_countryList;
+    public void setCountriesInControl(Map<String, Country> p_CountryList) {
+        d_CountriesInControl = p_CountryList;
     }
 
     /**
      * to assign country for each player
      *
-     * @param p_country add a new country object into function
+     * @param p_Country add a new country object into function
      */
-    public void assignCountry(Country p_country) {
-        d_countriesInControl.put(p_country.getName().toLowerCase(), p_country);
+    public void assignCountry(Country p_Country) {
+        d_CountriesInControl.put(p_Country.getName().toLowerCase(), p_Country);
     }
 
     /**
@@ -124,16 +124,16 @@ public class Player {
      * @return return the value of order in current turn
      */
     public Deque<Order> getOrdersInCurrentTurn() {
-        return d_ordersInCurrentTurn;
+        return d_OrdersInCurrentTurn;
     }
 
     /**
      * set current turning orders for each player
      *
-     * @param p_orders add new orderlist object.
+     * @param p_Orders add new orderlist object.
      */
-    public void setOrdersInCurrentTurn(Deque<Order> p_orders) {
-        d_ordersInCurrentTurn = p_orders;
+    public void setOrdersInCurrentTurn(Deque<Order> p_Orders) {
+        d_OrdersInCurrentTurn = p_Orders;
     }
 
     /**
@@ -142,7 +142,7 @@ public class Player {
      * @param p_order add new order object to order list
      */
     public void addOrderToList(Order p_order) {
-        d_ordersInCurrentTurn.add(p_order);
+        d_OrdersInCurrentTurn.add(p_order);
     }
 
     /**
@@ -151,16 +151,16 @@ public class Player {
      * @return return the value of d_reinforcementArmies, how many reinforcement Armies in this round for a player.
      */
     public int getReinforcementArmies() {
-        return d_reinforcementArmies;
+        return d_ReinforcementArmies;
     }
 
     /**
      * set how many Reinforcement Armies that each player have.
      *
-     * @param p_reinforcementArmies add number of Reinforcement Armies as int, to set value in the function.
+     * @param p_ReinforcementArmies add number of Reinforcement Armies as int, to set value in the function.
      */
-    public void setReinforcementArmies(int p_reinforcementArmies) {
-        d_reinforcementArmies = p_reinforcementArmies;
+    public void setReinforcementArmies(int p_ReinforcementArmies) {
+        d_ReinforcementArmies = p_ReinforcementArmies;
     }
 
     /**
@@ -168,18 +168,18 @@ public class Player {
      */
     public void issueOrder() {
         // read the command from a player
-        String l_command;
+        String l_Command;
         do {
             System.out.println("\nPlease enter the command: \n");
             Scanner l_scanner = new Scanner(System.in);
-            l_command = l_scanner.nextLine();
-        } while (!d_commandValidator.validate(l_command));
+            l_Command = l_scanner.nextLine();
+        } while (!d_CommandValidator.validate(l_Command));
 
         // create an order
-        String[] l_command_arr = l_command.split(" ");
-        Order l_order = OrderFactory.CreateOrder(l_command_arr, this);
-        if (l_order != null) {
-            addOrderToList(l_order);
+        String[] l_command_arr = l_Command.split(" ");
+        Order l_Order = OrderFactory.CreateOrder(l_command_arr, this);
+        if (l_Order != null) {
+            addOrderToList(l_Order);
         }
     }
 
@@ -191,7 +191,7 @@ public class Player {
      * @return return the value of peek element in queue.
      */
     public Order getLastOrderFromQueue() {
-        return d_ordersInCurrentTurn.peekLast();
+        return d_OrdersInCurrentTurn.peekLast();
     }
 
     /**
@@ -200,22 +200,22 @@ public class Player {
      * @return poll the value of first element in queue.
      */
     public Order nextOrder() {
-        return d_ordersInCurrentTurn.poll();
+        return d_OrdersInCurrentTurn.poll();
     }
 
     /**
      * Subtract the armies from the reinforcement pool.
      *
-     * @param p_armyNumber add number of armies as int.
+     * @param p_ArmyNumber add number of armies as int.
      * @return return true if the number of the remaining armies is not less than the number to deploy,
      * and otherwise return false.
      */
-    public boolean deployReinforcementArmies(int p_armyNumber) {
-        if (p_armyNumber > d_reinforcementArmies) {
-            d_reinforcementArmies = 0;
+    public boolean deployReinforcementArmies(int p_ArmyNumber) {
+        if (p_ArmyNumber > d_ReinforcementArmies) {
+            d_ReinforcementArmies = 0;
             return false;
         }
-        d_reinforcementArmies -= p_armyNumber;
+        d_ReinforcementArmies -= p_ArmyNumber;
         return true;
     }
 }

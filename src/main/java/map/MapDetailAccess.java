@@ -22,12 +22,12 @@ public class MapDetailAccess {
      *
      */
     public int getContinentNumber(File p_file){
-        int l_tlines = d_Mla.getLines(p_file);
-        int l_continentlines = d_Mla.getContinentLines(p_file);
-        int l_countrylines = d_Mla.getCountryLines(p_file);
-        int l_borderlines = d_Mla.getBorderLines(p_file);
-        int l_continentnumber = l_countrylines - l_continentlines - 1;
-        return l_continentnumber;
+        int l_Tlines = d_Mla.getLines(p_file);
+        int l_Continentlines = d_Mla.getContinentLines(p_file);
+        int l_Countrylines = d_Mla.getCountryLines(p_file);
+        int l_Borderlines = d_Mla.getBorderLines(p_file);
+        int l_Continentnumber = l_Countrylines - l_Continentlines - 1;
+        return l_Continentnumber;
     }
 
     /**
@@ -36,45 +36,45 @@ public class MapDetailAccess {
      * @return number of continent lines
      */
     public int getCountryNumber(File p_file){
-        int l_tlines = d_Mla.getLines(p_file);
-        int l_continentlines = d_Mla.getContinentLines(p_file);
-        int l_countrylines = d_Mla.getCountryLines(p_file);
-        int l_borderlines = d_Mla.getBorderLines(p_file);
-        int l_countrynumber = l_borderlines - l_countrylines - 1;
-        return l_countrynumber;
+        int l_Tlines = d_Mla.getLines(p_file);
+        int l_Continentlines = d_Mla.getContinentLines(p_file);
+        int l_Countrylines = d_Mla.getCountryLines(p_file);
+        int l_Borderlines = d_Mla.getBorderLines(p_file);
+        int l_Countrynumber = l_Borderlines - l_Countrylines - 1;
+        return l_Countrynumber;
     }
 
     /**
      * This method is to get the neighbour of countries in text file
-     * @param p_file the map file
+     * @param p_File the map file
      * @return the list of the neighbour of countries
      */
-    public ArrayList<String[]> getNeighbourList(File p_file){
+    public ArrayList<String[]> getNeighbourList(File p_File){
 
-        ArrayList<String[]> l_neighbourlist = new ArrayList<String[]>();
-        int l_a = d_Mla.getBorderLines(p_file);
-        Scanner sc = null;
+        ArrayList<String[]> l_Neighbourlist = new ArrayList<String[]>();
+        int l_A = d_Mla.getBorderLines(p_File);
+        Scanner l_Sc = null;
         try {
-             sc = new Scanner(p_file);
+             l_Sc = new Scanner(p_File);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         //To get the location of borders in the map file.
-        while(sc.hasNextLine()) {
-            if (sc.nextLine().equals("[borders]")) {
-                for (int l_i = 0; l_i < l_a - 1; l_i++) {
-                    if (!sc.hasNext()) {
+        while(l_Sc.hasNextLine()) {
+            if (l_Sc.nextLine().equals("[borders]")) {
+                for (int l_I = 0; l_I < l_A - 1; l_I++) {
+                    if (!l_Sc.hasNext()) {
                         break;
                     }
                     // Getting the connection table for the country
-                    String l_text = sc.nextLine();
-                    String[] l_one = l_text.split(" ");
-                    l_neighbourlist.add(l_one);
+                    String l_Text = l_Sc.nextLine();
+                    String[] l_one = l_Text.split(" ");
+                    l_Neighbourlist.add(l_one);
                 }
             }
         }
         //To return the whole neighbour list
-        return l_neighbourlist;
+        return l_Neighbourlist;
     }
 
 }

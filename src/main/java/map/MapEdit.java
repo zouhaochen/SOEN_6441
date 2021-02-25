@@ -106,14 +106,14 @@ public class MapEdit {
         // create a new map if the file does not exists
         else {
             l_F3.createNewFile();
-            BufferedWriter l_bw = new BufferedWriter(new FileWriter(l_F3));
+            BufferedWriter l_Bw = new BufferedWriter(new FileWriter(l_F3));
             // add [continents] [countries] [borders]
             // make sure the map is editable
-            l_bw.write("[continents]\n\n" +
+            l_Bw.write("[continents]\n\n" +
                     "[countries]\n\n" +
                     "[borders]");
-            l_bw.flush();
-            l_bw.close();
+            l_Bw.flush();
+            l_Bw.close();
             // check map validation
             map.MapCheck.check(l_F3);
             FLAG = 3;
@@ -244,68 +244,68 @@ public class MapEdit {
      */
     private static void tempSave(String p_Command, String p_EditType, String p_Head) throws IOException {
         // get file name
-        String[] l_s = p_Command.split(p_EditType);
-        if (l_s.length == 0) {
+        String[] l_S = p_Command.split(p_EditType);
+        if (l_S.length == 0) {
             System.out.println("filename input error");
             return;
         }
         // determine add and delete according to command
-        String l_suffix = l_s[1];
+        String l_suffix = l_S[1];
         List<String> l_Adds = new ArrayList<>();
         List<String> l_Rems = new ArrayList<>();
         optType(l_suffix, l_Adds, l_Rems);
         // read file name
         File l_F3 = getFile(OPTFILE);
         // read map file
-        BufferedReader l_br = new BufferedReader(new FileReader(l_F3));
+        BufferedReader l_Br = new BufferedReader(new FileReader(l_F3));
         // write content in a temptation file
-        BufferedWriter l_bw = new BufferedWriter(new FileWriter("temp.map"));
-        String l_line = "";
-        StringBuffer l_sb = new StringBuffer();
+        BufferedWriter l_Bw = new BufferedWriter(new FileWriter("temp.map"));
+        String l_Line = "";
+        StringBuffer l_Sb = new StringBuffer();
         // set flag
-        boolean l_flag = false;
+        boolean l_Flag = false;
         // Edit content in map according to flag
-        while ((l_line = l_br.readLine()) != null) {
-            if (p_Head.equals(l_line)) {
+        while ((l_Line = l_Br.readLine()) != null) {
+            if (p_Head.equals(l_Line)) {
                 // Create a new array
                 // enlarge the length
                 // copy the strings that need to be added to the new array
-                l_sb.append(l_line + "\n");
-                l_flag = true;
+                l_Sb.append(l_Line + "\n");
+                l_Flag = true;
                 continue;
-            } else if (l_flag && "".equals(l_line)) {
+            } else if (l_Flag && "".equals(l_Line)) {
                 // add option
                 l_Adds.forEach((item) -> {
-                    l_sb.append(item + "\n");
+                    l_Sb.append(item + "\n");
                 });
-                l_flag = false;
+                l_Flag = false;
             // flag starts with [ and ends with ]
-            } else if (l_line.startsWith("[") && l_line.endsWith("]")) {
-                l_flag = false;
+            } else if (l_Line.startsWith("[") && l_Line.endsWith("]")) {
+                l_Flag = false;
             }
-            if (l_flag) {
-                boolean l_res = false;
+            if (l_Flag) {
+                boolean l_Res = false;
                 // remove option
-                for (String item : l_Rems) {
-                    if (l_line.startsWith(item)) {
-                        l_res = true;
+                for (String l_Item : l_Rems) {
+                    if (l_Line.startsWith(l_Item)) {
+                        l_Res = true;
                     }
                 }
-                if (!l_res) {
-                    l_sb.append(l_line + "\n");
+                if (!l_Res) {
+                    l_Sb.append(l_Line + "\n");
                 }
             } else {
-                l_sb.append(l_line + "\n");
+                l_Sb.append(l_Line + "\n");
             }
         }
-        if("[borders]".equals(p_Head) && l_flag) {
+        if("[borders]".equals(p_Head) && l_Flag) {
             l_Adds.forEach((item) -> {
-                l_sb.append(item + "\n");
+                l_Sb.append(item + "\n");
             });
         }
-        l_bw.write(l_sb.toString());
-        l_bw.close();
-        l_br.close();
+        l_Bw.write(l_Sb.toString());
+        l_Bw.close();
+        l_Br.close();
     }
 
     /**
@@ -335,12 +335,12 @@ public class MapEdit {
      * @throws IOException if file not find
      */
     public static void showMap(File p_F3) throws IOException {
-        BufferedReader l_br = new BufferedReader(new FileReader(p_F3));
+        BufferedReader l_Br = new BufferedReader(new FileReader(p_F3));
         String l_line = "";
-        while ((l_line = l_br.readLine()) != null) {
+        while ((l_line = l_Br.readLine()) != null) {
             System.out.println(l_line);
         }
-        l_br.close();
+        l_Br.close();
     }
 
     /**
@@ -351,32 +351,32 @@ public class MapEdit {
      */
     public static void saveMap(String p_Command) throws IOException {
         // get command user input
-        String[] l_s = p_Command.split("savemap ");
+        String[] l_S = p_Command.split("savemap ");
         System.out.println("Warning: You should check map VALID");
         System.out.println("         only valid map can be played");
-        if (l_s.length == 0) {
+        if (l_S.length == 0) {
             System.out.println("filename input error");
             return;
         }
-        String l_FileName = l_s[1];
+        String l_FileName = l_S[1];
         // get file name
-        File l_file = getFile(l_FileName);
+        File l_File = getFile(l_FileName);
         // get temporary file
-        File l_readFile = new File("temp.map");
+        File l_ReadFile = new File("temp.map");
         // convert temporary file content to map file
-        if(l_readFile.exists()) {
-            BufferedReader l_br = new BufferedReader(new FileReader(l_readFile));
-            BufferedWriter l_bw = new BufferedWriter(new FileWriter(l_file));
-            String l_line = "";
-            while((l_line = l_br.readLine()) != null) {
-                l_bw.write(l_line);
-                l_bw.newLine();
-                l_bw.flush();
+        if(l_ReadFile.exists()) {
+            BufferedReader l_Br = new BufferedReader(new FileReader(l_ReadFile));
+            BufferedWriter l_Bw = new BufferedWriter(new FileWriter(l_File));
+            String l_Line = "";
+            while((l_Line = l_Br.readLine()) != null) {
+                l_Bw.write(l_Line);
+                l_Bw.newLine();
+                l_Bw.flush();
             }
-            l_br.close();
-            l_bw.close();
+            l_Br.close();
+            l_Bw.close();
             // check map validation
-            map.MapCheck.check(l_file);
+            map.MapCheck.check(l_File);
         }
     }
 

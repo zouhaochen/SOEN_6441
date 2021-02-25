@@ -19,42 +19,42 @@ public class MapLineAccess {
      * @return count the total lines
      */
     public int getLines(File p_file) {
-        Scanner l_scan = null;
+        Scanner l_Scan = null;
         try {
-            l_scan = new Scanner(p_file);
-        } catch (FileNotFoundException l_e) {
-            l_e.printStackTrace();
+            l_Scan = new Scanner(p_file);
+        } catch (FileNotFoundException l_E) {
+            l_E.printStackTrace();
         }
-        int l_count = 0;
-        while (l_scan.hasNextLine()) {
-            l_count++;
-            l_scan.nextLine();
+        int l_Count = 0;
+        while (l_Scan.hasNextLine()) {
+            l_Count++;
+            l_Scan.nextLine();
         }
-        return l_count;
+        return l_Count;
     }
 
     /**
      * This method is to return the continent lines
-     * @param p_file the map file
+     * @param p_File the map file
      * @return return the continent lines
      */
-    public int getContinentLines(File p_file){
+    public int getContinentLines(File p_File){
 
         int l_continentlines = 0;
-        Scanner l_sca = null;
+        Scanner l_Sca = null;
         try {
-            l_sca = new Scanner(p_file);
-        } catch (FileNotFoundException l_e) {
-            l_e.printStackTrace();
+            l_Sca = new Scanner(p_File);
+        } catch (FileNotFoundException l_E) {
+            l_E.printStackTrace();
         }
         //To get the location of the continents in the map file.
-        while(l_sca.hasNextLine()){
+        while(l_Sca.hasNextLine()){
             l_continentlines++;
 
-            if (l_sca.next().equals("[continents]")){
+            if (l_Sca.next().equals("[continents]")){
                 break;
             }
-            l_sca.nextLine();
+            l_Sca.nextLine();
         }
         return l_continentlines;
     }
@@ -66,49 +66,49 @@ public class MapLineAccess {
      */
     public int getCountryLines(File p_file){
 
-        int l_countryline = 0;
-        Scanner l_scan = null;
+        int l_Countryline = 0;
+        Scanner l_Scan = null;
         try {
-            l_scan = new Scanner(p_file);
-        } catch (FileNotFoundException l_e) {
-            l_e.printStackTrace();
+            l_Scan = new Scanner(p_file);
+        } catch (FileNotFoundException l_E) {
+            l_E.printStackTrace();
         }
         //To get the location of the countries in the map file.
-        while(l_scan.hasNextLine()){
-            l_countryline++;
+        while(l_Scan.hasNextLine()){
+            l_Countryline++;
 
-            if (l_scan.next().equals("[countries]")){
+            if (l_Scan.next().equals("[countries]")){
                 break;
             }
-            l_scan.nextLine();
+            l_Scan.nextLine();
         }
-        return l_countryline;
+        return l_Countryline;
     }
 
     /***
      * This method is to return the borders lines
-     * @param p_file the map file
+     * @param p_File the map file
      * @return return the borders lines
      */
-    public int getBorderLines(File p_file){
+    public int getBorderLines(File p_File){
 
-        int l_borderline = 0;
-        Scanner l_scan = null;
+        int l_Borderline = 0;
+        Scanner l_Scan = null;
         try {
-            l_scan = new Scanner(p_file);
-        } catch (FileNotFoundException l_e) {
-            l_e.printStackTrace();
+            l_Scan = new Scanner(p_File);
+        } catch (FileNotFoundException l_E) {
+            l_E.printStackTrace();
         }
         //To get the location of the borders in the map file.
-        while(l_scan.hasNextLine()){
-            l_borderline++;
+        while(l_Scan.hasNextLine()){
+            l_Borderline++;
 
-            if (l_scan.next().equals("[borders]")){
+            if (l_Scan.next().equals("[borders]")){
                 break;
             }
-            l_scan.nextLine();
+            l_Scan.nextLine();
         }
-        return l_borderline;
+        return l_Borderline;
     }
 
 }
