@@ -10,6 +10,11 @@ import java.util.ArrayList;
  */
 public class MapCheck {
 
+    /**
+     * This method implements check the verification of map correctness.
+     * @param p_file the map file.
+     * @return return the state of the map correction.
+     */
     public static int check(File p_file){
 
         MapValidate l_New = new MapValidate();

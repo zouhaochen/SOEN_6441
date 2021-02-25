@@ -12,7 +12,6 @@ import java.util.HashMap;
  */
 public class MapValidate {
 
-    MapLineAccess d_Mla = new MapLineAccess();
     MapDetailAccess d_Mdl = new MapDetailAccess();
     MapListing d_Ml = new MapListing();
 
