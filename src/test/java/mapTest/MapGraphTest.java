@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 public class MapGraphTest {
     /**
      * test all border are get
+     * @throws Exception
      */
     @Test
     public void testPrintTableBorder() throws Exception {
@@ -25,7 +26,8 @@ public class MapGraphTest {
     }
 
     /**
-     * test all border are get
+     * test all countries are get
+     * @throws Exception
      */
     @Test
     public void testPrintTableCountry() throws Exception {
@@ -37,7 +39,8 @@ public class MapGraphTest {
     }
 
     /**
-     * test all border are get
+     * test all continents are get
+     * @throws Exception
      */
     @Test
     public void testPrintTableContinent() throws Exception {
