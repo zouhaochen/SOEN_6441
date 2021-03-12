@@ -1,6 +1,6 @@
-[map]
+[model.map]
 author=haochen zou
-mapname=01.map
+mapname=01.model.map
 
 [continents]
 Asia 3

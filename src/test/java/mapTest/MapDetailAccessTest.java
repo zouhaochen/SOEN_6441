@@ -1,6 +1,6 @@
 package mapTest;
 
-import map.MapDetailAccess;
+import model.MapDetailAccess;
 import org.junit.Test;
 
 import java.io.File;
@@ -17,16 +17,16 @@ import static org.junit.Assert.assertEquals;
 public class MapDetailAccessTest {
 
     /**
-     * Pre-made test map file
+     * Pre-made test model.map file
      */
-    File d_File = new File("domination//test_02.map");
+    File d_File = new File("domination//test_02.model.map");
     /**
      * Test Map information access object
      */
     MapDetailAccess d_Case1 = new MapDetailAccess();
 
     /**
-     * This method is test case1 for continent lines in the map file.
+     * This method is test case1 for continent lines in the model.map file.
      */
     @Test
     public void testOne() {
@@ -35,7 +35,7 @@ public class MapDetailAccessTest {
     }
 
     /**
-     * This method is test case1 for country lines in the map file.
+     * This method is test case1 for country lines in the model.map file.
      */
     @Test
     public void testTwo() {

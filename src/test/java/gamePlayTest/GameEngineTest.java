@@ -1,11 +1,11 @@
 package gamePlayTest;
 
 import command.CommandValidator;
-import gameelements.Continent;
-import gameelements.Country;
-import gameelements.Player;
-import gameplay.GameData;
-import gameplay.GameEngine;
+import controller.GameEngineController;
+import model.gameelements.Continent;
+import model.gameelements.Country;
+import model.gameelements.Player;
+import model.GameData;
 import gameplay.GamePhase;
 import org.junit.Test;
 
@@ -25,9 +25,9 @@ import static org.mockito.Mockito.mock;
 public class GameEngineTest {
 
     /**
-     * test map file
+     * test model.map file
      */
-    File d_File = new File("domination/germany.map");
+    File d_File = new File("domination/germany.model.map");
 
     /**
      * test game data object
@@ -36,11 +36,11 @@ public class GameEngineTest {
     /**
      * test game engine object
      */
-    GameEngine d_GameEngine = new GameEngine(d_GameData);
+    GameEngineController d_GameEngine = new GameEngineController(d_GameData);
 
 
     /**
-     * this method used to test GameEngine Class
+     * this method used to test GameEngineController Class
      */
     @Test
     public void testGameEngine() {
@@ -76,11 +76,11 @@ public class GameEngineTest {
     }
 
     /**
-     * test show map function
+     * test show model.map function
      */
     @Test
     public void testShowMap() {
-        System.out.println("4. check show map");
+        System.out.println("4. check show model.map");
         d_GameEngine.addNewPlayer("black");
         Player l_Player = d_GameEngine.d_GameData.getPlayerList().get(0);
         try {
@@ -116,7 +116,7 @@ public class GameEngineTest {
         // mock and stub
         GameData l_GameData = mock(GameData.class);
         given(l_GameData.getContinentList()).willReturn((ArrayList<Continent>) l_ContinentList);
-        GameEngine l_GameEngine = new GameEngine(l_GameData);
+        GameEngineController l_GameEngine = new GameEngineController(l_GameData);
 
         // when
         int l_ReinforcementBonus = l_GameEngine.getReinforcementBonus(l_Player);
@@ -149,7 +149,7 @@ public class GameEngineTest {
         // mock and stub
         GameData l_GameData = mock(GameData.class);
         given(l_GameData.getContinentList()).willReturn((ArrayList<Continent>) l_ContinentList);
-        GameEngine l_GameEngine = new GameEngine(l_GameData);
+        GameEngineController l_GameEngine = new GameEngineController(l_GameData);
 
         // when
         int l_ReinforcementBonus = l_GameEngine.getReinforcementBonus(l_Player);
