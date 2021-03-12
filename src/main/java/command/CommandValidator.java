@@ -1,6 +1,6 @@
 package command;
 
-import gameplay.GameData;
+import model.GameData;
 
 import java.io.File;
 import java.io.IOException;
@@ -136,7 +136,7 @@ public class CommandValidator {
         String l_FileName = p_CommandArr[1];
         boolean l_MapFileExist;
 
-        // check if the map file exists
+        // check if the model.map file exists
         try {
             l_MapFileExist = isMapFileExist(l_FileName);
         } catch (IOException p_Exception) {
@@ -194,9 +194,9 @@ public class CommandValidator {
     }
 
     /**
-     * Get a map file from an existing "domination" map file
+     * Get a model.map file from an existing "domination" model.map file
      *
-     * @param p_FileName name of the map file
+     * @param p_FileName name of the model.map file
      * @return true if the file exists, false otherwise
      * @throws IOException if file not found or cannot read
      */
@@ -205,7 +205,7 @@ public class CommandValidator {
         File l_File = new File(l_ProjectPath + "/domination/" + p_FileName);
 
         if (!l_File.exists()) {
-            System.out.println("\nNo such map file exists!");
+            System.out.println("\nNo such model.map file exists!");
             return false;
         }
         return true;

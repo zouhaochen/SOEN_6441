@@ -1,6 +1,6 @@
 package mapTest;
 
-import map.MapGraph;
+import model.MapGraph;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -21,7 +21,7 @@ public class MapGraphTest {
         MapGraph l_Test = new MapGraph();
         String l_LineTest = "";
         boolean l_BorderTest = l_Test.equals(l_LineTest);
-        map.MapGraph.printTable("testmap.map");
+        MapGraph.printTable("testmap.model.map");
         assertFalse(l_BorderTest);
     }
 
@@ -34,7 +34,7 @@ public class MapGraphTest {
         MapGraph l_Test = new MapGraph();
         String l_LineTest = "";
         boolean l_CountryTest = l_Test.equals(l_LineTest);
-        map.MapGraph.printTable("testmap.map");
+        MapGraph.printTable("testmap.model.map");
         assertFalse(l_CountryTest);
     }
 
@@ -47,7 +47,7 @@ public class MapGraphTest {
         MapGraph l_Test = new MapGraph();
         String l_LineTest = "";
         boolean l_ContinentTest = l_Test.equals(l_LineTest);
-        map.MapGraph.printTable("testmap.map");
+        MapGraph.printTable("testmap.model.map");
         assertFalse(l_ContinentTest);
     }
 }

@@ -1,6 +1,6 @@
 package gamePlayTest;
 
-import gameplay.GameData;
+import model.GameData;
 import gameplay.GamePhase;
 import org.junit.Test;
 
@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
 public class GameDataTest {
 
     /**
-     * test map file
+     * test model.map file
      */
-    File d_File = new File("domination/germany.map");
+    File d_File = new File("domination/germany.model.map");
     /**
      * Test object GameData.
      */
@@ -37,11 +37,11 @@ public class GameDataTest {
     }
 
     /**
-     * this is load map function test
+     * this is load model.map function test
      */
     @Test
     public void loadMapTest(){
-        System.out.println("2.check load map function");
+        System.out.println("2.check load model.map function");
         try{
             d_GameData.loadMap();
         }catch(FileNotFoundException e){

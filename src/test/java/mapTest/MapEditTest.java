@@ -1,5 +1,6 @@
 package mapTest;
 
+import model.MapEdit;
 import org.junit.Test;
 
 import java.io.File;
@@ -19,29 +20,29 @@ public class MapEditTest {
      */
     @Test
     public void testEditMapEmpty() {
-        int l_TestFlag1 = map.MapEdit.flagEditMap("editmap ");
+        int l_TestFlag1 = MapEdit.flagEditMap("editmap ");
         assertEquals(1, l_TestFlag1);
     }
 
     /**
-     * test open exist map
+     * test open exist model.map
      */
     @Test
     public void testEditMapExist() {
-        int l_TestFlag2 = map.MapEdit.flagEditMap("editmap testmap.map");
+        int l_TestFlag2 = MapEdit.flagEditMap("editmap testmap.model.map");
         assertEquals(2, l_TestFlag2);
     }
 
     /**
-     * test open new map
+     * test open new model.map
      *
      * @throws IOException not find file
      */
     @Test
     public void testEditMapNew() throws IOException {
-        int l_TestFlag3 = map.MapEdit.flagEditMap("editmap testnewmap.map");
+        int l_TestFlag3 = MapEdit.flagEditMap("editmap testnewmap.model.map");
         assertEquals(3, l_TestFlag3);
-        File l_File = map.MapEdit.getFile("testnewmap.map");
+        File l_File = MapEdit.getFile("testnewmap.model.map");
         l_File.delete();
     }
 }

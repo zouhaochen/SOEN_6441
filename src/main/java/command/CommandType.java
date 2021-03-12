@@ -24,23 +24,23 @@ public enum CommandType {
      */
     EDIT_NEIGHBOR("editneighbor"),
     /**
-     * Show map command type.
+     * Show model.map command type.
      */
     SHOW_MAP("showmap"),
     /**
-     * Save map command type.
+     * Save model.map command type.
      */
     SAVE_MAP("savemap"),
     /**
-     * Edit map command type.
+     * Edit model.map command type.
      */
     EDIT_MAP("editmap"),
     /**
-     * Validate map command type.
+     * Validate model.map command type.
      */
     VALIDATE_MAP("validatemap"),
     /**
-     * Load map command type.
+     * Load model.map command type.
      */
     LOAD_MAP("loadmap"),
     /**

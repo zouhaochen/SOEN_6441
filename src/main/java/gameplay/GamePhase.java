@@ -29,7 +29,7 @@ public enum GamePhase {
      */
     END_OF_GAME(5),
     /**
-     * map edit phase
+     * model.map edit phase
      */
     MAP_EDIT(6),
     /**
