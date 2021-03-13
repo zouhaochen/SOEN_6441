@@ -1,7 +1,7 @@
 package controller;
 
 import model.GameData;
-import model.MapEdit;
+import model.map.MapEdit;
 import model.gameelements.Country;
 import model.gameelements.Player;
 

@@ -1,6 +1,6 @@
 package mapTest;
 
-import model.MapGraph;
+import model.map.MapGraph;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

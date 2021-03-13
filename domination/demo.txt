@@ -1,0 +1,11 @@
+
+continent: A-B-C-D
+country:    1-2-3-4
+
+first cycle: 
+1.read counrty1's neighbour list.
+
+2. if country1 is connected with a counrty which belongs to another continent(B), then we say A is connected with B.
+
+3. remove A from the continent list and consider the continent B as a target, iterate the country in continent B.
+

@@ -1,6 +1,6 @@
 package mapTest;
 
-import model.MapDetailAccess;
+import model.map.MapDetailAccess;
 import org.junit.Test;
 
 import java.io.File;
@@ -19,7 +19,7 @@ public class MapDetailAccessTest {
     /**
      * Pre-made test model.map file
      */
-    File d_File = new File("domination//test_02.model.map");
+    File d_File = new File("domination//test_02.map");
     /**
      * Test Map information access object
      */

@@ -2,7 +2,7 @@ package mapTest;
 
 import static org.junit.Assert.*;
 
-import model.MapLineAccess;
+import model.map.MapLineAccess;
 import org.junit.Test;
 
 import java.io.File;
@@ -22,7 +22,7 @@ public class MapLineAccessTest {
      */
     @Test
     public void testOne() {
-        File l_File = new File("domination//test_02.model.map");
+        File l_File = new File("domination//test_02.map");
         MapLineAccess l_Case1 = new MapLineAccess();
         int l_A = l_Case1.getLines(l_File);
         assertEquals(25, l_A);
@@ -33,7 +33,7 @@ public class MapLineAccessTest {
      */
     @Test
     public void testTwo() {
-        File l_File = new File("domination//test_02.model.map");
+        File l_File = new File("domination//test_02.map");
         MapLineAccess l_Case1 = new MapLineAccess();
         int l_A = l_Case1.getContinentLines(l_File);
         assertEquals(8, l_A);
@@ -44,7 +44,7 @@ public class MapLineAccessTest {
      */
     @Test
     public void testThree() {
-        File l_File = new File("domination//test_02.model.map");
+        File l_File = new File("domination//test_02.map");
         MapLineAccess l_Case1 = new MapLineAccess();
         int l_A = l_Case1.getCountryLines(l_File);
         assertEquals(11, l_A);
@@ -55,7 +55,7 @@ public class MapLineAccessTest {
      */
     @Test
     public void testFour() {
-        File l_File = new File("domination//test_02.model.map");
+        File l_File = new File("domination//test_02.map");
         MapLineAccess l_Case1 = new MapLineAccess();
         int l_A = l_Case1.getBorderLines(l_File);
         assertEquals(16, l_A);

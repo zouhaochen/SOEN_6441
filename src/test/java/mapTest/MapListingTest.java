@@ -1,6 +1,6 @@
 package mapTest;
 
-import model.MapListing;
+import model.map.MapListing;
 import org.junit.Test;
 
 import java.io.File;
@@ -24,7 +24,7 @@ public class MapListingTest {
     @Test
     public void testOne() {
 
-        File l_file = new File("domination//test_02.model.map");
+        File l_file = new File("domination//test_02.map");
         MapListing l_case = new MapListing();
         ArrayList<String> l_List;
         l_List = l_case.getCountryList(l_file);
@@ -37,7 +37,7 @@ public class MapListingTest {
      */
     @Test
     public void testTwo() {
-        File l_file = new File("domination//test_02.model.map");
+        File l_file = new File("domination//test_02.map");
         MapListing l_case = new MapListing();
         ArrayList<String> l_List;
         l_List = l_case.getContinentList(l_file);
@@ -50,7 +50,7 @@ public class MapListingTest {
      */
     @Test
     public void testThree() {
-        File l_file = new File("domination//test_02.model.map");
+        File l_file = new File("domination//test_02.map");
         MapListing l_case = new MapListing();
         HashMap<String, String> l_CountryContinent;
         l_CountryContinent = l_case.getCountryContinent(l_file);
@@ -63,7 +63,7 @@ public class MapListingTest {
      */
     @Test
     public void testFour() {
-        File l_file = new File("domination//test_02.model.map");
+        File l_file = new File("domination//test_02.map");
         MapListing l_case = new MapListing();
         ArrayList<String> l_List;
         l_List = l_case.getNeighbour(l_file, "China");
