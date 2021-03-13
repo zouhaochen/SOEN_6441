@@ -340,7 +340,7 @@ public class MapEdit {
     }
 
     /**
-     * Display the model.map as text
+     * Display the model.map in a connected directed graph
      *
      * @param p_F3 filename user input in editmap command
      * @throws IOException if file not find
@@ -407,4 +407,3 @@ public class MapEdit {
         return FLAG;
     }
 }
-
