@@ -1,6 +1,6 @@
 package mapTest;
 
-import model.MapCheck;
+import model.map.MapCheck;
 import org.junit.Test;
 
 import java.io.File;

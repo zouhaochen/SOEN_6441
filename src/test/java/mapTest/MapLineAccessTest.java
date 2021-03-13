@@ -2,7 +2,7 @@ package mapTest;
 
 import static org.junit.Assert.*;
 
-import model.MapLineAccess;
+import model.map.MapLineAccess;
 import org.junit.Test;
 
 import java.io.File;

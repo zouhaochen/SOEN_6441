@@ -4,9 +4,9 @@ import gameplay.GamePhase;
 import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;
-import model.MapDetailAccess;
-import model.MapGraph;
-import model.MapListing;
+import model.map.MapDetailAccess;
+import model.map.MapGraph;
+import model.map.MapListing;
 
 
 import java.io.File;

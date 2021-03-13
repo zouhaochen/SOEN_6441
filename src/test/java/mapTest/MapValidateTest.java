@@ -1,6 +1,6 @@
 package mapTest;
 
-import model.MapValidate;
+import model.map.MapValidate;
 import org.junit.Test;
 
 import java.io.File;

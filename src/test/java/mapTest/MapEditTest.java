@@ -1,6 +1,6 @@
 package mapTest;
 
-import model.MapEdit;
+import model.map.MapEdit;
 import org.junit.Test;
 
 import java.io.File;

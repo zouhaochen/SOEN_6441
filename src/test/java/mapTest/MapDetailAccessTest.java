@@ -1,6 +1,6 @@
 package mapTest;
 
-import model.MapDetailAccess;
+import model.map.MapDetailAccess;
 import org.junit.Test;
 
 import java.io.File;

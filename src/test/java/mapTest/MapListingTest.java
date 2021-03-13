@@ -1,6 +1,6 @@
 package mapTest;
 
-import model.MapListing;
+import model.map.MapListing;
 import org.junit.Test;
 
 import java.io.File;
