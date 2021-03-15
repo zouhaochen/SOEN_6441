@@ -22,7 +22,7 @@ public class MapListingTest {
      * This method is test case1 for the country connection in the model.map file.
      */
     @Test
-    public void testOne() {
+    public void testGetCountryList() {
 
         File l_file = new File("domination//test_02.map");
         MapListing l_case = new MapListing();
@@ -36,7 +36,7 @@ public class MapListingTest {
      * This method is test case1 for the continent connection in the model.map file.
      */
     @Test
-    public void testTwo() {
+    public void testGetContinentList() {
         File l_file = new File("domination//test_02.map");
         MapListing l_case = new MapListing();
         ArrayList<String> l_List;
@@ -49,7 +49,7 @@ public class MapListingTest {
      * This method is test case1 for the correspondence between countries and continents in the model.map file.
      */
     @Test
-    public void testThree() {
+    public void testGetCountryContinent() {
         File l_file = new File("domination//test_02.map");
         MapListing l_case = new MapListing();
         HashMap<String, String> l_CountryContinent;
@@ -62,7 +62,7 @@ public class MapListingTest {
      * This method is test case1 for the country's neighbour list in the model.map file.
      */
     @Test
-    public void testFour() {
+    public void testGetNeighbour() {
         File l_file = new File("domination//test_02.map");
         MapListing l_case = new MapListing();
         ArrayList<String> l_List;

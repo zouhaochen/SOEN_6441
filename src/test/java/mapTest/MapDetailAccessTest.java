@@ -20,7 +20,7 @@ public class MapDetailAccessTest {
      * This method is test case1 for total lines in the model.map file.
      */
     @Test
-    public void testOne() {
+    public void testGetLines() {
         File l_File = new File("domination//test_02.map");
         MapDetailAccess l_Case1 = new MapDetailAccess();
         int l_A = l_Case1.getLines(l_File);
@@ -31,7 +31,7 @@ public class MapDetailAccessTest {
      * This method is test case1 for continent lines in the model.map file.
      */
     @Test
-    public void testTwo() {
+    public void testGetContinentLines() {
         File l_File = new File("domination//test_02.map");
         MapDetailAccess l_Case1 = new MapDetailAccess();
         int l_A = l_Case1.getContinentLines(l_File);
@@ -42,7 +42,7 @@ public class MapDetailAccessTest {
      * This method is test case1 for country lines in the model.map file.
      */
     @Test
-    public void testThree() {
+    public void testGetCountryLines() {
         File l_File = new File("domination//test_02.map");
         MapDetailAccess l_Case1 = new MapDetailAccess();
         int l_A = l_Case1.getCountryLines(l_File);
@@ -53,7 +53,7 @@ public class MapDetailAccessTest {
      * This method is test case1 for borders lines in the model.map file.
      */
     @Test
-    public void testFour() {
+    public void testGetBorderLines() {
         File l_File = new File("domination//test_02.map");
         MapDetailAccess l_Case1 = new MapDetailAccess();
         int l_A = l_Case1.getBorderLines(l_File);
@@ -73,7 +73,7 @@ public class MapDetailAccessTest {
      * This method is test case1 for continent lines in the model.map file.
      */
     @Test
-    public void testFive() {
+    public void testGetContinentNumber() {
         int l_A = d_Case1.getContinentNumber(d_File);
         assertEquals(2, l_A);
     }
@@ -82,7 +82,7 @@ public class MapDetailAccessTest {
      * This method is test case1 for country lines in the model.map file.
      */
     @Test
-    public void testSix() {
+    public void testGetCountryNumber() {
         int l_A = d_Case1.getCountryNumber(d_File);
         assertEquals(4, l_A);
     }
@@ -91,7 +91,7 @@ public class MapDetailAccessTest {
      * This method is test case1 for the neighbour list.
      */
     @Test
-    public void testSeven() {
+    public void testGetNeighbourList() {
         ArrayList<String[]> l_NeighbourList = new ArrayList<String[]>();
         l_NeighbourList = d_Case1.getNeighbourList(d_File);
         assertEquals(4, l_NeighbourList.size());

@@ -173,11 +173,14 @@ public class MainLoopController {
      * @param args To get parameters from console
      * @throws IOException if file does not exist
      */
+
+    /**
     public static void main(String[] args) throws Exception {
         //filename initial
         String file = "domination/test_02.map";
         MainLoopController mainLoop = new MainLoopController(file);
         mainLoop.MainLogic();
     }
+     **/
 
 }
