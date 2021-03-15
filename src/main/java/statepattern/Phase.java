@@ -29,11 +29,11 @@ public abstract class Phase {
      *  so that the state object can change the state of
      *  the GameEngine to transition between states.
      */
-    GameEngine ge;
+    //GameEngine ge;
 
-    Phase(GameEngine p_ge) {
-        ge = p_ge;
-    }
+    //Phase(GameEngine p_ge) {
+        //ge = p_ge;
+    //}
 
     // common commands
     abstract public void loadMap();

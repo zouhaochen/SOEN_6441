@@ -47,11 +47,11 @@ public class MainLoop {
             switch (mystart) {
                 case "Edit":
                     // Set the state to Preload
-                    setPhase(new Preload(this));
+                    //setPhase(new Preload(this));
                     break;
                 case "Play":
                     // Set the state to PlaySetup
-                    setPhase(new PlaySetup(this));
+                    //setPhase(new PlaySetup(this));
                     break;
                 case "Exit":
                     System.out.println("Bye!");
@@ -118,7 +118,7 @@ public class MainLoop {
                     default:
                         System.out.println("this command does not exist");
                 }
-            } while (!(gamePhase instanceof End));
+            } while (mycommand != 3);
         } while (mycommand != 3);
 
         l_Scanner.close();
