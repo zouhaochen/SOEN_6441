@@ -22,54 +22,6 @@ public class MapValidate {
      */
     MapListing d_Ml = new MapListing();
 
-    /**
-     * This method is to get the list of neighbour of continents in text file
-     *
-     * @param p_File the model.map file
-     * @return the list of the neighbour of continents
-     */
-    public ArrayList<String[]> getContinentBorderList(File p_File) {
-        int l_State = 1;
-
-        ArrayList<String> l_ContinentList = new ArrayList<String>();
-        l_ContinentList = d_Ml.getContinentList(p_File);
-
-        ArrayList<String> l_CountryList = new ArrayList<String>();
-        ArrayList<String> l_ContinentConnection = new ArrayList<String>();
-        l_CountryList = d_Ml.getCountryList(p_File);
-
-        HashMap<String, String> l_ContinentCountry = new HashMap<String, String>();
-        l_ContinentCountry = d_Ml.getCountryContinent(p_File);
-
-        ArrayList<String[]> l_TotalContinentConnection = new ArrayList<String[]>();
-        // To get the continent connection list.
-        for (int l_I = 0; l_I < l_CountryList.size(); l_I++) {
-
-            ArrayList<String> l_NeighbourList = new ArrayList<String>();
-            //To get each country's connection list.
-            l_NeighbourList = d_Ml.getNeighbour(p_File, l_CountryList.get(l_I));
-
-
-            l_ContinentConnection.clear();
-            for (int l_J = 0; l_J < l_NeighbourList.size(); l_J++) {
-
-                //To get the ID of continent which the country is included by get of the form in which countries are stored in the model.map file.
-                String l_Con = l_ContinentCountry.get(l_NeighbourList.get(l_J));
-                int l_Conno = l_ContinentList.indexOf(l_Con);
-                String l_No = Integer.toString(l_Conno);
-                if (!l_ContinentConnection.contains(l_No)) {
-                    l_ContinentConnection.add(l_No);
-                }
-            }
-            //To get the whole list of the continent connection.
-            String[] l_Connection = new String[l_ContinentConnection.size()];
-            l_Connection = (String[]) l_ContinentConnection.toArray(l_Connection);
-            l_TotalContinentConnection.add(l_Connection);
-        }
-
-        return l_TotalContinentConnection;
-    }
-
 
     /**
      * This method checks if all the countries given in the model.map is connected or not
@@ -185,4 +137,74 @@ public class MapValidate {
         return l_A;
     }
 
+    /**
+     * This method implements check the verification of model.map correctness.
+     *
+     * @param p_File the model.map file.
+     * @return return the model.state of the model.map correction.
+     */
+    public static int check(File p_File) {
+
+        MapValidate l_New = new MapValidate();
+        MapDetailAccess l_Mdl = new MapDetailAccess();
+        ArrayList<String[]> l_Neighbourlist = new ArrayList<String[]>();
+        l_Neighbourlist = l_Mdl.getNeighbourList(p_File);
+
+        int l_State = 0;
+
+        int l_A = l_Mdl.getContinentNumber(p_File);
+
+        //Checking the number of continents
+        if (l_A == 0) {
+            System.out.println("There is no continents!");
+            l_State = 1;
+            return l_State;
+
+        }
+
+        //Checking the number of countries
+        int l_B = l_Mdl.getCountryNumber(p_File);
+        if (l_B == 0) {
+            System.out.println("There is no countries!");
+            l_State = 2;
+            return l_State;
+        }
+
+        //Checking the number of borders
+        int l_C = l_Neighbourlist.size();
+        if (l_C == 0) {
+            System.out.println("There is no borders!");
+            l_State = 3;
+            return l_State;
+        }
+        if (l_C != l_B) {
+            System.out.println("The borders is incomplete!");
+            l_State = 4;
+            return l_State;
+        }
+
+        //Checking countries Connectivity
+        int l_Countryconnected = l_New.validateCountryConnection(p_File);
+        if (l_Countryconnected == -1) {
+            l_State = 5;
+            System.out.println("Countries are not connected!");
+            return l_State;
+        }
+        if (l_Countryconnected == 1) {
+            System.out.println("Countries are connected!");
+        }
+
+        //Checking Continental Connectivity
+        int l_Continentconnected = l_New.validateContinentConnection(p_File);
+        if (l_Continentconnected == 0) {
+            l_State = 6;
+            System.out.println("Continents are not connected!");
+            return l_State;
+        }
+        if (l_Continentconnected == 1) {
+            System.out.println("Continents are connected!");
+        }
+
+        return l_State;
+    }
 }

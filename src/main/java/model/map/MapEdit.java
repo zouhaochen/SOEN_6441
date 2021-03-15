@@ -76,7 +76,7 @@ public class MapEdit {
                 File l_File = getFile(OPTFILE);
                 if (l_File.exists()) {
                     // check model.map validation
-                    MapCheck.check(l_File);
+                    MapValidate.check(l_File);
                 }
             } else if (l_Command.startsWith("exit")) {
                 break;
@@ -110,7 +110,7 @@ public class MapEdit {
             System.out.println("");
             System.out.println("Map validate:");
             // check model.map validation
-            MapCheck.check(l_F3);
+            MapValidate.check(l_F3);
             FLAG = 2;
 
         }
@@ -126,7 +126,7 @@ public class MapEdit {
             l_Bw.flush();
             l_Bw.close();
             // check model.map validation
-            MapCheck.check(l_F3);
+            MapValidate.check(l_F3);
             FLAG = 3;
         }
     }
@@ -387,7 +387,7 @@ public class MapEdit {
             l_Br.close();
             l_Bw.close();
             // check model.map validation
-            MapCheck.check(l_File);
+            MapValidate.check(l_File);
         }
     }
 
