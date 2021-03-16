@@ -5,14 +5,16 @@ import model.gameelements.Player;
 
 import java.io.File;
 
-public class GameplayPhase extends Phase {
+public class GamePlay extends Phase {
+
     /**
      * initialize the GameData object
      *
      * @param p_gameData The current context of game engine object
+     * @param p_mlObj
      */
-    GameplayPhase(GameEngineController p_gameData) {
-        super(p_gameData);
+    GamePlay(GameEngineController p_gameData, MainLoop p_mlObj) {
+        super(p_gameData, p_mlObj);
     }
 
     @Override
@@ -107,6 +109,11 @@ public class GameplayPhase extends Phase {
 
     @Override
     public void endGame() {
+
+    }
+
+    @Override
+    public void next() {
 
     }
 }

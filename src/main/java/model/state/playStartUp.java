@@ -1,26 +1,18 @@
 package model.state;
 
 import controller.GameEngineController;
-import gameplay.GamePhase;
-import model.GameData;
-import model.gameelements.Country;
 import model.gameelements.Player;
 
-import java.io.File;
-import java.util.Map;
-import java.util.Scanner;
-
-public class playStartUpPhase extends GameplayPhase {
+public class playStartUp extends GamePlay {
 
     /**
      * initialize the GameData object
      *
      * @param p_gameData The current context of game engine object
      */
-    playStartUpPhase(GameEngineController p_gameData) {
-        super(p_gameData);
+    playStartUp(GameEngineController p_gameData, MainLoop p_mlObj) {
+        super(p_gameData,p_mlObj);
     }
-
 
     //问题1。 如果此方法为static参数传不进来
     /*
@@ -57,7 +49,51 @@ public class playStartUpPhase extends GameplayPhase {
     }
      */
 
+    /**
+     * invoke load map function from map file
+     */
+    //GameData.java
+    public  void loadMap(){
+        System.out.println("load map has been done ");
+    }
 
+    /**
+     * invoke function to add new player to the game
+     *
+     * @param p_colour you custom player color
+     */
+    //GameEngineController.java
+    public  void addNewPlayer(String p_colour){
+        System.out.println("player has been added ");
+    }
+
+    /**
+     * invoke function to remove player from the game
+     *
+     * @param p_player the player you want to remove
+     */
+    //GameEngineController.java
+    public  void removePlayer(Player p_player){
+        System.out.println("player has been removed");
+    }
+
+    /**
+     * invoke method for player to show map in game
+     *
+     * @param p_player input the playerID you want to show its map
+     */
+    //GameEngineController.java
+    public  void showMap(Player p_player){
+        System.out.println("map is being displayed");
+    }
+
+    /**
+     * invoke method to randomly assign all the countries to the players
+     */
+    //GameEngineController.java
+    public void assignCountries(){
+        System.out.println(" countries have been assigned for each player ");
+    }
 
     /**
      * invoke method to issue deploy order
@@ -67,7 +103,7 @@ public class playStartUpPhase extends GameplayPhase {
      * @param p_numberOfArmies Number of armies to deploy
      */
     //DeployOrder.java
-    public  void deployOrder(Player p_player, String p_countryID, int p_numberOfArmies){
+    public void deployOrder(Player p_player, String p_countryID, int p_numberOfArmies){
         printInvalidCommand(this);
     }
 
@@ -124,5 +160,13 @@ public class playStartUpPhase extends GameplayPhase {
      */
     public  void dilpomacyOrder(Player p_player, String p_playerID){
         printInvalidCommand(this);
+    }
+
+    public void  endGame(){
+        d_mainLoopObject.setPhase(new End(d_gameDataObject,d_mainLoopObject));
+    }
+
+    public void next(){
+        d_mainLoopObject.setPhase(new reinforcement(d_gameDataObject,d_mainLoopObject));
     }
 }

@@ -4,9 +4,6 @@ import controller.GameEngineController;
 import model.GameData;
 import model.gameelements.Player;
 
-import statepattern.End;
-import statepattern.Phase;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -19,7 +16,7 @@ public class MainLoop {
     /**
      * State object of the MainLoop
      */
-    private statepattern.Phase gamePhase;
+    private model.state.Phase gamePhase;
     public String p_Command;
     public String p_Color;
     public String[] p_command;
@@ -98,30 +95,29 @@ public class MainLoop {
                     return;
             }
 
-
             do {
-                    System.out.println(" =================================================");
-                    System.out.println("| #   PHASE                   : command           |");
-                    System.out.println(" =================================================");
+                    System.out.println(" ================================================================");
+                    System.out.println("| #   PHASE                   : command                         |");
+                    System.out.println(" ================================================================");
                     System.out.println("| 1.  Any except play         : edit map                        |");
                     System.out.println("| 2.  Edit Preload            : editContinent                   |");
                     System.out.println("| 3.  Edit Preload            : edit country                    |");
                     System.out.println("| 4.  Edit:Preload            : editNeighbor                    |");
-                    System.out.println("| 5.  Edit:Preload            : showMap                         |");
-                    System.out.println("| 6.  Edit:Preload            : validate                        |");
-                    System.out.println("| 7.  playStartUpPhase        : loadMap -filename               |");
-                    System.out.println("| 8.  playStartUpPhase        : gameplayer -add                 |");
-                    System.out.println("| 9.  playStartUpPhase        : gameplayer  -remove             |");
-                    System.out.println("| 10. playStartUpPhase        : showMap                         |");
-                    System.out.println("| 11. Reinforcement           : assignCountries                 |");
-                    System.out.println("| 12. IssueOrder              : deploy -countryID -numArmies    |");
-                    System.out.println("| 13. IssueOrder              : end game                        |");
+                    System.out.println("| 5.  Edit:Preload            : showmap                         |");
+                    System.out.println("| 6.  Edit:Preload            : savemap                         |");
+                    System.out.println("| 7.  Edit:Preload            : validate                        |");
+                    System.out.println("| 8.  playStartUpPhase        : loadMap -filename               |");
+                    System.out.println("| 9.  playStartUpPhase        : gameplayer -add                 |");
+                    System.out.println("| 10. playStartUpPhase        : gameplayer  -remove             |");
+                    System.out.println("| 11. playStartUpPhase        : showMap                         |");
+                    System.out.println("| 12. Reinforcement           : assignCountries                 |");
+                    System.out.println("| 13. IssueOrder              : deploy -countryID -numArmies    |");
                     System.out.println("| 14. IssueOrder              : advance                         |");
                     System.out.println("| 15. IssueOrder              : block                           |");
                     System.out.println("| 16. IssueOrder              : bomb                            |");
                     System.out.println("| 17. IssueOrder              : airlift                         |");
                     System.out.println("| 18. IssueOrder              : dilpomacy                       |");
-                    System.out.println("| 19. End                     : end game                        |");
+                    System.out.println("| 19. play startup phase      : end game                        |");
                     System.out.println("| 20. Any                     : next phase                      |");
                     System.out.println(" =================================================");
                     System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase command: ");

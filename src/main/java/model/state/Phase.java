@@ -4,19 +4,20 @@ import controller.GameEngineController;
 import model.gameelements.Player;
 
 import java.io.File;
-import java.io.IOException;
 
 
 public abstract class Phase {
     GameEngineController d_gameDataObject;
+    MainLoop d_mainLoopObject;
 
     /**
      * initialize the GameData object
      *
      * @param p_gameData The current context of game engine object
      */
-    Phase(GameEngineController p_gameData) {
+    Phase(GameEngineController p_gameData, MainLoop p_mlObj) {
         d_gameDataObject = p_gameData;
+        d_mainLoopObject = p_mlObj;
     }
 
     /**
@@ -176,4 +177,5 @@ public abstract class Phase {
 
     public abstract void endGame();
 
+    public abstract void next();
 }
