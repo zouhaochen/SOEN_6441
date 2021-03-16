@@ -173,4 +173,7 @@ public abstract class Phase {
      * @param p_playerID ID of the player to negotiate with
      */
     public abstract void dilpomacyOrder(Player p_player, String p_playerID);
+
+    public abstract void endGame();
+
 }
