@@ -2,6 +2,8 @@ package model.state;
 
 
 
+import model.map.MapEdit;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -43,7 +45,7 @@ public class MainLoop {
             switch (mystart) {
                 case "Edit":
                     // Set the state to Preload
-                    //setPhase(new Preload(this));
+                    setPhase(new Preload(this));
                     break;
                 case "Play":
                     // Set the state to PlaySetup

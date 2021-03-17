@@ -43,6 +43,7 @@ public abstract class Phase {
     abstract public void editCountry();
     abstract public void saveMap();
 
+
     // Play commands
     // game setup commands
     abstract public void setPlayers();

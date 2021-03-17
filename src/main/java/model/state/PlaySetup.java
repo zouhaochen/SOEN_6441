@@ -3,11 +3,14 @@ package model.state;
 import controller.GameEngineController;
 import gameplay.GamePhase;
 import model.GameData;
+import model.gameelements.Country;
+import model.gameelements.Player;
 import model.map.MapGraph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PlaySetup extends Play {
@@ -94,6 +97,22 @@ public class PlaySetup extends Play {
     public void assignCountries() {
         // randomly assign countries for each player
         d_GameEngine.assignCountries();
+        int l_CurrentReinforcement = 5;
+        int l_TempReinforcementArmy;
+
+        // Assign Reinforcement phase, Call the method in gameplay to allocate the number of ReinforcementArmies in each round to each player
+        this.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.REINFORCEMENT);
+        System.out.println(d_GameData.getCurrentPhase());
+
+        for (Player l_Player : this.d_GameEngine.d_GameData.getPlayerList()) {
+            l_CurrentReinforcement += d_GameEngine.getReinforcementBonus(l_Player);
+            l_Player.setReinforcementArmies(l_CurrentReinforcement);
+            System.out.println(l_CurrentReinforcement + " Reinforcement Armies are assigned to " + " Player [" + l_Player.getColour() + "]  ");
+
+            for (Map.Entry<String, Country> l_CountryEntry : l_Player.getCountriesInControl().entrySet()) {
+                System.out.println("Controlling countries: " + l_CountryEntry.getKey());
+            }
+        }
     }
 
     public void reinforce() {
@@ -113,6 +132,6 @@ public class PlaySetup extends Play {
     }
 
     public void next() {
-        d_ml.setPhase(new Reinforcement(d_ml));
+        d_ml.setPhase(new End(d_ml));
     }
 }
