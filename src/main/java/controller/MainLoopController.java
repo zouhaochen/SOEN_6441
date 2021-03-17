@@ -32,7 +32,11 @@ public class MainLoopController {
     /**
      * Constructor
      * the main game loop that to control game phases.
-     *
+     *public MainLoopController(String p_FilePath) {
+     *         this.d_MapFile = new File(p_FilePath);
+     *         this.d_GameData = new GameData(d_MapFile);
+     *         this.d_GameEngine = new GameEngineController(d_GameData);
+     *     }
      * @param p_FilePath the model.map file path that use to load game model.map.
      */
     public MainLoopController(String p_FilePath) {

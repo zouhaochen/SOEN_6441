@@ -1,11 +1,7 @@
-package statepattern;
+package model.state;
 
-import controller.GameEngineController;
-import gameplay.GamePhase;
-import model.GameData;
-import model.map.MapEdit;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -51,10 +47,10 @@ public class MainLoop {
                     break;
                 case "Play":
                     // Set the state to PlaySetup
-                    //setPhase(new PlaySetup(this));
+                    setPhase(new PlaySetup(this));
                     break;
                 case "Exit":
-                    System.out.println("Bye!");
+                    System.out.println("Exiting Warzone Game see you next time!");
                     return;
             }
             do {
@@ -86,13 +82,13 @@ public class MainLoop {
                         gamePhase.loadMap();
                         break;
                     case 2:
-                        gamePhase.showMap();
+                        //gamePhase.showMap();
                         break;
                     case 3:
-                        gamePhase.editCountry();
+                        //gamePhase.editCountry();
                         break;
                     case 4:
-                        gamePhase.saveMap();
+                        //gamePhase.saveMap();
                         break;
                     case 5:
                         gamePhase.setPlayers();
@@ -104,10 +100,10 @@ public class MainLoop {
                         gamePhase.reinforce();
                         break;
                     case 8:
-                        gamePhase.attack();
+                        //gamePhase.advanceOrder();
                         break;
                     case 9:
-                        gamePhase.fortify();
+                        /*gamePhase.fortify();*/
                         break;
                     case 10:
                         gamePhase.endGame();
@@ -118,9 +114,10 @@ public class MainLoop {
                     default:
                         System.out.println("this command does not exist");
                 }
-            } while (mycommand != 3);
+            } while (!(gamePhase instanceof End));
         } while (mycommand != 3);
 
         l_Scanner.close();
     }
+
 }
