@@ -9,7 +9,7 @@ public class Preload extends Edit {
 	}
 
 	public void loadMap() {
-		System.out.println("map has been loaded");
+		System.out.println("map has been load");
 		d_ml.setPhase(new PostLoad(d_ml));
 		try {
 			MapEdit.mapEditLoop();
