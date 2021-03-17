@@ -40,9 +40,8 @@ public abstract class Phase {
     abstract public void showMap();
 
     // Edit map commands
-    abstract public void editCountry();
+    abstract public void editMap();
     abstract public void saveMap();
-
 
     // Play commands
     // game setup commands
@@ -63,6 +62,9 @@ public abstract class Phase {
 
     // go to next phase
     abstract public void next();
+
+    // go to previous phase
+    abstract public void previous();
 
     /**
      *  Common method to all States.

@@ -22,7 +22,7 @@ public abstract class Play extends Phase {
         System.out.println("map is being displayed");
     }
 
-    public void editCountry() {
+    public void editMap() {
         printInvalidCommandMessage();
     }
 

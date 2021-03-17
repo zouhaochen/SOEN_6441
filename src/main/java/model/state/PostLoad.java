@@ -1,5 +1,7 @@
 package model.state;
 
+import model.map.MapEdit;
+
 public class PostLoad extends Edit {
 
 	PostLoad(MainLoop p_ml) {
@@ -7,15 +9,18 @@ public class PostLoad extends Edit {
 	}
 	
 	public void showMap() {
-		System.out.println("edited map is displayed");
+		printInvalidCommandMessage();
 	}
 
-	public void loadMap() {
-		System.out.println("map has been loaded");
-	}
+	public void loadMap() { printInvalidCommandMessage(); }
 
-	public void editCountry() {
-		System.out.println("country has been edited");
+	public void editMap() {
+		d_ml.setPhase(new PostLoad(d_ml));
+		try {
+			MapEdit.mapEditLoop();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void saveMap() {
@@ -25,5 +30,10 @@ public class PostLoad extends Edit {
 
 	public void next() {
 		System.out.println("must save map");
+	}
+
+	public void previous() {
+		System.out.println("back to previous phase");
+		d_ml.setPhase(new Preload(d_ml));
 	}
 }
