@@ -139,6 +139,7 @@ public class PlaySetup extends Play {
     }
 
     public void previous() {
+        System.out.println("back to previous phase");
         d_ml.setPhase(new PostLoad(d_ml));
     }
 }

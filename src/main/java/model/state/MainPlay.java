@@ -98,11 +98,9 @@ public class MainPlay extends Play {
         printInvalidCommandMessage();
     }
 
-    public void next() {
-        d_ml.setPhase(new End(d_ml));
-    }
+    public void next() { d_ml.setPhase(new End(d_ml)); }
 
     public void previous() {
-        d_ml.setPhase(new PostLoad(d_ml));
-    }
+        System.out.println("back to previous phase");
+        d_ml.setPhase(new PlaySetup(d_ml)); }
 }

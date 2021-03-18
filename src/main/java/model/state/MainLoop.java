@@ -136,7 +136,6 @@ public class MainLoop {
                 }
             } while (!(gamePhase instanceof End));
         } while (!mystart.equalsIgnoreCase("exit"));
-
         l_Scanner.close();
     }
 

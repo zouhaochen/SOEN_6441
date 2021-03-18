@@ -30,6 +30,7 @@ public class PostLoad extends Edit {
 
     public void next() {
         System.out.println("must save map");
+        d_ml.setPhase(new PlaySetup(d_ml));
     }
 
     public void previous() {
