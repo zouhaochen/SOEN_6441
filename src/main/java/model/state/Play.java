@@ -1,6 +1,10 @@
 package model.state;
 
 
+import controller.GameEngineController;
+import model.GameData;
+
+import java.io.File;
 
 /**
  *	ConcreteState of the State pattern. In this example, defines behavior
@@ -14,9 +18,10 @@ package model.state;
  */
 public abstract class Play extends Phase {
 
-    Play(MainLoop p_ml) {
+    Play(MainLoop p_ml ){
         super(p_ml);
     }
+
 
     public void showMap() {
         System.out.println("map is being displayed");
@@ -27,6 +32,9 @@ public abstract class Play extends Phase {
     }
 
     public void saveMap() {
+        printInvalidCommandMessage();
+    }
+    public void previous() {
         printInvalidCommandMessage();
     }
 

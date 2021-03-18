@@ -1,6 +1,9 @@
 package model.state;
 
-import model.gameelements.Player;
+import controller.GameEngineController;
+import model.GameData;
+
+import java.io.File;
 
 /**
  *	State of the State pattern. Here implemented as a abstract class.
@@ -33,8 +36,11 @@ public abstract class Phase {
      */
     MainLoop d_ml;
 
+
     Phase(MainLoop p_ml) {
+
         d_ml = p_ml;
+
     }
 
     // common commands
@@ -50,20 +56,14 @@ public abstract class Phase {
     abstract public void setPlayers();
     abstract public void assignCountries();
 
-
-
     // reinforcement commands
     abstract public void reinforce();
 
-    // Issue deploy order commands
-    abstract public void deployOrder();
+    // attack commands
+    abstract public void IssureOrder();
 
     // fortify commands
-    abstract public void fortify();
-
-    //execute  order commands
-    //abstract public void deployOrder();
-
+    abstract public void execute();
 
     // end command
     abstract public void endGame();

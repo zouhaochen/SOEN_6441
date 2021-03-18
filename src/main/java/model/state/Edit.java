@@ -1,12 +1,12 @@
 package model.state;
 /**
- *	ConcreteState of the State pattern. In this example, defines behavior 
- *  for commands that are valid in this state, and for the others signifies  
- *  that the command is invalid. 
+ *	ConcreteState of the State pattern. In this example, defines behavior
+ *  for commands that are valid in this state, and for the others signifies
+ *  that the command is invalid.
  *
- *  This state represents a group of states, and defines the behavior 
- *  that is common to all the states in its group. All the states in its 
- *  group need to extend this class. 
+ *  This state represents a group of states, and defines the behavior
+ *  that is common to all the states in its group. All the states in its
+ *  group need to extend this class.
  *
  */
 public abstract class Edit extends Phase {
@@ -27,11 +27,11 @@ public abstract class Edit extends Phase {
         printInvalidCommandMessage();
     }
 
-    public void deployOrder() {
+    public void IssureOrder() {
         printInvalidCommandMessage();
     }
 
-    public void fortify() {
+    public void execute() {
         printInvalidCommandMessage();
     }
 
@@ -43,3 +43,4 @@ public abstract class Edit extends Phase {
         printInvalidCommandMessage();
     }
 }
+

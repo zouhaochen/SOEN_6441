@@ -2,8 +2,11 @@ package model.state;
 
 
 
+import controller.GameEngineController;
+import model.GameData;
 import model.map.MapEdit;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -19,7 +22,18 @@ public class MainLoop {
 
     String mystart;
     int mycommand;
-
+    /**
+     * model.map file that use to load represent game model.map.
+     */
+    public File d_MapFile = new File(".//domination//test_02.map");
+    /**
+     * get Game data as an object, used to be the input parameter for GameEngineController class
+     */
+    public GameData d_GameData = new GameData(d_MapFile);
+    /**
+     * get game engine as an object that used to call the function from GameEngineController class
+     */
+    public GameEngineController d_GameEngine = new GameEngineController(d_GameData);
     /**
      * Method that allows the GameEngine object to change its state.
      * @param p_phase new state to be set for the GameEngine object.
@@ -52,29 +66,30 @@ public class MainLoop {
                     setPhase(new PlaySetup(this));
                     break;
                 case "exit":
+                    setPhase(new End(this));
                     System.out.println("Exiting Warzone Game see you next time!");
                     return;
             }
             do {
-                System.out.println(" =======================================================");
-                System.out.println("| #   PHASE                   : command                |");
-                System.out.println(" =======================================================");
-                System.out.println("| 1.  GamePlay:PreLoad             : load map          |");
-                System.out.println("| 2.  GamePlay:PreLoad             : show map          |");
-                System.out.println("| 3.  Edit:PostLoad                : edit map          |");
-                System.out.println("| 4.  Edit:PostLoad                : save map          |");
-                System.out.println("| 5.  Play:PlaySetup               : set players       |");
-                System.out.println("| 6.  Play:PlaySetup               : assign countries  |");
-                System.out.println("| 7.  Play:MainPlay:Reinforce      : reinforce         |");
-                System.out.println("| 8.  Play:MainPlay:Deploy         : deploy            |");
-                System.out.println("| 9.  Play:MainPlay:Fortify        : fortify           |");
-                System.out.println("| 10. Play                         : end game          |");
-                System.out.println("| 11. Any                          : next phase        |");
-                System.out.println("| 12. Any                          : previous phase    |");
-                System.out.println(" =======================================================");
+                System.out.println(" =================================================");
+                System.out.println("| #   PHASE                   : command           |");
+                System.out.println(" =================================================");
+                System.out.println("| 1.  GamePlay:PreLoad        : load map          |");
+                System.out.println("| 2.  GamePlay:PreLoad        : show map          |");
+                System.out.println("| 3.  Edit:PostLoad           : edit map          |");
+                System.out.println("| 4.  Edit:PostLoad           : save map          |");
+                System.out.println("| 5.  Play:PlaySetup          : set players       |");
+                System.out.println("| 6.  Play:PlaySetup          : assign countries  |");
+                System.out.println("| 7.  Play:MainPlay:Reinforce : no command        |");
+                System.out.println("| 8.  Play:MainPlay:Issure    : deploy             |");
+                System.out.println("| 9.  Play:MainPlay:Execute   : no command        |");
+                System.out.println("| 10. Play:END                : end game          |");
+                System.out.println("| 11. Any                     : next phase        |");
+                System.out.println("| 12. Any                     : previous phase    |");
+                System.out.println(" =================================================");
                 System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase command: ");
                 mycommand = l_Scanner.nextInt();
-                System.out.println(" ======================================================");
+                System.out.println(" =================================================");
                 //
                 // Calls the method corresponding to the action that the user has selected.
                 // Depending on what it the current state object, these method calls will
@@ -103,10 +118,10 @@ public class MainLoop {
                         gamePhase.reinforce();
                         break;
                     case 8:
-                        gamePhase.deployOrder();
+                        gamePhase.IssureOrder();
                         break;
                     case 9:
-                        /*gamePhase.fortify();*/
+                        gamePhase.execute();
                         break;
                     case 10:
                         gamePhase.endGame();
@@ -120,7 +135,7 @@ public class MainLoop {
                         System.out.println("this command does not exist");
                 }
             } while (!(gamePhase instanceof End));
-        } while (mycommand != 3);
+        } while (!mystart.equalsIgnoreCase("exit"));
 
         l_Scanner.close();
     }
