@@ -81,7 +81,7 @@ public class MainLoop {
                 System.out.println("| 5.  Play:PlaySetup          : set players       |");
                 System.out.println("| 6.  Play:PlaySetup          : assign countries  |");
                 System.out.println("| 7.  Play:MainPlay:Reinforce : no command        |");
-                System.out.println("| 8.  Play:MainPlay:Issure    : deploy             |");
+                System.out.println("| 8.  Play:MainPlay:Issue    : deploy             |");
                 System.out.println("| 9.  Play:MainPlay:Execute   : no command        |");
                 System.out.println("| 10. Play:END                : end game          |");
                 System.out.println("| 11. Any                     : next phase        |");
