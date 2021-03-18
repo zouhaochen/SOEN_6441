@@ -19,35 +19,21 @@ public class PlaySetup extends Play {
         super(p_ml);
     }
 
-    /**
-     * model.map file that use to load represent game model.map.
-     */
-    public File d_MapFile = new File(".//domination//test_02.map");
-    /**
-     * get Game data as an object, used to be the input parameter for GameEngineController class
-     */
-    public GameData d_GameData = new GameData(d_MapFile);
-    /**
-     * get game engine as an object that used to call the function from GameEngineController class
-     */
-    public GameEngineController d_GameEngine = new GameEngineController(d_GameData);
-
-
 
 
     public void loadMap() {
-        d_GameData.setCurrentPhase(GamePhase.STARTUP);
+        d_ml.d_GameData.setCurrentPhase(GamePhase.STARTUP);
         try {
-            this.d_MapFile = new File(d_GameEngine.getMapFilePath());
+            d_ml.d_MapFile = new File(d_ml.d_GameEngine.getMapFilePath());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        d_GameData = new GameData(d_MapFile);
-        d_GameData.setCurrentPhase(GamePhase.STARTUP);
-        d_GameEngine = new GameEngineController(d_GameData);
+        d_ml.d_GameData = new GameData(d_ml.d_MapFile);
+        d_ml.d_GameData.setCurrentPhase(GamePhase.STARTUP);
+        d_ml.d_GameEngine = new GameEngineController(d_ml.d_GameData);
         try {
-            d_GameData.loadMap();
+            d_ml.d_GameData.loadMap();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -56,24 +42,24 @@ public class PlaySetup extends Play {
     public void showMap() {
         try {
             System.out.println("\nMain Graph show below:");
-            MapGraph.printTable(d_MapFile.getName());
+            MapGraph.printTable(d_ml.d_MapFile.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     public void editMap() {
-        d_GameData.setCurrentPhase(GamePhase.STARTUP);
+        d_ml.d_GameData.setCurrentPhase(GamePhase.STARTUP);
         try {
-            this.d_MapFile = new File(d_GameEngine.getMapFilePath());
+            d_ml.d_MapFile = new File(d_ml.d_GameEngine.getMapFilePath());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        d_GameData = new GameData(d_MapFile);
-        d_GameData.setCurrentPhase(GamePhase.STARTUP);
-        d_GameEngine = new GameEngineController(d_GameData);
+        d_ml.d_GameData = new GameData(d_ml.d_MapFile);
+        d_ml.d_GameData.setCurrentPhase(GamePhase.STARTUP);
+        d_ml.d_GameEngine = new GameEngineController(d_ml.d_GameData);
         try {
-            d_GameData.loadMap();
+            d_ml.d_GameData.loadMap();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -88,17 +74,17 @@ public class PlaySetup extends Play {
             String l_askUser = l_scanner.nextLine().trim();
 
             if (l_askUser.equalsIgnoreCase("y")) {
-                if (d_GameData.getPlayerList().size() < 5) {
-                    d_GameEngine.gamePlayerCommand();
+                if (d_ml.d_GameData.getPlayerList().size() < 5) {
+                    d_ml.d_GameEngine.gamePlayerCommand();
                 }
                 // since the number of player range is 2 to 5. no more player can be add in.
-                else if (d_GameData.getPlayerList().size() >= 5) {
+                else if (d_ml.d_GameData.getPlayerList().size() >= 5) {
                     System.out.println("number of player out of limit ");
                     continue;
                 }
             } else if (l_askUser.equalsIgnoreCase("n")) {
                 // since the number of player range is 2 to 5. no more player can be remove in.
-                if (d_GameData.getPlayerList().size() < 2) {
+                if (d_ml.d_GameData.getPlayerList().size() < 2) {
                     System.out.println("number of player is not enough, please add more ");
                 } else {
                     System.out.println("All player have already set ");
@@ -112,16 +98,16 @@ public class PlaySetup extends Play {
 
     public void assignCountries() {
         // randomly assign countries for each player
-        d_GameEngine.assignCountries();
+        d_ml.d_GameEngine.assignCountries();
         int l_CurrentReinforcement = 5;
         int l_TempReinforcementArmy;
 
         // Assign Reinforcement phase, Call the method in gameplay to allocate the number of ReinforcementArmies in each round to each player
-        this.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.REINFORCEMENT);
-        System.out.println(d_GameData.getCurrentPhase());
+        d_ml.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.REINFORCEMENT);
+        System.out.println(d_ml.d_GameData.getCurrentPhase());
 
-        for (Player l_Player : this.d_GameEngine.d_GameData.getPlayerList()) {
-            l_CurrentReinforcement += d_GameEngine.getReinforcementBonus(l_Player);
+        for (Player l_Player : d_ml.d_GameEngine.d_GameData.getPlayerList()) {
+            l_CurrentReinforcement += d_ml.d_GameEngine.getReinforcementBonus(l_Player);
             l_Player.setReinforcementArmies(l_CurrentReinforcement);
             System.out.println(l_CurrentReinforcement + " Reinforcement Armies are assigned to " + " Player [" + l_Player.getColour() + "]  ");
 
@@ -129,6 +115,7 @@ public class PlaySetup extends Play {
                 System.out.println("Controlling countries: " + l_CountryEntry.getKey());
             }
         }
+        d_ml.setPhase(new Reinforcement(d_ml));
     }
 
     public void reinforce() {
@@ -148,7 +135,7 @@ public class PlaySetup extends Play {
     }
 
     public void next() {
-        d_ml.setPhase(new End(d_ml));
+        d_ml.setPhase(new Reinforcement(d_ml));
     }
 
     public void previous() {

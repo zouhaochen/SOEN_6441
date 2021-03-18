@@ -1,5 +1,10 @@
 package model.state;
 
+import controller.GameEngineController;
+import model.GameData;
+
+import java.io.File;
+
 /**
  *	State of the State pattern. Here implemented as a abstract class.
  *
@@ -31,8 +36,11 @@ public abstract class Phase {
      */
     MainLoop d_ml;
 
+
     Phase(MainLoop p_ml) {
+
         d_ml = p_ml;
+
     }
 
     // common commands

@@ -2,8 +2,11 @@ package model.state;
 
 
 
+import controller.GameEngineController;
+import model.GameData;
 import model.map.MapEdit;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -19,7 +22,18 @@ public class MainLoop {
 
     String mystart;
     int mycommand;
-
+    /**
+     * model.map file that use to load represent game model.map.
+     */
+    public File d_MapFile = new File(".//domination//test_02.map");
+    /**
+     * get Game data as an object, used to be the input parameter for GameEngineController class
+     */
+    public GameData d_GameData = new GameData(d_MapFile);
+    /**
+     * get game engine as an object that used to call the function from GameEngineController class
+     */
+    public GameEngineController d_GameEngine = new GameEngineController(d_GameData);
     /**
      * Method that allows the GameEngine object to change its state.
      * @param p_phase new state to be set for the GameEngine object.
