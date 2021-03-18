@@ -23,12 +23,6 @@ public class GameEngineController {
     public GameData d_GameData;
 
     /**
-     * the commandValidator each player will use.
-     */
-    CommandValidator d_CommandValidator;
-
-
-    /**
      * GameEngineController Constructor
      *
      * @param p_GameData you should pass reference that Game Data you used
@@ -38,7 +32,7 @@ public class GameEngineController {
         // new gameData here
         d_GameData = p_GameData;
         // command validator initialize here
-        d_CommandValidator = new CommandValidator(d_GameData);
+        CommandValidator.setGameData(p_GameData);
     }
 
 
@@ -57,7 +51,7 @@ public class GameEngineController {
         if (l_Player == null) {
             //new temp player list
             ArrayList<Player> l_NewPlayerList = d_GameData.getPlayerList();
-            l_NewPlayer = new Player(p_colour, d_CommandValidator);
+            l_NewPlayer = new Player(p_colour);
             // add to temp player list
             l_Result = l_NewPlayerList.add(l_NewPlayer);
             // set to game data player list
@@ -152,7 +146,7 @@ public class GameEngineController {
             if (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel())) {
                 System.out.println("\nInvalid command.");
             }
-        } while (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel()) || !d_CommandValidator.validate(l_Command));
+        } while (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel()) || !CommandValidator.validate(l_Command));
 
         String l_ProjectPath = new File("").getCanonicalPath();
 //		File l_File = new File(l_ProjectPath + "/domination/" + l_CommandArr[1]);
@@ -175,7 +169,7 @@ public class GameEngineController {
             if (!l_CommandArr[0].equalsIgnoreCase(CommandType.ADD_PLAYER.getLabel())) {
                 System.out.println("\nInvalid command.");
             }
-        } while (!l_CommandArr[0].equalsIgnoreCase(CommandType.ADD_PLAYER.getLabel()) || !d_CommandValidator.validate(l_Command));
+        } while (!l_CommandArr[0].equalsIgnoreCase(CommandType.ADD_PLAYER.getLabel()) || !CommandValidator.validate(l_Command));
 
         // iterate through the command arguments to perform the operations
         for (int l_Index = 1; l_Index < l_CommandArr.length - 1; ) {
@@ -212,7 +206,7 @@ public class GameEngineController {
             if (!l_CommandArr[0].equalsIgnoreCase(CommandType.ASSIGN_COUNTRIES.getLabel())) {
                 System.out.println("\nInvalid command.");
             }
-        } while (!l_CommandArr[0].equalsIgnoreCase(CommandType.ASSIGN_COUNTRIES.getLabel()) || !d_CommandValidator.validate(l_Command));
+        } while (!l_CommandArr[0].equalsIgnoreCase(CommandType.ASSIGN_COUNTRIES.getLabel()) || !CommandValidator.validate(l_Command));
 
         // randomly assign countries
         int l_NumberOfPlayer = d_GameData.getPlayerList().size();

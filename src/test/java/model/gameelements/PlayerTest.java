@@ -1,11 +1,9 @@
 package model.gameelements;
 
-import command.CommandValidator;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
 
 /**
  * The type Player test.
@@ -17,18 +15,13 @@ public class PlayerTest {
      * The player to be tested.
      */
     private Player d_Player;
-    /**
-     * The command validator.
-     */
-    private CommandValidator d_CommandValidator;
 
     /**
      * Sets up the objects needed in tests.
      */
     @Before
     public void setup() {
-        d_CommandValidator = mock(CommandValidator.class);
-        d_Player = new Player("Red", d_CommandValidator);
+        d_Player = new Player("Red");
     }
 
     /**

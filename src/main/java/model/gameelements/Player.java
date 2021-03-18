@@ -36,23 +36,17 @@ public class Player {
      * number of reinforcement armies
      */
     private int d_ReinforcementArmies;
-    /**
-     * command validator.
-     */
-    private CommandValidator d_CommandValidator;
 
     /**
      * Player class constructor
      *
      * @param p_Colour           get player name as string type.
-     * @param p_CommandValidator add new commandValidator object
      */
-    public Player(String p_Colour, CommandValidator p_CommandValidator) {
+    public Player(String p_Colour) {
         d_Id = ++D_COUNT;
         d_Colour = p_Colour;
         d_CountriesInControl = new HashMap<>();
         d_OrdersInCurrentTurn = new ArrayDeque<>();
-        d_CommandValidator = p_CommandValidator;
     }
 
     /**
@@ -173,7 +167,7 @@ public class Player {
             System.out.println("\nPlease enter the command: \n");
             Scanner l_Scanner = new Scanner(System.in);
             l_Command = l_Scanner.nextLine();
-        } while (!d_CommandValidator.validate(l_Command));
+        } while (!CommandValidator.validate(l_Command));
 
         // create an order
         String[] l_CommandArr = l_Command.split(" ");
