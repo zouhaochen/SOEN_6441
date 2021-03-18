@@ -5,7 +5,7 @@ import model.state.MainLoop;
 import java.io.IOException;
 
 /**
- * Start running the risk game
+ * Start running the Warzone game
  */
 public class GameDriver {
     /**
@@ -16,9 +16,9 @@ public class GameDriver {
      */
     public static void main(String args[]) throws Exception {
         String file = "domination/test_02.map";
-        //MainLoop l_mainLoop = new MainLoop();
-        //l_mainLoop.Start();
-        MainLoopController l_mainLoop = new MainLoopController(file);
-        l_mainLoop.MainLogic();
+        MainLoop l_mainLoop = new MainLoop();
+        l_mainLoop.Start();
+//        MainLoopController l_mainLoop = new MainLoopController(file);
+//        l_mainLoop.MainLogic();
     }
 }

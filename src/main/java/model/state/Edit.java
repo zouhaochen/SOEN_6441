@@ -1,11 +1,4 @@
 package model.state;
-
-
-import controller.GameEngineController;
-import model.GameData;
-
-import java.io.File;
-
 /**
  *	ConcreteState of the State pattern. In this example, defines behavior
  *  for commands that are valid in this state, and for the others signifies
@@ -16,29 +9,38 @@ import java.io.File;
  *  group need to extend this class.
  *
  */
-public abstract class Play extends Phase {
+public abstract class Edit extends Phase {
 
-    Play(MainLoop p_ml ){
+    Edit(MainLoop p_ml) {
         super(p_ml);
     }
 
-
-    public void showMap() {
-        System.out.println("map is being displayed");
-    }
-
-    public void editMap() {
+    public void setPlayers() {
         printInvalidCommandMessage();
     }
 
-    public void saveMap() {
+    public void assignCountries() {
         printInvalidCommandMessage();
     }
-    public void previous() {
+
+    public void reinforce() {
+        printInvalidCommandMessage();
+    }
+
+    public void IssureOrder() {
+        printInvalidCommandMessage();
+    }
+
+    public void execute() {
         printInvalidCommandMessage();
     }
 
     public void endGame() {
-        d_ml.setPhase(new End(d_ml));
+        printInvalidCommandMessage();
+    }
+
+    public void showMap() {
+        printInvalidCommandMessage();
     }
 }
+

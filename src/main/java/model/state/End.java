@@ -1,7 +1,5 @@
 package model.state;
 
-
-
 public class End extends Phase {
 
     End(MainLoop p_ml) {
@@ -16,7 +14,7 @@ public class End extends Phase {
         printInvalidCommandMessage();
     }
 
-    public void editCountry() {
+    public void editMap() {
         printInvalidCommandMessage();
     }
 
@@ -36,19 +34,21 @@ public class End extends Phase {
         printInvalidCommandMessage();
     }
 
-    public void attack() {
+    public void IssureOrder() {
         printInvalidCommandMessage();
     }
 
-    public void fortify() {
+    public void execute() {
         printInvalidCommandMessage();
     }
 
     public void endGame() {
-        printInvalidCommandMessage();
+
     }
 
     public void next() {
         printInvalidCommandMessage();
     }
+
+    public void previous() { printInvalidCommandMessage(); }
 }
