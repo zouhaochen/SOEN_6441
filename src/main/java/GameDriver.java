@@ -5,7 +5,7 @@ import model.state.MainLoop;
 import java.io.IOException;
 
 /**
- * Start running the risk game
+ * Start running the Warzone game
  */
 public class GameDriver {
     /**
