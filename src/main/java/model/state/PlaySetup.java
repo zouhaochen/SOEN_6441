@@ -30,13 +30,12 @@ public class PlaySetup extends Play {
     /**
      * get game engine as an object that used to call the function from GameEngineController class
      */
-    public GameEngineController d_GameEngine = new GameEngineController(d_GameData);;
+    public GameEngineController d_GameEngine = new GameEngineController(d_GameData);
 
 
 
 
     public void loadMap() {
-
         d_GameData.setCurrentPhase(GamePhase.STARTUP);
         try {
             this.d_MapFile = new File(d_GameEngine.getMapFilePath());
@@ -59,6 +58,23 @@ public class PlaySetup extends Play {
             System.out.println("\nMain Graph show below:");
             MapGraph.printTable(d_MapFile.getName());
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void editMap() {
+        d_GameData.setCurrentPhase(GamePhase.STARTUP);
+        try {
+            this.d_MapFile = new File(d_GameEngine.getMapFilePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        d_GameData = new GameData(d_MapFile);
+        d_GameData.setCurrentPhase(GamePhase.STARTUP);
+        d_GameEngine = new GameEngineController(d_GameData);
+        try {
+            d_GameData.loadMap();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -133,5 +149,9 @@ public class PlaySetup extends Play {
 
     public void next() {
         d_ml.setPhase(new End(d_ml));
+    }
+
+    public void previous() {
+        d_ml.setPhase(new PostLoad(d_ml));
     }
 }

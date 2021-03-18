@@ -16,7 +16,7 @@ public class End extends Phase {
         printInvalidCommandMessage();
     }
 
-    public void editCountry() {
+    public void editMap() {
         printInvalidCommandMessage();
     }
 
@@ -51,4 +51,6 @@ public class End extends Phase {
     public void next() {
         printInvalidCommandMessage();
     }
+
+    public void previous() { printInvalidCommandMessage(); }
 }
