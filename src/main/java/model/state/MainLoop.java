@@ -131,6 +131,7 @@ public class MainLoop {
                         break;
                     case 12:
                         gamePhase.previous();
+                        break;
                     default:
                         System.out.println("this command does not exist");
                 }
