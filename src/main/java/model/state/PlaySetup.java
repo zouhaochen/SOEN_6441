@@ -3,11 +3,14 @@ package model.state;
 import controller.GameEngineController;
 import gameplay.GamePhase;
 import model.GameData;
+import model.gameelements.Country;
+import model.gameelements.Player;
 import model.map.MapGraph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PlaySetup extends Play {
@@ -27,13 +30,12 @@ public class PlaySetup extends Play {
     /**
      * get game engine as an object that used to call the function from GameEngineController class
      */
-    public GameEngineController d_GameEngine = new GameEngineController(d_GameData);;
+    public GameEngineController d_GameEngine = new GameEngineController(d_GameData);
 
 
 
 
     public void loadMap() {
-
         d_GameData.setCurrentPhase(GamePhase.STARTUP);
         try {
             this.d_MapFile = new File(d_GameEngine.getMapFilePath());
@@ -56,6 +58,23 @@ public class PlaySetup extends Play {
             System.out.println("\nMain Graph show below:");
             MapGraph.printTable(d_MapFile.getName());
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void editMap() {
+        d_GameData.setCurrentPhase(GamePhase.STARTUP);
+        try {
+            this.d_MapFile = new File(d_GameEngine.getMapFilePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        d_GameData = new GameData(d_MapFile);
+        d_GameData.setCurrentPhase(GamePhase.STARTUP);
+        d_GameEngine = new GameEngineController(d_GameData);
+        try {
+            d_GameData.loadMap();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -94,13 +113,33 @@ public class PlaySetup extends Play {
     public void assignCountries() {
         // randomly assign countries for each player
         d_GameEngine.assignCountries();
+
+//        int l_CurrentReinforcement = 5;
+//        int l_TempReinforcementArmy;
+//
+//        // Assign Reinforcement phase, Call the method in gameplay to allocate the number of ReinforcementArmies in each round to each player
+//        this.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.REINFORCEMENT);
+//        System.out.println(d_GameData.getCurrentPhase());
+//
+//        for (Player l_Player : this.d_GameEngine.d_GameData.getPlayerList()) {
+//            l_CurrentReinforcement += d_GameEngine.getReinforcementBonus(l_Player);
+//            l_Player.setReinforcementArmies(l_CurrentReinforcement);
+//            System.out.println(l_CurrentReinforcement + " Reinforcement Armies are assigned to " + " Player [" + l_Player.getColour() + "]  ");
+//
+//            for (Map.Entry<String, Country> l_CountryEntry : l_Player.getCountriesInControl().entrySet()) {
+//                System.out.println("Controlling countries: " + l_CountryEntry.getKey());
+//            }
+//        }
+//        System.out.println("---------REINFORCEMENT PHASE COMPLETE-----------\n");
     }
+
+
 
     public void reinforce() {
         printInvalidCommandMessage();
     }
 
-    public void attack() {
+    public void deployOrder() {
         printInvalidCommandMessage();
     }
 
@@ -113,6 +152,10 @@ public class PlaySetup extends Play {
     }
 
     public void next() {
-        d_ml.setPhase(new Reinforcement(d_ml));
+        d_ml.setPhase(new IssueOrder(d_ml));
+    }
+
+    public void previous() {
+        d_ml.setPhase(new PostLoad(d_ml));
     }
 }

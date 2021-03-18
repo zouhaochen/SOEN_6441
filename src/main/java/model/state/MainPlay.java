@@ -27,4 +27,6 @@ public abstract class MainPlay extends Play {
     public void assignCountries() {
         this.printInvalidCommandMessage();
     }
+
+    public void previous() { this.printInvalidCommandMessage(); }
 }

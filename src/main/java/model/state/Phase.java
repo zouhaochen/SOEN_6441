@@ -1,5 +1,7 @@
 package model.state;
 
+import model.gameelements.Player;
+
 /**
  *	State of the State pattern. Here implemented as a abstract class.
  *
@@ -40,7 +42,7 @@ public abstract class Phase {
     abstract public void showMap();
 
     // Edit map commands
-    abstract public void editCountry();
+    abstract public void editMap();
     abstract public void saveMap();
 
     // Play commands
@@ -48,20 +50,29 @@ public abstract class Phase {
     abstract public void setPlayers();
     abstract public void assignCountries();
 
+
+
     // reinforcement commands
     abstract public void reinforce();
 
-    // attack commands
-    abstract public void attack();
+    // Issue deploy order commands
+    abstract public void deployOrder();
 
     // fortify commands
     abstract public void fortify();
+
+    //execute  order commands
+    //abstract public void deployOrder();
+
 
     // end command
     abstract public void endGame();
 
     // go to next phase
     abstract public void next();
+
+    // go to previous phase
+    abstract public void previous();
 
     /**
      *  Common method to all States.

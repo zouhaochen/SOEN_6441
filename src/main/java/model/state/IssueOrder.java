@@ -1,94 +1,65 @@
 package model.state;
 
 import controller.GameEngineController;
+import gameplay.GamePhase;
+import model.GameData;
 import model.gameelements.Player;
 
-public class IssueOrder extends MainPlayPhase {
-    /**
-     * initialize the GameData object
-     *
-     * @param p_gameData The current context of game engine object
-     */
-    IssueOrder(GameEngineController p_gameData, MainLoop p_mlObj) {
-        super(p_gameData,p_mlObj);
+import java.io.File;
+
+public class IssueOrder extends MainPlay {
+    IssueOrder(MainLoop p_ml) {
+        super(p_ml);
     }
 
     /**
-     * invoke method to assign  reinforcement armies to the players
+     * model.map file that use to load represent game model.map.
      */
-    //GameEngineController.java
-    public void setReinforcementArmies(){
-        printInvalidCommand(this);
-    }
-
+    public File d_MapFile = new File(".//domination//test_02.map");
     /**
-     * invoke method to issue deploy order
-     *
-     * @param p_player         The player who issued the order
-     * @param p_countryID      ID of the country to which to deploy the armies
-     * @param p_numberOfArmies Number of armies to deploy
+     * get Game data as an object, used to be the input parameter for GameEngineController class
      */
-    //DeployOrder.java
-    public void deployOrder(Player p_player, String p_countryID, int p_numberOfArmies){
-        System.out.println(" player order has been deployed ");
-    }
-
+    public GameData d_GameData = new GameData(d_MapFile);
     /**
-     * invoke method to issue advance order
-     *
-     * @param p_player         The player who issued the order
-     * @param p_countryIDFrom  ID of the country from which to deploy the armies
-     * @param p_countryIDTo    ID of the country to which to deploy the armies
-     * @param p_numberOfArmies Number of armies to advance
+     * get game engine as an object that used to call the function from GameEngineController class
      */
-    public  void advanceOrder(Player p_player, String p_countryIDFrom, String p_countryIDTo, int p_numberOfArmies){
-        System.out.println(" Advance Order has been done ");
+    public GameEngineController d_GameEngine = new GameEngineController(d_GameData);
+
+
+    @Override
+    public void reinforce() {
+        printInvalidCommandMessage();
     }
 
-    /**
-     * invoke method to issue bomb order
-     *
-     * @param p_player    The player who issued the order
-     * @param p_countryID ID of the country to bomb
-     */
-    public  void bombOrder(Player p_player, String p_countryID){
-        System.out.println(" bomb Order has been done ");
+    @Override
+    public void deployOrder() {
+
+        int l_TempReinforcementArmy;
+
+        for (Player l_Player : this.d_GameEngine.d_GameData.getPlayerList()) {
+            this.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.ISSUE_ORDER);
+            System.out.println(this.d_GameEngine.d_GameData.getCurrentPhase());
+
+            l_TempReinforcementArmy = l_Player.getReinforcementArmies();
+            while (l_TempReinforcementArmy > 0) {
+                System.out.println("==== Now Player [" + l_Player.getColour() + "]'s turn to issue order ====");
+                System.out.println(" Player [" + l_Player.getColour() + "] have " + l_TempReinforcementArmy
+                        + " Reinforcement Armies.");
+                l_Player.issueOrder();
+
+                //Reduce the corresponding amount of reinforcements after deploying.
+                l_TempReinforcementArmy -= l_Player.getLastOrderFromQueue().getOrderInfo().getNumberOfArmy();
+            }
+        }
     }
 
-    /**
-     * invoke method to issue blockade order
-     *
-     * @param p_player    The player who issued the order
-     * @param p_countryID ID of the country to block
-     */
-    public  void blockadeOrder(Player p_player, String p_countryID){
-        System.out.println(" blockade Order has been done ");
+    @Override
+    public void fortify() {
+
     }
 
-    /**
-     * This function is used to issue airlift order
-     *
-     * @param p_player         The player who issued the order
-     * @param p_countryIDFrom  ID of the country from which to deploy the armies
-     * @param p_countryIDTo    ID of the country to which to deploy the armies
-     * @param p_numberOfArmies Number of armies to advance
-     */
-    public  void airliftOrder(Player p_player, String p_countryIDFrom, String p_countryIDTo, int p_numberOfArmies){
-        System.out.println(" airlift Order has been done ");
-    }
-
-
-    /**
-     * This function is used to issue negotiate order
-     *
-     * @param p_player   The player who issued the order
-     * @param p_playerID ID of the player to negotiate with
-     */
-    public  void dilpomacyOrder(Player p_player, String p_playerID){
-        System.out.println(" dilpomacy Order has been done ");
-    }
-
-    public void next(){
-        d_mainLoopObject.setPhase(new Execution(d_gameDataObject,d_mainLoopObject));
+    @Override
+    public void next() {
+        d_ml.setPhase(new Execution(d_ml));
     }
 }

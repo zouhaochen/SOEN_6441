@@ -1,5 +1,7 @@
 package model.state;
 
+import controller.MainLoopController;
+
 import java.io.IOException;
 
 public class GameDriver {
@@ -10,9 +12,10 @@ public class GameDriver {
      * @throws IOException if file does not exist
      */
     public static void main(String[] args) throws Exception {
-        //filename initial
-        String file = "domination/test_02.map";
-        MainLoop mainLoop = new MainLoop(file);
-        mainLoop.MainLogic();
+       String file = "domination/test_02.map";
+        MainLoop l_mainLoop = new MainLoop();
+        l_mainLoop.Start();
+//        MainLoopController l_mainLoop = new MainLoopController(file);
+//        l_mainLoop.MainLogic();
     }
 }
