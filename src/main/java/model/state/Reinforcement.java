@@ -43,7 +43,7 @@ public class Reinforcement extends MainPlay {
 		d_ml.d_GameEngine.phaseProcess();
 
 		System.out.println("reinforcement done");
-		//d_ml.setPhase(new End(d_ml));
+		d_ml.setPhase(new End(d_ml));
 	}
 
 	public void attack() {

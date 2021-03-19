@@ -37,6 +37,7 @@ public class PlaySetup extends Play {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        setPlayers();
     }
 
     public void showMap() {
@@ -94,6 +95,7 @@ public class PlaySetup extends Play {
                 System.out.println("Invalid command, please try again (y/n): ");
             }
         }
+        assignCountries();
     }
 
     public void assignCountries() {
@@ -130,9 +132,7 @@ public class PlaySetup extends Play {
         printInvalidCommandMessage();
     }
 
-    public void endGame() {
-        printInvalidCommandMessage();
-    }
+    public void endGame() { d_ml.setPhase(new End(d_ml));}
 
     public void next() {
         d_ml.setPhase(new Reinforcement(d_ml));

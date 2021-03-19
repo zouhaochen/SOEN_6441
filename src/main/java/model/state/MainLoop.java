@@ -49,21 +49,25 @@ public class MainLoop {
      * @throws IOException if files are not found
      */
     public void Start() throws Exception {
-        Scanner l_Scanner = new Scanner(System.in);
 
         do {
+            Scanner l_Scanner = new Scanner(System.in);
             System.out.println("Welcome to warzone! ");
             System.out.println("Do you want to edit map or play game? (Edit/Play/Exit)");
             System.out.println("( Edit for edit map / Play for play the game / Exit for exit the game )");
+
             mystart = l_Scanner.nextLine();
+
             switch (mystart.toLowerCase()) {
                 case "edit":
                     // Set the state to Preload
                     setPhase(new Preload(this));
+                    //gamePhase.loadMap();
                     break;
                 case "play":
                     // Set the state to PlaySetup
                     setPhase(new PlaySetup(this));
+                    //gamePhase.loadMap();
                     break;
                 case "exit":
                     System.out.println("Exiting Warzone Game see you next time!");
@@ -130,13 +134,16 @@ public class MainLoop {
                         break;
                     case 12:
                         gamePhase.previous();
+                    case 13:
+
+                        break;
                     default:
                         System.out.println("this command does not exist");
                 }
             } while (!(gamePhase instanceof End));
-        } while (mycommand != 3);
 
-        l_Scanner.close();
+        } while (mycommand != 3);
+        //l_Scanner.close();
     }
 
 }
