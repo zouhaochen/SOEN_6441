@@ -27,7 +27,7 @@ public abstract class Edit extends Phase {
         printInvalidCommandMessage();
     }
 
-    public void IssureOrder() {
+    public void IssueOrder() {
         printInvalidCommandMessage();
     }
 

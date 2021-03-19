@@ -60,7 +60,7 @@ public abstract class Phase {
     abstract public void reinforce();
 
     // attack commands
-    abstract public void IssureOrder();
+    abstract public void IssueOrder();
 
     // fortify commands
     abstract public void execute();

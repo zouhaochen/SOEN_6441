@@ -66,7 +66,7 @@ public class MainPlay extends Play {
         System.out.println("Reinforcement armies for each player have been assigne, please Enter 8  continue to Issue order " );
     }
 
-    public void IssureOrder() {
+    public void IssueOrder() {
         int l_TempReinforcementArmy;
         // Issue order phase,Loop through all players, until all players finish issuing the instructions, and save the order in player`s order list.
         for (Player l_Player : d_ml.d_GameEngine.d_GameData.getPlayerList()) {

@@ -118,7 +118,7 @@ public class MainLoop {
                         gamePhase.reinforce();
                         break;
                     case 8:
-                        gamePhase.IssureOrder();
+                        gamePhase.IssueOrder();
                         break;
                     case 9:
                         gamePhase.execute();

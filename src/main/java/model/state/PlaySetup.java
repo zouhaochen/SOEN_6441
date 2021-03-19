@@ -122,7 +122,7 @@ public class PlaySetup extends Play {
         printInvalidCommandMessage();
     }
 
-    public void IssureOrder() {
+    public void IssueOrder() {
         printInvalidCommandMessage();
     }
 
