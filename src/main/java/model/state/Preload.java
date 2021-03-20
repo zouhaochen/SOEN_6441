@@ -1,7 +1,7 @@
 package model.state;
 
 import controller.GameEngineController;
-import gameplay.GamePhase;
+import controller.MainPlayController;
 import model.GameData;
 import model.map.MapGraph;
 
@@ -24,12 +24,12 @@ public class Preload extends Edit {
 	 */
 	public GameEngineController d_GameEngine = new GameEngineController(d_GameData);
 
-	Preload(MainLoop p_ml) {
+	public Preload(MainPlayController p_ml) {
 		super(p_ml);
 	}
 
 	public void loadMap() {
-		d_GameData.setCurrentPhase(GamePhase.STARTUP);
+		//d_GameData.setCurrentPhase(GamePhase.STARTUP);
 		try {
 			this.d_MapFile = new File(d_GameEngine.getMapFilePath());
 		} catch (IOException e) {
@@ -37,7 +37,7 @@ public class Preload extends Edit {
 		}
 
 		d_GameData = new GameData(d_MapFile);
-		d_GameData.setCurrentPhase(GamePhase.STARTUP);
+		//d_GameData.setCurrentPhase(GamePhase.STARTUP);
 		d_GameEngine = new GameEngineController(d_GameData);
 		try {
 			d_GameData.loadMap();

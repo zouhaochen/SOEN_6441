@@ -1,7 +1,8 @@
 package model.state;
 
 import controller.GameEngineController;
-import gameplay.GamePhase;
+import controller.MainPlayController;
+import model.GamePhase;
 import model.GameData;
 import model.gameelements.Country;
 import model.gameelements.Player;
@@ -15,7 +16,7 @@ import java.util.Scanner;
 
 public class PlaySetup extends Play {
 
-    PlaySetup(MainLoop p_ml) {
+    public PlaySetup(MainPlayController p_ml) {
         super(p_ml);
     }
 
@@ -117,25 +118,25 @@ public class PlaySetup extends Play {
                 System.out.println("Controlling countries: " + l_CountryEntry.getKey());
             }
         }
-        d_ml.setPhase(new Reinforcement(d_ml));
+        d_ml.setPhase(new MainPlay(d_ml));
     }
 
-    public void reinforce() {
+    public void deploy() {
         printInvalidCommandMessage();
     }
 
-    public void attack() {
+    public void advance() {
         printInvalidCommandMessage();
     }
 
-    public void fortify() {
+    public void cards() {
         printInvalidCommandMessage();
     }
 
     public void endGame() { d_ml.setPhase(new End(d_ml));}
 
     public void next() {
-        d_ml.setPhase(new Reinforcement(d_ml));
+        d_ml.setPhase(new MainPlay(d_ml));
     }
 
     public void previous() {

@@ -1,9 +1,6 @@
 package model.state;
 
-import controller.GameEngineController;
-import model.GameData;
-
-import java.io.File;
+import controller.MainPlayController;
 
 /**
  *	State of the State pattern. Here implemented as a abstract class.
@@ -34,10 +31,10 @@ public abstract class Phase {
      *  so that the state object can change the state of
      *  the GameEngine to transition between states.
      */
-    MainLoop d_ml;
+    MainPlayController d_ml;
 
 
-    Phase(MainLoop p_ml) {
+    Phase(MainPlayController p_ml) {
 
         d_ml = p_ml;
 
@@ -56,14 +53,15 @@ public abstract class Phase {
     abstract public void setPlayers();
     abstract public void assignCountries();
 
-    // reinforcement commands
-    abstract public void reinforce();
 
     // attack commands
-    abstract public void attack();
+    abstract public void deploy();
 
-    // fortify commands
-    abstract public void fortify();
+    // advance commands
+    abstract public void advance();
+
+    // cards commands
+    abstract public void cards();
 
     // end command
     abstract public void endGame();

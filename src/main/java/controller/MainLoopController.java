@@ -1,6 +1,7 @@
 package controller;
 
 import model.GameData;
+import model.GamePhase;
 import model.map.MapEdit;
 import model.gameelements.Country;
 import model.gameelements.Player;
@@ -9,8 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
-
-import gameplay.*;
 
 /**
  * The Main game loop controls program to execute each of the game phase.

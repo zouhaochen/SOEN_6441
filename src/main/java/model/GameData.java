@@ -1,6 +1,5 @@
 package model;
 
-import gameplay.GamePhase;
 import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;

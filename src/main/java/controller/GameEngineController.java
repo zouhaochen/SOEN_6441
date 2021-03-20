@@ -144,7 +144,7 @@ public class GameEngineController {
         String[] l_CommandArr;
 
         // validate the command from console
-        do {
+        //do {
             System.out.println("\nPlease enter command to load the model.map for the game: ");
             Scanner l_scanner = new Scanner(System.in);
             l_Command = l_scanner.nextLine();
@@ -152,7 +152,7 @@ public class GameEngineController {
             if (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel())) {
                 System.out.println("\nInvalid command.");
             }
-        } while (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel()) || !d_CommandValidator.validate(l_Command));
+        //} while (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel()) || !d_CommandValidator.validate(l_Command));
 
         String l_ProjectPath = new File("").getCanonicalPath();
 //		File l_File = new File(l_ProjectPath + "/domination/" + l_CommandArr[1]);

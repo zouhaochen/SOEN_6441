@@ -1,7 +1,7 @@
 package gamePlayTest;
 
 import model.GameData;
-import gameplay.GamePhase;
+import model.GamePhase;
 import org.junit.Test;
 
 import java.io.File;

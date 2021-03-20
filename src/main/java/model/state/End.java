@@ -1,10 +1,11 @@
 package model.state;
 
 
+import controller.MainPlayController;
 
 public class End extends Phase {
 
-    End(MainLoop p_ml) {
+    End(MainPlayController p_ml) {
         super(p_ml);
     }
 
@@ -32,15 +33,15 @@ public class End extends Phase {
         printInvalidCommandMessage();
     }
 
-    public void reinforce() {
+    public void deploy() {
         printInvalidCommandMessage();
     }
 
-    public void attack() {
+    public void advance() {
         printInvalidCommandMessage();
     }
 
-    public void fortify() {
+    public void cards() {
         printInvalidCommandMessage();
     }
 

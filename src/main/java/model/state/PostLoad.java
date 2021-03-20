@@ -1,10 +1,11 @@
 package model.state;
 
+import controller.MainPlayController;
 import model.map.MapEdit;
 
 public class PostLoad extends Edit {
 
-	PostLoad(MainLoop p_ml) {
+	PostLoad(MainPlayController p_ml) {
 		super(p_ml);
 	}
 	
@@ -29,7 +30,9 @@ public class PostLoad extends Edit {
 	}
 
 	public void next() {
+
 		System.out.println("must save map");
+		d_ml.setPhase(new PlaySetup(d_ml));
 	}
 
 	public void previous() {

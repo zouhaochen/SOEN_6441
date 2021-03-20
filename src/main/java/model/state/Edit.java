@@ -1,5 +1,8 @@
 
 package model.state;
+
+import controller.MainPlayController;
+
 /**
  *	ConcreteState of the State pattern. In this example, defines behavior 
  *  for commands that are valid in this state, and for the others signifies  
@@ -12,7 +15,7 @@ package model.state;
  */
 public abstract class Edit extends Phase {
 
-	Edit(MainLoop p_ml) {
+	Edit(MainPlayController p_ml) {
 		super(p_ml);
 	}
 
@@ -24,20 +27,20 @@ public abstract class Edit extends Phase {
 		printInvalidCommandMessage(); 
 	}
 
-	public void reinforce() {
+	public void deploy() {
 		printInvalidCommandMessage(); 
 	}
 
-	public void attack() {
+	public void advance() {
 		printInvalidCommandMessage(); 
 	}
 
-	public void fortify() {
+	public void cards() {
 		printInvalidCommandMessage(); 
 	}
 
 	public void endGame() {
-		printInvalidCommandMessage(); 
+		d_ml.setPhase(new End(d_ml));
 	}
 	
 	public void showMap() {
