@@ -49,9 +49,9 @@ public class MainLoop {
      * @throws IOException if files are not found
      */
     public void Start() throws Exception {
-        Scanner l_Scanner = new Scanner(System.in);
 
         do {
+            Scanner l_Scanner = new Scanner(System.in);
             System.out.println("Welcome to warzone! ");
             System.out.println("Do you want to edit map or play game? (Edit/Play/Exit)");
             System.out.println("( Edit for edit map / Play for play the game / Exit for exit the game )");
@@ -137,7 +137,6 @@ public class MainLoop {
                 }
             } while (!(gamePhase instanceof End));
         } while (!mystart.equalsIgnoreCase("exit"));
-        l_Scanner.close();
     }
 
 }
