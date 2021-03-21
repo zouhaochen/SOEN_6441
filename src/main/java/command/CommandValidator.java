@@ -13,15 +13,10 @@ public class CommandValidator {
     /**
      * The game data.
      */
-    private GameData d_GameData;
+    private static GameData D_GameData;
 
-    /**
-     * Instantiates a new object of type CommandValidator.
-     *
-     * @param p_GameData the game data
-     */
-    public CommandValidator(GameData p_GameData) {
-        d_GameData = p_GameData;
+    public static void setGameData(GameData p_GameData) {
+        D_GameData = p_GameData;
     }
 
     /**
@@ -30,7 +25,7 @@ public class CommandValidator {
      * @param p_Command the command from console
      * @return true if the command is valid, false otherwise
      */
-    public boolean validate(String p_Command) {
+    public static boolean validate(String p_Command) {
         if (p_Command == null || p_Command.isEmpty() || p_Command.trim().isEmpty()) {
             System.out.println("\nNo command is entered!");
             return false;
@@ -39,7 +34,7 @@ public class CommandValidator {
         // validate the command based on the current game phase
         String[] l_Command_arr = p_Command.trim().split(" ");
         boolean l_Valid;
-        switch (d_GameData.getCurrentPhase()) {
+        switch (D_GameData.getCurrentPhase()) {
             case MAP_EDIT:
                 l_Valid = true;
                 break;
@@ -62,7 +57,7 @@ public class CommandValidator {
      * @param p_CommandArr the command from console
      * @return true if the command is valid, false otherwise
      */
-    private boolean validateIssueOrderCommands(String[] p_CommandArr) {
+    private static boolean validateIssueOrderCommands(String[] p_CommandArr) {
         String l_CommandType = p_CommandArr[0].toLowerCase();
         boolean l_Result;
         switch (CommandType.getCommandFromLabel(l_CommandType)) {
@@ -86,7 +81,7 @@ public class CommandValidator {
      * @param p_CommandArr the command from console
      * @return true if the command is valid, false otherwise
      */
-    private boolean validateStartupCommands(String[] p_CommandArr) {
+    private static boolean validateStartupCommands(String[] p_CommandArr) {
         String l_CommandType = p_CommandArr[0].toLowerCase();
         boolean l_Result;
         switch (CommandType.getCommandFromLabel(l_CommandType)) {
@@ -112,7 +107,7 @@ public class CommandValidator {
      * @param p_CommandArr an array of command components from the console
      * @return true if the command length is 1; false otherwise
      */
-    private boolean validateNoArgumentCommand(String[] p_CommandArr) {
+    private static boolean validateNoArgumentCommand(String[] p_CommandArr) {
         if (p_CommandArr.length != 1) {
             printInvalidArguments();
             return false;
@@ -127,7 +122,7 @@ public class CommandValidator {
      * @param p_CommandArr an array of command components from the console
      * @return true if the LOAD_MAP command is valid, false otherwise
      */
-    private boolean validateLoadMap(String[] p_CommandArr) {
+    private static boolean validateLoadMap(String[] p_CommandArr) {
         if (p_CommandArr.length != 2) {
             printInvalidArguments();
             return false;
@@ -152,7 +147,7 @@ public class CommandValidator {
      * @param p_CommandArr an array of command components from the console
      * @return true if the ADD_PLAYER command is valid, false otherwise
      */
-    private boolean validateAddPlayer(String[] p_CommandArr) {
+    private static boolean validateAddPlayer(String[] p_CommandArr) {
         if (p_CommandArr.length < 3 || p_CommandArr.length % 2 != 1) {
             System.out.println("\nInvalid command arguments!");
             return false;
@@ -177,7 +172,7 @@ public class CommandValidator {
      * @param p_Command_arr an array of command components from the console
      * @return true if the DEPLOY command is valid, false otherwise
      */
-    private boolean validateDeploy(String[] p_Command_arr) {
+    private static boolean validateDeploy(String[] p_Command_arr) {
         if (p_Command_arr.length != 3) {
             printInvalidArguments();
             return false;
@@ -200,7 +195,7 @@ public class CommandValidator {
      * @return true if the file exists, false otherwise
      * @throws IOException if file not found or cannot read
      */
-    private boolean isMapFileExist(String p_FileName) throws IOException {
+    private static boolean isMapFileExist(String p_FileName) throws IOException {
         String l_ProjectPath = new File("").getCanonicalPath();
         File l_File = new File(l_ProjectPath + "/domination/" + p_FileName);
 
@@ -214,14 +209,14 @@ public class CommandValidator {
     /**
      * Prints a warning of invalid arguments to the console
      */
-    private void printInvalidArguments() {
+    private static void printInvalidArguments() {
         System.out.println("\nInvalid command arguments!");
     }
 
     /**
      * Prints a warning of invalid command to the console
      */
-    private void printInvalidCommandInCurrentPhase() {
+    private static void printInvalidCommandInCurrentPhase() {
         System.out.println("Invalid command in the current game phase!");
     }
 
