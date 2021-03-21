@@ -50,6 +50,7 @@ public class MainPlayController extends Observable {
      */
     public void setPhase(Phase p_phase) {
         gamePhase = p_phase;
+        d_GameData.setCurrentPhase(p_phase);
         System.out.println("new phase: " + p_phase.getClass().getSimpleName());
     }
 

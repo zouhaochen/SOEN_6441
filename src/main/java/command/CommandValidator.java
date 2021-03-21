@@ -34,14 +34,16 @@ public class CommandValidator {
         // validate the command based on the current game phase
         String[] l_Command_arr = p_Command.trim().split(" ");
         boolean l_Valid;
-        switch (D_GameData.getCurrentPhase()) {
-            case MAP_EDIT:
+        String l_CurrentPhase = D_GameData.getCurrentPhase().getClass().getSimpleName();
+        switch (l_CurrentPhase) {
+            case "PreLoad":
+            case "PostLoad":
                 l_Valid = true;
                 break;
-            case STARTUP:
+            case "LoadMap":
                 l_Valid = validateStartupCommands(l_Command_arr);
                 break;
-            case ISSUE_ORDER:
+            case "IssueOrder":
                 l_Valid = validateIssueOrderCommands(l_Command_arr);
                 break;
             default:

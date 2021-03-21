@@ -26,7 +26,6 @@ public class Startup extends Play {
 
     public void loadMap() {
 
-        d_ml.d_GameData.setCurrentPhase(GamePhase.STARTUP);
         try {
             d_ml.d_MapFile = new File(d_ml.d_GameEngine.getMapFilePath());
         } catch (IOException e) {
@@ -34,7 +33,7 @@ public class Startup extends Play {
         }
 
         d_ml.d_GameData = new GameData(d_ml.d_MapFile);
-        d_ml.d_GameData.setCurrentPhase(GamePhase.STARTUP);
+        d_ml.d_GameData.setCurrentPhase(this);
         d_ml.d_GameEngine = new GameEngineController(d_ml.d_GameData);
         try {
             d_ml.d_GameData.loadMap();
@@ -52,23 +51,6 @@ public class Startup extends Play {
             System.out.println("\nMain Graph show below:");
             MapGraph.printTable(d_ml.d_MapFile.getName());
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void editMap() {
-        d_ml.d_GameData.setCurrentPhase(GamePhase.STARTUP);
-        try {
-            d_ml.d_MapFile = new File(d_ml.d_GameEngine.getMapFilePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        d_ml.d_GameData = new GameData(d_ml.d_MapFile);
-        d_ml.d_GameData.setCurrentPhase(GamePhase.STARTUP);
-        d_ml.d_GameEngine = new GameEngineController(d_ml.d_GameData);
-        try {
-            d_ml.d_GameData.loadMap();
-        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -113,10 +95,6 @@ public class Startup extends Play {
         d_ml.d_GameEngine.assignCountries();
         int l_CurrentReinforcement = 5;
         int l_TempReinforcementArmy;
-
-        // Assign Reinforcement phase, Call the method in gameplay to allocate the number of ReinforcementArmies in each round to each player
-        d_ml.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.REINFORCEMENT);
-        System.out.println(d_ml.d_GameData.getCurrentPhase());
 
         for (Player l_Player : d_ml.d_GameEngine.d_GameData.getPlayerList()) {
             l_CurrentReinforcement += d_ml.d_GameEngine.getReinforcementBonus(l_Player);

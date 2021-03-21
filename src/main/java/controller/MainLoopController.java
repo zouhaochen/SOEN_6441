@@ -47,7 +47,7 @@ public class MainLoopController {
     /**
      * call function from GameEngineController class, and according to the game rule to execute the game.
      */
-    public void mainGamePhaseLoop() {
+    /*public void mainGamePhaseLoop() {
         Scanner l_scanner = new Scanner(System.in);
 
         boolean l_isTrue = true;
@@ -124,14 +124,14 @@ public class MainLoopController {
             System.out.println(d_GameEngine.d_GameData.getCurrentPhase());
         }
         l_scanner.close();
-    }
+    }*/
 
     /**
      * According to user input to check in which model that user are going to get in.
      *
      * @throws IOException if files are not found
      */
-    public void MainLogic() throws Exception {
+    /*public void MainLogic() throws Exception {
         Scanner l_Scanner = new Scanner(System.in);
 
         int l_CheckState = 1;
@@ -168,7 +168,7 @@ public class MainLoopController {
                 System.out.println("Invalid input, try again !");
         }
         l_Scanner.close();
-    }
+    }*/
 
     /**
      * main method, Show each game phase from GameEngineController, and run the game according to the game rules

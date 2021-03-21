@@ -28,7 +28,6 @@ public class MainPlay extends Play {
         int l_TempReinforcementArmy;
         // Issue order phase,Loop through all players, until all players finish issuing the instructions, and save the order in player`s order list.
         for (Player l_Player : d_ml.d_GameEngine.d_GameData.getPlayerList()) {
-            d_ml.d_GameEngine.d_GameData.setCurrentPhase(GamePhase.ISSUE_ORDER);
             System.out.println(d_ml.d_GameEngine.d_GameData.getCurrentPhase());
 
             l_TempReinforcementArmy = l_Player.getReinforcementArmies();

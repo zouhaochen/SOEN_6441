@@ -6,6 +6,7 @@ import model.gameelements.Player;
 import model.map.MapDetailAccess;
 import model.map.MapGraph;
 import model.map.MapListing;
+import model.state.Phase;
 
 
 import java.io.File;
@@ -36,7 +37,7 @@ public class GameData extends Observable{
     /**
      * Game current phase
      */
-    private GamePhase d_CurrentPhase;
+    private Phase d_CurrentPhase;
     /**
      * Total player now in game
      */
@@ -200,7 +201,7 @@ public class GameData extends Observable{
      *
      * @return current Game phase object
      */
-    public GamePhase getCurrentPhase() {
+    public Phase getCurrentPhase() {
         return d_CurrentPhase;
     }
 
@@ -209,7 +210,7 @@ public class GameData extends Observable{
      *
      * @param p_currentPhase new Game phase you want to set
      */
-    public void setCurrentPhase(GamePhase p_currentPhase) {
+    public void setCurrentPhase(Phase p_currentPhase) {
         d_CurrentPhase = p_currentPhase;
     }
 
