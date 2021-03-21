@@ -23,6 +23,7 @@ public class PlaySetup extends Play {
 
 
     public void loadMap() {
+
         d_ml.d_GameData.setCurrentPhase(GamePhase.STARTUP);
         try {
             d_ml.d_MapFile = new File(d_ml.d_GameEngine.getMapFilePath());
@@ -38,7 +39,10 @@ public class PlaySetup extends Play {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        d_ml.getDLogEntryBuffer().updateFile();
         setPlayers();
+
+
     }
 
     public void showMap() {
@@ -96,7 +100,10 @@ public class PlaySetup extends Play {
                 System.out.println("Invalid command, please try again (y/n): ");
             }
         }
+        d_ml.getDLogEntryBuffer().updateFile();
         assignCountries();
+
+
     }
 
     public void assignCountries() {
@@ -118,6 +125,7 @@ public class PlaySetup extends Play {
                 System.out.println("Controlling countries: " + l_CountryEntry.getKey());
             }
         }
+        d_ml.getDLogEntryBuffer().updateFile();
         d_ml.setPhase(new MainPlay(d_ml));
     }
 

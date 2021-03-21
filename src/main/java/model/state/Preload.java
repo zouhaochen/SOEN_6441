@@ -44,7 +44,6 @@ public class Preload extends Edit {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void showMap() {

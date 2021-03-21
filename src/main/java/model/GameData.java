@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * This class is a wrapper class containing the elements and the current states of the game
  */
-public class GameData {
+public class GameData extends Observable{
 
     /**
      * Map file
@@ -191,7 +191,7 @@ public class GameData {
     public void setPlayerList(ArrayList<Player> d_PlayerList) {
         // set total player number to list length
         this.d_PlayerList = d_PlayerList;
-//        d_TotalPlayer = d_PlayerList.size();
+        notifyGameDataObs(this);
     }
 
 
@@ -262,6 +262,7 @@ public class GameData {
         System.out.println("NOTICE: the new country [" + l_NewCountry.getName() + "] has been added to the model.map, ID:"
                 + l_NewCountry.getCountryId() + " Armies:" + l_NewCountry.getArmies());
         d_CountryList.add(l_NewCountry);
+        notifyGameDataObs(this);
     }
 
     /**
@@ -275,6 +276,7 @@ public class GameData {
         System.out.println("NOTICE: the new continent [" + l_NewContinent.getName() + "] has been added to the model.map, Value:"
                 + l_NewContinent.getContinentValue());
         d_ContinentList.add(l_NewContinent);
+        notifyGameDataObs(this);
     }
 
 
@@ -349,7 +351,6 @@ public class GameData {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 

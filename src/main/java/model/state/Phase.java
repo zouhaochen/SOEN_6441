@@ -1,6 +1,7 @@
 package model.state;
 
 import controller.MainPlayController;
+import model.Observable;
 
 /**
  *	State of the State pattern. Here implemented as a abstract class.
