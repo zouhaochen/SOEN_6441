@@ -6,7 +6,7 @@ import model.LogEntryBuffer;
 import model.Observable;
 import model.state.End;
 import model.state.Phase;
-import model.state.PlaySetup;
+import model.state.play.Startup;
 import model.state.Preload;
 
 import java.io.File;
@@ -129,7 +129,7 @@ public class MainPlayController extends Observable {
                     break;
                 case "play":
                     // Set the state to PlaySetup
-                    setPhase(new PlaySetup(this));
+                    setPhase(new Startup(this));
                     do {
                         System.out.println(" =================================================");
                         System.out.println("| #   PHASE                   : command           |");

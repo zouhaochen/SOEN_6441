@@ -5,7 +5,7 @@ import controller.MainPlayController;
 
 public class End extends Phase {
 
-    End(MainPlayController p_ml) {
+    public End(MainPlayController p_ml) {
         super(p_ml);
     }
 

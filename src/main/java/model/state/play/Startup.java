@@ -1,4 +1,4 @@
-package model.state;
+package model.state.play;
 
 import controller.GameEngineController;
 import controller.MainPlayController;
@@ -7,6 +7,8 @@ import model.GameData;
 import model.gameelements.Country;
 import model.gameelements.Player;
 import model.map.MapGraph;
+import model.state.End;
+import model.state.PostLoad;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,9 +16,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
-public class PlaySetup extends Play {
+public class Startup extends Play {
 
-    public PlaySetup(MainPlayController p_ml) {
+    public Startup(MainPlayController p_ml) {
         super(p_ml);
     }
 

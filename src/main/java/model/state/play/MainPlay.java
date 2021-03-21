@@ -1,8 +1,10 @@
-package model.state;
+package model.state.play;
 
 import controller.MainPlayController;
 import model.GamePhase;
 import model.gameelements.Player;
+import model.state.End;
+import model.state.play.Play;
 
 /**
  *	ConcreteState of the State pattern. In this example, defines behavior
@@ -16,7 +18,7 @@ import model.gameelements.Player;
  */
 public class MainPlay extends Play {
 
-    MainPlay(MainPlayController p_ml){
+    public MainPlay(MainPlayController p_ml){
         super(p_ml);
 
     }

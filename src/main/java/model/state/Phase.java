@@ -32,10 +32,10 @@ public abstract class Phase {
      *  so that the state object can change the state of
      *  the GameEngine to transition between states.
      */
-    MainPlayController d_ml;
+    protected MainPlayController d_ml;
 
 
-    Phase(MainPlayController p_ml) {
+    public Phase(MainPlayController p_ml) {
 
         d_ml = p_ml;
 
