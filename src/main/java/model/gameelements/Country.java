@@ -24,6 +24,10 @@ public class Country extends Territory {
      * Hash Map for all connectivity for current country
      */
     private Map<String, Country> d_BorderCountries;
+    /**
+     * the country name
+     */
+    private String d_countryName;
 
     /**
      * Country Object Constructor
@@ -114,5 +118,21 @@ public class Country extends Territory {
      */
     public void setBorderCountries(Map<String, Country> p_BorderCountries) {
         this.d_BorderCountries = p_BorderCountries;
+    }
+
+    /**
+     * get the country name
+     * @return the name of the country
+     */
+    public String getCountryName() {
+        return d_countryName;
+    }
+
+    /**
+     * set the name of the country
+     * @param p_countryName the country name
+     */
+    public void setCountryName(String p_countryName) {
+        this.d_countryName = p_countryName;
     }
 }

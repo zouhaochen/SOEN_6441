@@ -14,7 +14,7 @@ public class Order {
     /**
      * The order type.
      */
-    private CommandType d_Type;
+    protected CommandType d_Type;
 
     /**
      * Instantiates a new Order.

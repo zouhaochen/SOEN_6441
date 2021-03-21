@@ -67,6 +67,7 @@ public class GameData {
      */
     private ArrayList<Player> d_PlayerList;
 
+    private static GameData GAME_DATA;
 
     /**
      * game data constructor
@@ -83,6 +84,7 @@ public class GameData {
         this.d_BorderList = new ArrayList<>();
         this.d_MapListing = new MapListing();
     }
+
 
     /**
      * Border list getter
@@ -350,8 +352,6 @@ public class GameData {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
 }

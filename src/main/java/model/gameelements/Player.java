@@ -41,6 +41,10 @@ public class Player {
      */
     private CommandValidator d_CommandValidator;
 
+    private boolean d_playerExist = true;
+
+    private List<Card> d_cards;
+
     /**
      * Player class constructor
      *
@@ -74,7 +78,7 @@ public class Player {
     }
 
     /**
-     * set player name.
+     * get player name.
      *
      * @return return the value of player name.
      */
@@ -216,4 +220,22 @@ public class Player {
         d_ReinforcementArmies -= p_ArmyNumber;
         return true;
     }
+
+    /**
+     * Get whether a play still exist in the game
+     *
+     * @return true if the player still has at least one territory.
+     */
+    public boolean getPlayerExist() {
+        return d_playerExist;
+    }
+
+    /**
+     * Cards the player has available to play
+     * @return list of cards
+     */
+    public List<Card> getCards() {
+        return d_cards;
+    }
+
 }
