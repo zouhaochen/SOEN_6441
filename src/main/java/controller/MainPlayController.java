@@ -1,24 +1,22 @@
 package controller;
 
 
-
-import controller.GameEngineController;
 import model.GameData;
-import model.map.MapEdit;
+import model.LogEntryBuffer;
+import model.Observable;
 import model.state.End;
 import model.state.Phase;
 import model.state.PlaySetup;
 import model.state.Preload;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
- *  Context of the State pattern.
- *  It contains a State object.
+ * Context of the State pattern.
+ * It contains a State object.
  */
-public class MainPlayController {
+public class MainPlayController extends Observable {
     /**
      * State object of the MainLoop
      */
@@ -38,8 +36,16 @@ public class MainPlayController {
      * get game engine as an object that used to call the function from GameEngineController class
      */
     public GameEngineController d_GameEngine = new GameEngineController(d_GameData);
+
+    /**
+     * game logger
+     */
+    private LogEntryBuffer d_LogEntryBuffer = new LogEntryBuffer();
+
+
     /**
      * Method that allows the GameEngine object to change its state.
+     *
      * @param p_phase new state to be set for the GameEngine object.
      */
     public void setPhase(Phase p_phase) {
@@ -48,12 +54,20 @@ public class MainPlayController {
     }
 
     /**
-     * According to user input to check in which model that user are going to get in.
+     * LogEntryBuffer obj getter
      *
-     * @throws IOException if files are not found
+     * @return LogEntryBuffer obj
      */
-    public void Start() throws Exception {
+    public LogEntryBuffer getDLogEntryBuffer() {
+        return d_LogEntryBuffer;
+    }
 
+
+    /**
+     * According to user input to check in which model that user are going to get in.
+     */
+    public void Start() {
+        d_LogEntryBuffer.start();
         do {
             Scanner l_Scanner = new Scanner(System.in);
             System.out.println("Welcome to warzone! ");
@@ -173,7 +187,6 @@ public class MainPlayController {
                     System.out.println("Exiting Warzone Game see you next time!");
                     return;
             }
-
 
 
         } while (mycommand != 3);

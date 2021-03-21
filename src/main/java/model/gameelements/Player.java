@@ -1,6 +1,7 @@
 package model.gameelements;
 
 import command.CommandValidator;
+import model.Observable;
 import model.gameelements.order.Order;
 import model.gameelements.order.OrderFactory;
 
@@ -9,7 +10,9 @@ import java.util.*;
 /**
  * player object that reprsent in game.
  */
-public class Player {
+public class
+
+Player extends Observable {
 
     /**
      * id counter (increment)
