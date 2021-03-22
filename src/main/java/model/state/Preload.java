@@ -11,46 +11,23 @@ import java.io.IOException;
 
 public class Preload extends Edit {
 
-	/**
-	 * model.map file that use to load represent game model.map.
-	 */
-	public File d_MapFile = new File(".//domination//test_02.map");
-	/**
-	 * get Game data as an object, used to be the input parameter for GameEngineController class
-	 */
-	public GameData d_GameData = new GameData(d_MapFile);
-	/**
-	 * get game engine as an object that used to call the function from GameEngineController class
-	 */
-	public GameEngineController d_GameEngine = new GameEngineController(d_GameData);
 
 	public Preload(MainPlayController p_ml) {
 		super(p_ml);
 	}
 
 	public void loadMap() {
-		//d_GameData.setCurrentPhase(GamePhase.STARTUP);
 		try {
-			this.d_MapFile = new File(d_GameEngine.getMapFilePath());
+			d_ml.d_MapFile = new File(d_ml.d_GameEngine.getMapFilePath());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		d_GameData = new GameData(d_MapFile);
-		//d_GameData.setCurrentPhase(GamePhase.STARTUP);
-		d_GameEngine = new GameEngineController(d_GameData);
+		d_ml.d_GameData = new GameData(d_ml.d_MapFile);
+		d_ml.d_GameEngine = new GameEngineController(d_ml.d_GameData);
 		try {
-			d_GameData.loadMap();
+			d_ml.d_GameData.loadMap();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void showMap() {
-		try {
-			System.out.println("\nMain Graph show below:");
-			MapGraph.printTable(d_MapFile.getName());
-		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

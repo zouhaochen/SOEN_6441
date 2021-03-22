@@ -36,12 +36,16 @@ public class CommandValidator {
         boolean l_Valid;
         String l_CurrentPhase = D_GameData.getCurrentPhase().getClass().getSimpleName();
         switch (l_CurrentPhase) {
-            case "PreLoad":
             case "PostLoad":
-                l_Valid = true;
+                l_Valid = validatePostLoadCommands(l_Command_arr);
                 break;
+            case "PreLoad":
+            case "Startup":
             case "LoadMap":
-                l_Valid = validateStartupCommands(l_Command_arr);
+                l_Valid = validateLoadMapCommands(l_Command_arr);
+                break;
+            case "AddPlayer":
+                l_Valid = validateAddPlayerCommands(l_Command_arr);
                 break;
             case "IssueOrder":
                 l_Valid = validateIssueOrderCommands(l_Command_arr);
@@ -53,6 +57,35 @@ public class CommandValidator {
         return l_Valid;
     }
 
+    private static boolean validatePostLoadCommands(String[] p_CommandArr) {
+        String l_CommandType = p_CommandArr[0].toLowerCase();
+        boolean l_Result;
+
+        if (CommandType.getCommandFromLabel(l_CommandType) == null) {
+            printInvalidCommandType();
+            return false;
+        }
+
+        switch (CommandType.getCommandFromLabel(l_CommandType)) {
+            case EDIT_MAP:
+            case EDIT_CONTINENT:
+            case EDIT_COUNTRY:
+            case EDIT_NEIGHBOR:
+            case SAVE_MAP:
+            case VALIDATE_MAP:
+            case EXIT:
+                l_Result = true;
+                break;
+            case SHOW_MAP:
+                l_Result = validateNoArgumentCommand(p_CommandArr);
+                break;
+            default:
+                printInvalidCommandInCurrentPhase();
+                return false;
+        }
+        return l_Result;
+    }
+
     /**
      * Validates the commands allowed in the "issue orders" phase.
      *
@@ -62,6 +95,12 @@ public class CommandValidator {
     private static boolean validateIssueOrderCommands(String[] p_CommandArr) {
         String l_CommandType = p_CommandArr[0].toLowerCase();
         boolean l_Result;
+
+        if (CommandType.getCommandFromLabel(l_CommandType) == null) {
+            printInvalidCommandType();
+            return false;
+        }
+
         switch (CommandType.getCommandFromLabel(l_CommandType)) {
             case SHOW_MAP:
                 l_Result = validateNoArgumentCommand(p_CommandArr);
@@ -83,16 +122,63 @@ public class CommandValidator {
      * @param p_CommandArr the command from console
      * @return true if the command is valid, false otherwise
      */
-    private static boolean validateStartupCommands(String[] p_CommandArr) {
+    private static boolean validateLoadMapCommands(String[] p_CommandArr) {
         String l_CommandType = p_CommandArr[0].toLowerCase();
         boolean l_Result;
+
+        if (CommandType.getCommandFromLabel(l_CommandType) == null) {
+            printInvalidCommandType();
+            return false;
+        }
+
         switch (CommandType.getCommandFromLabel(l_CommandType)) {
             case LOAD_MAP:
                 l_Result = validateLoadMap(p_CommandArr);
                 break;
+            default:
+                printInvalidCommandInCurrentPhase();
+                return false;
+        }
+        return l_Result;
+    }
+
+    private static boolean validateAddPlayerCommands(String[] p_CommandArr) {
+        String l_CommandType = p_CommandArr[0].toLowerCase();
+        boolean l_Result;
+
+        if (CommandType.getCommandFromLabel(l_CommandType) == null) {
+            printInvalidCommandType();
+            return false;
+        }
+
+        switch (CommandType.getCommandFromLabel(l_CommandType)) {
+            case SHOW_MAP:
+                l_Result = validateNoArgumentCommand(p_CommandArr);
+                break;
             case ADD_PLAYER:
                 l_Result = validateAddPlayer(p_CommandArr);
                 break;
+            case ASSIGN_COUNTRIES:
+                l_Result = validateNoArgumentCommand(p_CommandArr);
+                break;
+            default:
+                printInvalidCommandInCurrentPhase();
+                return false;
+        }
+        return l_Result;
+    }
+
+    private static boolean validateAssignCountryCommands(String[] p_CommandArr) {
+        String l_CommandType = p_CommandArr[0].toLowerCase();
+        boolean l_Result;
+
+        if (CommandType.getCommandFromLabel(l_CommandType) == null) {
+            printInvalidCommandType();
+            return false;
+        }
+
+        switch (CommandType.getCommandFromLabel(l_CommandType)) {
+            case SHOW_MAP:
             case ASSIGN_COUNTRIES:
                 l_Result = validateNoArgumentCommand(p_CommandArr);
                 break;
@@ -219,7 +305,14 @@ public class CommandValidator {
      * Prints a warning of invalid command to the console
      */
     private static void printInvalidCommandInCurrentPhase() {
-        System.out.println("Invalid command in the current game phase!");
+        System.out.println("Invalid command in phase " + D_GameData.getCurrentPhase().getClass().getSimpleName());
+    }
+
+    /**
+     * Prints a warning of invalid command to the console
+     */
+    private static void printInvalidCommandType() {
+        System.out.println("Invalid command type. There is no such command.");
     }
 
 

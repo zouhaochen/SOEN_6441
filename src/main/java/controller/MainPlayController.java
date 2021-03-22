@@ -1,6 +1,7 @@
 package controller;
 
 
+import command.CommandValidator;
 import model.GameData;
 import model.LogEntryBuffer;
 import model.Observable;
@@ -51,7 +52,7 @@ public class MainPlayController extends Observable {
     public void setPhase(Phase p_phase) {
         gamePhase = p_phase;
         d_GameData.setCurrentPhase(p_phase);
-        System.out.println("new phase: " + p_phase.getClass().getSimpleName());
+        System.out.println("Current game phase: " + p_phase.getClass().getSimpleName());
     }
 
     /**
@@ -69,6 +70,7 @@ public class MainPlayController extends Observable {
      */
     public void Start() {
         d_LogEntryBuffer.start();
+        CommandValidator.setGameData(d_GameData);
         do {
             Scanner l_Scanner = new Scanner(System.in);
             System.out.println("Welcome to warzone! ");
@@ -81,57 +83,11 @@ public class MainPlayController extends Observable {
                 case "edit":
                     // Set the state to Preload
                     setPhase(new Preload(this));
-                    //gamePhase.loadMap();
-                    do {
-                        System.out.println(" =================================================");
-                        System.out.println("| #   PHASE                   : command           |");
-                        System.out.println(" =================================================");
-                        System.out.println("| 1.  Edit:PreLoad            : load map          |");
-                        System.out.println("| 2.  Edit:PreLoad            : show map          |");
-                        System.out.println("| 3.  Edit:PostLoad           : edit map          |");
-                        System.out.println("| 4.  Edit:PostLoad           : save map          |");
-                        System.out.println("| 10. Any                     : end               |");
-                        System.out.println("| 11. Any                     : next phase        |");
-                        System.out.println("| 12. Any                     : previous phase    |");
-                        System.out.println(" =================================================");
-                        System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase command: ");
-                        mycommand = l_Scanner.nextInt();
-                        System.out.println(" =================================================");
-                        //
-                        // Calls the method corresponding to the action that the user has selected.
-                        // Depending on what it the current state object, these method calls will
-                        // have a different implementation.
-                        //
-                        switch (mycommand) {
-                            case 1:
-                                gamePhase.loadMap();
-                                break;
-                            case 2:
-                                gamePhase.showMap();
-                                break;
-                            case 3:
-                                gamePhase.editMap();
-                                break;
-                            case 4:
-                                gamePhase.saveMap();
-                                break;
-                            case 10:
-                                gamePhase.endGame();
-                                break;
-                            case 11:
-                                gamePhase.next();
-                                break;
-                            case 12:
-                                gamePhase.previous();
-                            default:
-                                System.out.println("this command does not exist");
-                        }
-                    } while (!(gamePhase instanceof End));
                     break;
                 case "play":
                     // Set the state to PlaySetup
                     setPhase(new Startup(this));
-                    do {
+                    /*do {
                         System.out.println(" =================================================");
                         System.out.println("| #   PHASE                   : command           |");
                         System.out.println(" =================================================");
@@ -182,12 +138,71 @@ public class MainPlayController extends Observable {
                             default:
                                 System.out.println("this command does not exist");
                         }
-                    } while (!(gamePhase instanceof End));
+                    } while (!(gamePhase instanceof End));*/
                     break;
                 case "exit":
                     System.out.println("Exiting Warzone Game see you next time!");
                     return;
             }
+            do {
+                System.out.println(" =================================================");
+                System.out.println("| #   PHASE                   : command           |");
+                System.out.println(" =================================================");
+                System.out.println("| 1.  Edit:PreLoad            : load map          |");
+                System.out.println("| 2.  Edit:PostLoad           : edit map          |");
+                System.out.println("| 3.  Edit:PostLoad           : save map          |");
+                System.out.println("| 4.  Play:                   : show map          |");
+                System.out.println("| 5.  Play:Startup:           : load map          |");
+                System.out.println("| 6.  Play:MainPlay:deploy    : reinforce+deploy  |");
+                System.out.println("| 7.  Play:MainPlay:advance   : advance           |");
+                System.out.println("| 8.  Play:MainPlay:cards     : cards             |");
+                System.out.println("| 10. Any                     : end               |");
+                System.out.println("| 11. Any                     : next phase        |");
+                System.out.println("| 12. Any                     : previous phase    |");
+                System.out.println(" =================================================");
+                System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase command: ");
+                mycommand = l_Scanner.nextInt();
+                System.out.println(" =================================================");
+                //
+                // Calls the method corresponding to the action that the user has selected.
+                // Depending on what it the current state object, these method calls will
+                // have a different implementation.
+                //
+                switch (mycommand) {
+                    case 1:
+                    case 5:
+                        gamePhase.loadMap();
+                        break;
+                    case 2:
+                        gamePhase.editMap();
+                        break;
+                    case 3:
+                        gamePhase.saveMap();
+                        break;
+                    case 4:
+                        gamePhase.showMap();
+                        break;
+                    case 6:
+                        gamePhase.deploy();
+                        break;
+                    case 7:
+                        gamePhase.advance();
+                        break;
+                    case 8:
+                        gamePhase.cards();
+                        break;
+                    case 10:
+                        gamePhase.endGame();
+                        break;
+                    case 11:
+                        gamePhase.next();
+                        break;
+                    case 12:
+                        gamePhase.previous();
+                    default:
+                        System.out.println("this command does not exist");
+                }
+            } while (!(gamePhase instanceof End));
 
 
         } while (mycommand != 3);

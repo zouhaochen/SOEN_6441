@@ -77,6 +77,6 @@ public abstract class Phase {
      *  Common method to all States.
      */
     public void printInvalidCommandMessage() {
-        System.out.println("Invalid command in state " + this.getClass().getSimpleName() );
+        System.out.println("Invalid command in phase " + this.getClass().getSimpleName() );
     }
 }

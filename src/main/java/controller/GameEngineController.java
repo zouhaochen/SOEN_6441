@@ -139,14 +139,11 @@ public class GameEngineController {
 
         // validate the command from console
         do {
-            System.out.println("\nPlease enter command to load the model.map for the game: ");
+            System.out.println("\nPlease enter command to load the map for the game: ");
             Scanner l_scanner = new Scanner(System.in);
             l_Command = l_scanner.nextLine();
             l_CommandArr = l_Command.split(" ");
-            if (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel())) {
-                System.out.println("\nInvalid command.");
-            }
-        } while (!l_CommandArr[0].equalsIgnoreCase(CommandType.LOAD_MAP.getLabel()) || !CommandValidator.validate(l_Command));
+        } while (!CommandValidator.validate(l_Command));
 
         String l_ProjectPath = new File("").getCanonicalPath();
 //		File l_File = new File(l_ProjectPath + "/domination/" + l_CommandArr[1]);
