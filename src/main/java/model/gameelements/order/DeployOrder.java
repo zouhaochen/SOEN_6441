@@ -24,6 +24,31 @@ public class DeployOrder extends Order {
     @Override
     public boolean execute() {
 
+        if (!valid()) {
+            return false;
+        }
+
+        Player l_Player = getOrderInfo().getPlayer();
+        String l_Destination = getOrderInfo().getDestination();
+        int l_ArmiesToDeploy = getOrderInfo().getNumberOfArmy();
+        l_ArmiesToDeploy = Math.min(l_ArmiesToDeploy, l_Player.getReinforcementArmies());
+
+        // deploy the armies, if there not enough armies left, deploy all the armies.
+        Country l_Country = l_Player.getCountriesInControl().get(l_Destination.toLowerCase());
+        l_Country.deployArmies(l_ArmiesToDeploy);
+        if (!l_Player.deployReinforcementArmies(getOrderInfo().getNumberOfArmy())) {
+            System.out.println("\nWarning: insufficient armies to deploy. Deploy only " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
+        } else {
+            System.out.println("\nExecution is completed: deploy " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
+        }
+
+        System.out.println("\nArmies left: " + l_Player.getReinforcementArmies());
+
+        return true;
+    }
+
+    @Override
+    public boolean valid() {
         if (getOrderInfo().getPlayer() == null || getOrderInfo().getDestination() == null) {
             System.out.println("Fail to execute Deploy order: Invalid order information.");
             return false;
@@ -41,17 +66,6 @@ public class DeployOrder extends Order {
             System.out.println("\nThe player " + l_Player.getColour() + " will lose " + l_ArmiesToDeploy + " armies.");
             return false;
         }
-
-        // deploy the armies, if there not enough armies left, deploy all the armies.
-        Country l_Country = l_Player.getCountriesInControl().get(l_Destination.toLowerCase());
-        l_Country.deployArmies(l_ArmiesToDeploy);
-        if (!l_Player.deployReinforcementArmies(getOrderInfo().getNumberOfArmy())) {
-            System.out.println("\nWarning: insufficient armies to deploy. Deploy only " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
-        } else {
-            System.out.println("\nExecution is completed: deploy " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
-        }
-
-        System.out.println("\nArmies left: " + l_Player.getReinforcementArmies());
 
         return true;
     }

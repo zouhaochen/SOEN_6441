@@ -163,7 +163,17 @@ Player extends Observable {
     /**
      * following the command to issue order and add the order to order list.
      */
-    public void issueOrder() {
+    public boolean issueOrder() {
+        Order l_Order = createOrder();
+        if (l_Order != null) {
+            addOrderToList(l_Order);
+            return true;
+        }
+
+        return false;
+    }
+
+    public Order createOrder() {
         // read the command from a player
         String l_Command;
         do {
@@ -174,10 +184,8 @@ Player extends Observable {
 
         // create an order
         String[] l_CommandArr = l_Command.split(" ");
-        Order l_Order = OrderFactory.CreateOrder(l_CommandArr, this);
-        if (l_Order != null) {
-            addOrderToList(l_Order);
-        }
+        return OrderFactory.CreateOrder(l_CommandArr, this);
+
     }
 
     /**
