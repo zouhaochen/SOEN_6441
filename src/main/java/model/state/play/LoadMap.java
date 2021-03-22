@@ -25,19 +25,24 @@ public class LoadMap extends Startup {
         }
 
         d_ml.d_GameData = new GameData(d_ml.d_MapFile);
-//        d_ml.d_GameData.setCurrentPhase(this);
+        d_ml.d_GameData.setCurrentPhase(this);
         d_ml.d_GameEngine = new GameEngineController(d_ml.d_GameData);
         try {
             d_ml.d_GameData.loadMap();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        d_ml.getDLogEntryBuffer().updateFile();
         setPlayers();
     }
 
     @Override
-    public void assignCountries() {
-
+    public void next() {
+        super.next();
     }
 
+    @Override
+    public void previous() {
+        super.previous();
+    }
 }

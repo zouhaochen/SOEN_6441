@@ -24,15 +24,4 @@ public abstract class Play extends Phase {
         System.out.println("map is being displayed");
     }
 
-    public void editMap() {
-        printInvalidCommandMessage();
-    }
-
-    public void saveMap() {
-        printInvalidCommandMessage();
-    }
-
-    public void endGame() {
-        d_ml.setPhase(new End(d_ml));
-    }
 }

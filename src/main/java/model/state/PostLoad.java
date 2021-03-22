@@ -2,6 +2,7 @@ package model.state;
 
 import controller.MainPlayController;
 import model.map.MapEdit;
+import model.state.play.LoadMap;
 import model.state.play.Startup;
 
 public class PostLoad extends Edit {
@@ -27,13 +28,13 @@ public class PostLoad extends Edit {
 
 	public void saveMap() {
 		System.out.println("map has been saved");
-		d_ml.setPhase(new Startup(d_ml));
+		d_ml.setPhase(new LoadMap(d_ml));
 	}
 
 	public void next() {
 
 		System.out.println("must save map");
-		d_ml.setPhase(new Startup(d_ml));
+		d_ml.setPhase(new LoadMap(d_ml));
 		System.out.println(" =================================================");
 		System.out.println("| #   PHASE                   : command           |");
 		System.out.println(" =================================================");

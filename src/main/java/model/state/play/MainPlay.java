@@ -16,7 +16,7 @@ import model.state.play.Play;
  *  group need to extend this class.
  *
  */
-public class MainPlay extends Play {
+public abstract class MainPlay extends Play {
 
     public MainPlay(MainPlayController p_ml){
         super(p_ml);

@@ -8,11 +8,6 @@ import model.gameelements.Country;
 import model.gameelements.Player;
 import model.map.MapGraph;
 import model.state.End;
-import model.state.PostLoad;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -20,30 +15,6 @@ public class Startup extends Play {
 
     public Startup(MainPlayController p_ml) {
         super(p_ml);
-    }
-
-
-
-    public void loadMap() {
-
-        try {
-            d_ml.d_MapFile = new File(d_ml.d_GameEngine.getMapFilePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        d_ml.d_GameData = new GameData(d_ml.d_MapFile);
-        d_ml.d_GameData.setCurrentPhase(this);
-        d_ml.d_GameEngine = new GameEngineController(d_ml.d_GameData);
-        try {
-            d_ml.d_GameData.loadMap();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        d_ml.getDLogEntryBuffer().updateFile();
-        setPlayers();
-
-
     }
 
     public void showMap() {
@@ -90,44 +61,4 @@ public class Startup extends Play {
 
     }
 
-    public void assignCountries() {
-        // randomly assign countries for each player
-        d_ml.d_GameEngine.assignCountries();
-        int l_CurrentReinforcement = 5;
-        int l_TempReinforcementArmy;
-
-        for (Player l_Player : d_ml.d_GameEngine.d_GameData.getPlayerList()) {
-            l_CurrentReinforcement += d_ml.d_GameEngine.getReinforcementBonus(l_Player);
-            l_Player.setReinforcementArmies(l_CurrentReinforcement);
-            System.out.println(l_CurrentReinforcement + " Reinforcement Armies are assigned to " + " Player [" + l_Player.getColour() + "]  ");
-
-            for (Map.Entry<String, Country> l_CountryEntry : l_Player.getCountriesInControl().entrySet()) {
-                System.out.println("Controlling countries: " + l_CountryEntry.getKey());
-            }
-        }
-        d_ml.getDLogEntryBuffer().updateFile();
-        d_ml.setPhase(new MainPlay(d_ml));
-    }
-
-    public void deploy() {
-        printInvalidCommandMessage();
-    }
-
-    public void advance() {
-        printInvalidCommandMessage();
-    }
-
-    public void cards() {
-        printInvalidCommandMessage();
-    }
-
-    public void endGame() { d_ml.setPhase(new End(d_ml));}
-
-    public void next() {
-        d_ml.setPhase(new MainPlay(d_ml));
-    }
-
-    public void previous() {
-        d_ml.setPhase(new PostLoad(d_ml));
-    }
 }

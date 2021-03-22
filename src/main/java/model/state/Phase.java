@@ -25,7 +25,7 @@ import model.Observable;
  *      the above list, except for Fortify, which goes back to
  *      Reinforcement state.
  */
-public abstract class Phase {
+public class Phase {
 
     /**
      *  Contains a reference to the State of the GameEngine
@@ -42,36 +42,71 @@ public abstract class Phase {
     }
 
     // common commands
-    abstract public void loadMap();
-    abstract public void showMap();
+    public void loadMap() {
+        printInvalidCommandMessage();
+    }
+    public void showMap(){
+        printInvalidCommandMessage();
+    }
 
     // Edit map commands
-    abstract public void editMap();
-    abstract public void saveMap();
+    public void editMap() {
+        printInvalidCommandMessage();
+    }
+    public void saveMap() {
+        printInvalidCommandMessage();
+    }
 
     // Play commands
     // game setup commands
-    abstract public void setPlayers();
-    abstract public void assignCountries();
+    public void setPlayers() {
+        printInvalidCommandMessage();
+    }
+    public void assignCountries() {
+        printInvalidCommandMessage();
+    }
 
+
+    // issue orders
+    public void issueOrder() {
+        printInvalidCommandMessage();
+    }
+
+    // order execute
+    public void execute() {
+        printInvalidCommandMessage();
+    }
 
     // attack commands
-    abstract public void deploy();
+    public void deploy() {
+        printInvalidCommandMessage();
+    }
 
     // advance commands
-    abstract public void advance();
+    public void advance() {
+        printInvalidCommandMessage();
+    }
 
     // cards commands
-    abstract public void cards();
+    public void cards() {
+        printInvalidCommandMessage();
+    }
 
     // end command
-    abstract public void endGame();
+    public void endGame() {
+        d_ml.setPhase(new End(d_ml));
+        System.out.println("Exit the game!");
+    }
 
     // go to next phase
-    abstract public void next();
+    public void next() {
+        printInvalidCommandMessage();
+    }
 
     // go to previous phase
-    abstract public void previous();
+    public void previous() {
+        printInvalidCommandMessage();
+    }
 
     /**
      *  Common method to all States.
