@@ -40,6 +40,7 @@ public class MapEditTest {
      */
     @Test
     public void testEditMapNew() throws IOException {
+
         int l_TestFlag3 = MapEdit.flagEditMap("editmap testnewmap.model.map");
         assertEquals(3, l_TestFlag3);
         File l_File = MapEdit.getFile("testnewmap.model.map");
