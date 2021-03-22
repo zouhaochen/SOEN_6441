@@ -21,34 +21,6 @@ public class Edit extends Phase {
 		super(p_ml);
 	}
 
-	public void setPlayers() {
-		printInvalidCommandMessage();
-	}
-
-	public void assignCountries() {
-		printInvalidCommandMessage();
-	}
-
-	public void deploy() {
-		printInvalidCommandMessage();
-	}
-
-	public void loadMap() {
-		printInvalidCommandMessage();
-	}
-
-	public void advance() {
-		printInvalidCommandMessage();
-	}
-
-	public void cards() {
-		printInvalidCommandMessage();
-	}
-
-	public void endGame() {
-		d_ml.setPhase(new End(d_ml));
-	}
-
 	public void showMap() {
 		try {
 			System.out.println("\nMain Graph show below:");

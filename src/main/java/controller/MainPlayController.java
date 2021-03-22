@@ -1,6 +1,5 @@
 package controller;
 
-
 import command.CommandValidator;
 import model.GameData;
 import model.LogEntryBuffer;
@@ -97,8 +96,8 @@ public class MainPlayController extends Observable {
                 System.out.println(" =====================================================");
                 System.out.println("| #   PHASE                      : command           |");
                 System.out.println(" =====================================================");
-                System.out.println("| 1.  Edit:PostLoad              : edit map          |");
-                System.out.println("| 2.  Edit:PostLoad              : save map          |");
+                System.out.println("| 1.  Edit                       : edit map          |");
+                System.out.println("| 2.  Edit                       : save map          |");
                 System.out.println("| 3.  Play except for LoadMap    : show map          |");
                 System.out.println("| 4.  Play:Startup:LoadMap       : load map          |");
                 System.out.println("| 5.  Play:Startup:AddPlayer     : add Players       |");
