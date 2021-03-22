@@ -12,6 +12,10 @@ public enum CommandType {
      */
     VOID("void"),
     /**
+     * Exit command type.
+     */
+    EXIT("exit"),
+    /**
      * Edit continent command type.
      */
     EDIT_CONTINENT("editcontinent"),

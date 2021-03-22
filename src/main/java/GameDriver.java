@@ -1,13 +1,31 @@
-import controller.GameEngineController;
-import controller.MainLoopController;
-import model.state.MainLoop;
+import controller.MainPlayController;
+import view.LogEntryBufferView;
 
 import java.io.IOException;
 
 /**
- * Start running the Warzone game
+ * Start running the risk game
  */
 public class GameDriver {
+    /**
+     * main game controller
+     */
+    MainPlayController d_MainPlayController;
+    /**
+     * logger view
+     */
+    LogEntryBufferView d_LogEntryBufferView;
+
+    /**
+     * constructor
+     */
+    public GameDriver(){
+        // setup controller
+        d_MainPlayController = new MainPlayController();
+        // assign logger as model, pass it to logger view
+        d_LogEntryBufferView = new LogEntryBufferView(d_MainPlayController.getDLogEntryBuffer());
+    }
+
     /**
      * main method, Show each game phase from GameEngineController, and run the game according to the game rules
      *
@@ -15,10 +33,13 @@ public class GameDriver {
      * @throws IOException if file does not exist
      */
     public static void main(String args[]) throws Exception {
-        String file = "domination/test_02.map";
-        MainLoop l_mainLoop = new MainLoop();
-        l_mainLoop.Start();
-//        MainLoopController l_mainLoop = new MainLoopController(file);
-//        l_mainLoop.MainLogic();
+
+        // new game
+        GameDriver l_GameDriver=new GameDriver();
+        // run the controller
+        l_GameDriver.d_MainPlayController.Start();
+        //remove obs when game over
+        l_GameDriver.d_MainPlayController.removeObs(l_GameDriver.d_LogEntryBufferView);
+
     }
 }
