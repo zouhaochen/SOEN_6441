@@ -1,17 +1,16 @@
-
 package model.state;
 
 import controller.MainPlayController;
 
 /**
- *	ConcreteState of the State pattern. In this example, defines behavior 
- *  for commands that are valid in this state, and for the others signifies  
- *  that the command is invalid. 
- *  
- *  This state represents a group of states, and defines the behavior 
- *  that is common to all the states in its group. All the states in its 
- *  group need to extend this class. 
- *  
+ *	ConcreteState of the State pattern. In this example, defines behavior
+ *  for commands that are valid in this state, and for the others signifies
+ *  that the command is invalid.
+ *
+ *  This state represents a group of states, and defines the behavior
+ *  that is common to all the states in its group. All the states in its
+ *  group need to extend this class.
+ *
  */
 public abstract class Edit extends Phase {
 
@@ -20,33 +19,77 @@ public abstract class Edit extends Phase {
 	}
 
 	public void setPlayers() {
-		printInvalidCommandMessage(); 
+		printInvalidCommandMessage();
 	}
 
 	public void assignCountries() {
-		printInvalidCommandMessage(); 
+		printInvalidCommandMessage();
 	}
 
 	public void deploy() {
-		printInvalidCommandMessage(); 
+		printInvalidCommandMessage();
 	}
 	public void loadMap() {
 		printInvalidCommandMessage();
 	}
 
 	public void advance() {
-		printInvalidCommandMessage(); 
+		printInvalidCommandMessage();
 	}
 
 	public void cards() {
-		printInvalidCommandMessage(); 
+		printInvalidCommandMessage();
 	}
 
 	public void endGame() {
 		d_ml.setPhase(new End(d_ml));
 	}
-	
+
 	public void showMap() {
-		printInvalidCommandMessage(); 
+		printInvalidCommandMessage();
 	}
+package model.state;
+/**
+ *	ConcreteState of the State pattern. In this example, defines behavior
+ *  for commands that are valid in this state, and for the others signifies
+ *  that the command is invalid.
+ *
+ *  This state represents a group of states, and defines the behavior
+ *  that is common to all the states in its group. All the states in its
+ *  group need to extend this class.
+ *
+ */
+public abstract class Edit extends Phase {
+
+    Edit(MainLoop p_ml) {
+        super(p_ml);
+    }
+
+    public void setPlayers() {
+        printInvalidCommandMessage();
+    }
+
+    public void assignCountries() {
+        printInvalidCommandMessage();
+    }
+
+    public void reinforce() {
+        printInvalidCommandMessage();
+    }
+
+    public void IssueOrder() {
+        printInvalidCommandMessage();
+    }
+
+    public void execute() {
+        printInvalidCommandMessage();
+    }
+
+    public void endGame() {
+        printInvalidCommandMessage();
+    }
+
+    public void showMap() {
+        printInvalidCommandMessage();
+    }
 }

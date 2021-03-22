@@ -11,7 +11,7 @@ public class PostLoad extends Edit {
 	public PostLoad(MainPlayController p_ml) {
 		super(p_ml);
 	}
-	
+
 	public void showMap() {
 		try {
 			System.out.println("\nMain Graph show below:");

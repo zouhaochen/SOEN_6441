@@ -41,6 +41,5 @@ public class GameDriver {
         //remove obs when game over
         l_GameDriver.d_MainPlayController.removeObs(l_GameDriver.d_LogEntryBufferView);
 
-
     }
 }
