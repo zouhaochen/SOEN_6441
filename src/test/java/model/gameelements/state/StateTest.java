@@ -26,7 +26,7 @@ public class StateTest {
 
     @Test
     public void testEditState() {
-        d_MainPlayController.setPhase(new PostLoad(d_MainPlayController));
+        d_MainPlayController.setPhase(new Edit(d_MainPlayController));
         d_MainPlayController.gamePhase.deploy();
     }
 

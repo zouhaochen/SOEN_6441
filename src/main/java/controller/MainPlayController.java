@@ -5,9 +5,9 @@ import command.CommandValidator;
 import model.GameData;
 import model.LogEntryBuffer;
 import model.Observable;
+import model.state.Edit;
 import model.state.End;
 import model.state.Phase;
-import model.state.PostLoad;
 import model.state.play.LoadMap;
 
 import java.io.File;
@@ -82,7 +82,7 @@ public class MainPlayController extends Observable {
             switch (mystart.toLowerCase()) {
                 case "edit":
                     // Set the state to Preload
-                    setPhase(new PostLoad(this));
+                    setPhase(new Edit(this));
                     break;
                 case "play":
                     // Set the state to PlaySetup
@@ -108,7 +108,7 @@ public class MainPlayController extends Observable {
                 System.out.println("| 8.  Play:MainPlay:cards        : cards             |");
                 System.out.println("| 9. Any                        : end               |");
                 System.out.println(" =====================================================");
-                System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase command: ");
+                System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase number: ");
                 mycommand = l_Scanner.nextInt();
                 System.out.println(" =====================================================");
                 //
