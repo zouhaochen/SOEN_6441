@@ -192,18 +192,13 @@ public class GameEngineController {
      */
     public void assignCountries() {
         String l_Command;
-        String[] l_CommandArr;
 
         // validate the command from console
         do {
             System.out.println("\nPlease enter command to randomly assign countries to all players: ");
             Scanner l_scanner = new Scanner(System.in);
             l_Command = l_scanner.nextLine();
-            l_CommandArr = l_Command.split(" ");
-            if (!l_CommandArr[0].equalsIgnoreCase(CommandType.ASSIGN_COUNTRIES.getLabel())) {
-                System.out.println("\nInvalid command.");
-            }
-        } while (!l_CommandArr[0].equalsIgnoreCase(CommandType.ASSIGN_COUNTRIES.getLabel()) || !CommandValidator.validate(l_Command));
+        } while (!CommandValidator.validate(l_Command));
 
         // randomly assign countries
         int l_NumberOfPlayer = d_GameData.getPlayerList().size();

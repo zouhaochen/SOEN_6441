@@ -47,6 +47,9 @@ public class CommandValidator {
             case "AddPlayer":
                 l_Valid = validateAddPlayerCommands(l_Command_arr);
                 break;
+            case "AssignCountry":
+                l_Valid = validateAssignCountryCommands(l_Command_arr);
+                break;
             case "IssueOrder":
                 l_Valid = validateIssueOrderCommands(l_Command_arr);
                 break;

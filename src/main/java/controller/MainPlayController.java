@@ -100,11 +100,11 @@ public class MainPlayController extends Observable {
                 System.out.println("| 1.  Edit:PreLoad               : load map          |");
                 System.out.println("| 2.  Edit:PostLoad              : edit map          |");
                 System.out.println("| 3.  Edit:PostLoad              : save map          |");
-                System.out.println("| 4.  Play:                      : show map          |");
+                System.out.println("| 4.  Play except for LoadMap    : show map          |");
                 System.out.println("| 5.  Play:Startup:LoadMap       : load map          |");
                 System.out.println("| 6.  Play:Startup:AddPlayer     : add Players       |");
                 System.out.println("| 7.  Play:Startup:AssignCountry : assign countries  |");
-                System.out.println("| 8.  Play:MainPlay:IssueOrder       : issue orders  |");
+                System.out.println("| 8.  Play:MainPlay:IssueOrder   : issue orders      |");
                 System.out.println("| 9.  Play:MainPlay:advance      : advance           |");
                 System.out.println("| 10. Play:MainPlay:cards        : cards             |");
                 System.out.println("| 11. Any                        : end               |");
@@ -134,21 +134,21 @@ public class MainPlayController extends Observable {
                         gamePhase.showMap();
                         break;
                     case 6:
-                        gamePhase.deploy();
+                        gamePhase.setPlayers();
                         break;
                     case 7:
-                        gamePhase.advance();
+                        gamePhase.assignCountries();
                         break;
                     case 8:
-                        gamePhase.cards();
-                        break;
-                    case 10:
-                        gamePhase.endGame();
+                        gamePhase.issueOrder();
                         break;
                     case 11:
-                        gamePhase.next();
+                        gamePhase.endGame();
                         break;
                     case 12:
+                        gamePhase.next();
+                        break;
+                    case 13:
                         gamePhase.previous();
                     default:
                         System.out.println("this command does not exist");

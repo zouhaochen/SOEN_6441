@@ -3,8 +3,6 @@ package model.state.play;
 import controller.GameEngineController;
 import controller.MainPlayController;
 import model.GameData;
-import model.state.End;
-import model.state.Phase;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,12 +31,18 @@ public class LoadMap extends Startup {
             e.printStackTrace();
         }
         d_ml.getDLogEntryBuffer().updateFile();
-        setPlayers();
+
+        next();
+    }
+
+    @Override
+    public void showMap() {
+        printInvalidCommandMessage();
     }
 
     @Override
     public void next() {
-        super.next();
+        d_ml.setPhase(new AddPlayer(d_ml));
     }
 
     @Override
