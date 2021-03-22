@@ -30,6 +30,9 @@ public abstract class Edit extends Phase {
 	public void deploy() {
 		printInvalidCommandMessage(); 
 	}
+	public void loadMap() {
+		printInvalidCommandMessage();
+	}
 
 	public void advance() {
 		printInvalidCommandMessage(); 

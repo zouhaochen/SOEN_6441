@@ -1,10 +1,8 @@
 package model.state.play;
 
 import controller.MainPlayController;
-import model.GamePhase;
 import model.gameelements.Player;
 import model.state.End;
-import model.state.play.Play;
 
 /**
  *	ConcreteState of the State pattern. In this example, defines behavior
@@ -27,8 +25,8 @@ public abstract class MainPlay extends Play {
 
         int l_TempReinforcementArmy;
         // Issue order phase,Loop through all players, until all players finish issuing the instructions, and save the order in player`s order list.
-        for (Player l_Player : d_ml.d_GameEngine.d_GameData.getPlayerList()) {
-            System.out.println(d_ml.d_GameEngine.d_GameData.getCurrentPhase());
+        for (Player l_Player : d_ml.d_GameEngineController.d_GameData.getPlayerList()) {
+            System.out.println(d_ml.d_GameEngineController.d_GameData.getCurrentPhase());
 
             l_TempReinforcementArmy = l_Player.getReinforcementArmies();
             while (l_TempReinforcementArmy > 0) {
@@ -42,7 +40,7 @@ public abstract class MainPlay extends Play {
             }
         }
         //execute orders phase,  execute player`s order, assigning a number of armies to move towards the target country.
-        d_ml.d_GameEngine.phaseProcess();
+        d_ml.d_GameEngineController.phaseProcess();
 
         System.out.println("reinforcement done");
 

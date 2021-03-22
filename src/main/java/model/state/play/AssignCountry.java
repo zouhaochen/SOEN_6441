@@ -11,7 +11,7 @@ public class AssignCountry extends Startup{
     @Override
     public void assignCountries() {
         // randomly assign countries for each player
-        d_ml.d_GameEngine.assignCountries();
+        d_ml.d_GameEngineController.assignCountries();
 
         d_ml.getDLogEntryBuffer().updateFile();
 

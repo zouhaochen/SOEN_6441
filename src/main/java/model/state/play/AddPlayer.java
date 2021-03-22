@@ -20,7 +20,7 @@ public class AddPlayer extends Startup{
 
             if (l_askUser.equalsIgnoreCase("y")) {
                 if (d_ml.d_GameData.getPlayerList().size() < 5) {
-                    d_ml.d_GameEngine.gamePlayerCommand();
+                    d_ml.d_GameEngineController.gamePlayerCommand();
                 }
                 // since the number of player range is 2 to 5. no more player can be add in.
                 else if (d_ml.d_GameData.getPlayerList().size() >= 5) {
@@ -47,6 +47,7 @@ public class AddPlayer extends Startup{
     @Override
     public void next() {
         d_ml.setPhase(new AssignCountry(d_ml));
+        d_ml.gamePhase.assignCountries();
     }
 
     @Override

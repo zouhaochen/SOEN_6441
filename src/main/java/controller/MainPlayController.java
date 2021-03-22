@@ -7,9 +7,8 @@ import model.LogEntryBuffer;
 import model.Observable;
 import model.state.End;
 import model.state.Phase;
+import model.state.PostLoad;
 import model.state.play.LoadMap;
-import model.state.play.Startup;
-import model.state.Preload;
 
 import java.io.File;
 import java.util.Scanner;
@@ -22,7 +21,7 @@ public class MainPlayController extends Observable {
     /**
      * State object of the MainLoop
      */
-    private Phase gamePhase;
+    public Phase gamePhase;
 
     String mystart;
     int mycommand;
@@ -37,7 +36,7 @@ public class MainPlayController extends Observable {
     /**
      * get game engine as an object that used to call the function from GameEngineController class
      */
-    public GameEngineController d_GameEngine = new GameEngineController(d_GameData);
+    public GameEngineController d_GameEngineController = new GameEngineController(d_GameData);
 
     /**
      * game logger
@@ -83,11 +82,12 @@ public class MainPlayController extends Observable {
             switch (mystart.toLowerCase()) {
                 case "edit":
                     // Set the state to Preload
-                    setPhase(new Preload(this));
+                    setPhase(new PostLoad(this));
                     break;
                 case "play":
                     // Set the state to PlaySetup
                     setPhase(new LoadMap(this));
+
                     break;
                 case "exit":
                     System.out.println("Exiting Warzone Game see you next time!");
@@ -97,19 +97,16 @@ public class MainPlayController extends Observable {
                 System.out.println(" =====================================================");
                 System.out.println("| #   PHASE                      : command           |");
                 System.out.println(" =====================================================");
-                System.out.println("| 1.  Edit:PreLoad               : load map          |");
-                System.out.println("| 2.  Edit:PostLoad              : edit map          |");
-                System.out.println("| 3.  Edit:PostLoad              : save map          |");
-                System.out.println("| 4.  Play except for LoadMap    : show map          |");
-                System.out.println("| 5.  Play:Startup:LoadMap       : load map          |");
-                System.out.println("| 6.  Play:Startup:AddPlayer     : add Players       |");
-                System.out.println("| 7.  Play:Startup:AssignCountry : assign countries  |");
-                System.out.println("| 8.  Play:MainPlay:IssueOrder   : issue orders      |");
-                System.out.println("| 9.  Play:MainPlay:advance      : advance           |");
-                System.out.println("| 10. Play:MainPlay:cards        : cards             |");
-                System.out.println("| 11. Any                        : end               |");
-                System.out.println("| 12. Any                        : next phase        |");
-                System.out.println("| 13. Any                        : previous phase    |");
+                System.out.println("| 1.  Edit:PostLoad              : edit map          |");
+                System.out.println("| 2.  Edit:PostLoad              : save map          |");
+                System.out.println("| 3.  Play except for LoadMap    : show map          |");
+                System.out.println("| 4.  Play:Startup:LoadMap       : load map          |");
+                System.out.println("| 5.  Play:Startup:AddPlayer     : add Players       |");
+                //System.out.println("| 6.  Play:Startup:AssignCountry : assign countries  |");
+                System.out.println("| 6.  Play:MainPlay:IssueOrder   : issue orders      |");
+                System.out.println("| 7.  Play:MainPlay:advance      : advance           |");
+                System.out.println("| 8.  Play:MainPlay:cards        : cards             |");
+                System.out.println("| 9. Any                        : end               |");
                 System.out.println(" =====================================================");
                 System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase command: ");
                 mycommand = l_Scanner.nextInt();
@@ -121,35 +118,32 @@ public class MainPlayController extends Observable {
                 //
                 switch (mycommand) {
                     case 1:
-                    case 5:
-                        gamePhase.loadMap();
-                        break;
-                    case 2:
                         gamePhase.editMap();
                         break;
-                    case 3:
+                    case 2:
                         gamePhase.saveMap();
                         break;
-                    case 4:
+                    case 3:
                         gamePhase.showMap();
                         break;
-                    case 6:
+                    case 4:
+                        gamePhase.loadMap();
+                        break;
+                    case 5:
                         gamePhase.setPlayers();
                         break;
-                    case 7:
-                        gamePhase.assignCountries();
-                        break;
-                    case 8:
+                    case 6:
                         gamePhase.issueOrder();
                         break;
-                    case 11:
+                    case 7:
+                        gamePhase.advance();
+                        break;
+                    case 8:
+                        gamePhase.cards();
+                        break;
+                    case 9:
                         gamePhase.endGame();
                         break;
-                    case 12:
-                        gamePhase.next();
-                        break;
-                    case 13:
-                        gamePhase.previous();
                     default:
                         System.out.println("this command does not exist");
                 }
@@ -157,7 +151,7 @@ public class MainPlayController extends Observable {
 
 
         } while (mycommand != 3);
-        //l_Scanner.close();
+
     }
 
 }

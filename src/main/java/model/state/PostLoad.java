@@ -2,6 +2,7 @@ package model.state;
 
 import controller.MainPlayController;
 import model.map.MapEdit;
+import model.map.MapGraph;
 import model.state.play.LoadMap;
 import model.state.play.Startup;
 
@@ -12,10 +13,14 @@ public class PostLoad extends Edit {
 	}
 	
 	public void showMap() {
-		printInvalidCommandMessage();
+		try {
+			System.out.println("\nMain Graph show below:");
+			MapGraph.printTable(d_ml.d_MapFile.getName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void loadMap() { printInvalidCommandMessage(); }
 
 	public void editMap() {
 		d_ml.setPhase(new PostLoad(d_ml));
@@ -50,8 +55,4 @@ public class PostLoad extends Edit {
 		System.out.println("enter a " + d_ml.getClass().getSimpleName() + " phase command: ");
 	}
 
-	public void previous() {
-		System.out.println("back to previous phase");
-		d_ml.setPhase(new Preload(d_ml));
-	}
 }

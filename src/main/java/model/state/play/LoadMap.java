@@ -17,14 +17,14 @@ public class LoadMap extends Startup {
     public void loadMap() {
 
         try {
-            d_ml.d_MapFile = new File(d_ml.d_GameEngine.getMapFilePath());
+            d_ml.d_MapFile = new File(d_ml.d_GameEngineController.getMapFilePath());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         d_ml.d_GameData = new GameData(d_ml.d_MapFile);
         d_ml.d_GameData.setCurrentPhase(this);
-        d_ml.d_GameEngine = new GameEngineController(d_ml.d_GameData);
+        d_ml.d_GameEngineController = new GameEngineController(d_ml.d_GameData);
         try {
             d_ml.d_GameData.loadMap();
         } catch (FileNotFoundException e) {

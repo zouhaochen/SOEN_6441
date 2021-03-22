@@ -27,7 +27,7 @@ public class GameEngineTest {
     /**
      * test model.map file
      */
-    File d_File = new File("domination/germany.model.map");
+    File d_File = new File("domination/germany.map");
 
     /**
      * test game data object
@@ -66,13 +66,13 @@ public class GameEngineTest {
     /*@Test
     public void testPhaseChange() {
         System.out.println("3.check phase change");
-        d_GameEngine.d_GameData.setCurrentPhase(GamePhase.WAITING_TO_TURN);
+        d_GameEngineController.d_GameData.setCurrentPhase(GamePhase.WAITING_TO_TURN);
         System.out.println(d_GameData.getCurrentPhase());
         System.out.println(d_GameData.getCurrentPhase().getGamePhaseAsInt());
-        d_GameEngine.d_GameData.setCurrentPhase(GamePhase.ATTACK);
+        d_GameEngineController.d_GameData.setCurrentPhase(GamePhase.ATTACK);
         System.out.println(d_GameData.getCurrentPhase());
         System.out.println(d_GameData.getCurrentPhase().getGamePhaseAsInt());
-        assertEquals(GamePhase.ATTACK, d_GameEngine.d_GameData.getCurrentPhase());
+        assertEquals(GamePhase.ATTACK, d_GameEngineController.d_GameData.getCurrentPhase());
     }*/
 
     /**
