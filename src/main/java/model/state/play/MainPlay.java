@@ -46,30 +46,4 @@ public abstract class MainPlay extends Play {
 
     }
 
-    public void advance() {
-        printInvalidCommandMessage();
-    }
-
-    public void cards() {
-        printInvalidCommandMessage();
-    }
-
-    public void next() {
-        d_ml.setPhase(new End(d_ml));
-    }
-    public void previous() {
-        printInvalidCommandMessage();
-    }
-
-    public void loadMap() {
-        this.printInvalidCommandMessage();
-    }
-
-    public void setPlayers() {
-        this.printInvalidCommandMessage();
-    }
-
-    public void assignCountries() {
-        this.printInvalidCommandMessage();
-    }
 }

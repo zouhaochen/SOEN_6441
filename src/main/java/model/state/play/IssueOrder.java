@@ -9,7 +9,13 @@ public class IssueOrder extends MainPlay{
 
     @Override
     public void issueOrder() {
+        d_ml.d_GameEngineController.awardReinforcement();
 
         next();
+    }
+
+    private void awardReinforcement() {
+        d_ml.d_GameEngineController.awardReinforcement();
+
     }
 }

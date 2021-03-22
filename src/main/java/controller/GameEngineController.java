@@ -227,6 +227,15 @@ public class GameEngineController {
         }
     }
 
+    public void awardReinforcement() {
+        int l_DefaultReinforcementNumber = 5;
+
+        for (Player l_Player : d_GameData.getPlayerList()) {
+            int l_Reinforcement = l_DefaultReinforcementNumber + getReinforcementBonus(l_Player);
+            l_Player.setReinforcementArmies(l_Reinforcement);
+        }
+    }
+
     /**
      * Calculate the reinforcement armies to be award.
      *

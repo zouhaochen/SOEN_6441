@@ -65,7 +65,6 @@ public class Phase {
         printInvalidCommandMessage();
     }
 
-
     // issue orders
     public void issueOrder() {
         printInvalidCommandMessage();
