@@ -1,3 +1,5 @@
+package modeltest;
+
 import model.LogEntryBuffer;
 import org.junit.After;
 import org.junit.Test;
@@ -7,6 +9,11 @@ public class LogEntryBufferTest {
      * test object
      */
     LogEntryBuffer d_LogEntryBuffer=new LogEntryBuffer();
+
+    /**
+     * test log file path
+     */
+    private String d_FilePath = "log/TestLog.txt";
 
     /**
      * print ok when test is passed
@@ -24,9 +31,9 @@ public class LogEntryBufferTest {
         d_LogEntryBuffer.start();
         System.out.println("test msg1 before first update");
         System.out.println("test msg2 before first update");
-        d_LogEntryBuffer.updateFile("TestLog.txt");
+        d_LogEntryBuffer.updateFile(d_FilePath);
         System.out.println("test msg3 before second update");
-        d_LogEntryBuffer.updateFile("TestLog.txt");
+        d_LogEntryBuffer.updateFile(d_FilePath);
     }
 
 
