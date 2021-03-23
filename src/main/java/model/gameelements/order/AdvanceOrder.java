@@ -185,11 +185,6 @@ public class AdvanceOrder extends Order {
         p_TargetCountry.setArmies(p_NumberOfArmies);
         // add target country to new owner's country list
         p_NewOwner.assignCountry(p_TargetCountry);
-
-
-
-
-
     }
 
     /**
@@ -215,7 +210,7 @@ public class AdvanceOrder extends Order {
         // if target country is un-attackable, because of diplomacy
         // only two countries with diplomacy cant attack each other
         // getPlayerDiplomacy()[0] is target player id that register during diploma order.
-        if (l_targetPlayer.getPlayerDiplomacy()[0]==d_player.getId()){
+        if (l_targetPlayer.getPlayerDiplomacy()[1]==d_player.getId()){
             l_valid = false;
         }
 

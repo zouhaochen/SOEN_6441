@@ -29,6 +29,7 @@ public class Country extends Territory {
      */
     private String d_countryName;
 
+
     /**
      * Country Object Constructor
      *
@@ -134,5 +135,19 @@ public class Country extends Territory {
      */
     public void setCountryName(String p_countryName) {
         this.d_countryName = p_countryName;
+    }
+
+    /**
+     * add the 2 countries boarder connectivity
+     * @param p_country the neighbor country
+     * @return true if successfully added, otherwise return false
+     */
+    public boolean addBoarderConnection(Country p_country) {
+        if(p_country != null) {
+            d_BorderCountries.put(p_country.getCountryName(), p_country);
+            return true;
+        }
+        else
+            return false;
     }
 }
