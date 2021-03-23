@@ -11,6 +11,7 @@ public class OrderExecution extends MainPlay {
     @Override
     public void executeOrder() {
         d_ml.executeAllOrders();
+        d_ml.getDLogEntryBuffer().updateFile();
     }
 
     @Override

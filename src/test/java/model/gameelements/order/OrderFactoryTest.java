@@ -1,6 +1,7 @@
 package model.gameelements.order;
 
 import model.gameelements.Player;
+import org.junit.After;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,6 +11,14 @@ import static org.mockito.Mockito.mock;
  * The test class for OrderFactory.
  */
 public class OrderFactoryTest {
+
+    /**
+     * print ok when test is passed
+     */
+    @After
+    public void checked(){
+        System.out.println("ok");
+    }
 
     /**
      * Test deploy order creation.

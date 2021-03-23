@@ -25,6 +25,7 @@ public class Edit extends Phase {
 		try {
 			System.out.println("\nMain Graph show below:");
 			MapGraph.printTable(d_ml.d_MapFile.getName());
+			d_ml.getDLogEntryBuffer().updateFile();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -35,6 +36,7 @@ public class Edit extends Phase {
 
 		try {
 			MapEdit.mapEditLoop();
+			d_ml.getDLogEntryBuffer().updateFile();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,6 +44,7 @@ public class Edit extends Phase {
 
 	public void saveMap() {
 		System.out.println("map has been saved");
+		d_ml.getDLogEntryBuffer().updateFile();
 		d_ml.setPhase(new LoadMap(d_ml));
 	}
 

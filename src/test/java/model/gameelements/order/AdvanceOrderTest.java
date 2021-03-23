@@ -2,17 +2,29 @@ package model.gameelements.order;
 
 import model.gameelements.Country;
 import model.gameelements.Player;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * test adv order
+ */
 public class AdvanceOrderTest {
 
 	private Player d_attacker;
 	private Player d_defender;
 	private Country d_attackCountry;
 	private Country d_defendCountry;
+
+	/**
+	 * print ok when test is passed
+	 */
+	@After
+	public void checked(){
+		System.out.println("ok");
+	}
 	
 	@Before
 	public void setup() {

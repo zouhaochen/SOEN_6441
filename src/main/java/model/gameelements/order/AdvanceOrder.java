@@ -209,7 +209,7 @@ public class AdvanceOrder extends Order {
 
         // if target country is un-attackable, because of diplomacy
         // only two countries with diplomacy cant attack each other
-        // getPlayerDiplomacy()[0] is target player id that register during diploma order.
+        // getPlayerDiplomacy()[1] is target player id that register during diploma order.
         if (l_targetPlayer.getPlayerDiplomacy()[1]==d_player.getId()){
             l_valid = false;
         }

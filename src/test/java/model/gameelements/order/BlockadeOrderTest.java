@@ -1,8 +1,8 @@
 package model.gameelements.order;
 
-import model.gameelements.Card;
 import model.gameelements.Country;
 import model.gameelements.Player;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,6 +16,14 @@ public class BlockadeOrderTest {
 	Country d_country;
 	/** blockade order */
 	BlockadeOrder d_order;
+
+	/**
+	 * print ok when test is passed
+	 */
+	@After
+	public void checked(){
+		System.out.println("ok");
+	}
 	
 	/**
 	 * This method can set up game context before test cases begin.

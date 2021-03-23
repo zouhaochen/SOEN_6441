@@ -43,6 +43,8 @@ public abstract class MainPlay extends Play {
 
         System.out.println("reinforcement done");
 
+        d_ml.getDLogEntryBuffer().updateFile();
+
     }
 
 }

@@ -1,5 +1,6 @@
 package model.gameelements;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,6 +23,14 @@ public class PlayerTest {
     @Before
     public void setup() {
         d_Player = new Player("Red");
+    }
+
+    /**
+     * print ok when test is passed
+     */
+    @After
+    public void checked(){
+        System.out.println("ok");
     }
 
     /**

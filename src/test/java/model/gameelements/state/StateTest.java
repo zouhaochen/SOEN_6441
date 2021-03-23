@@ -7,6 +7,7 @@ import model.map.MapListing;
 import model.state.*;
 import model.state.play.AddPlayer;
 import model.state.play.Play;
+import org.junit.After;
 import org.junit.Test;
 
 import java.io.File;
@@ -23,6 +24,14 @@ public class StateTest {
      * The MainPlayController class to be tested.
      */
     public MainPlayController d_MainPlayController = new MainPlayController();
+
+    /**
+     * print ok when test is passed
+     */
+    @After
+    public void checked(){
+        System.out.println("ok");
+    }
 
     @Test
     public void testEditState() {
