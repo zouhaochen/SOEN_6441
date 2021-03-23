@@ -24,7 +24,7 @@ public class OrderFactory {
                 break;
             default:
                 System.out.println("\nFail to create an order due to invalid arguments");
-                l_Order = new Order();
+                l_Order = null;
         }
         return l_Order;
     }

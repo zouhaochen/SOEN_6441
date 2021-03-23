@@ -1,12 +1,12 @@
 package gamePlayTest;
 
-import command.CommandValidator;
 import controller.GameEngineController;
 import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;
 import model.GameData;
-import model.GamePhase;
+//import model.GamePhase;
+import org.junit.After;
 import org.junit.Test;
 
 import java.io.File;
@@ -38,6 +38,13 @@ public class GameEngineTest {
      */
     GameEngineController d_GameEngine = new GameEngineController(d_GameData);
 
+    /**
+     * print ok when test is passed
+     */
+    @After
+    public void checked(){
+        System.out.println("ok");
+    }
 
     /**
      * this method used to test GameEngineController Class
@@ -60,27 +67,13 @@ public class GameEngineTest {
 
     }
 
-    /**
-     * test game phase change.
-     */
-    /*@Test
-    public void testPhaseChange() {
-        System.out.println("3.check phase change");
-        d_GameEngineController.d_GameData.setCurrentPhase(GamePhase.WAITING_TO_TURN);
-        System.out.println(d_GameData.getCurrentPhase());
-        System.out.println(d_GameData.getCurrentPhase().getGamePhaseAsInt());
-        d_GameEngineController.d_GameData.setCurrentPhase(GamePhase.ATTACK);
-        System.out.println(d_GameData.getCurrentPhase());
-        System.out.println(d_GameData.getCurrentPhase().getGamePhaseAsInt());
-        assertEquals(GamePhase.ATTACK, d_GameEngineController.d_GameData.getCurrentPhase());
-    }*/
 
     /**
      * test show model.map function
      */
     @Test
     public void testShowMap() {
-        System.out.println("4. check show model.map");
+        System.out.println("3. check show model.map");
         d_GameEngine.addNewPlayer("black");
         Player l_Player = d_GameEngine.d_GameData.getPlayerList().get(0);
         try {
@@ -99,6 +92,7 @@ public class GameEngineTest {
      */
     @Test
     public void testReinforcementCalculationWithBonus() {
+        System.out.println("4. check ReinforcementCalculationWithBonus");
         // given: one continent has only one country
         int l_ExpectedContinentValue = 8;
         Continent l_Continent = new Continent("NorthAmerica", l_ExpectedContinentValue);
@@ -130,6 +124,7 @@ public class GameEngineTest {
      */
     @Test
     public void testReinforcementCalculationWithoutBonus() {
+        System.out.println("5. check ReinforcementCalculationWithoutBonus");
         // given: one continent has only one country
         int l_ContinentValue = 8;
         Continent l_Continent = new Continent("NorthAmerica", l_ContinentValue);

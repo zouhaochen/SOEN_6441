@@ -1,7 +1,6 @@
 package model.state;
 
 import controller.MainPlayController;
-import model.Observable;
 
 /**
  *	State of the State pattern. Here implemented as a abstract class.
@@ -66,14 +65,13 @@ public class Phase {
         printInvalidCommandMessage();
     }
 
-
     // issue orders
     public void issueOrder() {
         printInvalidCommandMessage();
     }
 
     // order execute
-    public void execute() {
+    public void executeOrder() {
         printInvalidCommandMessage();
     }
 

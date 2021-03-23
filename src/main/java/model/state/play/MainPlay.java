@@ -2,7 +2,6 @@ package model.state.play;
 
 import controller.MainPlayController;
 import model.gameelements.Player;
-import model.state.End;
 
 /**
  *	ConcreteState of the State pattern. In this example, defines behavior
@@ -46,30 +45,4 @@ public abstract class MainPlay extends Play {
 
     }
 
-    public void advance() {
-        printInvalidCommandMessage();
-    }
-
-    public void cards() {
-        printInvalidCommandMessage();
-    }
-
-    public void next() {
-        d_ml.setPhase(new End(d_ml));
-    }
-    public void previous() {
-        printInvalidCommandMessage();
-    }
-
-    public void loadMap() {
-        this.printInvalidCommandMessage();
-    }
-
-    public void setPlayers() {
-        this.printInvalidCommandMessage();
-    }
-
-    public void assignCountries() {
-        this.printInvalidCommandMessage();
-    }
 }

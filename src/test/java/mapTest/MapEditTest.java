@@ -11,8 +11,6 @@ import static org.junit.Assert.*;
 /**
  * This class is for test MapEditor
  *
- * @author Haochen Zou
- * @version 1.0
  */
 public class MapEditTest {
     /**
