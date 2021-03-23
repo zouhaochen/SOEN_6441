@@ -174,17 +174,28 @@ Player extends Observable {
     }
 
     public Order createOrder() {
-        // read the command from a player
-        String l_Command;
+        String l_Reply;
+        Scanner l_Scanner = new Scanner(System.in);
         do {
-            System.out.println("\nPlease enter the command: \n");
-            Scanner l_Scanner = new Scanner(System.in);
-            l_Command = l_Scanner.nextLine();
-        } while (!CommandValidator.validate(l_Command));
+            System.out.println("\nPlayer " + d_Colour + "do you want to create an order? (y/n) ");
+            l_Reply = l_Scanner.nextLine().trim();
+        } while (!l_Reply.equalsIgnoreCase("y") && !l_Reply.equalsIgnoreCase("n"));
 
-        // create an order
-        String[] l_CommandArr = l_Command.split(" ");
-        return OrderFactory.CreateOrder(l_CommandArr, this);
+        if (l_Reply.equalsIgnoreCase("y")) {
+
+            // read the command from a player
+            String l_Command;
+            do {
+                System.out.println("\nPlease enter the command: \n");
+                l_Command = l_Scanner.nextLine();
+            } while (!CommandValidator.validate(l_Command));
+
+            // create an order
+            String[] l_CommandArr = l_Command.split(" ");
+            return OrderFactory.CreateOrder(l_CommandArr, this);
+        }
+
+        return null;
 
     }
 

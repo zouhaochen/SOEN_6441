@@ -39,10 +39,8 @@ public class DeployOrder extends Order {
         if (!l_Player.deployReinforcementArmies(getOrderInfo().getNumberOfArmy())) {
             System.out.println("\nWarning: insufficient armies to deploy. Deploy only " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
         } else {
-            System.out.println("\nExecution is completed: deploy " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
+            System.out.println("\n\"DEPLOY\" Execution is completed: deploy " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
         }
-
-        System.out.println("\nArmies left: " + l_Player.getReinforcementArmies());
 
         return true;
     }
@@ -50,7 +48,7 @@ public class DeployOrder extends Order {
     @Override
     public boolean valid() {
         if (getOrderInfo().getPlayer() == null || getOrderInfo().getDestination() == null) {
-            System.out.println("Fail to execute Deploy order: Invalid order information.");
+            System.out.println("\nFail to execute \"DEPLOY\" order: Invalid order information.");
             return false;
         }
 
@@ -62,8 +60,8 @@ public class DeployOrder extends Order {
         // If the player decides to deploy armies to the country he/she doesn't control, the player will lost the armies.
         if (!l_Player.getCountriesInControl().containsKey(l_Destination.toLowerCase())) {
             l_Player.setReinforcementArmies(l_Player.getReinforcementArmies() - l_ArmiesToDeploy);
-            System.out.println("\nFail to execute Deploy order: the country " + l_Destination + " is not in the control of player " + l_Player.getColour() + ".");
-            System.out.println("\nThe player " + l_Player.getColour() + " will lose " + l_ArmiesToDeploy + " armies.");
+            System.out.println("\nFail to execute \"DEPLOY\" order: the country " + l_Destination + " is not in the control of player " + l_Player.getColour() + ".");
+            System.out.println("The player " + l_Player.getColour() + " will lose " + l_ArmiesToDeploy + " armies.");
             return false;
         }
 
