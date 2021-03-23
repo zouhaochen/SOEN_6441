@@ -117,14 +117,14 @@ public class AdvanceOrder extends Order {
                 d_numberOfArmies = d_attackCountry.getArmies();
             }
 
-            //if toCountry is owned by the player then advance armies
+            //if defendCountry is owned by the player then advance armies
             if(d_defendCountry.getOwner().equals(d_player)) {
                 //move armies
                 d_attackCountry.setArmies(d_attackCountry.getArmies() - d_numberOfArmies);
                 d_defendCountry.setArmies(d_defendCountry.getArmies() + d_numberOfArmies);
             }
 
-            //else toCountry is owned by opponent then attack
+            //else defendCountry is owned by opponent then attack
             else {
                 Random l_randomNumber = new Random();
                 for(int i = 0; i < d_numberOfArmies; i++) {
@@ -163,11 +163,11 @@ public class AdvanceOrder extends Order {
      * When attacker control defender's country,
      * this method performs the exchange of the countries and armies.
      *
-     * @param p_toCountry
-     * @param p_fromCountry
+     * @param p_defendCountry
+     * @param p_attackCountry
      * @param p_numberOfArmies
      */
-    private void exchangeCountryOwner(Country p_toCountry, Country p_fromCountry, int p_numberOfArmies) {
+    private void exchangeCountryOwner(Country p_defendCountry, Country p_attackCountry, int p_numberOfArmies) {
     }
 
     /**
@@ -183,7 +183,7 @@ public class AdvanceOrder extends Order {
             l_valid = false;
         }
 
-        //check whether player is fromCountry owner
+        //check whether player is attackCountry owner
         if(!d_attackCountry.getOwner().equals(d_player)) {
             System.out.println("Could not perform the advance order moving " + d_numberOfArmies + " armies from " +
                     d_attackCountry.getCountryName() + " to " + d_defendCountry.getCountryName() + " because " + d_player.getColour() + " does not own " + d_attackCountry + ".");
@@ -195,7 +195,7 @@ public class AdvanceOrder extends Order {
 
         }*/
 
-        //check if fromCountry and toCountry are neighbors
+        //check if attackCountry and defendCountry are neighbors
         if(d_attackCountry.getBorderCountries().get(d_defendCountry.getCountryId()) == null) {
             System.out.println("Could not perform the advance order moving " + d_numberOfArmies + " armies from " +
                     d_attackCountry.getCountryName() + " to " + d_defendCountry.getCountryName() + " because they are not neighbors.");
@@ -209,7 +209,6 @@ public class AdvanceOrder extends Order {
      * print the order
      */
     public void printOrder(){
-
         System.out.println("Advance Order created: " + d_player.getColour() + " is sending " + d_numberOfArmies + " armies from " + d_attackCountry.getCountryName() + " to " + d_defendCountry.getCountryName());
     }
 }
