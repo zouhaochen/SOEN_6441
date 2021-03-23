@@ -19,7 +19,7 @@ public class OrderInfo {
     /**
      * The destination country.
      */
-    private String d_Destination;
+    private Country d_Destination;
     /**
      * The number of army to be moved.
      */
@@ -66,7 +66,7 @@ public class OrderInfo {
      *
      * @return the destination
      */
-    public String getDestination() {
+    public Country getDestination() {
         return d_Destination;
     }
 
@@ -75,7 +75,7 @@ public class OrderInfo {
      *
      * @param p_Destination the destination
      */
-    public void setDestination(String p_Destination) {
+    public void setDestination(Country p_Destination) {
         this.d_Destination = p_Destination;
     }
 

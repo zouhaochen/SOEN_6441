@@ -29,12 +29,11 @@ public class DeployOrder extends Order {
         }
 
         Player l_Player = getOrderInfo().getPlayer();
-        String l_Destination = getOrderInfo().getDestination();
         int l_ArmiesToDeploy = getOrderInfo().getNumberOfArmy();
         l_ArmiesToDeploy = Math.min(l_ArmiesToDeploy, l_Player.getReinforcementArmies());
 
         // deploy the armies, if there not enough armies left, deploy all the armies.
-        Country l_Country = l_Player.getCountriesInControl().get(l_Destination.toLowerCase());
+        Country l_Country = getOrderInfo().getDestination();
         l_Country.deployArmies(l_ArmiesToDeploy);
         if (!l_Player.deployReinforcementArmies(getOrderInfo().getNumberOfArmy())) {
             System.out.println("\nWarning: insufficient armies to deploy. Deploy only " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
@@ -53,7 +52,7 @@ public class DeployOrder extends Order {
         }
 
         Player l_Player = getOrderInfo().getPlayer();
-        String l_Destination = getOrderInfo().getDestination();
+        String l_Destination = getOrderInfo().getDestination().getCountryName();
         int l_ArmiesToDeploy = getOrderInfo().getNumberOfArmy();
         l_ArmiesToDeploy = Math.min(l_ArmiesToDeploy, l_Player.getReinforcementArmies());
 

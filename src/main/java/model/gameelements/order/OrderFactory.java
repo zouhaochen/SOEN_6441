@@ -1,11 +1,19 @@
 package model.gameelements.order;
 
+import model.GameData;
+import model.gameelements.Country;
 import model.gameelements.Player;
 
 /**
  * The class to create an object of subclass of Type Order based on Factory design pattern.
  */
 public class OrderFactory {
+
+    private static GameData D_GameData;
+
+    public static void setGameData(GameData p_GameData) {
+        D_GameData = p_GameData;
+    }
 
     /**
      * Create an object of type Order.
@@ -42,9 +50,19 @@ public class OrderFactory {
 
         OrderInfo l_OrderInfo = new OrderInfo();
         l_OrderInfo.setPlayer(p_Player);
-        l_OrderInfo.setDestination(l_CountryID);
+        l_OrderInfo.setDestination(findCountryByName(l_CountryID));
         l_OrderInfo.setNumberOfArmy(l_NumberOfArmy);
 
         return l_OrderInfo;
+    }
+
+    private static Country findCountryByName(String p_CountryId) {
+        for (Country l_Country : D_GameData.getCountryList()) {
+            if (l_Country.getCountryName().equalsIgnoreCase(p_CountryId)) {
+                return l_Country;
+            }
+        }
+
+        return null;
     }
 }
