@@ -1,9 +1,6 @@
-package model.gameelements.state;
+package model.gameelements.state.play;
 
-import controller.GameEngineController;
 import controller.MainPlayController;
-import model.GameData;
-import model.map.MapListing;
 import model.state.*;
 import model.state.play.AddPlayer;
 import model.state.play.Play;
@@ -16,20 +13,17 @@ import java.util.HashMap;
 import static org.junit.Assert.assertEquals;
 
 
-public class StateTest {
-
+public class PlayStateTest {
 
     /**
-     * The MainPlayController class to be tested.
+     * The Play package to be tested.
      */
     public MainPlayController d_MainPlayController = new MainPlayController();
 
     @Test
     public void testEditState() {
         d_MainPlayController.setPhase(new Edit(d_MainPlayController));
-        d_MainPlayController.gamePhase.setPlayers();
-        d_MainPlayController.gamePhase.assignCountries();
-        d_MainPlayController.gamePhase.loadMap();
+        d_MainPlayController.gamePhase.deploy();
     }
 
     @Test

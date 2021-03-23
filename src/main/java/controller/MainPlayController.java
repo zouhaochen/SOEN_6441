@@ -111,7 +111,7 @@ public class MainPlayController extends Observable {
                 mycommand = l_Scanner.nextLine();
                 System.out.println(" =====================================================");
                 //
-                // Calls the method corresponding to the action that the user has selected.
+                // Calls the method corresponding to the action that the user has selected.reflection
                 // Depending on what it the current state object, these method calls will
                 // have a different implementation.
                 //

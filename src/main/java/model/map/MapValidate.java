@@ -156,7 +156,7 @@ public class MapValidate {
 
         //Checking the number of continents
         if (l_A == 0) {
-            System.out.println("There is no continents!");
+            System.out.println("The map is not completed!");
             l_State = 1;
             return l_State;
 
@@ -165,7 +165,7 @@ public class MapValidate {
         //Checking the number of countries
         int l_B = l_Mdl.getCountryNumber(p_File);
         if (l_B == 0) {
-            System.out.println("There is no countries!");
+            System.out.println("The map is not completed!");
             l_State = 2;
             return l_State;
         }
@@ -173,12 +173,12 @@ public class MapValidate {
         //Checking the number of borders
         int l_C = l_Neighbourlist.size();
         if (l_C == 0) {
-            System.out.println("There is no borders!");
+            System.out.println("The map is not completed!");
             l_State = 3;
             return l_State;
         }
         if (l_C != l_B) {
-            System.out.println("The borders is incomplete!");
+            System.out.println("The map is not completed!");
             l_State = 4;
             return l_State;
         }
