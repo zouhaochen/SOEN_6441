@@ -1,6 +1,8 @@
 package model.gameelements;
 
 
+import model.Observable;
+
 /**
  * This is a class to represent the concept of an area on a model.map.
  * This serves as a parent class of Continent and Country.

@@ -12,6 +12,10 @@ public enum CommandType {
      */
     VOID("void"),
     /**
+     * Exit command type.
+     */
+    EXIT("exit"),
+    /**
      * Edit continent command type.
      */
     EDIT_CONTINENT("editcontinent"),
@@ -54,7 +58,27 @@ public enum CommandType {
     /**
      * Deploy command type.
      */
-    DEPLOY("deploy");
+    DEPLOY("deploy"),
+    /**
+     * Advance command type
+     */
+    ADVANCE("advance"),
+    /**
+     * Bomb command type
+     */
+    BOMB("bomb"),
+    /**
+     * Blockade command type
+     */
+    BLOCKADE("blockade"),
+    /**
+     * Airlift command type
+     */
+    AIRLIFT("airlift"),
+    /**
+     * Negotiate command type
+     */
+    NEGOTIATE("negotiate");
 
     /**
      * The label of the command.

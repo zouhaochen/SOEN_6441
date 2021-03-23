@@ -5,7 +5,7 @@ import command.CommandType;
 /**
  * The class to represent an void order.
  */
-public class Order {
+public abstract class Order {
 
     /**
      * The order info.
@@ -15,24 +15,6 @@ public class Order {
      * The order type.
      */
     protected CommandType d_Type;
-
-    /**
-     * Instantiates a new Order.
-     */
-    public Order() {
-        d_Type = CommandType.getCommandFromLabel("void");
-        d_OrderInfo = null;
-    }
-
-    /**
-     * Executes a void order and the subclasses are supposed to override this method.
-     *
-     * @return false always since this is a void order
-     */
-    public boolean execute() {
-        System.out.println("Void order is not able to execute");
-        return false;
-    }
 
     /**
      * Gets order info.
@@ -69,4 +51,18 @@ public class Order {
     public void setType(String p_Type) {
         d_Type = CommandType.getCommandFromLabel(p_Type);
     }
+
+    /**
+     * Validate an order.
+     *
+     * @return true if the order is valid for execution, false otherwise
+     */
+    public abstract boolean valid();
+
+    /**
+     * Executes an order and the subclasses are supposed to override this method.
+     *
+     * @return true if the order executes successfully, false otherwise
+     */
+    public abstract boolean execute();
 }

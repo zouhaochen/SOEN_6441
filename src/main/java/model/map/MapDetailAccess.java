@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author Zitao Wang
  * @version 1.0.0
  */
-public class MapDetailAccess {
+public class MapDetailAccess extends MapGraph {
 
 
     /**

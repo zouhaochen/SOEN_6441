@@ -1,12 +1,12 @@
 package model;
 
-import gameplay.GamePhase;
 import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;
 import model.map.MapDetailAccess;
 import model.map.MapGraph;
 import model.map.MapListing;
+import model.state.Phase;
 
 
 import java.io.File;
@@ -17,7 +17,7 @@ import java.util.Scanner;
 /**
  * This class is a wrapper class containing the elements and the current states of the game
  */
-public class GameData {
+public class GameData extends Observable{
 
     /**
      * Map file
@@ -37,7 +37,7 @@ public class GameData {
     /**
      * Game current phase
      */
-    private GamePhase d_CurrentPhase;
+    private Phase d_CurrentPhase;
     /**
      * Total player now in game
      */
@@ -67,7 +67,6 @@ public class GameData {
      */
     private ArrayList<Player> d_PlayerList;
 
-    private static GameData GAME_DATA;
 
     /**
      * game data constructor
@@ -84,7 +83,6 @@ public class GameData {
         this.d_BorderList = new ArrayList<>();
         this.d_MapListing = new MapListing();
     }
-
 
     /**
      * Border list getter
@@ -194,7 +192,7 @@ public class GameData {
     public void setPlayerList(ArrayList<Player> d_PlayerList) {
         // set total player number to list length
         this.d_PlayerList = d_PlayerList;
-//        d_TotalPlayer = d_PlayerList.size();
+        notifyGameDataObs(this);
     }
 
 
@@ -203,7 +201,7 @@ public class GameData {
      *
      * @return current Game phase object
      */
-    public GamePhase getCurrentPhase() {
+    public Phase getCurrentPhase() {
         return d_CurrentPhase;
     }
 
@@ -212,7 +210,7 @@ public class GameData {
      *
      * @param p_currentPhase new Game phase you want to set
      */
-    public void setCurrentPhase(GamePhase p_currentPhase) {
+    public void setCurrentPhase(Phase p_currentPhase) {
         d_CurrentPhase = p_currentPhase;
     }
 
@@ -352,6 +350,7 @@ public class GameData {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
 }

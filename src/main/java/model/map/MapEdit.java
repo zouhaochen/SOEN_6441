@@ -125,9 +125,9 @@ public class MapEdit {
                     "[borders]");
             l_Bw.flush();
             l_Bw.close();
+            FLAG = 3;
             // check model.map validation
             MapValidate.check(l_F3);
-            FLAG = 3;
         }
     }
 
