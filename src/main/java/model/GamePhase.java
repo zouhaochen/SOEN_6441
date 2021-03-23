@@ -1,4 +1,4 @@
-package gameplay;
+package model;
 
 /**
  * Phase of the game

@@ -1,6 +1,7 @@
 package model.gameelements;
 
 import command.CommandValidator;
+import model.Observable;
 import model.gameelements.order.Order;
 import model.gameelements.order.OrderFactory;
 
@@ -9,7 +10,9 @@ import java.util.*;
 /**
  * player object that reprsent in game.
  */
-public class Player {
+public class
+
+Player extends Observable {
 
     /**
      * id counter (increment)
@@ -37,26 +40,61 @@ public class Player {
      */
     private int d_ReinforcementArmies;
     /**
-     * command validator.
+     * check player obj whether existed
      */
-    private CommandValidator d_CommandValidator;
-
     private boolean d_playerExist = true;
 
-    private List<Card> d_cards;
+    /**
+     * user's card list
+     */
+    private List<Card> d_Cards;
+
+
+    /**
+     * the player can be attacked
+     * it is int array, [x,y] x stand for current player who want diplomacy, y is target player
+     */
+    private int[] d_DiplomacyFlag;
 
     /**
      * Player class constructor
      *
      * @param p_Colour           get player name as string type.
-     * @param p_CommandValidator add new commandValidator object
      */
-    public Player(String p_Colour, CommandValidator p_CommandValidator) {
+    public Player(String p_Colour) {
         d_Id = ++D_COUNT;
         d_Colour = p_Colour;
         d_CountriesInControl = new HashMap<>();
         d_OrdersInCurrentTurn = new ArrayDeque<>();
-        d_CommandValidator = p_CommandValidator;
+        d_DiplomacyFlag = new int[2];
+        d_DiplomacyFlag[0]=d_Id;
+    }
+
+    /**
+     * Attack flag setter
+     *
+     * @param p_TargetDiplomaPlayer to set flag
+     */
+    public void setPlayerDiplomacy(Player p_TargetDiplomaPlayer) {
+        this.d_DiplomacyFlag[1]=p_TargetDiplomaPlayer.getId();
+    }
+
+    /**
+     * reset the Diaplomacy
+     */
+    public void resetPlayerDiplomacy(){
+        int[] l_Arr=new int[2];
+        l_Arr[0]=this.d_Id;
+        this.d_DiplomacyFlag =l_Arr;
+    }
+
+    /**
+     * Attackable Flag getter
+     *
+     * @return boolean flag
+     */
+    public int[] getPlayerDiplomacy() {
+        return d_DiplomacyFlag;
     }
 
     /**
@@ -78,7 +116,7 @@ public class Player {
     }
 
     /**
-     * get player name.
+     * set player name.
      *
      * @return return the value of player name.
      */
@@ -170,21 +208,40 @@ public class Player {
     /**
      * following the command to issue order and add the order to order list.
      */
-    public void issueOrder() {
-        // read the command from a player
-        String l_Command;
-        do {
-            System.out.println("\nPlease enter the command: \n");
-            Scanner l_Scanner = new Scanner(System.in);
-            l_Command = l_Scanner.nextLine();
-        } while (!d_CommandValidator.validate(l_Command));
-
-        // create an order
-        String[] l_CommandArr = l_Command.split(" ");
-        Order l_Order = OrderFactory.CreateOrder(l_CommandArr, this);
+    public boolean issueOrder() {
+        Order l_Order = createOrder();
         if (l_Order != null) {
             addOrderToList(l_Order);
+            return true;
         }
+
+        return false;
+    }
+
+    public Order createOrder() {
+        String l_Reply;
+        Scanner l_Scanner = new Scanner(System.in);
+        do {
+            System.out.println("\nPlayer " + d_Colour + "do you want to create an order? (y/n) ");
+            l_Reply = l_Scanner.nextLine().trim();
+        } while (!l_Reply.equalsIgnoreCase("y") && !l_Reply.equalsIgnoreCase("n"));
+
+        if (l_Reply.equalsIgnoreCase("y")) {
+
+            // read the command from a player
+            String l_Command;
+            do {
+                System.out.println("\nPlease enter the command: \n");
+                l_Command = l_Scanner.nextLine();
+            } while (!CommandValidator.validate(l_Command));
+
+            // create an order
+            String[] l_CommandArr = l_Command.split(" ");
+            return OrderFactory.CreateOrder(l_CommandArr, this);
+        }
+
+        return null;
+
     }
 
     /**
@@ -232,10 +289,11 @@ public class Player {
 
     /**
      * Cards the player has available to play
+     *
      * @return list of cards
      */
     public List<Card> getCards() {
-        return d_cards;
+        return d_Cards;
     }
 
 }
