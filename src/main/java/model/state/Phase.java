@@ -71,7 +71,7 @@ public class Phase {
     }
 
     // order execute
-    public void execute() {
+    public void executeOrder() {
         printInvalidCommandMessage();
     }
 

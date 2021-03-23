@@ -111,6 +111,13 @@ public class CommandValidator {
             case DEPLOY:
                 l_Result = validateDeploy(p_CommandArr);
                 break;
+            case ADVANCE:
+            case BOMB:
+            case BLOCKADE:
+            case AIRLIFT:
+            case NEGOTIATE:
+                l_Result = false;
+                break;
             default:
                 printInvalidCommandInCurrentPhase();
                 return false;

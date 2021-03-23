@@ -163,21 +163,40 @@ Player extends Observable {
     /**
      * following the command to issue order and add the order to order list.
      */
-    public void issueOrder() {
-        // read the command from a player
-        String l_Command;
-        do {
-            System.out.println("\nPlease enter the command: \n");
-            Scanner l_Scanner = new Scanner(System.in);
-            l_Command = l_Scanner.nextLine();
-        } while (!CommandValidator.validate(l_Command));
-
-        // create an order
-        String[] l_CommandArr = l_Command.split(" ");
-        Order l_Order = OrderFactory.CreateOrder(l_CommandArr, this);
+    public boolean issueOrder() {
+        Order l_Order = createOrder();
         if (l_Order != null) {
             addOrderToList(l_Order);
+            return true;
         }
+
+        return false;
+    }
+
+    public Order createOrder() {
+        String l_Reply;
+        Scanner l_Scanner = new Scanner(System.in);
+        do {
+            System.out.println("\nPlayer " + d_Colour + "do you want to create an order? (y/n) ");
+            l_Reply = l_Scanner.nextLine().trim();
+        } while (!l_Reply.equalsIgnoreCase("y") && !l_Reply.equalsIgnoreCase("n"));
+
+        if (l_Reply.equalsIgnoreCase("y")) {
+
+            // read the command from a player
+            String l_Command;
+            do {
+                System.out.println("\nPlease enter the command: \n");
+                l_Command = l_Scanner.nextLine();
+            } while (!CommandValidator.validate(l_Command));
+
+            // create an order
+            String[] l_CommandArr = l_Command.split(" ");
+            return OrderFactory.CreateOrder(l_CommandArr, this);
+        }
+
+        return null;
+
     }
 
     /**

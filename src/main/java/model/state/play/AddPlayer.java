@@ -47,7 +47,6 @@ public class AddPlayer extends Startup{
     @Override
     public void next() {
         d_ml.setPhase(new AssignCountry(d_ml));
-        d_ml.gamePhase.assignCountries();
     }
 
     @Override

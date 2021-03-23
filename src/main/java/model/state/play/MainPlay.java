@@ -2,7 +2,6 @@ package model.state.play;
 
 import controller.MainPlayController;
 import model.gameelements.Player;
-import model.state.End;
 
 /**
  *	ConcreteState of the State pattern. In this example, defines behavior
