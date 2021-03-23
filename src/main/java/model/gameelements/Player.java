@@ -40,10 +40,22 @@ public class Player {
      * command validator.
      */
     private CommandValidator d_CommandValidator;
-
+    /**
+     * check player obj whether existed
+     */
     private boolean d_playerExist = true;
 
-    private List<Card> d_cards;
+    /**
+     * user's card list
+     */
+    private List<Card> d_Cards;
+
+
+    /**
+     * the player can be attacked
+     * it is int array, [x,y] x stand for current player who want diplomacy, y is target player
+     */
+    private int[] d_DiplomacyFlag;
 
     /**
      * Player class constructor
@@ -57,6 +69,35 @@ public class Player {
         d_CountriesInControl = new HashMap<>();
         d_OrdersInCurrentTurn = new ArrayDeque<>();
         d_CommandValidator = p_CommandValidator;
+        d_DiplomacyFlag = new int[2];
+        d_DiplomacyFlag[0]=d_Id;
+    }
+
+    /**
+     * Attack flag setter
+     *
+     * @param p_TargetDiplomaPlayer to set flag
+     */
+    public void setPlayerDiplomacy(Player p_TargetDiplomaPlayer) {
+        this.d_DiplomacyFlag[1]=p_TargetDiplomaPlayer.getId();
+    }
+
+    /**
+     * reset the Diaplomacy
+     */
+    public void resetPlayerDiplomacy(){
+        int[] l_Arr=new int[2];
+        l_Arr[0]=this.d_Id;
+        this.d_DiplomacyFlag =l_Arr;
+    }
+
+    /**
+     * Attackable Flag getter
+     *
+     * @return boolean flag
+     */
+    public int[] getPlayerDiplomacy() {
+        return d_DiplomacyFlag;
     }
 
     /**
@@ -232,10 +273,11 @@ public class Player {
 
     /**
      * Cards the player has available to play
+     *
      * @return list of cards
      */
     public List<Card> getCards() {
-        return d_cards;
+        return d_Cards;
     }
 
 }

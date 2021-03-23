@@ -48,6 +48,11 @@ public class DiplomacyOrder extends Order {
 			return false;
 		}
 
+
+		// setup diplomacy to each other
+		d_player.setPlayerDiplomacy(d_targetPlayer);
+		d_targetPlayer.setPlayerDiplomacy(d_player);
+
 		// add order to game engine
 /*		if(){
 

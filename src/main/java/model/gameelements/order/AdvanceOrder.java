@@ -1,6 +1,5 @@
 package model.gameelements.order;
 
-import model.GameData;
 import model.gameelements.Country;
 import model.gameelements.Player;
 
@@ -213,10 +212,14 @@ public class AdvanceOrder extends Order {
             l_valid =  false;
         }
 
-        //check if DIPLOMACY
-        /*if(){
+        // if target country is un-attackable, because of diplomacy
+        // only two countries with diplomacy cant attack each other
+        // getPlayerDiplomacy()[0] is target player id that register during diploma order.
+        if (l_targetPlayer.getPlayerDiplomacy()[0]==d_player.getId()){
+            l_valid = false;
+        }
 
-        }*/
+
 
         //check if fromCountry and toCountry are neighbors
         if(d_attackCountry.getBorderCountries().get(d_defendCountry.getCountryId()) == null) {
