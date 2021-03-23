@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class AdvanceOrder extends Order {
 
-    private Country d_fromCountry;
-    private Country d_toCountry;
+    private Country d_attackCountry;
+    private Country d_defendCountry;
     private int d_numberOfArmies;
     private Player d_player;
 
@@ -17,16 +17,16 @@ public class AdvanceOrder extends Order {
      * Instantiates a new object of type AdvanceOrder.
      *
      * @param p_player
-     * @param p_fromCountry
-     * @param p_toCountry
+     * @param p_attackCountry
+     * @param p_defendCountry
      * @param p_numberOfArmies
      */
-    public AdvanceOrder(Player p_player, Country p_fromCountry, Country p_toCountry, int p_numberOfArmies) {
+    public AdvanceOrder(Player p_player, Country p_attackCountry, Country p_defendCountry, int p_numberOfArmies) {
         super();
         setType("Advance");
         d_player = p_player;
-        d_fromCountry = p_fromCountry;
-        d_toCountry = p_toCountry;
+        d_attackCountry = p_attackCountry;
+        d_defendCountry = p_defendCountry;
         d_numberOfArmies = p_numberOfArmies;
     }
 
@@ -35,17 +35,17 @@ public class AdvanceOrder extends Order {
      *
      * @return
      */
-    public Country getFromCountry() {
-        return d_fromCountry;
+    public Country getAttackCountry() {
+        return d_attackCountry;
     }
 
     /**
      * Set attack country
      *
-     * @param fromCountry
+     * @param attackCountry
      */
-    public void setFromCountry(Country fromCountry) {
-        this.d_fromCountry = fromCountry;
+    public void setAttackCountry(Country attackCountry) {
+        this.d_attackCountry = attackCountry;
     }
 
     /**
@@ -53,17 +53,17 @@ public class AdvanceOrder extends Order {
      *
      * @return
      */
-    public Country getToCountry() {
-        return d_toCountry;
+    public Country getDefendCountry() {
+        return d_defendCountry;
     }
 
     /**
      * Set defend country
      *
-     * @param toCountry
+     * @param defendCountry
      */
-    public void setToCountry(Country toCountry) {
-        this.d_toCountry = toCountry;
+    public void setDefendCountry(Country defendCountry) {
+        this.d_defendCountry = defendCountry;
     }
 
     /**
@@ -113,23 +113,23 @@ public class AdvanceOrder extends Order {
         if(valid()) {
 
             //check armies number to advance
-            if(d_fromCountry.getArmies() < d_numberOfArmies) {
-                d_numberOfArmies = d_fromCountry.getArmies();
+            if(d_attackCountry.getArmies() < d_numberOfArmies) {
+                d_numberOfArmies = d_attackCountry.getArmies();
             }
 
             //if toCountry is owned by the player then advance armies
-            if(d_toCountry.getOwner().equals(d_player)) {
+            if(d_defendCountry.getOwner().equals(d_player)) {
                 //move armies
-                d_fromCountry.setArmies(d_fromCountry.getArmies() - d_numberOfArmies);
-                d_toCountry.setArmies(d_toCountry.getArmies() + d_numberOfArmies);
+                d_attackCountry.setArmies(d_attackCountry.getArmies() - d_numberOfArmies);
+                d_defendCountry.setArmies(d_defendCountry.getArmies() + d_numberOfArmies);
             }
 
             //else toCountry is owned by opponent then attack
             else {
                 Random l_randomNumber = new Random();
                 for(int i = 0; i < d_numberOfArmies; i++) {
-                    if(d_toCountry.getArmies() == 0) {
-                        exchangeCountryOwner(d_toCountry, d_fromCountry, d_numberOfArmies);
+                    if(d_defendCountry.getArmies() == 0) {
+                        exchangeCountryOwner(d_defendCountry, d_attackCountry, d_numberOfArmies);
                         return true;
                     }
 
@@ -137,7 +137,7 @@ public class AdvanceOrder extends Order {
                     if((l_randomNumber.nextInt(10) + 1) <= 6) {
                         //random int between 1 and 10 (inclusive)
                         //defeat defend army
-                        d_toCountry.setArmies(d_toCountry.getArmies() - 1);
+                        d_defendCountry.setArmies(d_defendCountry.getArmies() - 1);
                         return true;
                     }
 
@@ -145,14 +145,14 @@ public class AdvanceOrder extends Order {
                     if((l_randomNumber.nextInt(10) + 1) <= 7) {
                         //random int between 1 and 10 (inclusive)
                         //defeat attack army
-                        d_fromCountry.setArmies(d_fromCountry.getArmies() - 1);
+                        d_attackCountry.setArmies(d_attackCountry.getArmies() - 1);
                         d_numberOfArmies--;
                         i--;
                     }
                 }
 
-                if(d_toCountry.getArmies() == 0 && d_numberOfArmies > 0) {
-                    exchangeCountryOwner(d_toCountry, d_fromCountry, d_numberOfArmies);
+                if(d_defendCountry.getArmies() == 0 && d_numberOfArmies > 0) {
+                    exchangeCountryOwner(d_defendCountry, d_attackCountry, d_numberOfArmies);
                 }
             }
         }
@@ -177,16 +177,16 @@ public class AdvanceOrder extends Order {
      */
     public boolean valid(){
         boolean l_valid = true;
-        Player l_targetPlayer = d_fromCountry.getOwner();
+        Player l_targetPlayer = d_attackCountry.getOwner();
         if(l_targetPlayer == null || !l_targetPlayer.getPlayerExist()){
             System.out.println("player of target country does not exist" );
             l_valid = false;
         }
 
         //check whether player is fromCountry owner
-        if(!d_fromCountry.getOwner().equals(d_player)) {
+        if(!d_attackCountry.getOwner().equals(d_player)) {
             System.out.println("Could not perform the advance order moving " + d_numberOfArmies + " armies from " +
-                    d_fromCountry.getCountryName() + " to " + d_toCountry.getCountryName() + " because " + d_player.getColour() + " does not own " + d_fromCountry + ".");
+                    d_attackCountry.getCountryName() + " to " + d_defendCountry.getCountryName() + " because " + d_player.getColour() + " does not own " + d_attackCountry + ".");
             l_valid =  false;
         }
 
@@ -196,9 +196,9 @@ public class AdvanceOrder extends Order {
         }*/
 
         //check if fromCountry and toCountry are neighbors
-        if(d_fromCountry.getBorderCountries().get(d_toCountry.getCountryId()) == null) {
+        if(d_attackCountry.getBorderCountries().get(d_defendCountry.getCountryId()) == null) {
             System.out.println("Could not perform the advance order moving " + d_numberOfArmies + " armies from " +
-                    d_fromCountry.getCountryName() + " to " + d_toCountry.getCountryName() + " because they are not neighbors.");
+                    d_attackCountry.getCountryName() + " to " + d_defendCountry.getCountryName() + " because they are not neighbors.");
             l_valid =  false;
         }
 
@@ -210,6 +210,6 @@ public class AdvanceOrder extends Order {
      */
     public void printOrder(){
 
-        System.out.println("Advance Order created: " + d_player.getColour() + " is sending " + d_numberOfArmies + " armies from " + d_fromCountry.getCountryName() + " to " + d_toCountry.getCountryName());
+        System.out.println("Advance Order created: " + d_player.getColour() + " is sending " + d_numberOfArmies + " armies from " + d_attackCountry.getCountryName() + " to " + d_defendCountry.getCountryName());
     }
 }
