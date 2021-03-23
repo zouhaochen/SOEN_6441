@@ -4,6 +4,7 @@ import model.GameData;
 import model.gameelements.Country;
 import model.gameelements.Player;
 
+import java.util.Map;
 import java.util.Random;
 
 public class AdvanceOrder extends Order {
@@ -129,7 +130,7 @@ public class AdvanceOrder extends Order {
                 Random l_randomNumber = new Random();
                 for(int i = 0; i < d_numberOfArmies; i++) {
                     if(d_defendCountry.getArmies() == 0) {
-                        exchangeCountryOwner(d_defendCountry, d_attackCountry, d_numberOfArmies);
+                        exchangeCountryOwner(d_defendCountry, d_player, d_numberOfArmies);
                         return true;
                     }
 
@@ -152,7 +153,7 @@ public class AdvanceOrder extends Order {
                 }
 
                 if(d_defendCountry.getArmies() == 0 && d_numberOfArmies > 0) {
-                    exchangeCountryOwner(d_defendCountry, d_attackCountry, d_numberOfArmies);
+                    exchangeCountryOwner(d_defendCountry, d_player, d_numberOfArmies);
                 }
             }
         }
@@ -163,11 +164,33 @@ public class AdvanceOrder extends Order {
      * When attacker control defender's country,
      * this method performs the exchange of the countries and armies.
      *
-     * @param p_toCountry
-     * @param p_fromCountry
-     * @param p_numberOfArmies
+     * @param p_TargetCountry
+     * @param p_NewOwner
+     * @param p_NumberOfArmies
      */
-    private void exchangeCountryOwner(Country p_toCountry, Country p_fromCountry, int p_numberOfArmies) {
+    private void exchangeCountryOwner(Country p_TargetCountry, Player p_NewOwner, int p_NumberOfArmies) {
+        // get previous player from country obj
+        Player l_PreviousOwner=p_TargetCountry.getOwner();
+        Map<String, Country> l_PreOwnerCountryList=l_PreviousOwner.getCountriesInControl();
+        for (Map.Entry<String,Country> l_Entry : l_PreOwnerCountryList.entrySet()){
+            // check if country name in previous owner country list, then remove it.
+            if (l_Entry.getKey().equalsIgnoreCase(p_TargetCountry.getCountryName())){
+                l_PreOwnerCountryList.remove(l_Entry.getKey());
+            }
+        }
+        // set previous owner his new country list
+        l_PreviousOwner.setCountriesInControl(l_PreOwnerCountryList);
+        // now change the target country's owner
+        p_TargetCountry.setOwner(p_NewOwner);
+        // assign the number of armies
+        p_TargetCountry.setArmies(p_NumberOfArmies);
+        // add target country to new owner's country list
+        p_NewOwner.assignCountry(p_TargetCountry);
+
+
+
+
+
     }
 
     /**
