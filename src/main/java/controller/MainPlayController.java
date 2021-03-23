@@ -24,7 +24,7 @@ public class MainPlayController extends Observable {
     public Phase gamePhase;
 
     String mystart;
-    int mycommand;
+    String mycommand;
     /**
      * model.map file that use to load represent game model.map.
      */
@@ -97,19 +97,18 @@ public class MainPlayController extends Observable {
                 System.out.println(" =====================================================");
                 System.out.println("| #   PHASE                      : command           |");
                 System.out.println(" =====================================================");
-                System.out.println("| 1.  Edit:PostLoad              : edit map          |");
-                System.out.println("| 2.  Edit:PostLoad              : save map          |");
-                System.out.println("| 3.  Play except for LoadMap    : show map          |");
-                System.out.println("| 4.  Play:Startup:LoadMap       : load map          |");
-                System.out.println("| 5.  Play:Startup:AddPlayer     : add Players       |");
-                //System.out.println("| 6.  Play:Startup:AssignCountry : assign countries  |");
-                System.out.println("| 6.  Play:MainPlay:IssueOrder   : issue orders      |");
+                System.out.println("| 1.  Edit                       : editmap           |");
+                System.out.println("| 2.  Edit                       : savemap           |");
+                System.out.println("| 3.  Play except for LoadMap    : showmap           |");
+                System.out.println("| 4.  Play:Startup:LoadMap       : loadmap           |");
+                System.out.println("| 5.  Play:Startup:AddPlayer     : addPlayers        |");
+                System.out.println("| 6.  Play:MainPlay:IssueOrder   : issueorders       |");
                 System.out.println("| 7.  Play:MainPlay:advance      : advance           |");
                 System.out.println("| 8.  Play:MainPlay:cards        : cards             |");
-                System.out.println("| 9. Any                        : end               |");
+                System.out.println("| 9. Any                        : end                |");
                 System.out.println(" =====================================================");
-                System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase number: ");
-                mycommand = l_Scanner.nextInt();
+                System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase command: ");
+                mycommand = l_Scanner.nextLine();
                 System.out.println(" =====================================================");
                 //
                 // Calls the method corresponding to the action that the user has selected.
@@ -117,31 +116,31 @@ public class MainPlayController extends Observable {
                 // have a different implementation.
                 //
                 switch (mycommand) {
-                    case 1:
+                    case "editmap":
                         gamePhase.editMap();
                         break;
-                    case 2:
+                    case "savemap":
                         gamePhase.saveMap();
                         break;
-                    case 3:
+                    case "showmap":
                         gamePhase.showMap();
                         break;
-                    case 4:
+                    case "loadmap":
                         gamePhase.loadMap();
                         break;
-                    case 5:
+                    case "addplayer":
                         gamePhase.setPlayers();
                         break;
-                    case 6:
+                    case "issueorders":
                         gamePhase.issueOrder();
                         break;
-                    case 7:
+                    case "advance":
                         gamePhase.advance();
                         break;
-                    case 8:
+                    case "cards":
                         gamePhase.cards();
                         break;
-                    case 9:
+                    case "end":
                         gamePhase.endGame();
                         break;
                     default:
@@ -150,7 +149,7 @@ public class MainPlayController extends Observable {
             } while (!(gamePhase instanceof End));
 
 
-        } while (mycommand != 3);
+        } while (mycommand.equals("end"));
 
     }
 
