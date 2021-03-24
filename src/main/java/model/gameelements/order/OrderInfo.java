@@ -9,9 +9,13 @@ import model.gameelements.Player;
 public class OrderInfo {
 
     /**
-     * The player.
+     * The action player.
      */
-    private Player d_Player;
+    private Player d_Initiator;
+    /**
+     * The target player.
+     */
+    private Player d_TargetPlayer;
     /**
      * The departure country.
      */
@@ -26,21 +30,39 @@ public class OrderInfo {
     private int d_NumberOfArmy;
 
     /**
-     * Gets player.
+     * Gets initiator.
      *
-     * @return the player
+     * @return the initiator
      */
-    public Player getPlayer() {
-        return d_Player;
+    public Player getInitiator() {
+        return d_Initiator;
     }
 
     /**
-     * Sets player.
+     * Sets initiator.
      *
-     * @param p_Player the p player
+     * @param p_Player the initiator
      */
-    public void setPlayer(Player p_Player) {
-        this.d_Player = p_Player;
+    public void setInitiator(Player p_Player) {
+        this.d_Initiator = p_Player;
+    }
+
+    /**
+     * Gets target player.
+     *
+     * @return the target player
+     */
+    public Player getTargetPlayer() {
+        return d_TargetPlayer;
+    }
+
+    /**
+     * Sets target player.
+     *
+     * @param p_TargetPlayer the target player
+     */
+    public void setTargetPlayer(Player p_TargetPlayer) {
+        this.d_TargetPlayer = p_TargetPlayer;
     }
 
     /**

@@ -70,7 +70,7 @@ public class BlockadeOrder extends Order {
      */
 	public void printOrder() {
 		System.out.println("Blockade order issued by player " + this.d_player.getColour());
-		System.out.println("Blockade " + this.d_targetCountry.getCountryName());
+		System.out.println("Blockade " + this.d_targetCountry.getName());
 	}
 
 }

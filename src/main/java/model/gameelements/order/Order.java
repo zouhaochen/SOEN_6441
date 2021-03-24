@@ -65,4 +65,9 @@ public abstract class Order {
      * @return true if the order executes successfully, false otherwise
      */
     public abstract boolean execute();
+
+    /**
+     * print the order
+     */
+    public abstract void printOrder();
 }

@@ -3,89 +3,113 @@ package model.gameelements.order;
 import model.gameelements.Card;
 import model.gameelements.Player;
 
+/**
+ * The type Diplomacy order.
+ */
 public class DiplomacyOrder extends Order {
 
-	private Player d_player;
-	private Player d_targetPlayer;
+    private Player d_Player;
+    private Player d_TargetPlayer;
 
-	/**
-	 * Instantiates a new object of type DiplomacyOrder.
-	 *
-	 * @param p_player
-	 * @param p_targetPlayer
-	 */
-	public DiplomacyOrder(Player p_player, Player p_targetPlayer) {
-		super();
-		setType("Advance");
-		d_targetPlayer = p_targetPlayer;
-		d_player = p_player;
-	}
+    /**
+     * Instantiates a new object of type DiplomacyOrder.
+     *
+     * @param p_Player       the p player
+     * @param p_TargetPlayer the p target player
+     */
+    public DiplomacyOrder(Player p_Player, Player p_TargetPlayer) {
+        super();
+        setType("Diplomacy");
+        d_TargetPlayer = p_TargetPlayer;
+        d_Player = p_Player;
+    }
 
-	/**
-	 * get the player of the order
-	 *
-	 * @return the player
-	 */
-	public Player getPlayer() {
-		return d_player;
-	}
-	
-	/**
-	 * get the target player of the order
-	 *
-	 * @return the Target player
-	 */
-	public Player getTargetPlayer() {
-		return this.d_targetPlayer;
-	}
+    /**
+     * Instantiates a new Diplomacy order.
+     *
+     * @param p_OrderInfo the order info
+     */
+    public DiplomacyOrder(OrderInfo p_OrderInfo) {
+        this(p_OrderInfo.getInitiator(), p_OrderInfo.getTargetPlayer());
+        this.setOrderInfo(p_OrderInfo);
+    }
 
-	/**
-	 * Executes a diplomacy order.
-	 */
-	public boolean execute() {
-		if(!valid()) {
-			System.out.println("Diplomacy invalid, player not exist");
-			return false;
-		}
+    /**
+     * get the player of the order
+     *
+     * @return the player
+     */
+    public Player getPlayer() {
+        return d_Player;
+    }
 
-		// setup diplomacy to each other
-		d_player.setPlayerDiplomacy(d_targetPlayer);
-		d_targetPlayer.setPlayerDiplomacy(d_player);
-		
-		//print success information
-		System.out.println("Success applying diplomacy");
-		
-		printOrder();
-		return true;
-	}
+    /**
+     * get the target player of the order
+     *
+     * @return the Target player
+     */
+    public Player getTargetPlayer() {
+        return this.d_TargetPlayer;
+    }
 
-	/**
-	 * check validate
-	 *
-	 * @return true if valid
-	 */
-	public boolean valid(){
-		if(!d_player.getCards().contains(Card.NEGOTIATE)){
-			System.out.println("Player " + d_player.getColour() + " does not have a diplomacy card");
-			return false;
-		}
-		if(d_player != null && d_player.getPlayerExist()
-				&& d_targetPlayer != null && d_player.getPlayerExist()
-				&&  d_player != d_targetPlayer)
-			return true;
-		else
-			return false;
-	}
+    /**
+     * Executes a diplomacy order.
+     */
+    public boolean execute() {
+        if (!valid()) {
+            System.out.println("Diplomacy invalid, player not exist");
+            return false;
+        }
 
-	/**
-	 * print the order
-	 */
-	public void printOrder(){
-		System.out.println(this.toString());
-	}
+        // setup diplomacy to each other
+        d_Player.getUnattackablePlayers().add(d_TargetPlayer.getId());
+        d_TargetPlayer.getUnattackablePlayers().add(d_Player.getId());
 
-	public String toString(){
-		return String.format("Diplomacy order for player %s and player %s ",  this.d_player.getColour(), this.d_targetPlayer.getColour());
-	}
+        //print success information
+        System.out.println("Success applying diplomacy");
+
+        printOrder();
+        return true;
+    }
+
+    /**
+     * check validate
+     *
+     * @return true if valid
+     */
+    public boolean valid() {
+        if (!d_Player.getCards().contains(Card.NEGOTIATE)) {
+            System.out.println("Player " + d_Player.getColour() + " does not have a diplomacy card");
+            return false;
+        }
+
+        if ((d_Player != null && d_Player.getPlayerExist())
+                && (d_TargetPlayer != null && d_TargetPlayer.getPlayerExist())
+                && d_Player != d_TargetPlayer) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * print the order
+     */
+    @Override
+    public void printOrder() {
+        System.out.println("Diplomacy order issued by player " + d_Player.getColour());
+        System.out.println(this.toString());
+    }
+
+    /**
+     * Put the information of the order in a string
+     *
+     * @return a string
+     */
+    @Override
+    public String toString() {
+        return String.format("Diplomacy order for player %s and player %s ", this.d_Player.getColour(), this.d_TargetPlayer.getColour());
+    }
 
 }

@@ -24,11 +24,6 @@ public class Country extends Territory {
      * Hash Map for all connectivity for current country
      */
     private Map<String, Country> d_BorderCountries;
-    /**
-     * the country name
-     */
-    private String d_countryName;
-
 
     /**
      * Country Object Constructor
@@ -122,29 +117,13 @@ public class Country extends Territory {
     }
 
     /**
-     * get the country name
-     * @return the name of the country
-     */
-    public String getCountryName() {
-        return d_countryName;
-    }
-
-    /**
-     * set the name of the country
-     * @param p_countryName the country name
-     */
-    public void setCountryName(String p_countryName) {
-        this.d_countryName = p_countryName;
-    }
-
-    /**
      * add the 2 countries boarder connectivity
      * @param p_country the neighbor country
      * @return true if successfully added, otherwise return false
      */
     public boolean addBoarderConnection(Country p_country) {
         if(p_country != null) {
-            d_BorderCountries.put(p_country.getCountryName(), p_country);
+            d_BorderCountries.put(p_country.getName(), p_country);
             return true;
         }
         else

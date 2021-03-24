@@ -51,41 +51,28 @@ Player extends Observable {
 
 
     /**
-     * the player can be attacked
-     * it is int array, [x,y] x stand for current player who want diplomacy, y is target player
+     * the ids of the unattackable players
      */
-    private int[] d_DiplomacyFlag;
+    private List<Integer> d_UnattackablePlayers;
 
     /**
      * Player class constructor
      *
-     * @param p_Colour           get player name as string type.
+     * @param p_Colour get player name as string type.
      */
     public Player(String p_Colour) {
         d_Id = ++D_COUNT;
         d_Colour = p_Colour;
         d_CountriesInControl = new HashMap<>();
         d_OrdersInCurrentTurn = new ArrayDeque<>();
-        d_DiplomacyFlag = new int[2];
-        d_DiplomacyFlag[0]=d_Id;
+        d_UnattackablePlayers = new ArrayList<>();
     }
 
     /**
-     * Attack flag setter
-     *
-     * @param p_TargetDiplomaPlayer to set flag
+     * Reset the unattackable player list
      */
-    public void setPlayerDiplomacy(Player p_TargetDiplomaPlayer) {
-        this.d_DiplomacyFlag[1]=p_TargetDiplomaPlayer.getId();
-    }
-
-    /**
-     * reset the Diaplomacy
-     */
-    public void resetPlayerDiplomacy(){
-        int[] l_Arr=new int[2];
-        l_Arr[0]=this.d_Id;
-        this.d_DiplomacyFlag =l_Arr;
+    public void resetPlayerDiplomacy() {
+        this.d_UnattackablePlayers.clear();
     }
 
     /**
@@ -93,8 +80,17 @@ Player extends Observable {
      *
      * @return boolean flag
      */
-    public int[] getPlayerDiplomacy() {
-        return d_DiplomacyFlag;
+    public List<Integer> getUnattackablePlayers() {
+        return d_UnattackablePlayers;
+    }
+
+    /**
+     * Set unattackable players list
+     *
+     * @param p_PlayerIds the list of IDs
+     */
+    public void setUnattackablePlayers(List<Integer> p_PlayerIds) {
+        this.d_UnattackablePlayers = p_PlayerIds;
     }
 
     /**

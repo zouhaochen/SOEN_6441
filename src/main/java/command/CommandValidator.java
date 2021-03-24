@@ -39,7 +39,6 @@ public class CommandValidator {
             case "PostLoad":
                 l_Valid = validatePostLoadCommands(l_Command_arr);
                 break;
-            case "PreLoad":
             case "Startup":
             case "LoadMap":
                 l_Valid = validateLoadMapCommands(l_Command_arr);
@@ -112,11 +111,13 @@ public class CommandValidator {
                 l_Result = validateDeploy(p_CommandArr);
                 break;
             case ADVANCE:
+            case AIRLIFT:
+                l_Result = validateAdvance(p_CommandArr);
+                break;
             case BOMB:
             case BLOCKADE:
-            case AIRLIFT:
             case NEGOTIATE:
-                l_Result = false;
+                l_Result = validateSingleTargetCommand(p_CommandArr);
                 break;
             default:
                 printInvalidCommandInCurrentPhase();
@@ -279,6 +280,43 @@ public class CommandValidator {
         try {
             Integer.parseInt(p_Command_arr[2]);
         } catch (Exception p_Exception) {
+            printInvalidArguments();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Validates ADVANCE and AIRLIFT command.
+     *
+     * @param p_Command_arr an array of command components from the console
+     * @return true if the ADVANCE or AIRLIFT command is valid, false otherwise
+     */
+    private static boolean validateAdvance(String[] p_Command_arr) {
+        if (p_Command_arr.length != 4) {
+            printInvalidArguments();
+            return false;
+        }
+
+        try {
+            Integer.parseInt(p_Command_arr[3]);
+        } catch (Exception p_Exception) {
+            printInvalidArguments();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Validates single-target command.
+     *
+     * @param p_Command_arr an array of command components from the console
+     * @return true if the single-target command is valid, false otherwise
+     */
+    private static boolean validateSingleTargetCommand(String[] p_Command_arr) {
+        if (p_Command_arr.length != 2) {
             printInvalidArguments();
             return false;
         }
