@@ -218,4 +218,10 @@ public class MainPlayController extends Observable {
         System.out.println("\n=================================================");
     }
 
+    public void resetAttackableState() {
+        for (Player l_Player : d_GameData.getPlayerList()) {
+            l_Player.resetPlayerDiplomacy();
+        }
+    }
+
 }

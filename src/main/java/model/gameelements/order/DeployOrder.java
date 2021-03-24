@@ -38,8 +38,6 @@ public class DeployOrder extends Order {
         l_Country.deployArmies(l_ArmiesToDeploy);
         if (!l_Player.deployReinforcementArmies(getOrderInfo().getNumberOfArmy())) {
             System.out.println("\nWarning: insufficient armies to deploy. Deploy only " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
-        } else {
-            System.out.println("\n\"DEPLOY\" Execution is completed: deploy " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
         }
 
         printOrder();

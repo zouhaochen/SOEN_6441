@@ -74,6 +74,14 @@ public class BombOrder extends Order {
             return false;
         }
 
+        Player l_targetPlayer = d_TargetCountry.getOwner();
+        // if target country is un-attackable, because of diplomacy
+        // only two countries with diplomacy cant attack each other
+        if (d_Player.getUnattackablePlayers().contains(l_targetPlayer.getId())) {
+            System.out.println("Invalid Advance Order: you cannot attack Player " + l_targetPlayer.getColour() + " due to a Diplomacy card has been used by the player.");
+            return false;
+        }
+
         //check whether player is the target country owner
         if (d_Player.getCountriesInControl().containsKey(d_TargetCountry.getName().toLowerCase())) {
             System.out.println("Can not bomb player's own country");
@@ -83,7 +91,7 @@ public class BombOrder extends Order {
         //check whether the target country is adjacent to player's country
         boolean l_isAdjacent = false;
         for (Country l_Country : d_Player.getCountriesInControl().values()) {
-            if (l_Country.getBorderCountries().containsKey(d_TargetCountry.getName().toLowerCase())) {
+            if (l_Country.getBorderCountries().containsKey(d_TargetCountry.getName())) {
                 l_isAdjacent = true;
                 break;
             }

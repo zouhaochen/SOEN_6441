@@ -173,7 +173,6 @@ public class AdvanceOrder extends Order {
                 }
             }
 
-
             printOrder();
             return true;
         }
@@ -208,6 +207,8 @@ public class AdvanceOrder extends Order {
         // add target country to new owner's country list
         p_NewOwner.assignCountry(p_TargetCountry);
 
+        System.out.println("Player " + d_Player.getColour() + " has conquered Country " + p_TargetCountry.getName());
+
         // randomly give new owner a new card
         p_NewOwner.receiveNewCard(Card.getRandomCard());
     }
@@ -218,45 +219,45 @@ public class AdvanceOrder extends Order {
      * @return true if the order is valid; false otherwise
      */
     public boolean valid() {
-        boolean l_Valid = true;
-        Player l_targetPlayer = d_DefendCountry.getOwner();
-        if (l_targetPlayer == null || !l_targetPlayer.getPlayerExist()) {
-            System.out.println("player of target country does not exist");
-            l_Valid = false;
+        if (d_AttackCountry == null || d_DefendCountry == null) {
+            System.out.println("Invalid Advance Order: invalid country name.");
+            return false;
         }
 
-        if (d_AttackCountry == null || d_DefendCountry == null) {
-            System.out.println("Invalid country name.");
-            l_Valid = false;
+        Player l_targetPlayer = d_DefendCountry.getOwner();
+        if (l_targetPlayer == null || !l_targetPlayer.getPlayerExist()) {
+            System.out.println("Invalid Advance Order: player of target country does not exist");
+            return false;
         }
 
         //check whether player is fromCountry owner
         if (!d_AttackCountry.getOwner().equals(d_Player)) {
-            System.out.println("Could not perform the advance order moving " + d_NumberOfArmies + " armies from " +
+            System.out.println("Invalid Advance Order: could not perform the advance order moving " + d_NumberOfArmies + " armies from " +
                     d_AttackCountry.getName() + " to " + d_DefendCountry.getName() + " because " + d_Player.getColour() + " does not own " + d_AttackCountry + ".");
-            l_Valid = false;
+            return false;
         }
 
         // if target country is un-attackable, because of diplomacy
         // only two countries with diplomacy cant attack each other
         if (d_Player.getUnattackablePlayers().contains(l_targetPlayer.getId())) {
-            l_Valid = false;
+            System.out.println("Invalid Advance Order: you cannot attack Player " + l_targetPlayer.getColour() + " due to a Diplomacy card has been used by the player.");
+            return false;
         }
 
 
         // check if fromCountry and toCountry are neighbors
-        if (!d_AttackCountry.getBorderCountries().containsKey(d_DefendCountry.getName().toLowerCase())) {
-            System.out.println("Could not perform the advance order moving " + d_NumberOfArmies + " armies from " +
+        if (!d_AttackCountry.getBorderCountries().containsKey(d_DefendCountry.getName())) {
+            System.out.println("Invalid Advance Order: could not perform the advance order moving " + d_NumberOfArmies + " armies from " +
                     d_AttackCountry.getName() + " to " + d_DefendCountry.getName() + " because they are not neighbors.");
-            l_Valid = false;
+            return false;
         }
 
         // check if the number of armies is larger than zero
         if (d_NumberOfArmies <= 0) {
-            l_Valid = false;
+            return false;
         }
 
-        return l_Valid;
+        return true;
     }
 
     /**
