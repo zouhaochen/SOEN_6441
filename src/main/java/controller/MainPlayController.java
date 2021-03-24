@@ -140,7 +140,7 @@ public class MainPlayController extends Observable {
                         gamePhase.issueOrder();
                         break;
                     case "execute":
-                        gamePhase.advance();
+                        gamePhase.executeOrder();
                         break;
                     case "end":
                         gamePhase.endGame();

@@ -80,16 +80,6 @@ public class Phase {
         printInvalidCommandMessage();
     }
 
-    // advance commands
-    public void advance() {
-        printInvalidCommandMessage();
-    }
-
-    // cards commands
-    public void cards() {
-        printInvalidCommandMessage();
-    }
-
     // end command
     public void endGame() {
         d_ml.setPhase(new End(d_ml));
