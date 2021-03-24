@@ -43,6 +43,9 @@ public class OrderFactory {
             case "bomb":
                 l_Order = new BombOrder(generateOneArgumentOrderInfoFromCommand(p_Command, p_Player));
                 break;
+            case "blockade":
+                l_Order = new BlockadeOrder(generateOneArgumentOrderInfoFromCommand(p_Command, p_Player));
+                break;
             case "airlift":
                 l_Order = new AirliftOrder(generateThreeArgumentOrderInfoFromCommand(p_Command, p_Player));
                 break;
@@ -71,6 +74,7 @@ public class OrderFactory {
         l_OrderInfo.setInitiator(p_Player);
         l_OrderInfo.setDestination(D_GameData.getCountryByName(l_CountryID));
         l_OrderInfo.setNumberOfArmy(l_NumberOfArmy);
+        l_OrderInfo.setGameData(D_GameData);
 
         return l_OrderInfo;
     }
@@ -92,6 +96,7 @@ public class OrderFactory {
         l_OrderInfo.setDeparture(D_GameData.getCountryByName(l_DepartureCountryId));
         l_OrderInfo.setDestination(D_GameData.getCountryByName(l_DestinationCountryId));
         l_OrderInfo.setNumberOfArmy(l_NumberOfArmy);
+        l_OrderInfo.setGameData(D_GameData);
 
         return l_OrderInfo;
     }
@@ -109,6 +114,7 @@ public class OrderFactory {
         OrderInfo l_OrderInfo = new OrderInfo();
         l_OrderInfo.setInitiator(p_Player);
         l_OrderInfo.setDestination(D_GameData.getCountryByName(l_DestinationCountryId));
+        l_OrderInfo.setGameData(D_GameData);
 
         return l_OrderInfo;
     }
@@ -127,6 +133,7 @@ public class OrderFactory {
         OrderInfo l_OrderInfo = new OrderInfo();
         l_OrderInfo.setInitiator(p_Player);
         l_OrderInfo.setTargetPlayer(l_TargetPlayer);
+        l_OrderInfo.setGameData(D_GameData);
 
         return l_OrderInfo;
     }
