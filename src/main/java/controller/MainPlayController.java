@@ -108,7 +108,7 @@ public class MainPlayController extends Observable {
                 System.out.println("| 6.  Play:Startup:AssignCountry : assign            |");
                 System.out.println("| 7.  Play:MainPlay:IssueOrder   : issue             |");
                 System.out.println("| 8.  Play:MainPlay:ExecuteOrder : execute           |");
-                System.out.println("| 9. Any                        : end                |");
+                System.out.println("| 9.  Any                        : end                |");
                 System.out.println(" =====================================================");
                 System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase command: ");
                 mycommand = l_Scanner.nextLine();
