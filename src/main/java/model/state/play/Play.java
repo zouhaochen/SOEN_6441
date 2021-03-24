@@ -1,6 +1,7 @@
 package model.state.play;
 
 import controller.MainPlayController;
+import model.map.MapGraph;
 import model.state.Phase;
 
 /**
@@ -20,7 +21,12 @@ public abstract class Play extends Phase {
 
     @Override
     public void showMap() {
-        d_ml.showMap();
+        try {
+            System.out.println("\nMain Graph show below:");
+            MapGraph.printTable(d_ml.d_MapFile.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
