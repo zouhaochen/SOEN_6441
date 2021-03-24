@@ -66,6 +66,7 @@ Player extends Observable {
         d_CountriesInControl = new HashMap<>();
         d_OrdersInCurrentTurn = new ArrayDeque<>();
         d_UnattackablePlayers = new ArrayList<>();
+        d_Cards = new ArrayList<>();
         d_playerExist = true;
     }
 
@@ -219,7 +220,7 @@ Player extends Observable {
         String l_Reply;
         Scanner l_Scanner = new Scanner(System.in);
         do {
-            System.out.println("\nPlayer " + d_Colour + "do you want to create an order? (y/n) ");
+            System.out.println("\nPlayer " + d_Colour + ", do you want to create an order? (y/n) ");
             l_Reply = l_Scanner.nextLine().trim();
         } while (!l_Reply.equalsIgnoreCase("y") && !l_Reply.equalsIgnoreCase("n"));
 

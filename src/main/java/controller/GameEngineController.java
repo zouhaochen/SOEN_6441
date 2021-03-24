@@ -146,7 +146,6 @@ public class GameEngineController {
         } while (!CommandValidator.validate(l_Command));
 
         String l_ProjectPath = new File("").getCanonicalPath();
-//		File l_File = new File(l_ProjectPath + "/domination/" + l_CommandArr[1]);
         return l_ProjectPath + "/domination/" + l_CommandArr[1];
     }
 
