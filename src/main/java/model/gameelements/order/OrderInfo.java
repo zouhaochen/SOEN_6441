@@ -1,5 +1,6 @@
 package model.gameelements.order;
 
+import model.GameData;
 import model.gameelements.Country;
 import model.gameelements.Player;
 
@@ -28,6 +29,11 @@ public class OrderInfo {
      * The number of army to be moved.
      */
     private int d_NumberOfArmy;
+
+    /**
+     * The game data.
+     */
+    private GameData d_GameData;
 
     /**
      * Gets initiator.
@@ -117,5 +123,23 @@ public class OrderInfo {
      */
     public void setNumberOfArmy(int p_NumberOfArmy) {
         this.d_NumberOfArmy = p_NumberOfArmy;
+    }
+
+    /**
+     * Gets game data.
+     *
+     * @return the game data
+     */
+    public GameData getGameData() {
+        return d_GameData;
+    }
+
+    /**
+     * Sets game data.
+     *
+     * @param p_GameData the game data
+     */
+    public void setGameData(GameData p_GameData) {
+        this.d_GameData = p_GameData;
     }
 }

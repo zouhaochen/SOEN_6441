@@ -4,13 +4,21 @@ import controller.MainPlayController;
 
 import java.util.Scanner;
 
-public class AddPlayer extends Startup{
+/**
+ * The type Add player.
+ */
+public class AddPlayer extends Startup {
+    /**
+     * Instantiates a new Add player.
+     *
+     * @param p_ml the p ml
+     */
     public AddPlayer(MainPlayController p_ml) {
         super(p_ml);
     }
 
     /**
-     * set for how many player are going to play the game. the range of player number is 2 to 5.
+     * Add players to the game
      */
     @Override
     public void setPlayers() {
@@ -48,7 +56,7 @@ public class AddPlayer extends Startup{
     }
 
     /**
-     * continue to next phase
+     * Goes to the next phase
      */
     @Override
     public void next() {
@@ -56,7 +64,7 @@ public class AddPlayer extends Startup{
     }
 
     /**
-     * back to previous phase
+     * Goes to the previous phase
      */
     @Override
     public void previous() {

@@ -66,6 +66,7 @@ Player extends Observable {
         d_CountriesInControl = new HashMap<>();
         d_OrdersInCurrentTurn = new ArrayDeque<>();
         d_UnattackablePlayers = new ArrayList<>();
+        d_Cards = new ArrayList<>();
         d_playerExist = true;
     }
 
@@ -219,7 +220,7 @@ Player extends Observable {
         String l_Reply;
         Scanner l_Scanner = new Scanner(System.in);
         do {
-            System.out.println("\nPlayer " + d_Colour + "do you want to create an order? (y/n) ");
+            System.out.println("\nPlayer " + d_Colour + ", do you want to create an order? (y/n) ");
             l_Reply = l_Scanner.nextLine().trim();
         } while (!l_Reply.equalsIgnoreCase("y") && !l_Reply.equalsIgnoreCase("n"));
 
@@ -296,6 +297,26 @@ Player extends Observable {
      */
     public List<Card> getCards() {
         return d_Cards;
+    }
+
+    /**
+     * player receive a New Card
+     *
+     * @param p_NewCard
+     */
+    public void receiveNewCard(Card p_NewCard) {
+        this.d_Cards.add(p_NewCard);
+        System.out.println("Notice: Player " + this.d_Colour + " receive new card [" + p_NewCard.name() + "]");
+    }
+
+    /**
+     * Card being used so remove from card list
+     *
+     * @param p_UsedCard
+     */
+    public void removeTargetCard(Card p_UsedCard) {
+        d_Cards.remove(p_UsedCard);
+        System.out.println("Notice: Player " + this.d_Colour + " consumes card [" + p_UsedCard.name() + "]");
     }
 
 }

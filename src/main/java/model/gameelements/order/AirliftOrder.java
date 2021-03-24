@@ -73,6 +73,12 @@ public class AirliftOrder extends Order {
         d_TargetCountry.setArmies(l_armyInTarget);
         d_SourceCountry.setArmies(l_armyInSource);
 
+        //remove card from player cards list
+        d_Player.removeTargetCard(Card.AIRLIFT);
+
+        //print success information
+        System.out.println("Success applying Airlift");
+
         printOrder();
         return true;
     }

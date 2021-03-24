@@ -12,7 +12,7 @@ import org.junit.runners.Suite;
         AdvanceOrderTest.class,
         BlockadeOrderTest.class,
         DiplomacyOrderTest.class,
-//        OrderFactoryTest.class
+        OrderFactoryTest.class
 })
 public class AllOrderTest {
 }

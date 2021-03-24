@@ -2,11 +2,22 @@ package model.state.play;
 
 import controller.MainPlayController;
 
-public class IssueOrder extends MainPlay{
-    public IssueOrder(MainPlayController p_ml) {
-        super(p_ml);
+/**
+ * The type Issue order.
+ */
+public class IssueOrder extends MainPlay {
+    /**
+     * Instantiates a new Issue order.
+     *
+     * @param p_Ml the ml
+     */
+    public IssueOrder(MainPlayController p_Ml) {
+        super(p_Ml);
     }
 
+    /**
+     * Allows players to issue orders
+     */
     @Override
     public void issueOrder() {
         d_ml.d_GameEngineController.awardReinforcement();
@@ -15,7 +26,7 @@ public class IssueOrder extends MainPlay{
     }
 
     /**
-     * continue to next phase
+     * Goes to the next phase
      */
     @Override
     public void next() {

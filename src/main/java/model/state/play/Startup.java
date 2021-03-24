@@ -1,24 +1,19 @@
 package model.state.play;
 
 import controller.MainPlayController;
-import model.map.MapGraph;
 
+/**
+ * The type Startup.
+ */
 public class Startup extends Play {
 
-    public Startup(MainPlayController p_ml) {
-        super(p_ml);
-    }
-
     /**
-     * to display the map for current phase.
+     * Instantiates a new Startup.
+     *
+     * @param p_Ml the ml
      */
-    public void showMap() {
-        try {
-            System.out.println("\nMain Graph show below:");
-            MapGraph.printTable(d_ml.d_MapFile.getName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public Startup(MainPlayController p_Ml) {
+        super(p_Ml);
     }
 
 }

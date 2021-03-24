@@ -1,5 +1,6 @@
 package model.gameelements.order;
 
+import model.gameelements.Card;
 import model.gameelements.Country;
 import model.gameelements.Player;
 
@@ -184,6 +185,7 @@ public class AdvanceOrder extends Order {
                 }
             }
 
+
             printOrder();
             return true;
         }
@@ -217,6 +219,9 @@ public class AdvanceOrder extends Order {
         p_TargetCountry.setArmies(p_NumberOfArmies);
         // add target country to new owner's country list
         p_NewOwner.assignCountry(p_TargetCountry);
+
+        // randomly give new owner a new card
+        p_NewOwner.receiveNewCard(Card.getRandomCard());
     }
 
     /**
@@ -246,7 +251,6 @@ public class AdvanceOrder extends Order {
 
         // if target country is un-attackable, because of diplomacy
         // only two countries with diplomacy cant attack each other
-        // getPlayerDiplomacy()[1] is target player id that register during diploma order.
         if (d_Player.getUnattackablePlayers().contains(l_targetPlayer.getId())) {
             l_Valid = false;
         }

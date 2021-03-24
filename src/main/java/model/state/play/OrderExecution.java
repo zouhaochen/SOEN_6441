@@ -2,14 +2,22 @@ package model.state.play;
 
 import controller.MainPlayController;
 
+/**
+ * The type Order execution.
+ */
 public class OrderExecution extends MainPlay {
 
+    /**
+     * Instantiates a new Order execution.
+     *
+     * @param p_ml the p ml
+     */
     public OrderExecution(MainPlayController p_ml) {
         super(p_ml);
     }
 
     /**
-     * to execute the top of order from order list.
+     * Executes all orders.
      */
     @Override
     public void executeOrder() {
@@ -26,7 +34,7 @@ public class OrderExecution extends MainPlay {
     }
 
     /**
-     * continue to next phase
+     * Goes to the next phase
      */
     @Override
     public void next() {
@@ -34,7 +42,7 @@ public class OrderExecution extends MainPlay {
     }
 
     /**
-     * back to previous phase
+     * Goes to the previous phase
      */
     @Override
     public void previous() {
