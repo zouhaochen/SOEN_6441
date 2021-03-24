@@ -299,4 +299,24 @@ Player extends Observable {
         return d_Cards;
     }
 
+    /**
+     * player receive a New Card
+     *
+     * @param p_NewCard
+     */
+    public void receiveNewCard(Card p_NewCard) {
+        this.d_Cards.add(p_NewCard);
+        System.out.println("Notice: Player " + this.d_Colour + " receive new card [" + p_NewCard.name() + "]");
+    }
+
+    /**
+     * Card being used so remove from card list
+     *
+     * @param p_UsedCard
+     */
+    public void removeTargetCard(Card p_UsedCard) {
+        d_Cards.remove(p_UsedCard);
+        System.out.println("Notice: Player " + this.d_Colour + " consumes card [" + p_UsedCard.name() + "]");
+    }
+
 }

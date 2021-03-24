@@ -68,6 +68,9 @@ public class DiplomacyOrder extends Order {
         //print success information
         System.out.println("Success applying diplomacy");
 
+        //remove card from player cards list
+        d_Player.removeTargetCard(Card.NEGOTIATE);
+
         printOrder();
         return true;
     }

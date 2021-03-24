@@ -12,11 +12,11 @@ public class BlockadeOrder extends Order {
     /**
      * The D target country.
      */
-    private Country d_targetCountry;
+    private Country d_TargetCountry;
     /**
      * The D player.
      */
-    private Player d_player;
+    private Player d_Player;
 
     /**
      * Instantiates a new object of type BlockadeOrder.
@@ -27,8 +27,8 @@ public class BlockadeOrder extends Order {
     public BlockadeOrder(Player p_Player, Country p_TargetCountry) {
         super();
         setType("Blockade");
-        d_player = p_Player;
-        d_targetCountry = p_TargetCountry;
+        d_Player = p_Player;
+        d_TargetCountry = p_TargetCountry;
         setOrderInfo(new OrderInfo());
         getOrderInfo().setInitiator(p_Player);
         getOrderInfo().setDestination(p_TargetCountry);
@@ -42,8 +42,8 @@ public class BlockadeOrder extends Order {
     public BlockadeOrder(OrderInfo p_OrderInfo) {
         super();
         setType("Blockade");
-        d_targetCountry = p_OrderInfo.getDestination();
-        d_player = p_OrderInfo.getInitiator();
+        d_TargetCountry = p_OrderInfo.getDestination();
+        d_Player = p_OrderInfo.getInitiator();
         setOrderInfo(p_OrderInfo);
     }
 
@@ -56,15 +56,22 @@ public class BlockadeOrder extends Order {
             return false;
         }
         //triple the number of armies on one of the current player's territories
-        d_targetCountry.setArmies(d_targetCountry.getArmies() * 3);
+        d_TargetCountry.setArmies(d_TargetCountry.getArmies() * 3);
         //remove target country from conquered countries
-        d_targetCountry.getOwner().getCountriesInControl().remove(d_targetCountry.getName().toLowerCase());
+        d_TargetCountry.getOwner().getCountriesInControl().remove(d_TargetCountry.getName().toLowerCase());
         // check if there is a Player NEUTRAL
         if (getOrderInfo().getGameData().getPlayerByName("NEUTRAL") == null) {
             getOrderInfo().getGameData().getPlayerList().add(new Player("NEUTRAL"));
         }
         //set owner to Player NEUTRAL
-        d_targetCountry.setOwner(getOrderInfo().getGameData().getPlayerByName("NEUTRAL"));
+        d_TargetCountry.setOwner(getOrderInfo().getGameData().getPlayerByName("NEUTRAL"));
+
+		//remove card from player cards list
+		d_Player.removeTargetCard(Card.BLOCKADE);
+
+		//print success information
+		System.out.println("Success applying Blockage");
+
         return true;
     }
 
@@ -75,23 +82,23 @@ public class BlockadeOrder extends Order {
      */
     public boolean valid() {
 
-        if (!d_player.getCards().contains(Card.BLOCKADE)) {
-            System.out.println("Invalid Blockade Order: Player " + d_player.getColour() + " does not have a blockade card");
+        if (!d_Player.getCards().contains(Card.BLOCKADE)) {
+            System.out.println("Invalid Blockade Order: Player " + d_Player.getColour() + " does not have a blockade card");
             return false;
         }
 
-        if (!d_player.getPlayerExist()) {
-            System.out.println("Invalid Blockade Order: Player " + d_player.getColour() + " does not exist");
+        if (!d_Player.getPlayerExist()) {
+            System.out.println("Invalid Blockade Order: Player " + d_Player.getColour() + " does not exist");
             return false;
         }
 
-        if (d_targetCountry == null) {
+        if (d_TargetCountry == null) {
             System.out.println("Invalid Blockade Order: Invalid country");
             return false;
         }
 
-        if (!d_player.getCountriesInControl().containsKey(d_targetCountry.getName().toLowerCase())) {
-            System.out.println("Invalid Blockade Order: Player " + d_player.getColour() + " doesn't own Country " + d_targetCountry.getName());
+        if (!d_Player.getCountriesInControl().containsKey(d_TargetCountry.getName().toLowerCase())) {
+            System.out.println("Invalid Blockade Order: Player " + d_Player.getColour() + " doesn't own Country " + d_TargetCountry.getName());
             return false;
         }
 
@@ -102,8 +109,8 @@ public class BlockadeOrder extends Order {
      * print the order
      */
     public void printOrder() {
-        System.out.println("Blockade order issued by player " + this.d_player.getColour());
-        System.out.println("Blockade " + this.d_targetCountry.getName());
+        System.out.println("Blockade order issued by player " + this.d_Player.getColour());
+        System.out.println("Blockade " + this.d_TargetCountry.getName());
     }
 
 }

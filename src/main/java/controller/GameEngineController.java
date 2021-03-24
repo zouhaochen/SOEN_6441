@@ -3,9 +3,11 @@ package controller;
 import command.CommandType;
 import command.CommandValidator;
 import model.GameData;
+import model.gameelements.Card;
 import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;
+import model.gameelements.order.Order;
 
 import java.io.File;
 import java.io.IOException;
@@ -120,6 +122,11 @@ public class GameEngineController {
             for (Map.Entry<String, Country> l_BorderCountryEntry : d_GameData.getCountryByName(l_CountryName).getBorderCountries().entrySet()) {
                 System.out.print(l_BorderCountryEntry.getValue().getName() + "\t");
             }
+            System.out.print("Player cards: ");
+            for (Card l_Card : p_Player.getCards()) {
+                System.out.print("[" + l_Card.name() + "]");
+            }
+
 
             System.out.println();
         }
@@ -292,5 +299,7 @@ public class GameEngineController {
         }
         return false;
     }
+
+
 
 }
