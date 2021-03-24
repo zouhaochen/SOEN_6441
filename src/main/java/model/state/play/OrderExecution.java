@@ -12,10 +12,18 @@ public class OrderExecution extends MainPlay {
     public void executeOrder() {
         d_ml.executeAllOrders();
         d_ml.getDLogEntryBuffer().updateFile();
+
+        // go back to issueOrder phase for current build
+        previous();
     }
 
     @Override
     public void next() {
         endGame();
+    }
+
+    @Override
+    public void previous() {
+        d_ml.setPhase(new IssueOrder(d_ml));
     }
 }
