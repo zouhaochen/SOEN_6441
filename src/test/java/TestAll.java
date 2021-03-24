@@ -2,9 +2,9 @@
 import gamePlayTest.GameDataTest;
 import gamePlayTest.GameEngineTest;
 import mapTest.*;
+import model.gameelements.order.AllOrderTest;
 import modeltest.LogEntryBufferTest;
 import model.gameelements.PlayerTest;
-import model.gameelements.order.OrderFactoryTest;
 import model.gameelements.state.StateTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -17,16 +17,16 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-        MapDetailAccessTest.class,
-        MapListingTest.class,
-        MapValidateTest.class,
+        AllMapTest.class,
+        AllOrderTest.class,
         LogEntryBufferTest.class,
         ViewTest.class,
         GameDataTest.class,
         GameEngineTest.class,
-        OrderFactoryTest.class,
         PlayerTest.class,
         StateTest.class,
+
+
 })
 public class TestAll {
 

@@ -39,17 +39,58 @@ Player extends Observable {
      * number of reinforcement armies
      */
     private int d_ReinforcementArmies;
+    /**
+     * check player obj whether existed
+     */
+    private boolean d_playerExist = true;
+
+    /**
+     * user's card list
+     */
+    private List<Card> d_Cards;
+
+
+    /**
+     * the ids of the unattackable players
+     */
+    private List<Integer> d_UnattackablePlayers;
 
     /**
      * Player class constructor
      *
-     * @param p_Colour           get player name as string type.
+     * @param p_Colour get player name as string type.
      */
     public Player(String p_Colour) {
         d_Id = ++D_COUNT;
         d_Colour = p_Colour;
         d_CountriesInControl = new HashMap<>();
         d_OrdersInCurrentTurn = new ArrayDeque<>();
+        d_UnattackablePlayers = new ArrayList<>();
+    }
+
+    /**
+     * Reset the unattackable player list
+     */
+    public void resetPlayerDiplomacy() {
+        this.d_UnattackablePlayers.clear();
+    }
+
+    /**
+     * Attackable Flag getter
+     *
+     * @return boolean flag
+     */
+    public List<Integer> getUnattackablePlayers() {
+        return d_UnattackablePlayers;
+    }
+
+    /**
+     * Set unattackable players list
+     *
+     * @param p_PlayerIds the list of IDs
+     */
+    public void setUnattackablePlayers(List<Integer> p_PlayerIds) {
+        this.d_UnattackablePlayers = p_PlayerIds;
     }
 
     /**
@@ -232,4 +273,23 @@ Player extends Observable {
         d_ReinforcementArmies -= p_ArmyNumber;
         return true;
     }
+
+    /**
+     * Get whether a play still exist in the game
+     *
+     * @return true if the player still has at least one territory.
+     */
+    public boolean getPlayerExist() {
+        return d_playerExist;
+    }
+
+    /**
+     * Cards the player has available to play
+     *
+     * @return list of cards
+     */
+    public List<Card> getCards() {
+        return d_Cards;
+    }
+
 }

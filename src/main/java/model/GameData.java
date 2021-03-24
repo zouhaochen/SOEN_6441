@@ -263,7 +263,6 @@ public class GameData extends Observable{
         System.out.println("NOTICE: the new country [" + l_NewCountry.getName() + "] has been added to the model.map, ID:"
                 + l_NewCountry.getCountryId() + " Armies:" + l_NewCountry.getArmies());
         d_CountryList.add(l_NewCountry);
-        notifyGameDataObs(this);
     }
 
     /**
@@ -277,7 +276,6 @@ public class GameData extends Observable{
         System.out.println("NOTICE: the new continent [" + l_NewContinent.getName() + "] has been added to the model.map, Value:"
                 + l_NewContinent.getContinentValue());
         d_ContinentList.add(l_NewContinent);
-        notifyGameDataObs(this);
     }
 
 

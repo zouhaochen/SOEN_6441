@@ -1,23 +1,13 @@
 package mapTest;
 
-import gamePlayTest.GameDataTest;
-import gamePlayTest.GameEngineTest;
-import mapTest.*;
-import modeltest.LogEntryBufferTest;
-import model.gameelements.PlayerTest;
-import model.gameelements.order.OrderFactoryTest;
-import model.gameelements.state.StateTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 
 /**
- * the test all class used for running all test class
+ * test all map function
  */
 @RunWith(Suite.class)
-@SuiteClasses({
-
+@Suite.SuiteClasses({
         MapDetailAccessTest.class,
         MapListingTest.class,
         MapValidateTest.class,

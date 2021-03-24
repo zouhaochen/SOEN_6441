@@ -28,13 +28,13 @@ public class DeployOrder extends Order {
             return false;
         }
 
-        Player l_Player = getOrderInfo().getPlayer();
-        String l_Destination = getOrderInfo().getDestination();
+        Player l_Player = getOrderInfo().getInitiator();
         int l_ArmiesToDeploy = getOrderInfo().getNumberOfArmy();
         l_ArmiesToDeploy = Math.min(l_ArmiesToDeploy, l_Player.getReinforcementArmies());
+        getOrderInfo().setNumberOfArmy(l_ArmiesToDeploy);
 
         // deploy the armies, if there not enough armies left, deploy all the armies.
-        Country l_Country = l_Player.getCountriesInControl().get(l_Destination.toLowerCase());
+        Country l_Country = getOrderInfo().getDestination();
         l_Country.deployArmies(l_ArmiesToDeploy);
         if (!l_Player.deployReinforcementArmies(getOrderInfo().getNumberOfArmy())) {
             System.out.println("\nWarning: insufficient armies to deploy. Deploy only " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
@@ -42,18 +42,24 @@ public class DeployOrder extends Order {
             System.out.println("\n\"DEPLOY\" Execution is completed: deploy " + l_ArmiesToDeploy + " armies to Country " + l_Country.getName() + ".");
         }
 
+        printOrder();
         return true;
     }
 
+    /**
+     * Check if the order is valid.
+     *
+     * @return true if the order is valid; false otherwise
+     */
     @Override
     public boolean valid() {
-        if (getOrderInfo().getPlayer() == null || getOrderInfo().getDestination() == null) {
+        if (getOrderInfo().getInitiator() == null || getOrderInfo().getDestination() == null) {
             System.out.println("\nFail to execute \"DEPLOY\" order: Invalid order information.");
             return false;
         }
 
-        Player l_Player = getOrderInfo().getPlayer();
-        String l_Destination = getOrderInfo().getDestination();
+        Player l_Player = getOrderInfo().getInitiator();
+        String l_Destination = getOrderInfo().getDestination().getName();
         int l_ArmiesToDeploy = getOrderInfo().getNumberOfArmy();
         l_ArmiesToDeploy = Math.min(l_ArmiesToDeploy, l_Player.getReinforcementArmies());
 
@@ -66,5 +72,14 @@ public class DeployOrder extends Order {
         }
 
         return true;
+    }
+
+    /**
+     * print the order
+     */
+    @Override
+    public void printOrder() {
+        System.out.println("Deploy order issued by player " + getOrderInfo().getInitiator().getColour());
+        System.out.println("Deploy " + getOrderInfo().getNumberOfArmy() + " armies to " + getOrderInfo().getDestination().getName());
     }
 }

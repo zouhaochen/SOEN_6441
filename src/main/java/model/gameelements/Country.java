@@ -115,4 +115,18 @@ public class Country extends Territory {
     public void setBorderCountries(Map<String, Country> p_BorderCountries) {
         this.d_BorderCountries = p_BorderCountries;
     }
+
+    /**
+     * add the 2 countries boarder connectivity
+     * @param p_country the neighbor country
+     * @return true if successfully added, otherwise return false
+     */
+    public boolean addBoarderConnection(Country p_country) {
+        if(p_country != null) {
+            d_BorderCountries.put(p_country.getName(), p_country);
+            return true;
+        }
+        else
+            return false;
+    }
 }
