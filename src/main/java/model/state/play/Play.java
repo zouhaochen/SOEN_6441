@@ -14,10 +14,18 @@ import model.state.Phase;
  */
 public abstract class Play extends Phase {
 
-    Play(MainPlayController p_ml) {
-        super(p_ml);
+    /**
+     * Instantiates a new Play.
+     *
+     * @param p_Ml the p ml
+     */
+    Play(MainPlayController p_Ml) {
+        super(p_Ml);
     }
 
+    /**
+     * Shows information of the map.
+     */
     @Override
     public void showMap() {
         d_ml.showMap();

@@ -9,12 +9,23 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * The type Load map.
+ */
 public class LoadMap extends Startup {
 
-    public LoadMap(MainPlayController p_ml) {
-        super(p_ml);
+    /**
+     * Instantiates a new Load map.
+     *
+     * @param p_Ml the ml
+     */
+    public LoadMap(MainPlayController p_Ml) {
+        super(p_Ml);
     }
 
+    /**
+     * Loads a map.
+     */
     public void loadMap() {
 
         try {
@@ -37,18 +48,19 @@ public class LoadMap extends Startup {
         next();
     }
 
+    /**
+     * Showing map is invalid.
+     */
     @Override
     public void showMap() {
         printInvalidCommandMessage();
     }
 
+    /**
+     * Goes to the next phase.
+     */
     @Override
     public void next() {
         d_ml.setPhase(new AddPlayer(d_ml));
-    }
-
-    @Override
-    public void previous() {
-        super.previous();
     }
 }

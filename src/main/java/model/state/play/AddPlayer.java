@@ -4,11 +4,22 @@ import controller.MainPlayController;
 
 import java.util.Scanner;
 
-public class AddPlayer extends Startup{
+/**
+ * The type Add player.
+ */
+public class AddPlayer extends Startup {
+    /**
+     * Instantiates a new Add player.
+     *
+     * @param p_ml the p ml
+     */
     public AddPlayer(MainPlayController p_ml) {
         super(p_ml);
     }
 
+    /**
+     * Add players to the game
+     */
     @Override
     public void setPlayers() {
         Scanner l_scanner = new Scanner(System.in);
@@ -44,11 +55,17 @@ public class AddPlayer extends Startup{
         next();
     }
 
+    /**
+     * Goes to the next phase
+     */
     @Override
     public void next() {
         d_ml.setPhase(new AssignCountry(d_ml));
     }
 
+    /**
+     * Goes to the previous phase
+     */
     @Override
     public void previous() {
         d_ml.setPhase(new LoadMap(d_ml));

@@ -6,17 +6,21 @@ import model.map.MapGraph;
 import model.state.play.LoadMap;
 
 /**
- *	ConcreteState of the State pattern. In this example, defines behavior
- *  for commands that are valid in this state, and for the others signifies
- *  that the command is invalid.
- *
- *  This state represents a group of states, and defines the behavior
- *  that is common to all the states in its group. All the states in its
- *  group need to extend this class.
- *
+ * ConcreteState of the State pattern. In this example, defines behavior
+ * for commands that are valid in this state, and for the others signifies
+ * that the command is invalid.
+ * <p>
+ * This state represents a group of states, and defines the behavior
+ * that is common to all the states in its group. All the states in its
+ * group need to extend this class.
  */
 public class Edit extends Phase {
 
+	/**
+	 * Instantiates a new Edit.
+	 *
+	 * @param p_ml the p ml
+	 */
 	public Edit(MainPlayController p_ml) {
 		super(p_ml);
 	}
@@ -31,7 +35,9 @@ public class Edit extends Phase {
 		}
 	}
 
-
+	/**
+	 * Allows user to edit map.
+	 */
 	public void editMap() {
 
 		try {
@@ -42,12 +48,18 @@ public class Edit extends Phase {
 		}
 	}
 
+	/**
+	 * Allows user to save map.
+	 */
 	public void saveMap() {
 		System.out.println("map has been saved");
 		d_ml.getDLogEntryBuffer().updateFile();
 		d_ml.setPhase(new LoadMap(d_ml));
 	}
 
+	/**
+	 * Goes to next phase.
+	 */
 	public void next() {
 
 		System.out.println("must save map");
