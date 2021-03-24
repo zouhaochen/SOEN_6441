@@ -8,7 +8,6 @@ import model.map.MapGraph;
 import model.map.MapListing;
 import model.state.Phase;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -194,24 +193,6 @@ public class GameData extends Observable {
         this.d_PlayerList = d_PlayerList;
         notifyGameDataObs(this);
     }
-
-    /**
-     * remove target player from player list
-     *
-     * @param p_Player target player need to be removed
-     */
-    public void removeTarPlayerFromList(Player p_Player) {
-        for (Player l_Player : d_PlayerList) {
-            if (l_Player.getId() == p_Player.getId()) {
-                // remove target player
-                if (d_PlayerList.remove(l_Player)) {
-                    System.out.println(l_Player.getColour() + " being remove from game");
-                }
-            }
-        }
-        System.out.println("ERROR: Player No Found.");
-    }
-
 
     /**
      * game phase object getter, you can get current game phase.

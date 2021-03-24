@@ -1,11 +1,10 @@
 package gamePlayTest;
 
 import controller.GameEngineController;
+import model.GameData;
 import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;
-import model.GameData;
-//import model.GamePhase;
 import org.junit.After;
 import org.junit.Test;
 
@@ -14,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -42,7 +41,7 @@ public class GameEngineTest {
      * print ok when test is passed
      */
     @After
-    public void checked(){
+    public void checked() {
         System.out.println("ok");
     }
 
@@ -150,5 +149,55 @@ public class GameEngineTest {
         // then
         assertEquals(0, l_ReinforcementBonus);
 
+    }
+
+    @Test
+    public void testGameNotOver() {
+        System.out.println("6. check gameNotOver");
+        // given: two players own at least one country
+        Country l_Canada = new Country("Canada");
+        Country l_Japan = new Country("Japan");
+
+        Player l_Alice = new Player("Alice");
+        Player l_Bob = new Player("Bob");
+        l_Alice.assignCountry(l_Canada);
+        l_Bob.assignCountry(l_Japan);
+
+        List<Player> l_Players = new ArrayList<>();
+        l_Players.add(l_Alice);
+        l_Players.add(l_Bob);
+
+        d_GameData.setPlayerList((ArrayList<Player>) l_Players);
+
+        // when
+        boolean l_Result = d_GameEngine.checkGameIsOver();
+
+        // then
+        assertFalse(l_Result);
+    }
+
+    @Test
+    public void testGameIsOver() {
+        System.out.println("7. check gameIsOver");
+        // given: one player owns at least one country
+        Country l_Canada = new Country("Canada");
+        Country l_Japan = new Country("Japan");
+
+        Player l_Alice = new Player("Alice");
+        Player l_Bob = new Player("Bob");
+        l_Alice.assignCountry(l_Canada);
+        l_Alice.assignCountry(l_Japan);
+
+        List<Player> l_Players = new ArrayList<>();
+        l_Players.add(l_Alice);
+        l_Players.add(l_Bob);
+
+        d_GameData.setPlayerList((ArrayList<Player>) l_Players);
+
+        // when
+        boolean l_Result = d_GameEngine.checkGameIsOver();
+
+        // then
+        assertTrue(l_Result);
     }
 }

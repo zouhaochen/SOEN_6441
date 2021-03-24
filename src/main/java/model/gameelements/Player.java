@@ -282,12 +282,10 @@ Player extends Observable {
      */
     public boolean getPlayerExist() {
         // if player has no country
-        if(this.d_CountriesInControl.isEmpty()){
-            d_playerExist=false;
-        }else{
-            // player has at least one countries
-            return d_playerExist;
+        if (this.d_CountriesInControl.isEmpty()) {
+            d_playerExist = false;
         }
+
         return d_playerExist;
     }
 

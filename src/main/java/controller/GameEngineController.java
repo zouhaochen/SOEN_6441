@@ -269,17 +269,26 @@ public class GameEngineController {
 
     /**
      * check current game whether is over, and also remove the lost player
+     *
+     * @return true if the game is over, false otherwise
      */
-    public boolean checkGameIsOver(){
-        for(Player l_Player: d_GameData.getPlayerList()){
+    public boolean checkGameIsOver() {
+        List<Player> l_ToRemove = new ArrayList<>();
+        // remove all the players who have lost
+        for (Player l_Player : d_GameData.getPlayerList()) {
             // if player already lost or not exist, since has no country in play
-            if(l_Player.getPlayerExist()==false){
-                this.d_GameData.removeTarPlayerFromList(l_Player);
+            if (!l_Player.getPlayerExist()) {
+                l_ToRemove.add(l_Player);
             }
-            if(d_GameData.getPlayerList().size()==1){
-                System.out.println("=====Game is Over=====");
-                return true;
-            }
+        }
+
+        if (l_ToRemove.size() > 0) {
+            d_GameData.getPlayerList().removeAll(l_ToRemove);
+        }
+
+        if (d_GameData.getPlayerList().size() == 1) {
+            System.out.println("=====Game is Over=====");
+            return true;
         }
         return false;
     }
