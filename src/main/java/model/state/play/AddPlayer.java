@@ -9,6 +9,9 @@ public class AddPlayer extends Startup{
         super(p_ml);
     }
 
+    /**
+     * set for how many player are going to play the game. the range of player number is 2 to 5.
+     */
     @Override
     public void setPlayers() {
         Scanner l_scanner = new Scanner(System.in);
@@ -44,11 +47,17 @@ public class AddPlayer extends Startup{
         next();
     }
 
+    /**
+     * continue to next phase
+     */
     @Override
     public void next() {
         d_ml.setPhase(new AssignCountry(d_ml));
     }
 
+    /**
+     * back to previous phase
+     */
     @Override
     public void previous() {
         d_ml.setPhase(new LoadMap(d_ml));

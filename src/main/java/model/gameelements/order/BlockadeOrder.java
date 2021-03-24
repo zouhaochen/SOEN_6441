@@ -5,9 +5,19 @@ import model.gameelements.Country;
 import model.gameelements.Player;
 
 public class BlockadeOrder extends Order {
-	
+
+	/**
+	 * Define target country ID variables with int
+	 */
     private int d_targetCountryId;
+	/**
+	 * Define target country variables with country type.
+	 */
     private Country d_targetCountry;
+
+	/**
+	 * Define game player variables with player type
+	 */
     private Player d_player;
     
     /**

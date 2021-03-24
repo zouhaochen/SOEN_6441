@@ -9,6 +9,9 @@ public class Startup extends Play {
         super(p_ml);
     }
 
+    /**
+     * to display the map for current phase.
+     */
     public void showMap() {
         try {
             System.out.println("\nMain Graph show below:");

@@ -11,9 +11,21 @@ import java.util.Random;
  */
 public class AdvanceOrder extends Order {
 
+    /**
+     * the Country that being Attacker.
+     */
     private Country d_AttackCountry;
+    /**
+     * the Country that being defender.
+     */
     private Country d_DefendCountry;
+    /**
+     * for how many armies are going to set.
+     */
     private int d_NumberOfArmies;
+    /**
+     * the country ownership is belong to which player.
+     */
     private Player d_Player;
 
     /**

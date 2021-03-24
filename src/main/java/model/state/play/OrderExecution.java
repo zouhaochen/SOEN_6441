@@ -8,6 +8,9 @@ public class OrderExecution extends MainPlay {
         super(p_ml);
     }
 
+    /**
+     * to execute the top of order from order list.
+     */
     @Override
     public void executeOrder() {
         d_ml.executeAllOrders();
@@ -22,11 +25,17 @@ public class OrderExecution extends MainPlay {
         }
     }
 
+    /**
+     * continue to next phase
+     */
     @Override
     public void next() {
         endGame();
     }
 
+    /**
+     * back to previous phase
+     */
     @Override
     public void previous() {
         d_ml.setPhase(new IssueOrder(d_ml));

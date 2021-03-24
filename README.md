@@ -12,7 +12,6 @@ Group Member:
 **======================Build 2 ================================**
 
 **Refactoring Part**
-
 **Refactoring about State Pattern**
 In gernal, we refactored the game progress in the first version according to the statepattern design mode. As the result, the following refactoring was carried out:
 
@@ -35,10 +34,13 @@ In gernal, we refactored the game progress in the first version according to the
 
 5.
 
+**To run the Program**
 
-**New functions in Order Creation Phase**
+User will first get into option phase
 
-
+ Welcome to Warzone.
+user can type the following command in the console.
+command: **edit / play / exit  (ignore-case)**
 
 
 ## Build 2 Architecture UML

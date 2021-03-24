@@ -153,6 +153,11 @@ public class CommandValidator {
         return l_Result;
     }
 
+    /**
+     * to validate if the input of Command AddPlayer is correct.
+     * @param p_CommandArr command array as string type
+     * @return return the value with boolean type to check if command is valid.
+     */
     private static boolean validateAddPlayerCommands(String[] p_CommandArr) {
         String l_CommandType = p_CommandArr[0].toLowerCase();
         boolean l_Result;
@@ -179,6 +184,11 @@ public class CommandValidator {
         return l_Result;
     }
 
+    /**
+     * to validate if the input of Command assign country is correct.
+     * @param p_CommandArr command array as string type
+     * @return return the value with boolean type to check if command is valid.
+     */
     private static boolean validateAssignCountryCommands(String[] p_CommandArr) {
         String l_CommandType = p_CommandArr[0].toLowerCase();
         boolean l_Result;

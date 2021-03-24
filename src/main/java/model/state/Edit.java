@@ -17,10 +17,17 @@ import model.state.play.LoadMap;
  */
 public class Edit extends Phase {
 
+	/**
+	 *  constructor of edit class
+	 * @param p_ml  the object of main loop
+	 */
 	public Edit(MainPlayController p_ml) {
 		super(p_ml);
 	}
 
+	/**
+	 * to display the map by graph
+	 */
 	public void showMap() {
 		try {
 			System.out.println("\nMain Graph show below:");
@@ -32,6 +39,9 @@ public class Edit extends Phase {
 	}
 
 
+	/**
+	 * to edit the game map
+	 */
 	public void editMap() {
 
 		try {
@@ -42,6 +52,9 @@ public class Edit extends Phase {
 		}
 	}
 
+	/**
+	 * to save the editing of map
+	 */
 	public void saveMap() {
 		System.out.println("map has been saved");
 		d_ml.getDLogEntryBuffer().updateFile();

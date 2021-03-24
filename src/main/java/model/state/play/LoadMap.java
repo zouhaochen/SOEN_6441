@@ -15,6 +15,9 @@ public class LoadMap extends Startup {
         super(p_ml);
     }
 
+    /**
+     * Load the map that selected by the user for the game.
+     */
     public void loadMap() {
 
         try {
@@ -42,11 +45,17 @@ public class LoadMap extends Startup {
         printInvalidCommandMessage();
     }
 
+    /**
+     * continue to next phase
+     */
     @Override
     public void next() {
         d_ml.setPhase(new AddPlayer(d_ml));
     }
 
+    /**
+     * back to previous phase
+     */
     @Override
     public void previous() {
         super.previous();

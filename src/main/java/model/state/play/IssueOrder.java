@@ -14,6 +14,9 @@ public class IssueOrder extends MainPlay{
         next();
     }
 
+    /**
+     * continue to next phase
+     */
     @Override
     public void next() {
         d_ml.setPhase(new OrderExecution(d_ml));
