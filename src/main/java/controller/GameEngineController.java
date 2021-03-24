@@ -266,4 +266,22 @@ public class GameEngineController {
         return l_ReinforcementBonus;
     }
 
+
+    /**
+     * check current game whether is over, and also remove the lost player
+     */
+    public boolean checkGameIsOver(){
+        for(Player l_Player: d_GameData.getPlayerList()){
+            // if player already lost or not exist, since has no country in play
+            if(l_Player.getPlayerExist()==false){
+                this.d_GameData.removeTarPlayerFromList(l_Player);
+            }
+            if(d_GameData.getPlayerList().size()==1){
+                System.out.println("=====Game is Over=====");
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

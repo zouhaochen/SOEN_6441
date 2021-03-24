@@ -42,7 +42,7 @@ Player extends Observable {
     /**
      * check player obj whether existed
      */
-    private boolean d_playerExist = true;
+    private boolean d_playerExist;
 
     /**
      * user's card list
@@ -66,6 +66,7 @@ Player extends Observable {
         d_CountriesInControl = new HashMap<>();
         d_OrdersInCurrentTurn = new ArrayDeque<>();
         d_UnattackablePlayers = new ArrayList<>();
+        d_playerExist = true;
     }
 
     /**
@@ -280,6 +281,13 @@ Player extends Observable {
      * @return true if the player still has at least one territory.
      */
     public boolean getPlayerExist() {
+        // if player has no country
+        if(this.d_CountriesInControl.isEmpty()){
+            d_playerExist=false;
+        }else{
+            // player has at least one countries
+            return d_playerExist;
+        }
         return d_playerExist;
     }
 

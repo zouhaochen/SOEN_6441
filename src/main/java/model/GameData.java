@@ -17,7 +17,7 @@ import java.util.Scanner;
 /**
  * This class is a wrapper class containing the elements and the current states of the game
  */
-public class GameData extends Observable{
+public class GameData extends Observable {
 
     /**
      * Map file
@@ -193,6 +193,23 @@ public class GameData extends Observable{
         // set total player number to list length
         this.d_PlayerList = d_PlayerList;
         notifyGameDataObs(this);
+    }
+
+    /**
+     * remove target player from player list
+     *
+     * @param p_Player target player need to be removed
+     */
+    public void removeTarPlayerFromList(Player p_Player) {
+        for (Player l_Player : d_PlayerList) {
+            if (l_Player.getId() == p_Player.getId()) {
+                // remove target player
+                if (d_PlayerList.remove(l_Player)) {
+                    System.out.println(l_Player.getColour() + " being remove from game");
+                }
+            }
+        }
+        System.out.println("ERROR: Player No Found.");
     }
 
 
