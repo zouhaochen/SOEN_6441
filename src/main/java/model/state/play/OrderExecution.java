@@ -13,8 +13,13 @@ public class OrderExecution extends MainPlay {
         d_ml.executeAllOrders();
         d_ml.getDLogEntryBuffer().updateFile();
 
-        // go back to issueOrder phase for current build
-        previous();
+        if (d_ml.d_GameEngineController.checkGameIsOver()) {
+            // game ends
+            next();
+        } else {
+            // go back to issueOrder phase for current build
+            previous();
+        }
     }
 
     @Override

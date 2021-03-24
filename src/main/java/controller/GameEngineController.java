@@ -288,6 +288,7 @@ public class GameEngineController {
 
         if (d_GameData.getPlayerList().size() == 1) {
             System.out.println("=====Game is Over=====");
+            System.out.println("The winner is: Player " + d_GameData.getPlayerList().get(0).getColour());
             return true;
         }
         return false;
