@@ -81,6 +81,7 @@ public class MainPlayController extends Observable {
             System.out.println("( Edit for edit map / Play for play the game / Exit for exit the game )");
 
             mystart = l_Scanner.nextLine();
+            mycommand = "";
 
             switch (mystart.toLowerCase()) {
                 case "edit":
@@ -95,6 +96,8 @@ public class MainPlayController extends Observable {
                 case "exit":
                     System.out.println("Exiting Warzone Game see you next time!");
                     return;
+                default:
+                    continue;
             }
             do {
                 System.out.println(" =====================================================");
@@ -152,7 +155,7 @@ public class MainPlayController extends Observable {
             } while (!(gamePhase instanceof End));
 
 
-        } while (mycommand.equals("end"));
+        } while (!mycommand.equals("end"));
 
     }
 
