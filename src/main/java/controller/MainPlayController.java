@@ -136,6 +136,7 @@ public class MainPlayController extends Observable {
                         break;
                     case "assign":
                         gamePhase.assignCountries();
+                        break;
                     case "issue":
                         gamePhase.issueOrder();
                         break;
