@@ -205,6 +205,8 @@ Player extends Observable {
 
     /**
      * following the command to issue order and add the order to order list.
+     *
+     * @return true if an order is created
      */
     public boolean issueOrder() {
         Order l_Order = createOrder();
@@ -216,6 +218,11 @@ Player extends Observable {
         return false;
     }
 
+    /**
+     * Create order order.
+     *
+     * @return the order
+     */
     public Order createOrder() {
         String l_Reply;
         Scanner l_Scanner = new Scanner(System.in);
@@ -264,8 +271,7 @@ Player extends Observable {
      * Subtract the armies from the reinforcement pool.
      *
      * @param p_ArmyNumber add number of armies as int.
-     * @return return true if the number of the remaining armies is not less than the number to deploy,
-     * and otherwise return false.
+     * @return return true if the number of the remaining armies is not less than the number to deploy, and otherwise return false.
      */
     public boolean deployReinforcementArmies(int p_ArmyNumber) {
         if (p_ArmyNumber > d_ReinforcementArmies) {
@@ -302,7 +308,7 @@ Player extends Observable {
     /**
      * player receive a New Card
      *
-     * @param p_NewCard
+     * @param p_NewCard the p new card
      */
     public void receiveNewCard(Card p_NewCard) {
         this.d_Cards.add(p_NewCard);
@@ -312,7 +318,7 @@ Player extends Observable {
     /**
      * Card being used so remove from card list
      *
-     * @param p_UsedCard
+     * @param p_UsedCard the used card
      */
     public void removeTargetCard(Card p_UsedCard) {
         d_Cards.remove(p_UsedCard);
