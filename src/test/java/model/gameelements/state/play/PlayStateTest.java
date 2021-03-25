@@ -3,14 +3,8 @@ package model.gameelements.state.play;
 import controller.MainPlayController;
 import model.state.*;
 import model.state.play.AddPlayer;
-import model.state.play.Play;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-
-import static org.junit.Assert.assertEquals;
 
 
 public class PlayStateTest {

@@ -1,14 +1,13 @@
 package gamePlayTest;
 
 import model.GameData;
-//import model.GamePhase;
+
 import org.junit.After;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import static org.junit.Assert.*;
 
 /**
  *  game data test class
