@@ -67,14 +67,14 @@ public class DiplomacyOrder extends Order {
             return false;
         }
 
-        // setup diplomacy to each other
+        // Setup diplomacy to each other
         d_Player.getUnattackablePlayers().add(d_TargetPlayer.getId());
         d_TargetPlayer.getUnattackablePlayers().add(d_Player.getId());
 
-        //print success information
+        // Print success information
         System.out.println("Success applying diplomacy");
 
-        //remove card from player cards list
+        // Remove card from player cards list
         d_Player.removeTargetCard(Card.NEGOTIATE);
 
         printOrder();
@@ -87,11 +87,14 @@ public class DiplomacyOrder extends Order {
      * @return true if valid
      */
     public boolean valid() {
+
+        // Check whether the player has a negotiate card
         if (!d_Player.getCards().contains(Card.NEGOTIATE)) {
             System.out.println("Player " + d_Player.getColour() + " does not have a diplomacy card");
             return false;
         }
 
+        // Check whether the player is not null and exist
         if ((d_Player != null && d_Player.getPlayerExist())
                 && (d_TargetPlayer != null && d_TargetPlayer.getPlayerExist())
                 && d_Player != d_TargetPlayer) {
