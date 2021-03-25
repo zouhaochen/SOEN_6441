@@ -66,6 +66,11 @@ public class GameData extends Observable {
      */
     private ArrayList<Player> d_PlayerList;
 
+    /**
+     * The neutral player for blockade.
+     */
+    private Player d_NeutralPlayer;
+
 
     /**
      * game data constructor
@@ -81,6 +86,7 @@ public class GameData extends Observable {
         this.d_CountryList = new ArrayList<>();
         this.d_BorderList = new ArrayList<>();
         this.d_MapListing = new MapListing();
+        this.d_NeutralPlayer = null;
     }
 
     /**
@@ -213,11 +219,28 @@ public class GameData extends Observable {
     }
 
     /**
+     * Gets neutral player.
+     *
+     * @return the neutral player
+     */
+    public Player getNeutralPlayer() {
+        return d_NeutralPlayer;
+    }
+
+    /**
+     * Sets neutral player.
+     *
+     * @param p_NeutralPlayer the p neutral player
+     */
+    public void setNeutralPlayer(Player p_NeutralPlayer) {
+        this.d_NeutralPlayer = p_NeutralPlayer;
+    }
+
+    /**
+     * Gets target player.
+     *
      * @param p_Player the player you want in player list
-     * @return <ul>
-     * <li>specific player that you want</li>
-     * <li>player no found return null</li>
-     * </ul>
+     * @return <ul> <li>specific player that you want</li> <li>player no found return null</li> </ul>
      */
     public Player getTargetPlayer(Player p_Player) {
         for (Player l_Player : d_PlayerList) {

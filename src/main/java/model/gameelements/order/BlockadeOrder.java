@@ -10,11 +10,11 @@ import model.gameelements.Player;
 public class BlockadeOrder extends Order {
 
     /**
-     * The D target country.
+     * The target country.
      */
     private Country d_TargetCountry;
     /**
-     * The D player.
+     * The player.
      */
     private Player d_Player;
 
@@ -60,18 +60,20 @@ public class BlockadeOrder extends Order {
         //remove target country from conquered countries
         d_TargetCountry.getOwner().getCountriesInControl().remove(d_TargetCountry.getName().toLowerCase());
         // check if there is a Player NEUTRAL
-        if (getOrderInfo().getGameData().getPlayerByName("NEUTRAL") == null) {
-            getOrderInfo().getGameData().getPlayerList().add(new Player("NEUTRAL"));
+        if (getOrderInfo().getGameData().getNeutralPlayer() == null) {
+            getOrderInfo().getGameData().setNeutralPlayer(new Player("NEUTRAL"));
         }
         //set owner to Player NEUTRAL
-        d_TargetCountry.setOwner(getOrderInfo().getGameData().getPlayerByName("NEUTRAL"));
+        d_TargetCountry.setOwner(getOrderInfo().getGameData().getNeutralPlayer());
+        getOrderInfo().getGameData().getNeutralPlayer().assignCountry(d_TargetCountry);
 
-		//remove card from player cards list
-		d_Player.removeTargetCard(Card.BLOCKADE);
+        //remove card from player cards list
+        d_Player.removeTargetCard(Card.BLOCKADE);
 
-		//print success information
-		System.out.println("Success applying Blockage");
+        //print success information
+        System.out.println("Success applying Blockage");
 
+        printOrder();
         return true;
     }
 
@@ -80,7 +82,7 @@ public class BlockadeOrder extends Order {
      *
      * @return true if valid
      */
-    public boolean  valid() {
+    public boolean valid() {
 
         if (!d_Player.getCards().contains(Card.BLOCKADE)) {
             System.out.println("Invalid Blockade Order: Player " + d_Player.getColour() + " does not have a blockade card");

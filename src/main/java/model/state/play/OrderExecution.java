@@ -22,6 +22,12 @@ public class OrderExecution extends MainPlay {
     @Override
     public void executeOrder() {
         d_Ml.executeAllOrders();
+
+        // add NEUTRAL player for Blockade
+        if (d_Ml.d_GameData.getNeutralPlayer() != null && d_Ml.d_GameData.getPlayerByName(d_Ml.d_GameData.getNeutralPlayer().getColour()) == null) {
+            d_Ml.d_GameData.getPlayerList().add(d_Ml.d_GameData.getNeutralPlayer());
+        }
+
         d_Ml.resetAttackableState();
         d_Ml.getDLogEntryBuffer().updateFile();
 
