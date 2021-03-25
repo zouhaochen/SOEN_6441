@@ -96,7 +96,7 @@ public class AirliftOrder extends Order {
         }
 
         if (d_SourceCountry == null || d_TargetCountry == null) {
-            System.out.println("Invalid country name.");
+            System.out.println("Invalid country name");
             return false;
         }
 
