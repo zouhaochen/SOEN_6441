@@ -23,7 +23,7 @@ and remind the user what the current game phase they are in. Also, We changed th
 
 
 **Refactoring about MVC pattern**
-(只有MC 没V )
+(we are not fully implement MVC, View part is not complete)
 1. In order to introduce the observer mode in the current version, we move all relevant game elements and game data from the previous version to a package named model as the program data in the model that responds to requests for data about its state. 
 Also, Some classes like (_LogEntryBuffer.java_) in the package model extend Observable.java class that used to allow observers to watch the data change of them. 
 
