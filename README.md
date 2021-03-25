@@ -35,7 +35,7 @@ Also, Some classes like (_LogEntryBuffer.java_) in the package model extend Obse
 
 
 
-##To run the Warzone version 2.0
+## To run the Warzone version 2.0
 
 User will first get into option phase as the previous 
 
