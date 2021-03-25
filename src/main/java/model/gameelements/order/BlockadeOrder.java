@@ -55,22 +55,23 @@ public class BlockadeOrder extends Order {
         if (!this.valid()) {
             return false;
         }
-        //triple the number of armies on one of the current player's territories
+        // Triple the number of armies
+        // On one target country of player
         d_TargetCountry.setArmies(d_TargetCountry.getArmies() * 3);
-        //remove target country from conquered countries
+        // Remove target country from controlled countries
         d_TargetCountry.getOwner().getCountriesInControl().remove(d_TargetCountry.getName().toLowerCase());
-        // check if there is a Player NEUTRAL
+        // Check if there is a Player NEUTRAL
         if (getOrderInfo().getGameData().getNeutralPlayer() == null) {
             getOrderInfo().getGameData().setNeutralPlayer(new Player("NEUTRAL"));
         }
-        //set owner to Player NEUTRAL
+        // Set owner to Player NEUTRAL
         d_TargetCountry.setOwner(getOrderInfo().getGameData().getNeutralPlayer());
         getOrderInfo().getGameData().getNeutralPlayer().assignCountry(d_TargetCountry);
 
-        //remove card from player cards list
+        // Remove card from player cards list
         d_Player.removeTargetCard(Card.BLOCKADE);
 
-        //print success information
+        // Print success information
         System.out.println("Success applying Blockage");
 
         printOrder();
@@ -84,21 +85,25 @@ public class BlockadeOrder extends Order {
      */
     public boolean valid() {
 
+        // Check if the player has a blockade card
         if (!d_Player.getCards().contains(Card.BLOCKADE)) {
             System.out.println("Invalid Blockade Order: Player " + d_Player.getColour() + " does not have a blockade card");
             return false;
         }
 
+        // Check if the player exist
         if (!d_Player.getPlayerExist()) {
             System.out.println("Invalid Blockade Order: Player " + d_Player.getColour() + " does not exist");
             return false;
         }
 
+        // Check if the target country is null
         if (d_TargetCountry == null) {
             System.out.println("Invalid Blockade Order: Invalid country");
             return false;
         }
 
+        // Check if player own the target country
         if (!d_Player.getCountriesInControl().containsKey(d_TargetCountry.getName().toLowerCase())) {
             System.out.println("Invalid Blockade Order: Player " + d_Player.getColour() + " doesn't own Country " + d_TargetCountry.getName());
             return false;
