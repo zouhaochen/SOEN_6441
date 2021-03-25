@@ -26,3 +26,7 @@ jobs:
         run: mvn clean install
       - name: Javadoc Generation
         run: mvn javadoc:javadoc
+      - name: Check Javadoc
+        run:
+          cd src/main
+          javadoc -Xdoclint:missing java
