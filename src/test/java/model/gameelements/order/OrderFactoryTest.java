@@ -20,7 +20,7 @@ public class OrderFactoryTest {
      * print ok when test is passed
      */
     @After
-    public void checked(){
+    public void checked() {
         System.out.println("ok");
     }
 

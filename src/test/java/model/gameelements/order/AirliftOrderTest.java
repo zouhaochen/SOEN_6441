@@ -50,23 +50,14 @@ public class AirliftOrderTest {
     @Before
     public void testSetup() {
 
-        /**
-         * Set player
-         */
+        // Set player
         d_player = new Player("player");
-        /**
-         * Set country airlift from
-         */
+        // Set country airlift from
         d_FromCountry = new Country("Canada");
-        /**
-         * Set country airlift to
-         */
+        // Set country airlift to
         d_ToCountry = new Country("USA");
-        /**
-         * Set army number
-         */
-        d_NumOfArmies=5;
-
+        // Set army number
+        d_NumOfArmies = 5;
 
         d_OrderInfo = new OrderInfo();
         d_OrderInfo.setInitiator(d_player);
@@ -89,7 +80,7 @@ public class AirliftOrderTest {
      */
     @Test
     public void hasCardTest() {
-        d_AirliftOrder=new AirliftOrder(d_OrderInfo);
+        d_AirliftOrder = new AirliftOrder(d_OrderInfo);
         // Should return invalid because player has no airlift card in hand.
         assertFalse(d_AirliftOrder.valid());
     }
@@ -98,26 +89,26 @@ public class AirliftOrderTest {
      * Destination country or departure country is null check
      */
     @Test
-    public void countryIsNullTest(){
+    public void countryIsNullTest() {
         // Set destination country obj be null
         d_OrderInfo.setDestination(null);
         // Give player airlift card
         d_OrderInfo.getInitiator().receiveNewCard(Card.AIRLIFT);
-        d_AirliftOrder=new AirliftOrder(d_OrderInfo);
+        d_AirliftOrder = new AirliftOrder(d_OrderInfo);
         // Should return invalid because destination country is null
         assertFalse(d_AirliftOrder.valid());
     }
 
     /**
-     *  Test source country or target country does not belongs to the player.
+     * Test source country or target country does not belongs to the player.
      */
     @Test
-    public void countryBelongingTest(){
+    public void countryBelongingTest() {
         // Give player airlift card
         d_OrderInfo.getInitiator().receiveNewCard(Card.AIRLIFT);
         // Give one country to test player
         d_OrderInfo.getInitiator().assignCountry(d_FromCountry);
-        d_AirliftOrder=new AirliftOrder(d_OrderInfo);
+        d_AirliftOrder = new AirliftOrder(d_OrderInfo);
         // Should return invalid because cant airlift to country not belongs to player.
         assertFalse(d_AirliftOrder.valid());
     }

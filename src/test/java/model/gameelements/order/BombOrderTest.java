@@ -17,22 +17,22 @@ public class BombOrderTest {
 
     /**
      * Player
-     * */
+     */
     Player d_player;
     /**
      * Country
-     * */
+     */
     Country d_country;
     /**
      * Blockade order
-     * */
+     */
     BombOrder d_order;
 
     /**
      * Print ok when test is passed
      */
     @After
-    public void checked(){
+    public void checked() {
         System.out.println("ok");
     }
 
@@ -54,7 +54,6 @@ public class BombOrderTest {
     public void testOrderInvalidGivenPlayerHasNoCard() {
         assertFalse(d_order.valid());
     }
-
 
 
     @Test
