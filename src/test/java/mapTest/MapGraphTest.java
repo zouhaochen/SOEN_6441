@@ -3,7 +3,7 @@ package mapTest;
 import model.map.MapGraph;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 /**
  * This class is for test MapGraph
@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 public class MapGraphTest {
     /**
      * test all border are get
+     *
      * @throws Exception file not find
      */
     @Test
@@ -27,6 +28,7 @@ public class MapGraphTest {
 
     /**
      * test all countries are get
+     *
      * @throws Exception file not find
      */
     @Test
@@ -40,6 +42,7 @@ public class MapGraphTest {
 
     /**
      * test all continents are get
+     *
      * @throws Exception file not find
      */
     @Test

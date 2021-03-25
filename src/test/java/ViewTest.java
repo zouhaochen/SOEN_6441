@@ -10,14 +10,14 @@ public class ViewTest {
     /**
      * test model
      */
-    LogEntryBuffer d_log=new LogEntryBuffer();
+    LogEntryBuffer d_log = new LogEntryBuffer();
 
 
     /**
      * print ok when test is passed
      */
     @After
-    public void checked(){
+    public void checked() {
         System.out.println("ok");
     }
 
@@ -25,7 +25,7 @@ public class ViewTest {
      * unit test for observer list Test
      */
     @Test
-    public void obsListAttachTest(){
+    public void obsListAttachTest() {
         LogEntryBufferView d_TestView = new LogEntryBufferView(d_log);
         LogEntryBufferView d_TestView1 = new LogEntryBufferView(d_log);
         System.out.println(d_log.getDObserverList());

@@ -8,7 +8,13 @@ import model.gameelements.Player;
  */
 public class DiplomacyOrder extends Order {
 
+    /**
+     * The player.
+     */
     private Player d_Player;
+    /**
+     * The target player.
+     */
     private Player d_TargetPlayer;
 
     /**

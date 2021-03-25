@@ -12,14 +12,16 @@ public class GameDataView implements Observer {
     /**
      * view tag
      */
-    int d_ObsTag=2;
+    int d_ObsTag = 2;
 
     /**
      * constructor
      *
      * @param p_GameData the p game data
      */
-    GameDataView(GameData p_GameData){p_GameData.attachObs(this);}
+    GameDataView(GameData p_GameData) {
+        p_GameData.attachObs(this);
+    }
 
 
     /**

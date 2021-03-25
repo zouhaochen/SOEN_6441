@@ -4,11 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This is the method to convert a model.map into
@@ -123,8 +119,8 @@ public class MapGraph {
      * Get a model.map file from an existing "domination" model.map file
      *
      * @param p_Filename path to file
-     * @throws IOException if file not found or cannot read
      * @return File
+     * @throws IOException if file not found or cannot read
      */
     private static File getFile(String p_Filename) throws IOException {
         File l_F = new File("");

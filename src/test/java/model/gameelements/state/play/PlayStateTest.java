@@ -1,7 +1,7 @@
 package model.gameelements.state.play;
 
 import controller.MainPlayController;
-import model.state.*;
+import model.state.Edit;
 import model.state.play.AddPlayer;
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class PlayStateTest {
     }
 
     /**
-     *  unit test for play state
+     * unit test for play state
      */
     @Test
     public void testPlayState() {

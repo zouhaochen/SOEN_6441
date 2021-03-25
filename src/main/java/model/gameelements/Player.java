@@ -205,7 +205,8 @@ Player extends Observable {
 
     /**
      * following the command to issue order and add the order to order list.
-     * @return  check if the order can be issue
+     *
+     * @return true if an order is created
      */
     public boolean issueOrder() {
         Order l_Order = createOrder();
@@ -218,8 +219,9 @@ Player extends Observable {
     }
 
     /**
-     * to create player`s order.
-     * @return  to create an order for a player
+     * Create player's order.
+     *
+     * @return to create an order for a player
      */
     public Order createOrder() {
         String l_Reply;
@@ -307,7 +309,7 @@ Player extends Observable {
     /**
      * player receive a New Card
      *
-     * @param p_NewCard  send a new card for a player
+     * @param p_NewCard send a new card for a player
      */
     public void receiveNewCard(Card p_NewCard) {
         this.d_Cards.add(p_NewCard);
@@ -317,7 +319,7 @@ Player extends Observable {
     /**
      * Card being used so remove from card list
      *
-     * @param p_UsedCard remove the card that have already used.
+     * @param p_UsedCard the used card
      */
     public void removeTargetCard(Card p_UsedCard) {
         d_Cards.remove(p_UsedCard);

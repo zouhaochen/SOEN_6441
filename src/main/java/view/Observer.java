@@ -5,8 +5,7 @@ import model.Observable;
 /**
  * Observer interface
  */
-public interface Observer
-{
+public interface Observer {
 
     /**
      * interface update function
@@ -17,6 +16,7 @@ public interface Observer
 
     /**
      * tag getter
+     *
      * @return int that stand for specific view
      */
     int getTag();
