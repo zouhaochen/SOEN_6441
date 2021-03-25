@@ -67,6 +67,9 @@ public class DiplomacyOrderTest {
         assertFalse(d_TestDiplomacyOrder.valid());
     }
 
+    /**
+     * unit test for check order valid
+     */
     @Test
     public void testOrderValid() {
         // when

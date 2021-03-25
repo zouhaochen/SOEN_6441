@@ -67,6 +67,9 @@ public class BlockadeOrderTest {
         assertFalse(d_order.valid());
     }
 
+    /**
+     * unit test for check order valid
+     */
     @Test
     public void testOrderValid() {
         d_player.getCards().add(Card.BLOCKADE);
