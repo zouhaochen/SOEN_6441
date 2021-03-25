@@ -11,7 +11,7 @@ public class LogEntryBufferTest {
     /**
      * test object
      */
-    LogEntryBuffer d_LogEntryBuffer=new LogEntryBuffer();
+    LogEntryBuffer d_LogEntryBuffer = new LogEntryBuffer();
 
     /**
      * test log file path
@@ -22,7 +22,7 @@ public class LogEntryBufferTest {
      * print ok when test is passed
      */
     @After
-    public void checked(){
+    public void checked() {
         System.out.println("ok");
     }
 
@@ -30,7 +30,7 @@ public class LogEntryBufferTest {
      * write log to file test, go check file after test
      */
     @Test
-    public void writeTest(){
+    public void writeTest() {
         d_LogEntryBuffer.start();
         System.out.println("test msg1 before first update");
         System.out.println("test msg2 before first update");

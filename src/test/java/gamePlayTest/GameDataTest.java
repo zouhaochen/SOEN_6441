@@ -1,7 +1,6 @@
 package gamePlayTest;
 
 import model.GameData;
-
 import org.junit.After;
 import org.junit.Test;
 
@@ -10,7 +9,7 @@ import java.io.FileNotFoundException;
 
 
 /**
- *  game data test class
+ * game data test class
  */
 public class GameDataTest {
 
@@ -22,11 +21,12 @@ public class GameDataTest {
      * Test object GameData.
      */
     GameData d_GameData = new GameData(d_File);
+
     /**
      * print ok when test is passed
      */
     @After
-    public void checked(){
+    public void checked() {
         System.out.println("ok");
     }
 
@@ -34,11 +34,11 @@ public class GameDataTest {
      * this is load model.map function test
      */
     @Test
-    public void loadMapTest(){
+    public void loadMapTest() {
         System.out.println("check load model.map function");
-        try{
+        try {
             d_GameData.loadMap();
-        }catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 

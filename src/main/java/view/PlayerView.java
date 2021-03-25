@@ -11,14 +11,16 @@ public class PlayerView implements Observer {
     /**
      * view tag
      */
-   int d_ObsTag=1;
+    int d_ObsTag = 1;
 
     /**
      * constructor
      *
      * @param p_Player player object
      */
-    public PlayerView(Player p_Player){p_Player.attachObs(this);}
+    public PlayerView(Player p_Player) {
+        p_Player.attachObs(this);
+    }
 
 
     /**

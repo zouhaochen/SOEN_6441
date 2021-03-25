@@ -57,7 +57,7 @@ public class BombOrderTest {
 
 
     /**
-     *  unit test if Order is Valid
+     * unit test if Order is Valid
      */
     @Test
     public void testOrderValid() {

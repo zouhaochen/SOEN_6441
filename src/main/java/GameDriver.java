@@ -17,7 +17,7 @@ public class GameDriver {
     /**
      * constructor
      */
-    public GameDriver(){
+    public GameDriver() {
         // setup controller
         d_MainPlayController = new MainPlayController();
         // assign logger as model, pass it to logger view

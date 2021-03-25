@@ -9,8 +9,17 @@ import model.gameelements.Player;
  */
 public class BombOrder extends Order {
 
+    /**
+     * The previous army number.
+     */
     private int d_PreviousArmyNumber;
+    /**
+     * The target country.
+     */
     private Country d_TargetCountry;
+    /**
+     * The player.
+     */
     private Player d_Player;
 
     /**

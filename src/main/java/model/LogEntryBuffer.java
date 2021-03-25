@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *  record the game progress into log entry buffer
+ * record the game progress into log entry buffer
  */
 public class LogEntryBuffer extends Observable {
     /**
