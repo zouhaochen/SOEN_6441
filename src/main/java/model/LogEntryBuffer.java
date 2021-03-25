@@ -125,25 +125,25 @@ public class LogEntryBuffer extends Observable {
      * private class combine two string
      */
     private static class OutputStreamCombiner extends OutputStream {
-        private List<OutputStream> outputStreams;
+        private List<OutputStream> d_OutputStreams;
 
         /**
          * constructor
          *
-         * @param outputStreams current java output stream
+         * @param p_OutputStreams current java output stream
          */
-        public OutputStreamCombiner(List<OutputStream> outputStreams) {
-            this.outputStreams = outputStreams;
+        public OutputStreamCombiner(List<OutputStream> p_OutputStreams) {
+            this.d_OutputStreams = p_OutputStreams;
         }
 
         /**
          * write to output stream
          *
          * @param b int b
-         * @throws IOException
+         * @throws IOException if I/O error occurs
          */
         public void write(int b) throws IOException {
-            for (OutputStream os : outputStreams) {
+            for (OutputStream os : d_OutputStreams) {
                 os.write(b);
             }
         }
@@ -151,10 +151,10 @@ public class LogEntryBuffer extends Observable {
         /**
          * flush the stream
          *
-         * @throws IOException
+         * @throws IOException if I/O error occurs
          */
         public void flush() throws IOException {
-            for (OutputStream os : outputStreams) {
+            for (OutputStream os : d_OutputStreams) {
                 os.flush();
             }
         }
@@ -162,10 +162,10 @@ public class LogEntryBuffer extends Observable {
         /**
          * stream close
          *
-         * @throws IOException
+         * @throws IOException if I/O error occurs
          */
         public void close() throws IOException {
-            for (OutputStream os : outputStreams) {
+            for (OutputStream os : d_OutputStreams) {
                 os.close();
             }
         }

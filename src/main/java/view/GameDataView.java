@@ -16,17 +16,19 @@ public class GameDataView implements Observer {
 
     /**
      * constructor
-     * @param p_GameData
+     *
+     * @param p_GameData the p game data
      */
     GameDataView(GameData p_GameData){p_GameData.attachObs(this);}
 
 
     /**
      * override function update
-     * @param p_observable
+     *
+     * @param p_Observable observable object
      */
     @Override
-    public void update(Observable p_observable) {
+    public void update(Observable p_Observable) {
 
     }
 

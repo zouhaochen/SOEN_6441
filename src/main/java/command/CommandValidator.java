@@ -15,6 +15,11 @@ public class CommandValidator {
      */
     private static GameData D_GameData;
 
+    /**
+     * Sets game data.
+     *
+     * @param p_GameData the game data
+     */
     public static void setGameData(GameData p_GameData) {
         D_GameData = p_GameData;
     }
@@ -59,6 +64,12 @@ public class CommandValidator {
         return l_Valid;
     }
 
+    /**
+     * Validate post load commands boolean.
+     *
+     * @param p_CommandArr the command arr
+     * @return true if the command is valid, false otherwise
+     */
     private static boolean validatePostLoadCommands(String[] p_CommandArr) {
         String l_CommandType = p_CommandArr[0].toLowerCase();
         boolean l_Result;
@@ -155,6 +166,7 @@ public class CommandValidator {
 
     /**
      * to validate if the input of Command AddPlayer is correct.
+     *
      * @param p_CommandArr command array as string type
      * @return return the value with boolean type to check if command is valid.
      */
@@ -186,6 +198,7 @@ public class CommandValidator {
 
     /**
      * to validate if the input of Command assign country is correct.
+     *
      * @param p_CommandArr command array as string type
      * @return return the value with boolean type to check if command is valid.
      */

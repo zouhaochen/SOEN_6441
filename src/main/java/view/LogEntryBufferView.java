@@ -21,9 +21,18 @@ public class LogEntryBufferView implements Observer {
      */
     int d_ObsTag = 3;
 
-    String d_FilePath="log/Log.txt";
+    /**
+     * The file path.
+     */
+    String d_FilePath = "log/Log.txt";
 
+    /**
+     * The calendar.
+     */
     Calendar d_Calendar;
+    /**
+     * The simple date format.
+     */
     SimpleDateFormat d_SimpleDateFormat;
 
     /**
@@ -36,19 +45,18 @@ public class LogEntryBufferView implements Observer {
         d_SimpleDateFormat = new SimpleDateFormat("HH:mm:ss");
     }
 
-
     /**
      * interface update function
      *
-     * @param p_observable
+     * @param p_Observable observable object
      */
     @Override
-    public void update(Observable p_observable) {
+    public void update(Observable p_Observable) {
         d_Calendar = Calendar.getInstance();
         PrintWriter l_Out = null;
-        try {;
+        try {
             l_Out = new PrintWriter(new BufferedWriter(new FileWriter(d_FilePath, true)));
-            l_Out.println(d_SimpleDateFormat.format(d_Calendar.getTime()) );
+            l_Out.println(d_SimpleDateFormat.format(d_Calendar.getTime()));
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -59,7 +67,6 @@ public class LogEntryBufferView implements Observer {
         System.out.println("log file updated");
 
     }
-
 
     /**
      * tag getter

@@ -1,8 +1,6 @@
 import controller.MainPlayController;
 import view.LogEntryBufferView;
 
-import java.io.IOException;
-
 /**
  * Start running the risk game
  */
@@ -30,12 +28,11 @@ public class GameDriver {
      * main method, Show each game phase from GameEngineController, and run the game according to the game rules
      *
      * @param args To get parameters from console
-     * @throws IOException if file does not exist
      */
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) {
 
         // new game
-        GameDriver l_GameDriver=new GameDriver();
+        GameDriver l_GameDriver = new GameDriver();
         // run the controller
         l_GameDriver.d_MainPlayController.Start();
         //remove obs when game over

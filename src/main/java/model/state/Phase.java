@@ -9,15 +9,15 @@ import controller.MainPlayController;
  * There are many states, and even a hierarchy of states:
  * <p>
  * Phase
- * Edit phase (abstract)
- * Preload
- * Postload
- * Play (abstract)
- * PlaySetup
+ * Edit
+ * Play
+ * Startup
+ * LoadMap
+ * AddPlayer
+ * AssignCountry
  * MainPlay
- * Reinforcement <--
- * Attack          |
- * Fortify ---------
+ * IssueOrder
+ * OrderExecution
  * End
  * <p>
  * In each state, nextState() is defined so that it goes down in
@@ -31,17 +31,17 @@ public class Phase {
      * so that the state object can change the state of
      * the GameEngine to transition between states.
      */
-    protected MainPlayController d_ml;
+    protected MainPlayController d_Ml;
 
 
     /**
      * Instantiates a new Phase.
      *
-     * @param p_ml the p ml
+     * @param p_Ml the p ml
      */
-    public Phase(MainPlayController p_ml) {
+    public Phase(MainPlayController p_Ml) {
 
-        d_ml = p_ml;
+        d_Ml = p_Ml;
 
     }
 
@@ -119,7 +119,7 @@ public class Phase {
      * End game.
      */
     public void endGame() {
-        d_ml.setPhase(new End(d_ml));
+        d_Ml.setPhase(new End(d_Ml));
         System.out.println();
         System.out.println("Exit the game!");
     }

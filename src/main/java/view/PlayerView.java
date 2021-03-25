@@ -15,17 +15,19 @@ public class PlayerView implements Observer {
 
     /**
      * constructor
-     * @param p_Player
+     *
+     * @param p_Player player object
      */
     public PlayerView(Player p_Player){p_Player.attachObs(this);}
 
 
     /**
      * override function update
-     * @param p_observable
+     *
+     * @param p_Observable observable object
      */
     @Override
-    public void update(Observable p_observable) {
+    public void update(Observable p_Observable) {
 
     }
 

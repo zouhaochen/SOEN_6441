@@ -30,17 +30,16 @@ public class AddPlayer extends Startup {
             String l_askUser = l_scanner.nextLine().trim();
 
             if (l_askUser.equalsIgnoreCase("y")) {
-                if (d_ml.d_GameData.getPlayerList().size() < 5) {
-                    d_ml.d_GameEngineController.gamePlayerCommand();
+                if (d_Ml.d_GameData.getPlayerList().size() < 5) {
+                    d_Ml.d_GameEngineController.gamePlayerCommand();
                 }
                 // since the number of player range is 2 to 5. no more player can be add in.
-                else if (d_ml.d_GameData.getPlayerList().size() >= 5) {
+                else if (d_Ml.d_GameData.getPlayerList().size() >= 5) {
                     System.out.println("number of player out of limit ");
-                    continue;
                 }
             } else if (l_askUser.equalsIgnoreCase("n")) {
                 // since the number of player range is 2 to 5. no more player can be remove in.
-                if (d_ml.d_GameData.getPlayerList().size() < 2) {
+                if (d_Ml.d_GameData.getPlayerList().size() < 2) {
                     System.out.println("number of player is not enough, please add more ");
                 } else {
                     System.out.println("All player have already set ");
@@ -50,7 +49,7 @@ public class AddPlayer extends Startup {
                 System.out.println("Invalid command, please try again (y/n): ");
             }
         }
-        d_ml.getDLogEntryBuffer().updateFile();
+        d_Ml.getDLogEntryBuffer().updateFile();
 
         next();
     }
@@ -60,7 +59,7 @@ public class AddPlayer extends Startup {
      */
     @Override
     public void next() {
-        d_ml.setPhase(new AssignCountry(d_ml));
+        d_Ml.setPhase(new AssignCountry(d_Ml));
     }
 
     /**
@@ -68,6 +67,6 @@ public class AddPlayer extends Startup {
      */
     @Override
     public void previous() {
-        d_ml.setPhase(new LoadMap(d_ml));
+        d_Ml.setPhase(new LoadMap(d_Ml));
     }
 }
