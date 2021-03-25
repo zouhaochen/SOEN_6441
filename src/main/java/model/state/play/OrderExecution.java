@@ -21,11 +21,11 @@ public class OrderExecution extends MainPlay {
      */
     @Override
     public void executeOrder() {
-        d_ml.executeAllOrders();
-        d_ml.resetAttackableState();
-        d_ml.getDLogEntryBuffer().updateFile();
+        d_Ml.executeAllOrders();
+        d_Ml.resetAttackableState();
+        d_Ml.getDLogEntryBuffer().updateFile();
 
-        if (d_ml.d_GameEngineController.checkGameIsOver()) {
+        if (d_Ml.d_GameEngineController.checkGameIsOver()) {
             // game ends
             next();
         } else {
@@ -47,6 +47,6 @@ public class OrderExecution extends MainPlay {
      */
     @Override
     public void previous() {
-        d_ml.setPhase(new IssueOrder(d_ml));
+        d_Ml.setPhase(new IssueOrder(d_Ml));
     }
 }

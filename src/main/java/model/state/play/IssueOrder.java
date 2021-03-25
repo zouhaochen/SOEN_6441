@@ -20,8 +20,8 @@ public class IssueOrder extends MainPlay {
      */
     @Override
     public void issueOrder() {
-        d_ml.d_GameEngineController.awardReinforcement();
-        d_ml.issueOrders();
+        d_Ml.d_GameEngineController.awardReinforcement();
+        d_Ml.issueOrders();
         next();
     }
 
@@ -30,6 +30,6 @@ public class IssueOrder extends MainPlay {
      */
     @Override
     public void next() {
-        d_ml.setPhase(new OrderExecution(d_ml));
+        d_Ml.setPhase(new OrderExecution(d_Ml));
     }
 }

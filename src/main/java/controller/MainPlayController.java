@@ -26,7 +26,13 @@ public class MainPlayController extends Observable {
      */
     public Phase gamePhase;
 
+    /**
+     * The Mystart.
+     */
     String mystart;
+    /**
+     * The Mycommand.
+     */
     String mycommand;
     /**
      * model.map file that use to load represent game model.map.
@@ -159,6 +165,9 @@ public class MainPlayController extends Observable {
 
     }
 
+    /**
+     * Issue orders.
+     */
     public void issueOrders() {
         boolean l_Continue;
         do {
@@ -170,6 +179,9 @@ public class MainPlayController extends Observable {
         } while (l_Continue);
     }
 
+    /**
+     * Execute all orders.
+     */
     public void executeAllOrders() {
         boolean l_MoreOrder;
         do {
@@ -187,6 +199,9 @@ public class MainPlayController extends Observable {
         } while (l_MoreOrder);
     }
 
+    /**
+     * Shows map.
+     */
     public void showMap() {
         System.out.println("\n====================== Map ======================");
         // Information of continents
@@ -218,6 +233,9 @@ public class MainPlayController extends Observable {
         System.out.println("\n=================================================");
     }
 
+    /**
+     * Reset attackable state.
+     */
     public void resetAttackableState() {
         for (Player l_Player : d_GameData.getPlayerList()) {
             l_Player.resetPlayerDiplomacy();

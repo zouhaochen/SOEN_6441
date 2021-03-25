@@ -118,15 +118,15 @@ public class Country extends Territory {
 
     /**
      * add the 2 countries boarder connectivity
-     * @param p_country the neighbor country
+     *
+     * @param p_Country the neighbor country
      * @return true if successfully added, otherwise return false
      */
-    public boolean addBoarderConnection(Country p_country) {
-        if(p_country != null) {
-            d_BorderCountries.put(p_country.getName(), p_country);
+    public boolean addBoarderConnection(Country p_Country) {
+        if (p_Country != null) {
+            d_BorderCountries.put(p_Country.getName(), p_Country);
             return true;
-        }
-        else
+        } else
             return false;
     }
 }

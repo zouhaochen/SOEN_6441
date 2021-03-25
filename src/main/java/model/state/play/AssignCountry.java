@@ -22,9 +22,9 @@ public class AssignCountry extends Startup {
     @Override
     public void assignCountries() {
         // randomly assign countries for each player
-        d_ml.d_GameEngineController.assignCountries();
+        d_Ml.d_GameEngineController.assignCountries();
 
-        d_ml.getDLogEntryBuffer().updateFile();
+        d_Ml.getDLogEntryBuffer().updateFile();
 
         next();
     }
@@ -34,7 +34,7 @@ public class AssignCountry extends Startup {
      */
     @Override
     public void next() {
-        d_ml.setPhase(new IssueOrder(d_ml));
+        d_Ml.setPhase(new IssueOrder(d_Ml));
     }
 
     /**
@@ -42,6 +42,6 @@ public class AssignCountry extends Startup {
      */
     @Override
     public void previous() {
-        d_ml.setPhase(new AddPlayer(d_ml));
+        d_Ml.setPhase(new AddPlayer(d_Ml));
     }
 }

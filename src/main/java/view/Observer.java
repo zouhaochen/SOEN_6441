@@ -2,8 +2,6 @@ package view;
 
 import model.Observable;
 
-import java.util.List;
-
 /**
  * Observer interface
  */
@@ -12,9 +10,10 @@ public interface Observer
 
     /**
      * interface update function
-     * @param p_observable
+     *
+     * @param p_Observable observable object
      */
-    void update(Observable p_observable);
+    void update(Observable p_Observable);
 
     /**
      * tag getter

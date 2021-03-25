@@ -28,7 +28,7 @@ public abstract class Play extends Phase {
      */
     @Override
     public void showMap() {
-        d_ml.showMap();
+        d_Ml.showMap();
     }
 
 }

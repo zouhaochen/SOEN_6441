@@ -29,21 +29,21 @@ public class LoadMap extends Startup {
     public void loadMap() {
 
         try {
-            d_ml.d_MapFile = new File(d_ml.d_GameEngineController.getMapFilePath());
+            d_Ml.d_MapFile = new File(d_Ml.d_GameEngineController.getMapFilePath());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        d_ml.d_GameData = new GameData(d_ml.d_MapFile);
-        d_ml.d_GameData.setCurrentPhase(this);
-        d_ml.d_GameEngineController = new GameEngineController(d_ml.d_GameData);
-        OrderFactory.setGameData(d_ml.d_GameData);
+        d_Ml.d_GameData = new GameData(d_Ml.d_MapFile);
+        d_Ml.d_GameData.setCurrentPhase(this);
+        d_Ml.d_GameEngineController = new GameEngineController(d_Ml.d_GameData);
+        OrderFactory.setGameData(d_Ml.d_GameData);
         try {
-            d_ml.d_GameData.loadMap();
+            d_Ml.d_GameData.loadMap();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        d_ml.getDLogEntryBuffer().updateFile();
+        d_Ml.getDLogEntryBuffer().updateFile();
 
         next();
     }
@@ -61,6 +61,6 @@ public class LoadMap extends Startup {
      */
     @Override
     public void next() {
-        d_ml.setPhase(new AddPlayer(d_ml));
+        d_Ml.setPhase(new AddPlayer(d_Ml));
     }
 }

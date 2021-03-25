@@ -28,8 +28,8 @@ public class Edit extends Phase {
 	public void showMap() {
 		try {
 			System.out.println("\nMain Graph show below:");
-			MapGraph.printTable(d_ml.d_MapFile.getName());
-			d_ml.getDLogEntryBuffer().updateFile();
+			MapGraph.printTable(d_Ml.d_MapFile.getName());
+			d_Ml.getDLogEntryBuffer().updateFile();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,7 +42,7 @@ public class Edit extends Phase {
 
 		try {
 			MapEdit.mapEditLoop();
-			d_ml.getDLogEntryBuffer().updateFile();
+			d_Ml.getDLogEntryBuffer().updateFile();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -53,8 +53,8 @@ public class Edit extends Phase {
 	 */
 	public void saveMap() {
 		System.out.println("map has been saved");
-		d_ml.getDLogEntryBuffer().updateFile();
-		d_ml.setPhase(new LoadMap(d_ml));
+		d_Ml.getDLogEntryBuffer().updateFile();
+		d_Ml.setPhase(new LoadMap(d_Ml));
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class Edit extends Phase {
 	public void next() {
 
 		System.out.println("must save map");
-		d_ml.setPhase(new LoadMap(d_ml));
+		d_Ml.setPhase(new LoadMap(d_Ml));
 		System.out.println(" =================================================");
 		System.out.println("| #   PHASE                   : command           |");
 		System.out.println(" =================================================");
@@ -76,7 +76,7 @@ public class Edit extends Phase {
 		System.out.println("| 11. Play:PlaySetup:         : next phase        |");
 		System.out.println("| 12. Any                     : previous phase    |");
 		System.out.println(" =================================================");
-		System.out.println("enter a " + d_ml.getClass().getSimpleName() + " phase command: ");
+		System.out.println("enter a " + d_Ml.getClass().getSimpleName() + " phase command: ");
 	}
 
 }

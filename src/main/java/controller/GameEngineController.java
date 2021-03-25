@@ -40,11 +40,11 @@ public class GameEngineController {
     /**
      * add new player to the game
      *
-     * @param p_colour you custom player color
+     * @param p_Colour you custom player color
      */
-    public void addNewPlayer(String p_colour) {
+    public void addNewPlayer(String p_Colour) {
         // check if the player name(colour) already exists
-        Player l_Player = d_GameData.getPlayerByName(p_colour);
+        Player l_Player = d_GameData.getPlayerByName(p_Colour);
         boolean l_Result = false;
         Player l_NewPlayer = null;
         boolean l_PlayerRepetition = true;
@@ -52,17 +52,17 @@ public class GameEngineController {
         if (l_Player == null) {
             //new temp player list
             ArrayList<Player> l_NewPlayerList = d_GameData.getPlayerList();
-            l_NewPlayer = new Player(p_colour);
+            l_NewPlayer = new Player(p_Colour);
 
-            for(int l_i = 0; l_i < l_NewPlayerList.size(); l_i++){
+            for (int l_i = 0; l_i < l_NewPlayerList.size(); l_i++) {
                 String l_colour = l_NewPlayerList.get(l_i).getColour();
-                if(l_colour.equals(p_colour)){
+                if (l_colour.equals(p_Colour)) {
                     l_PlayerRepetition = false;
                     break;
                 }
             }
 
-            if(l_PlayerRepetition){
+            if (l_PlayerRepetition) {
                 // add to temp player list
                 l_Result = l_NewPlayerList.add(l_NewPlayer);
                 // set to game data player list
@@ -75,7 +75,7 @@ public class GameEngineController {
         if (l_Result) {
             System.out.println("NOTICE: New Player " + l_NewPlayer.getId() + " [" + l_NewPlayer.getColour() + "] has been added to the game.");
         } else {
-            System.out.println("Warning: Fail to create Player " + p_colour + ".");
+            System.out.println("Warning: Fail to create Player " + p_Colour + ".");
         }
     }
 
