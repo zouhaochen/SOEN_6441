@@ -10,9 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Tests for BlockadeOrder class
- */
+
 public class BlockadeOrderTest {
 	/** player */
 	Player d_player;

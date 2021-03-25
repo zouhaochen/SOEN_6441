@@ -111,7 +111,7 @@ public class GameEngineTest {
         GameEngineController l_GameEngine = new GameEngineController(l_GameData);
 
         // when
-        int l_ReinforcementBonus = l_GameEngine.getReinforcementBonus(l_Player);
+        int l_ReinforcementBonus = l_GameEngine.calculateReinforcement(l_Player);
 
         // then
         assertEquals(l_ExpectedContinentValue, l_ReinforcementBonus);
@@ -144,10 +144,10 @@ public class GameEngineTest {
         GameEngineController l_GameEngine = new GameEngineController(l_GameData);
 
         // when
-        int l_ReinforcementBonus = l_GameEngine.getReinforcementBonus(l_Player);
+        int l_ReinforcementBonus = l_GameEngine.calculateReinforcement(l_Player);
 
         // then
-        assertEquals(0, l_ReinforcementBonus);
+        assertEquals(3, l_ReinforcementBonus);
 
     }
 

@@ -80,7 +80,7 @@ public class BlockadeOrder extends Order {
      *
      * @return true if valid
      */
-    public boolean valid() {
+    public boolean  valid() {
 
         if (!d_Player.getCards().contains(Card.BLOCKADE)) {
             System.out.println("Invalid Blockade Order: Player " + d_Player.getColour() + " does not have a blockade card");

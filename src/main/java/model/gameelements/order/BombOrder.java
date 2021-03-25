@@ -10,6 +10,27 @@ public class BombOrder extends Order {
     private Country d_TargetCountry;
     private Player d_Player;
 
+    /**
+     * Instantiates a new object of type BombOrder.
+     *
+     * @param p_Player        current player
+     * @param p_TargetCountry target country id
+     */
+    public BombOrder(Player p_Player, Country p_TargetCountry) {
+        super();
+        setType("Blockade");
+        d_Player = p_Player;
+        d_TargetCountry = p_TargetCountry;
+        setOrderInfo(new OrderInfo());
+        getOrderInfo().setInitiator(p_Player);
+        getOrderInfo().setDestination(p_TargetCountry);
+    }
+
+    /**
+     * Instantiates a new Bomb order.
+     *
+     * @param p_OrderInfo the order info
+     */
     public BombOrder(OrderInfo p_OrderInfo) {
         super();
         setType("Bomb");
@@ -74,6 +95,14 @@ public class BombOrder extends Order {
             return false;
         }
 
+        Player l_targetPlayer = d_TargetCountry.getOwner();
+        // if target country is un-attackable, because of diplomacy
+        // only two countries with diplomacy cant attack each other
+        if (d_Player.getUnattackablePlayers().contains(l_targetPlayer.getId())) {
+            System.out.println("Invalid Advance Order: you cannot attack Player " + l_targetPlayer.getColour() + " due to a Diplomacy card has been used by the player.");
+            return false;
+        }
+
         //check whether player is the target country owner
         if (d_Player.getCountriesInControl().containsKey(d_TargetCountry.getName().toLowerCase())) {
             System.out.println("Can not bomb player's own country");
@@ -83,7 +112,7 @@ public class BombOrder extends Order {
         //check whether the target country is adjacent to player's country
         boolean l_isAdjacent = false;
         for (Country l_Country : d_Player.getCountriesInControl().values()) {
-            if (l_Country.getBorderCountries().containsKey(d_TargetCountry.getName().toLowerCase())) {
+            if (l_Country.getBorderCountries().containsKey(d_TargetCountry.getName())) {
                 l_isAdjacent = true;
                 break;
             }
