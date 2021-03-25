@@ -5,7 +5,7 @@ import model.gameelements.Country;
 import model.gameelements.Player;
 
 /**
- * implement the function of Bomb card.
+ * The type of Bomb order
  */
 public class BombOrder extends Order {
 
@@ -80,10 +80,10 @@ public class BombOrder extends Order {
         d_PreviousArmyNumber = d_TargetCountry.getArmies();
         d_TargetCountry.setArmies(d_PreviousArmyNumber / 2);
 
-        //remove card from player cards list
+        // Remove card from player cards list
         d_Player.removeTargetCard(Card.BOMB);
 
-        //print success information
+        // Print success information
         System.out.println("Success applying Bomb");
 
         printOrder();
@@ -96,32 +96,33 @@ public class BombOrder extends Order {
      * @return false if the current order is invalid
      */
     public boolean valid() {
-        //check if the player has a bomb card
+        // Check if the player has a bomb card
         if (!d_Player.getCards().contains(Card.BOMB)) {
             System.out.println("Player " + d_Player.getColour() + " does not have a bomb card");
             return false;
         }
 
+        // Check whether target country null
         if (d_TargetCountry == null) {
             System.out.println("Invalid country name.");
             return false;
         }
 
         Player l_targetPlayer = d_TargetCountry.getOwner();
-        // if target country is un-attackable, because of diplomacy
-        // only two countries with diplomacy cant attack each other
+        // If target country is un-attackable, because of diplomacy
+        // Only two countries with diplomacy cant attack each other
         if (d_Player.getUnattackablePlayers().contains(l_targetPlayer.getId())) {
             System.out.println("Invalid Advance Order: you cannot attack Player " + l_targetPlayer.getColour() + " due to a Diplomacy card has been used by the player.");
             return false;
         }
 
-        //check whether player is the target country owner
+        // Check whether player is the target country owner
         if (d_Player.getCountriesInControl().containsKey(d_TargetCountry.getName().toLowerCase())) {
             System.out.println("Can not bomb player's own country");
             return false;
         }
 
-        //check whether the target country is adjacent to player's country
+        // Check whether the target country is adjacent to player's country
         boolean l_isAdjacent = false;
         for (Country l_Country : d_Player.getCountriesInControl().values()) {
             if (l_Country.getBorderCountries().containsKey(d_TargetCountry.getName())) {
