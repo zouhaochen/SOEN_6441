@@ -10,17 +10,28 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-
+/**
+ * Blockade order test
+ */
 public class BlockadeOrderTest {
-	/** player */
+
+	/**
+	 * Player
+	 * */
 	Player d_player;
-	/** country */
+
+	/**
+	 * Country
+	 * */
 	Country d_country;
-	/** blockade order */
+
+	/**
+	 * Blockade order
+	 * */
 	BlockadeOrder d_order;
 
 	/**
-	 * print ok when test is passed
+	 * Print ok when test is passed
 	 */
 	@After
 	public void checked(){
