@@ -6,6 +6,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Diplomacy order test
+ */
 public class DiplomacyOrderTest {
 
     /**
@@ -25,7 +28,7 @@ public class DiplomacyOrderTest {
     DiplomacyOrder d_TestDiplomacyOrder;
 
     /**
-     * print ok when test is passed
+     * Print ok when test is passed
      */
     @After
     public void checked() {
@@ -34,7 +37,7 @@ public class DiplomacyOrderTest {
 
 
     /**
-     * order test
+     * Order test
      */
     @Test
     public void diplomaSetupTest() {
