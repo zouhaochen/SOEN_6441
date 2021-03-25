@@ -27,6 +27,6 @@ jobs:
       - name: Javadoc Generation
         run: mvn javadoc:javadoc
       - name: Check Javadoc
-        run:
+        run: |
           cd src/main
           javadoc -Xdoclint:missing java
