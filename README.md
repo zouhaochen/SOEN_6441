@@ -11,7 +11,7 @@ Group Member:
 
 **======================Build 2 ================================**
 
-**Refactoring**
+## Refactoring
 
 **Refactoring of Map package**
 1. Combining classes that are related to get the file information(the country’s storage location), and get the map information(functions that return a list of countries or continents).  
@@ -35,7 +35,7 @@ Also, Some classes like (_LogEntryBuffer.java_) in the package model extend Obse
 
 
 
-**To run the Warzone version 2.0**
+##To run the Warzone version 2.0
 
 User will first get into option phase as the previous 
 
