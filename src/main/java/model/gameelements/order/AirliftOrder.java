@@ -10,13 +10,13 @@ import model.gameelements.Player;
 public class AirliftOrder extends Order {
 
     /**
-     * The D source country.
+     * The D departure country.
      */
-    private Country d_SourceCountry;
+    private Country d_DepartureCountry;
     /**
-     * The D target country.
+     * The D destination country.
      */
-    private Country d_TargetCountry;
+    private Country d_DestinationCountry;
     /**
      * The D army number.
      */
@@ -34,8 +34,8 @@ public class AirliftOrder extends Order {
     public AirliftOrder(OrderInfo p_OrderInfo) {
         super();
         setType("Airlift");
-        d_SourceCountry = p_OrderInfo.getDeparture();
-        d_TargetCountry = p_OrderInfo.getDestination();
+        d_DepartureCountry = p_OrderInfo.getDeparture();
+        d_DestinationCountry = p_OrderInfo.getDestination();
         d_ArmyNumber = p_OrderInfo.getNumberOfArmy();
         d_Player = p_OrderInfo.getInitiator();
     }
@@ -67,16 +67,16 @@ public class AirliftOrder extends Order {
             return false;
         }
 
-        d_ArmyNumber = Math.min(d_ArmyNumber, d_SourceCountry.getArmies());
-        int l_armyInTarget = d_TargetCountry.getArmies() + d_ArmyNumber;
-        int l_armyInSource = d_SourceCountry.getArmies() - d_ArmyNumber;
-        d_TargetCountry.setArmies(l_armyInTarget);
-        d_SourceCountry.setArmies(l_armyInSource);
+        d_ArmyNumber = Math.min(d_ArmyNumber, d_DepartureCountry.getArmies());
+        int l_armyInTarget = d_DestinationCountry.getArmies() + d_ArmyNumber;
+        int l_armyInSource = d_DepartureCountry.getArmies() - d_ArmyNumber;
+        d_DestinationCountry.setArmies(l_armyInTarget);
+        d_DepartureCountry.setArmies(l_armyInSource);
 
-        //remove card from player cards list
+        // Remove card from player cards list
         d_Player.removeTargetCard(Card.AIRLIFT);
 
-        //print success information
+        // Print success information
         System.out.println("Success applying Airlift");
 
         printOrder();
@@ -89,25 +89,26 @@ public class AirliftOrder extends Order {
      * @return true if valid
      */
     public boolean valid() {
-        //check if the player has a airlift card
+        // Check if the player has a airlift card
         if (!d_Player.getCards().contains(Card.AIRLIFT)) {
             System.out.println("Player " + d_Player.getColour() + " does not have an airlift card");
             return false;
         }
 
-        if (d_SourceCountry == null || d_TargetCountry == null) {
+        // Check if departure country and destination country are null
+        if (d_DepartureCountry == null || d_DestinationCountry == null) {
             System.out.println("Invalid country name");
             return false;
         }
 
-        //check if countries belongs to the player
-        if (!d_Player.getCountriesInControl().containsKey(d_SourceCountry.getName().toLowerCase())
-                || !d_Player.getCountriesInControl().containsKey(d_TargetCountry.getName().toLowerCase())) {
+        // Check if departure country and destination belong to the player
+        if (!d_Player.getCountriesInControl().containsKey(d_DepartureCountry.getName().toLowerCase())
+                || !d_Player.getCountriesInControl().containsKey(d_DestinationCountry.getName().toLowerCase())) {
             System.out.println("Source country or target country does not belongs to the player.");
             return false;
         }
 
-        //check if army number is more than 0
+        // Check if army number is more than 0
         if (d_ArmyNumber <= 0) {
             System.out.println("The number of airlift army should be larger than 0.");
             return false;
@@ -121,6 +122,6 @@ public class AirliftOrder extends Order {
      */
     public void printOrder() {
         System.out.println("Airlift order issued by player " + this.d_Player.getColour());
-        System.out.println("Airlift " + this.d_ArmyNumber + " from country " + d_SourceCountry.getName() + " to " + this.d_TargetCountry.getName());
+        System.out.println("Airlift " + this.d_ArmyNumber + " from country " + d_DepartureCountry.getName() + " to " + this.d_DestinationCountry.getName());
     }
 }
