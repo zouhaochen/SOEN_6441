@@ -34,25 +34,37 @@ public class AirliftOrderTest {
     int d_NumOfArmies;
 
     /**
-     * necessary parameter to create airlift order
+     * Necessary parameter to create airlift order
      */
     OrderInfo d_OrderInfo;
 
     /**
-     * blockade order
+     * Airlift order
      */
     AirliftOrder d_AirliftOrder;
 
 
     /**
-     * necessary setup before each test
+     * Necessary setup before each test
      */
     @Before
     public void testSetup() {
 
+        /**
+         * Set player
+         */
         d_player = new Player("player");
+        /**
+         * Set country airlift from
+         */
         d_FromCountry = new Country("Canada");
+        /**
+         * Set country airlift to
+         */
         d_ToCountry = new Country("USA");
+        /**
+         * Set army number
+         */
         d_NumOfArmies=5;
 
 
@@ -65,7 +77,7 @@ public class AirliftOrderTest {
     }
 
     /**
-     * print ok when test is passed
+     * Print ok when test is passed
      */
     @After
     public void checked() {
@@ -73,26 +85,26 @@ public class AirliftOrderTest {
     }
 
     /**
-     * to check player has no airlift card but he/she want to use
+     * To check player has no airlift card but he/she want to use
      */
     @Test
     public void hasCardTest() {
         d_AirliftOrder=new AirliftOrder(d_OrderInfo);
-        // should return invalid because player has no airlift card in hand.
+        // Should return invalid because player has no airlift card in hand.
         assertFalse(d_AirliftOrder.valid());
     }
 
     /**
-     * destination country or departure country is null check
+     * Destination country or departure country is null check
      */
     @Test
     public void countryIsNullTest(){
-        // set destination country obj be null
+        // Set destination country obj be null
         d_OrderInfo.setDestination(null);
-        // give player airlift card
+        // Give player airlift card
         d_OrderInfo.getInitiator().receiveNewCard(Card.AIRLIFT);
         d_AirliftOrder=new AirliftOrder(d_OrderInfo);
-        // should return invalid because destination country is null
+        // Should return invalid because destination country is null
         assertFalse(d_AirliftOrder.valid());
     }
 
@@ -101,12 +113,12 @@ public class AirliftOrderTest {
      */
     @Test
     public void countryBelongingTest(){
-        // give player airlift card
+        // Give player airlift card
         d_OrderInfo.getInitiator().receiveNewCard(Card.AIRLIFT);
-        // give one country to test player
+        // Give one country to test player
         d_OrderInfo.getInitiator().assignCountry(d_FromCountry);
         d_AirliftOrder=new AirliftOrder(d_OrderInfo);
-        // should return invalid because cant airlift to country not belongs to player.
+        // Should return invalid because cant airlift to country not belongs to player.
         assertFalse(d_AirliftOrder.valid());
     }
 
