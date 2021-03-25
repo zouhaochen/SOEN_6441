@@ -140,54 +140,61 @@ public class AdvanceOrder extends Order {
 
         if (valid()) {
 
-            //check armies number to advance
+            // Check army number to advance
             if (d_AttackCountry.getArmies() < d_NumberOfArmies) {
                 d_NumberOfArmies = d_AttackCountry.getArmies();
             }
 
-            //if toCountry is owned by the player then advance armies
+            // If defend country is owned by the player then advance armies
             if (d_DefendCountry.getOwner().getId() == d_Player.getId()) {
-                //move armies
+                // Then move armies from attack country to defend country
                 d_AttackCountry.setArmies(d_AttackCountry.getArmies() - d_NumberOfArmies);
                 d_DefendCountry.setArmies(d_DefendCountry.getArmies() + d_NumberOfArmies);
             }
 
-            //else toCountry is owned by opponent then attack
+            // Else defend country is owned by opponent
+            // Then attack
             else {
+                // Set a random number
                 Random l_RandomNumber = new Random();
                 int l_OriginalAttackingArmies = d_NumberOfArmies;
-                int l_AttackingArmiesKilled = 0;
-                int l_DefendingArmiesKilled = 0;
+                int l_AttackArmyDestroy = 0;
+                int l_DefendArmyDestroy = 0;
 
-                // attacking
+                // Attack defend country
                 for (int i = 0; i < d_NumberOfArmies; i++) {
-                    //the attack army has a 60% chance to defeat the defend army
+                    // There are 10 numbers from 1 to 10
+                    // Randomly pick one number from 1 to 10
+                    // The probability that the number equal or less than 6 is 60%
                     if ((l_RandomNumber.nextInt(10) + 1) <= 6) {
-                        //random int between 1 and 10 (inclusive)
-                        //defeat defend army
-                        l_DefendingArmiesKilled++;
+                        // Every army from attack country has 60%
+                        // Of destroy one of the defend army
+                        l_DefendArmyDestroy++;
                     }
                 }
 
-                // defending
+                // Defend attack country
                 for (int i = 0; i < d_DefendCountry.getArmies(); i++) {
-                    //the defend army has a 70% chance to defeat the attack army
+                    // There are 10 numbers from 1 to 10
+                    // Randomly pick one number from 1 to 10
+                    // The probability that the number equal or less than 7 is 70%
                     if ((l_RandomNumber.nextInt(10) + 1) <= 7) {
-                        //random int between 1 and 10 (inclusive)
-                        //defeat attack army
-                        l_AttackingArmiesKilled++;
+                        // Every army from defend country has 70%
+                        // Of destroy one of the attack army
+                        l_AttackArmyDestroy++;
                     }
                 }
 
-                // calculate the loss of both sides
-                d_DefendCountry.setArmies(Math.max(0, d_DefendCountry.getArmies() - l_DefendingArmiesKilled));
-                d_NumberOfArmies = Math.max(0, d_NumberOfArmies - l_AttackingArmiesKilled);
+                // Calculate the loss of both sides
+                d_DefendCountry.setArmies(Math.max(0, d_DefendCountry.getArmies() - l_DefendArmyDestroy));
+                d_NumberOfArmies = Math.max(0, d_NumberOfArmies - l_AttackArmyDestroy);
 
+                // Exchange ownership between attack country and defend country
                 if (d_DefendCountry.getArmies() == 0 && d_NumberOfArmies > 0) {
                     exchangeCountryOwner(d_DefendCountry, d_Player, d_NumberOfArmies);
                     d_AttackCountry.setArmies(d_AttackCountry.getArmies() - l_OriginalAttackingArmies);
                 } else if (d_NumberOfArmies > 0) {
-                    d_AttackCountry.setArmies(d_AttackCountry.getArmies() - l_AttackingArmiesKilled);
+                    d_AttackCountry.setArmies(d_AttackCountry.getArmies() - l_AttackArmyDestroy);
                 } else if (d_NumberOfArmies == 0) {
                     d_AttackCountry.setArmies(d_AttackCountry.getArmies() - l_OriginalAttackingArmies);
                 }
@@ -208,28 +215,28 @@ public class AdvanceOrder extends Order {
      * @param p_NumberOfArmies armies to move to the country
      */
     private void exchangeCountryOwner(Country p_TargetCountry, Player p_NewOwner, int p_NumberOfArmies) {
-        // get previous player from country obj
+        // Get previous player from country obj
         Player l_PreviousOwner = p_TargetCountry.getOwner();
         Map<String, Country> l_PreOwnerCountryList = l_PreviousOwner.getCountriesInControl();
         for (Map.Entry<String, Country> l_Entry : l_PreOwnerCountryList.entrySet()) {
-            // check if country name in previous owner country list, then remove it.
+            // Check if country name in previous owner country list, then remove it.
             if (l_Entry.getKey().equalsIgnoreCase(p_TargetCountry.getName())) {
                 l_PreOwnerCountryList.remove(l_Entry.getKey());
                 break;
             }
         }
-        // set previous owner his new country list
+        // Set previous owner his new country list
         l_PreviousOwner.setCountriesInControl(l_PreOwnerCountryList);
-        // now change the target country's owner
+        // Now change the target country's owner
         p_TargetCountry.setOwner(p_NewOwner);
-        // assign the number of armies
+        // Assign the number of armies
         p_TargetCountry.setArmies(p_NumberOfArmies);
-        // add target country to new owner's country list
+        // Add target country to new owner's country list
         p_NewOwner.assignCountry(p_TargetCountry);
 
         System.out.println("Player " + d_Player.getColour() + " has conquered Country " + p_TargetCountry.getName());
 
-        // randomly give new owner a new card
+        // Randomly give new owner a new card
         p_NewOwner.receiveNewCard(Card.getRandomCard());
     }
 
@@ -239,40 +246,43 @@ public class AdvanceOrder extends Order {
      * @return true if the order is valid; false otherwise
      */
     public boolean valid() {
+
+        // Check whether attack and defend country is null
         if (d_AttackCountry == null || d_DefendCountry == null) {
             System.out.println("Invalid Advance Order: invalid country name.");
             return false;
         }
 
+        // Check whether play of defend country exist
         Player l_targetPlayer = d_DefendCountry.getOwner();
         if (l_targetPlayer == null || !l_targetPlayer.getPlayerExist()) {
             System.out.println("Invalid Advance Order: player of target country does not exist");
             return false;
         }
 
-        //check whether player is fromCountry owner
+        // Check whether player is owner of attack country
         if (!d_AttackCountry.getOwner().equals(d_Player)) {
-            System.out.println("Invalid Advance Order: could not perform the advance order moving " + d_NumberOfArmies + " armies from " +
+            System.out.println("Invalid Advance Order: can not do the advance order moving " + d_NumberOfArmies + " armies from " +
                     d_AttackCountry.getName() + " to " + d_DefendCountry.getName() + " because " + d_Player.getColour() + " does not own " + d_AttackCountry + ".");
             return false;
         }
 
-        // if target country is un-attackable, because of diplomacy
-        // only two countries with diplomacy cant attack each other
+        // If target country is un-attackable, because of diplomacy
+        // Only two countries with diplomacy cant attack each other
         if (d_Player.getUnattackablePlayers().contains(l_targetPlayer.getId())) {
             System.out.println("Invalid Advance Order: you cannot attack Player " + l_targetPlayer.getColour() + " due to a Diplomacy card has been used by the player.");
             return false;
         }
 
 
-        // check if fromCountry and toCountry are neighbors
+        // Check if attack country and defend country are neighbors
         if (!d_AttackCountry.getBorderCountries().containsKey(d_DefendCountry.getName())) {
-            System.out.println("Invalid Advance Order: could not perform the advance order moving " + d_NumberOfArmies + " armies from " +
+            System.out.println("Invalid Advance Order: can not do the advance order moving " + d_NumberOfArmies + " armies from " +
                     d_AttackCountry.getName() + " to " + d_DefendCountry.getName() + " because they are not neighbors.");
             return false;
         }
 
-        // check if the number of armies is larger than zero
+        // Check if the number of armies is larger than zero
         if (d_NumberOfArmies <= 0) {
             System.out.println("Invalid Advance Order: the number of armies is not positive.");
             return false;
