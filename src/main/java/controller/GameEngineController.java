@@ -7,7 +7,6 @@ import model.gameelements.Card;
 import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;
-import model.gameelements.order.Order;
 
 import java.io.File;
 import java.io.IOException;
@@ -233,13 +232,26 @@ public class GameEngineController {
         }
     }
 
+    /**
+     * Award reinforcement to each player.
+     */
     public void awardReinforcement() {
-        int l_DefaultReinforcementNumber = 5;
-
         for (Player l_Player : d_GameData.getPlayerList()) {
-            int l_Reinforcement = l_DefaultReinforcementNumber + getReinforcementBonus(l_Player);
-            l_Player.setReinforcementArmies(l_Reinforcement);
+            l_Player.setReinforcementArmies(calculateReinforcement(l_Player));
         }
+    }
+
+    /**
+     * Calculate reinforcement value.
+     *
+     * @param p_Player the player
+     * @return reinforcement value
+     */
+    public int calculateReinforcement(Player p_Player) {
+        int l_MinimumReinforcementNumber = 3;
+        int l_BasicValue = p_Player.getCountriesInControl().size() / 3;
+        int l_Reinforcement = l_BasicValue + getReinforcementBonus(p_Player);
+        return Math.max(l_MinimumReinforcementNumber, l_Reinforcement);
     }
 
     /**
@@ -248,7 +260,7 @@ public class GameEngineController {
      * @param p_Player the player object to be checked
      * @return the number of reinforcement
      */
-    public int getReinforcementBonus(Player p_Player) {
+    private int getReinforcementBonus(Player p_Player) {
         int l_ReinforcementBonus = 0;
         for (Continent l_Continent : d_GameData.getContinentList()) {
 
@@ -299,7 +311,6 @@ public class GameEngineController {
         }
         return false;
     }
-
 
 
 }
