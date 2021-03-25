@@ -120,6 +120,7 @@ public class Phase {
      */
     public void endGame() {
         d_ml.setPhase(new End(d_ml));
+        System.out.println();
         System.out.println("Exit the game!");
     }
 

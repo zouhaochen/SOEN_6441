@@ -52,19 +52,25 @@ public class DeployOrder extends Order {
     @Override
     public boolean valid() {
         if (getOrderInfo().getInitiator() == null || getOrderInfo().getDestination() == null) {
-            System.out.println("\nFail to execute \"DEPLOY\" order: Invalid order information.");
+            System.out.println("Invalid DEPLOY order: missing order information.");
             return false;
         }
 
         Player l_Player = getOrderInfo().getInitiator();
         String l_Destination = getOrderInfo().getDestination().getName();
         int l_ArmiesToDeploy = getOrderInfo().getNumberOfArmy();
+
+        if (l_ArmiesToDeploy <= 0) {
+            System.out.println("Invalid DEPLOY order: the number of armies is not positive.");
+            return false;
+        }
+
         l_ArmiesToDeploy = Math.min(l_ArmiesToDeploy, l_Player.getReinforcementArmies());
 
         // If the player decides to deploy armies to the country he/she doesn't control, the player will lost the armies.
         if (!l_Player.getCountriesInControl().containsKey(l_Destination.toLowerCase())) {
             l_Player.setReinforcementArmies(l_Player.getReinforcementArmies() - l_ArmiesToDeploy);
-            System.out.println("\nFail to execute \"DEPLOY\" order: the country " + l_Destination + " is not in the control of player " + l_Player.getColour() + ".");
+            System.out.println("Invalid DEPLOY order: the country " + l_Destination + " is not in the control of player " + l_Player.getColour() + ".");
             System.out.println("The player " + l_Player.getColour() + " will lose " + l_ArmiesToDeploy + " armies.");
             return false;
         }
