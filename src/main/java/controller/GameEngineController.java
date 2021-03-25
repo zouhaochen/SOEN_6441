@@ -47,17 +47,30 @@ public class GameEngineController {
         Player l_Player = d_GameData.getPlayerByName(p_colour);
         boolean l_Result = false;
         Player l_NewPlayer = null;
-
+        boolean l_PlayerRepetition = true;
         // no such player with the same name(colour) exists
         if (l_Player == null) {
             //new temp player list
             ArrayList<Player> l_NewPlayerList = d_GameData.getPlayerList();
             l_NewPlayer = new Player(p_colour);
-            // add to temp player list
-            l_Result = l_NewPlayerList.add(l_NewPlayer);
-            // set to game data player list
-            d_GameData.setPlayerList(l_NewPlayerList);
+
+            for(int l_i = 0; l_i < l_NewPlayerList.size(); l_i++){
+                String l_colour = l_NewPlayerList.get(l_i).getColour();
+                if(l_colour.equals(p_colour)){
+                    l_PlayerRepetition = false;
+                    break;
+                }
+            }
+
+            if(l_PlayerRepetition){
+                // add to temp player list
+                l_Result = l_NewPlayerList.add(l_NewPlayer);
+                // set to game data player list
+                d_GameData.setPlayerList(l_NewPlayerList);
+            }
+
         }
+
 
         if (l_Result) {
             System.out.println("NOTICE: New Player " + l_NewPlayer.getId() + " [" + l_NewPlayer.getColour() + "] has been added to the game.");

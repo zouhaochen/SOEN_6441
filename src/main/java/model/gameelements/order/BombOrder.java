@@ -10,6 +10,27 @@ public class BombOrder extends Order {
     private Country d_TargetCountry;
     private Player d_Player;
 
+    /**
+     * Instantiates a new object of type BombOrder.
+     *
+     * @param p_Player        current player
+     * @param p_TargetCountry target country id
+     */
+    public BombOrder(Player p_Player, Country p_TargetCountry) {
+        super();
+        setType("Blockade");
+        d_Player = p_Player;
+        d_TargetCountry = p_TargetCountry;
+        setOrderInfo(new OrderInfo());
+        getOrderInfo().setInitiator(p_Player);
+        getOrderInfo().setDestination(p_TargetCountry);
+    }
+
+    /**
+     * Instantiates a new Bomb order.
+     *
+     * @param p_OrderInfo the order info
+     */
     public BombOrder(OrderInfo p_OrderInfo) {
         super();
         setType("Bomb");

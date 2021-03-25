@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
-
+/**
+ * the test for the state pattern
+ */
 
 public class StateTest {
 
@@ -39,11 +41,13 @@ public class StateTest {
         d_MainPlayController.gamePhase.setPlayers();
         d_MainPlayController.gamePhase.assignCountries();
         d_MainPlayController.gamePhase.loadMap();
+        d_MainPlayController.gamePhase.issueOrder();
+        d_MainPlayController.gamePhase.executeOrder();
     }
 
     @Test
     public void testPlayState() {
         d_MainPlayController.setPhase(new AddPlayer(d_MainPlayController));
-        d_MainPlayController.gamePhase.loadMap();
+        d_MainPlayController.gamePhase.editMap();
     }
 }
