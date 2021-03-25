@@ -153,7 +153,7 @@ public class MainPlayController extends Observable {
                         System.out.println("this command does not exist");
                 }
             } while (!(gamePhase instanceof End));
-
+            d_LogEntryBuffer.updateFile();
 
         } while (!mycommand.equals("end"));
 
