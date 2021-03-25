@@ -65,6 +65,9 @@ public class AdvanceOrderTest {
         d_defendCountry.setOwner(d_defender);
     }
 
+    /**
+     * unit test for Attacker if Controls Defender
+     */
     @Test
     public void testAttackerControlDefender() {
 
@@ -89,6 +92,9 @@ public class AdvanceOrderTest {
         assertTrue(d_defendCountry.getArmies() < 10);
     }
 
+    /**
+     * unit test for Attacker if Controls Defender adn With Army Left
+     */
     @Test
     public void testAttackerControlDefenderWithArmyLeft() {
 
@@ -111,6 +117,9 @@ public class AdvanceOrderTest {
         assertTrue(d_defendCountry.getArmies() < 5);
     }
 
+    /**
+     * unit test for Attacker if not Controls Defender adn With Army Left
+     */
     @Test
     public void testAttackerNotControlDefender() {
 

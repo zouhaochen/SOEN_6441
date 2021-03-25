@@ -35,6 +35,9 @@ public class StateTest {
         System.out.println("ok");
     }
 
+    /**
+     *  unit test for edit state
+     */
     @Test
     public void testEditState() {
         d_MainPlayController.setPhase(new Edit(d_MainPlayController));
@@ -45,6 +48,9 @@ public class StateTest {
         d_MainPlayController.gamePhase.executeOrder();
     }
 
+    /**
+     *  unit test for play state
+     */
     @Test
     public void testPlayState() {
         d_MainPlayController.setPhase(new AddPlayer(d_MainPlayController));

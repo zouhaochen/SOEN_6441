@@ -9,9 +9,21 @@ import java.util.Random;
  * Card enum for the various types of cards players can use during gameplay
  */
 public enum Card {
+    /**
+     * BOMB card
+     */
     BOMB,
+    /**
+     * BLOCKADE card
+     */
     BLOCKADE,
+    /**
+     * AIRLIFT card
+     */
     AIRLIFT,
+    /**
+     * NEGOTIATE card
+     */
     NEGOTIATE;
 
 

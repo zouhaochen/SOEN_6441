@@ -4,6 +4,9 @@ import model.LogEntryBuffer;
 import org.junit.After;
 import org.junit.Test;
 
+/**
+ * unit test for Play State Test
+ */
 public class LogEntryBufferTest {
     /**
      * test object

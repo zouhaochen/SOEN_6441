@@ -21,6 +21,9 @@ public class ViewTest {
         System.out.println("ok");
     }
 
+    /**
+     * unit test for observer list Test
+     */
     @Test
     public void obsListAttachTest(){
         LogEntryBufferView d_TestView = new LogEntryBufferView(d_log);
