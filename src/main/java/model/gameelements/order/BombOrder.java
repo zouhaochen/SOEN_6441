@@ -4,6 +4,9 @@ import model.gameelements.Card;
 import model.gameelements.Country;
 import model.gameelements.Player;
 
+/**
+ * implement the function of Bomb card.
+ */
 public class BombOrder extends Order {
 
     private int d_PreviousArmyNumber;

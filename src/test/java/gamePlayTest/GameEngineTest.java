@@ -151,6 +151,9 @@ public class GameEngineTest {
 
     }
 
+    /**
+     * unit test for Game Not Over part
+     */
     @Test
     public void testGameNotOver() {
         System.out.println("6. check gameNotOver");
@@ -176,6 +179,9 @@ public class GameEngineTest {
         assertFalse(l_Result);
     }
 
+    /**
+     * unit test for Game is Over part
+     */
     @Test
     public void testGameIsOver() {
         System.out.println("7. check gameIsOver");

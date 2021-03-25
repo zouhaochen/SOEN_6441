@@ -219,9 +219,9 @@ Player extends Observable {
     }
 
     /**
-     * Create order order.
+     * Create player's order.
      *
-     * @return the order
+     * @return to create an order for a player
      */
     public Order createOrder() {
         String l_Reply;
@@ -271,7 +271,8 @@ Player extends Observable {
      * Subtract the armies from the reinforcement pool.
      *
      * @param p_ArmyNumber add number of armies as int.
-     * @return return true if the number of the remaining armies is not less than the number to deploy, and otherwise return false.
+     * @return return true if the number of the remaining armies is not less than the number to deploy,
+     * and otherwise return false.
      */
     public boolean deployReinforcementArmies(int p_ArmyNumber) {
         if (p_ArmyNumber > d_ReinforcementArmies) {
@@ -308,7 +309,7 @@ Player extends Observable {
     /**
      * player receive a New Card
      *
-     * @param p_NewCard the p new card
+     * @param p_NewCard send a new card for a player
      */
     public void receiveNewCard(Card p_NewCard) {
         this.d_Cards.add(p_NewCard);
