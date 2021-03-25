@@ -161,12 +161,6 @@ public class AdvanceOrder extends Order {
 
                 // attacking
                 for (int i = 0; i < d_NumberOfArmies; i++) {
-                    if (d_DefendCountry.getArmies() == 0) {
-                        exchangeCountryOwner(d_DefendCountry, d_Player, d_NumberOfArmies);
-                        printOrder();
-                        return true;
-                    }
-
                     //the attack army has a 60% chance to defeat the defend army
                     if ((l_RandomNumber.nextInt(10) + 1) <= 6) {
                         //random int between 1 and 10 (inclusive)
@@ -280,6 +274,7 @@ public class AdvanceOrder extends Order {
 
         // check if the number of armies is larger than zero
         if (d_NumberOfArmies <= 0) {
+            System.out.println("Invalid Advance Order: the number of armies is not positive.");
             return false;
         }
 
