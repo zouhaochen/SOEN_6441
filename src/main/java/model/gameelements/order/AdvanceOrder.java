@@ -142,8 +142,12 @@ public class AdvanceOrder extends Order {
 
             //else toCountry is owned by opponent then attack
             else {
-                Random l_randomNumber = new Random();
-                int l_SurvivingArmies = d_NumberOfArmies;
+                Random l_RandomNumber = new Random();
+                int l_OriginalAttackingArmies = d_NumberOfArmies;
+                int l_AttackingArmiesKilled = 0;
+                int l_DefendingArmiesKilled = 0;
+
+                // attacking
                 for (int i = 0; i < d_NumberOfArmies; i++) {
                     if (d_DefendCountry.getArmies() == 0) {
                         exchangeCountryOwner(d_DefendCountry, d_Player, d_NumberOfArmies);
@@ -152,24 +156,34 @@ public class AdvanceOrder extends Order {
                     }
 
                     //the attack army has a 60% chance to defeat the defend army
-                    if ((l_randomNumber.nextInt(10) + 1) <= 6) {
+                    if ((l_RandomNumber.nextInt(10) + 1) <= 6) {
                         //random int between 1 and 10 (inclusive)
                         //defeat defend army
-                        d_DefendCountry.setArmies(d_DefendCountry.getArmies() - 1);
-                    }
-
-                    //the defend army has a 70% chance to defeat the attack army
-                    if ((l_randomNumber.nextInt(10) + 1) <= 7) {
-                        //random int between 1 and 10 (inclusive)
-                        //defeat attack army
-                        d_AttackCountry.setArmies(d_AttackCountry.getArmies() - 1);
-                        l_SurvivingArmies--;
+                        l_DefendingArmiesKilled++;
                     }
                 }
-                d_NumberOfArmies = l_SurvivingArmies;
+
+                // defending
+                for (int i = 0; i < d_DefendCountry.getArmies(); i++) {
+                    //the defend army has a 70% chance to defeat the attack army
+                    if ((l_RandomNumber.nextInt(10) + 1) <= 7) {
+                        //random int between 1 and 10 (inclusive)
+                        //defeat attack army
+                        l_AttackingArmiesKilled++;
+                    }
+                }
+
+                // calculate the loss of both sides
+                d_DefendCountry.setArmies(Math.max(0, d_DefendCountry.getArmies() - l_DefendingArmiesKilled));
+                d_NumberOfArmies = Math.max(0, d_NumberOfArmies - l_AttackingArmiesKilled);
 
                 if (d_DefendCountry.getArmies() == 0 && d_NumberOfArmies > 0) {
                     exchangeCountryOwner(d_DefendCountry, d_Player, d_NumberOfArmies);
+                    d_AttackCountry.setArmies(d_AttackCountry.getArmies() - l_OriginalAttackingArmies);
+                } else if (d_NumberOfArmies > 0) {
+                    d_AttackCountry.setArmies(d_AttackCountry.getArmies() - l_AttackingArmiesKilled);
+                } else if (d_NumberOfArmies == 0) {
+                    d_AttackCountry.setArmies(d_AttackCountry.getArmies() - l_OriginalAttackingArmies);
                 }
             }
 
