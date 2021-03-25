@@ -47,9 +47,24 @@ command: **edit / play / exit  (ignore-case)**
 Type **edit** if user  want to get into Map Editor model.
 
  **if you are in Map Editor model:**
+ enter a Edit phase command: 
+ command: **editmap**
  
+  then you will be asked to enter the following command to edit model.map. 
+  command: **1. editmap filename     (example: editmap 01.model.map)**
+           **2. savepmap filename    (example: savepmap 01.model.map)**
+           
+   1. if enter command **editmap filename**: you will be continue to asked the following command to edit the model.map you selected.
+      command: **1. editcontinent -add continentID continentValue (example: editcontinent -add Asia 1 -add Europe 2)**
+            **2. editcountry -add countryID continentID (example: editcountry -add 1 China 1 -add 2 Korea 1)**
+            **3. editneighbor -add countryID neighborcountryID (example: editneighbor -add 1 2)**
+             
+       **4. editcontinent -remove continentID  (example: editcontinent -remove Asia -remove Egypt)**
+       **5. editcountry -remove countryID  (example: editcountry -remove 3 Russia 2 -remove 4 Finland 2)**
+       **6. editneighbor -remove countryID neighborcountryID (example: editneighbor -remove 4 3 -remove 3 1)**
  
- 
+   2. if enter command **savemap**: your current edit model.map will be saved.
+
 
  Type **play** if user  want to get into playing game model.
  
@@ -79,7 +94,7 @@ Type **edit** if user  want to get into Map Editor model.
     command: **assigncountries**
  
  5. then the reinforcement armies and countries ownership will be show up for each player. 
-    **Reinforcement phase complete.**
+            **Reinforcement phase complete.**
  
  
  6. After that, you will get into Issue order phase, and you will be asked to enter following command to issue order for each player.
@@ -102,14 +117,14 @@ Type **edit** if user  want to get into Map Editor model.
     (4. Tips:the player will randomly get a Function card from (bomb, blockade, airlift, negotiate), and can be use at next round)
     
     once all player have entered no for the current round, the game will continue to next phase, Order execution phase.
-     **Issue Order Phase Complete**
+             **Issue Order Phase Complete**
  
  7. After each player have already issued their orders, the game will get into  order execution phase. and you will be ask for the following command to execute orders.
      enter a OrderExecution phase command: 
      command: **execute**
      
      once there exit a player who have already conquered all of the countries in the game, he/she will be the winner for the game. Therefor, the game will be end, and back to start menu. if user does not want to play again, just enter command exit to end the program.
-    **Execute Order Phase Complete**
+             **Execute Order Phase Complete**
  
  
 
