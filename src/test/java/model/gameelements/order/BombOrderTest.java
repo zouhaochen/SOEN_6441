@@ -11,20 +11,25 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * the test for the Bomb Order function
+ * Bomb order test
  */
-
 public class BombOrderTest {
 
-    /** player */
+    /**
+     * Player
+     * */
     Player d_player;
-    /** country */
+    /**
+     * Country
+     * */
     Country d_country;
-    /** blockade order */
+    /**
+     * Blockade order
+     * */
     BombOrder d_order;
 
     /**
-     * print ok when test is passed
+     * Print ok when test is passed
      */
     @After
     public void checked(){
