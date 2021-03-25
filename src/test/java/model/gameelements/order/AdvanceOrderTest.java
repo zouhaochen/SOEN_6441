@@ -9,127 +9,144 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 /**
- * test adv order
+ * Test advance order
  */
 public class AdvanceOrderTest {
 
+	/**
+	 * Player attacker
+	 */
 	private Player d_attacker;
+	/**
+	 * Player defender
+	 */
 	private Player d_defender;
+	/**
+	 * Attack country
+	 */
 	private Country d_attackCountry;
+	/**
+	 * Defend country
+	 */
 	private Country d_defendCountry;
 
 	/**
-	 * print ok when test is passed
+	 * Print ok when test is passed
 	 */
 	@After
 	public void checked(){
 		System.out.println("ok");
 	}
-	
+
+	/**
+	 * Necessary setup before each test
+	 */
 	@Before
 	public void setup() {
 
 		/**
-		 * create attacker and defender
+		 * Set attacker and defender
 		 */
 		d_attacker = new Player("attacker");
 		d_defender = new Player("defender");
 
 		/**
-		 * create attack country and defend country
+		 * Set attack country and defend country
 		 */
 		d_attackCountry = new Country("attackCountry");
 		d_defendCountry = new Country("defendCountry");
 
 		/**
-		 * create border
+		 * Set border
 		 */
 		d_attackCountry.addBoarderConnection(d_defendCountry);
 		d_defendCountry.addBoarderConnection(d_attackCountry);
 
 		/**
-		 * add country to country in control hash map
+		 * Add country to country in control hash map
 		 */
 		d_attacker.getCountriesInControl().put("attackCountry", d_attackCountry);
 		d_defender.getCountriesInControl().put("defendCountry", d_defendCountry);
 		d_attackCountry.setOwner(d_attacker);
 		d_defendCountry.setOwner(d_defender);
-
-/*		*//**
-		 * add order to game engine?
-		 *//*
-		d_gameEngine.getCountries().put(1, d_attackCountry);
-		d_gameEngine.getCountries().put(2, d_defendCountry);*/
 	}
 	
 	@Test
 	public void testAttackerControlDefender() {
 
 		/**
-		 * give armies to both countries
+		 * Give armies to both countries
 		 */
 		d_attackCountry.setArmies(10);
 		d_defendCountry.setArmies(2);
 
 		/**
-		 * execute advance order
+		 * Execute advance order
 		 */
 		new AdvanceOrder(d_attacker, d_attackCountry, d_defendCountry, 10).execute();
-		
-		//make sure attacker countried country
-//		assertTrue(d_attacker.getCountriesInControl().size() == 2);
-//		assertTrue(d_defender.getCountriesInControl().size() == 0);
-		
-		//make sure the attacking and defending countries lost armies
-//		assertTrue(d_attackCountry.getArmies() == 0); //Attacker moves all armies to defender's country
-//		assertTrue(d_defendCountry.getArmies() < 10); //The attacker moves all remaining armies (some should be lost due to fights)
+
+		//Make sure attacker controlled country
+		assertTrue(d_attacker.getCountriesInControl().size() == 2);
+		assertTrue(d_defender.getCountriesInControl().size() == 0);
+
+		//Make sure the attacking and defending countries lost armies
+		//Move all attack armies to defend country
+		assertTrue(d_attackCountry.getArmies() == 0);
+		//Moves all attack remain armies
+		//Lost armies in war
+		assertTrue(d_defendCountry.getArmies() < 10);
 	}
 	
 	@Test
 	public void testAttackerControlDefenderWithArmyLeft() {
 
 		/**
-		 * give armies to both countries
+		 * Give armies to both countries
 		 */
 		d_attackCountry.setArmies(10);
 		d_defendCountry.setArmies(2);
 
 		/**
-		 * execute advance order
+		 * Execute advance order
 		 */
 		new AdvanceOrder(d_attacker, d_attackCountry, d_defendCountry, 5).execute();
-		
-		//Make sure attacker conquered country
-//		assertTrue(d_attacker.getCountriesInControl().size() == 2);
-//		assertTrue(d_defender.getCountriesInControl().size() == 0);
-		
-		//Make sure the attacking and defending countries lost armies
-//		assertTrue(d_attackCountry.getArmies() == 5); //Attacker move 500 armies to defender's country, but keeps 500 in attacking country
-//		assertTrue(d_defendCountry.getArmies() < 5); //The attacker moves all remaining armies (some should be lost due to fights)
+
+		//Make sure attacker controlled country
+		assertTrue(d_attacker.getCountriesInControl().size() == 2);
+		assertTrue(d_defender.getCountriesInControl().size() == 0);
+
+		//Make sure attack and defend countries lost armies in war
+		//Move 5 attack armies to defend country, keep 5 in attack country
+		assertTrue(d_attackCountry.getArmies() == 5);
+		//Move all remain armies
+		//Lost armies in war
+		assertTrue(d_defendCountry.getArmies() < 5);
 	}
 	
 	@Test
 	public void testAttackerNotControlDefender() {
 
 		/**
-		 * give armies to both countries
+		 * Give armies to both countries
 		 */
 		d_attackCountry.setArmies(2);
 		d_defendCountry.setArmies(10);
 
 
 		/**
-		 * execute advance order
+		 * Execute advance order
 		 */
 		new AdvanceOrder(d_attacker, d_attackCountry, d_defendCountry, 2).execute();
-		
-		//Make sure attacker did not conquer country
-//		assertTrue(d_attacker.getCountriesInControl().size() == 1);
-//		assertTrue(d_defender.getCountriesInControl().size() == 1);
+
+		//Make sure attack not control country
+		assertTrue(d_attacker.getCountriesInControl().size() == 1);
+		assertTrue(d_defender.getCountriesInControl().size() == 1);
 		
 		//Make sure the attacking and defending countries lost armies
-//		assertTrue(d_attackCountry.getArmies() < 2); //Attacker should lose some armies
-//		assertTrue(d_defendCountry.getArmies() < 10); //Some should be lost due to fights
+		//Attack country lose some armies in war
+		assertTrue(d_attackCountry.getArmies() < 2);
+		//Defend country lost some armies in war
+		assertTrue(d_defendCountry.getArmies() < 10);
 	}
 
 }
