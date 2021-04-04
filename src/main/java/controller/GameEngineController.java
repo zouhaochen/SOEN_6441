@@ -7,6 +7,7 @@ import model.gameelements.Card;
 import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;
+import model.gameelements.strategy.HumanInteractivePattern;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,6 +54,9 @@ public class GameEngineController {
             //new temp player list
             ArrayList<Player> l_NewPlayerList = d_GameData.getPlayerList();
             l_NewPlayer = new Player(p_Colour);
+
+            // for now all the players are human players
+            l_NewPlayer.setStrategy(new HumanInteractivePattern(l_NewPlayer, d_GameData));
 
             for (int l_i = 0; l_i < l_NewPlayerList.size(); l_i++) {
                 String l_colour = l_NewPlayerList.get(l_i).getColour();
