@@ -1,9 +1,8 @@
 package model.gameelements;
 
-import command.CommandValidator;
 import model.Observable;
 import model.gameelements.order.Order;
-import model.gameelements.order.OrderFactory;
+import model.gameelements.strategy.PlayerStrategy;
 
 import java.util.*;
 
@@ -54,6 +53,11 @@ Player extends Observable {
      * the ids of the unattackable players
      */
     private List<Integer> d_UnattackablePlayers;
+
+    /**
+     * The D strategy.
+     */
+    private PlayerStrategy d_Strategy;
 
     /**
      * Player class constructor
@@ -204,49 +208,27 @@ Player extends Observable {
     }
 
     /**
+     * Sets strategy.
+     *
+     * @param p_Strategy the strategy
+     */
+    public void setStrategy(PlayerStrategy p_Strategy) {
+        this.d_Strategy = p_Strategy;
+    }
+
+    /**
      * following the command to issue order and add the order to order list.
      *
      * @return true if an order is created
      */
     public boolean issueOrder() {
-        Order l_Order = createOrder();
+        Order l_Order = this.d_Strategy.createOrder();
         if (l_Order != null) {
             addOrderToList(l_Order);
             return true;
         }
 
         return false;
-    }
-
-    /**
-     * Create player's order.
-     *
-     * @return to create an order for a player
-     */
-    public Order createOrder() {
-        String l_Reply;
-        Scanner l_Scanner = new Scanner(System.in);
-        do {
-            System.out.println("\nPlayer " + d_Colour + ", do you want to create an order? (y/n) ");
-            l_Reply = l_Scanner.nextLine().trim();
-        } while (!l_Reply.equalsIgnoreCase("y") && !l_Reply.equalsIgnoreCase("n"));
-
-        if (l_Reply.equalsIgnoreCase("y")) {
-
-            // read the command from a player
-            String l_Command;
-            do {
-                System.out.println("\nPlease enter the command: \n");
-                l_Command = l_Scanner.nextLine();
-            } while (!CommandValidator.validate(l_Command));
-
-            // create an order
-            String[] l_CommandArr = l_Command.split(" ");
-            return OrderFactory.CreateOrder(l_CommandArr, this);
-        }
-
-        return null;
-
     }
 
     /**
@@ -271,8 +253,7 @@ Player extends Observable {
      * Subtract the armies from the reinforcement pool.
      *
      * @param p_ArmyNumber add number of armies as int.
-     * @return return true if the number of the remaining armies is not less than the number to deploy,
-     * and otherwise return false.
+     * @return return true if the number of the remaining armies is not less than the number to deploy, and otherwise return false.
      */
     public boolean deployReinforcementArmies(int p_ArmyNumber) {
         if (p_ArmyNumber > d_ReinforcementArmies) {
