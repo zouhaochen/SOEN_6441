@@ -44,8 +44,14 @@ public class AdvanceOrder extends Order {
         d_Player = p_Player;
         d_AttackCountry = p_AttackCountry;
         d_DefendCountry = p_DefenceCountry;
-        d_NumberOfArmies = p_NumberOfArmies
-        ;
+        d_NumberOfArmies = p_NumberOfArmies;
+
+        OrderInfo l_OrderInfo = new OrderInfo();
+        l_OrderInfo.setInitiator(p_Player);
+        l_OrderInfo.setDeparture(p_AttackCountry);
+        l_OrderInfo.setDestination(p_DefenceCountry);
+        l_OrderInfo.setNumberOfArmy(p_NumberOfArmies);
+        setOrderInfo(l_OrderInfo);
     }
 
     /**
