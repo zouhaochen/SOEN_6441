@@ -52,4 +52,12 @@ public class HumanInteractivePattern extends PlayerStrategy {
 
         return null;
     }
+
+    /**
+     * Reset strategy states.
+     */
+    @Override
+    public void reset() {
+
+    }
 }
