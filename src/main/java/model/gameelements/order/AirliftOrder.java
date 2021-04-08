@@ -29,6 +29,30 @@ public class AirliftOrder extends Order {
     /**
      * Instantiates a new Airlift order.
      *
+     * @param p_Player         the player
+     * @param p_Departure      the departure
+     * @param p_Destination    the destination
+     * @param p_NumberOfArmies the number of armies
+     */
+    public AirliftOrder(Player p_Player, Country p_Departure, Country p_Destination, int p_NumberOfArmies) {
+        super();
+        setType("Airlift");
+        d_Player = p_Player;
+        d_DepartureCountry = p_Departure;
+        d_DestinationCountry = p_Destination;
+        d_ArmyNumber = p_NumberOfArmies;
+
+        OrderInfo l_OrderInfo = new OrderInfo();
+        l_OrderInfo.setInitiator(p_Player);
+        l_OrderInfo.setDeparture(p_Departure);
+        l_OrderInfo.setDestination(p_Destination);
+        l_OrderInfo.setNumberOfArmy(p_NumberOfArmies);
+        setOrderInfo(l_OrderInfo);
+    }
+
+    /**
+     * Instantiates a new Airlift order.
+     *
      * @param p_OrderInfo the p order info
      */
     public AirliftOrder(OrderInfo p_OrderInfo) {

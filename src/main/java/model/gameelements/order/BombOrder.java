@@ -30,7 +30,7 @@ public class BombOrder extends Order {
      */
     public BombOrder(Player p_Player, Country p_TargetCountry) {
         super();
-        setType("Blockade");
+        setType("Bomb");
         d_Player = p_Player;
         d_TargetCountry = p_TargetCountry;
         setOrderInfo(new OrderInfo());

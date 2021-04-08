@@ -16,6 +16,16 @@ public class DeployOrder extends Order {
         setType("Deploy");
     }
 
+    public DeployOrder(Player p_Initiator, Country p_Destination, int p_ArmiesToDeploy) {
+        this();
+        OrderInfo l_OrderInfo = new OrderInfo();
+        l_OrderInfo.setInitiator(p_Initiator);
+        l_OrderInfo.setDestination(p_Destination);
+        l_OrderInfo.setNumberOfArmy(p_ArmiesToDeploy);
+
+        this.setOrderInfo(l_OrderInfo);
+    }
+
     /**
      * Executes an deploy order.
      *
