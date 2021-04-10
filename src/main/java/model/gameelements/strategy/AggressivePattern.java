@@ -9,10 +9,6 @@ import model.gameelements.order.AdvanceOrder;
 import model.gameelements.order.DeployOrder;
 import model.gameelements.order.Order;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 /**
  * The type Aggressive pattern.
  */
@@ -57,22 +53,6 @@ public class AggressivePattern extends PlayerStrategy {
     }
 
     /**
-     * Move from country.
-     *
-     * @return the country
-     */
-    @Override
-    protected Country moveFrom() {
-        if (getPlayer().getCountriesInControl().size() == 0) {
-            return null;
-        }
-        Random l_Rand = new Random();
-        List<Country> l_Countries = new ArrayList<>(getPlayer().getCountriesInControl().values());
-
-        return l_Countries.get(l_Rand.nextInt(l_Countries.size()));
-    }
-
-    /**
      * To defend country.
      *
      * @return the country
@@ -104,7 +84,7 @@ public class AggressivePattern extends PlayerStrategy {
             Card l_Card = getPlayer().getCards().remove(0);
             Country l_MoveFrom = moveFrom();
             int l_ArmiesToMove = l_MoveFrom.getArmies() - l_MoveFrom.getCommittedArmies();
-            return CardOrderCreator.createCardOrder(l_Card, getPlayer(), getTargetPlayer(), l_MoveFrom, attackFrom(), getRandomNeighbor(), l_ArmiesToMove);
+            return CardOrderCreator.createCardOrder(l_Card, getPlayer(), getRandomOpponentPlayer(), l_MoveFrom, attackFrom(), getRandomNeighbor(), l_ArmiesToMove);
         } else {
             // option 4: move armies to maximize aggregation of forces in one country
             Country l_MoveTo = attackFrom();
@@ -121,7 +101,7 @@ public class AggressivePattern extends PlayerStrategy {
                 return null;
             }
 
-            return new AdvanceOrder(getPlayer(), l_MoveFrom, l_MoveTo, l_MoveFrom.getArmies());
+            return new AdvanceOrder(getPlayer(), l_MoveFrom, l_MoveTo, l_MoveFrom.getArmies() - l_MoveFrom.getCommittedArmies());
         }
     }
 

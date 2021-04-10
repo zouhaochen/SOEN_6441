@@ -69,7 +69,7 @@ public class RandomPattern extends PlayerStrategy {
                 return new AdvanceOrder(l_Player, l_AttackFrom, toDefend(), l_Armies);
             case 5:
                 Card l_Card = l_Player.getCards().remove(0);
-                return CardOrderCreator.createCardOrder(l_Card, l_Player, getTargetPlayer(), l_AttackFrom, toDefend(), getRandomNeighbor(), l_Armies);
+                return CardOrderCreator.createCardOrder(l_Card, l_Player, getRandomOpponentPlayer(), l_AttackFrom, toDefend(), getRandomNeighbor(), l_Armies);
             default:
                 return null;
         }
