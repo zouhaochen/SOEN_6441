@@ -7,7 +7,7 @@ import model.gameelements.strategy.PlayerStrategy;
 import java.util.*;
 
 /**
- * player object that reprsent in game.
+ * player object that represents a player in game.
  */
 public class
 
@@ -42,22 +42,26 @@ Player extends Observable {
      * check player obj whether existed
      */
     private boolean d_playerExist;
-
     /**
      * user's card list
      */
     private List<Card> d_Cards;
-
-
     /**
      * the ids of the unattackable players
      */
     private List<Integer> d_UnattackablePlayers;
-
     /**
-     * The D strategy.
+     * The player strategy.
      */
     private PlayerStrategy d_Strategy;
+    /**
+     * The cards committed for orders.
+     */
+    private List<Card> d_CommittedCards;
+    /**
+     * The number of armies committed for Deploy orders.
+     */
+    private int d_CommittedReinforcement;
 
     /**
      * Player class constructor
@@ -72,6 +76,7 @@ Player extends Observable {
         d_UnattackablePlayers = new ArrayList<>();
         d_Cards = new ArrayList<>();
         d_playerExist = true;
+        d_CommittedCards = new ArrayList<>();
     }
 
     /**
@@ -226,6 +231,42 @@ Player extends Observable {
     }
 
     /**
+     * Gets the committed cards.
+     *
+     * @return the list of committed cards
+     */
+    public List<Card> getCommittedCards() {
+        return d_CommittedCards;
+    }
+
+    /**
+     * Gets committed reinforcement armies.
+     *
+     * @return the number of committed reinforcement armies
+     */
+    public int getCommittedReinforcement() {
+        return d_CommittedReinforcement;
+    }
+
+    /**
+     * Sets deployed armies buffer.
+     *
+     * @param p_Armies the p deployed armies buffer
+     */
+    public void setCommittedReinforcement(int p_Armies) {
+        this.d_CommittedReinforcement = p_Armies;
+    }
+
+    /**
+     * Add card to buffer.
+     *
+     * @param p_Card the p card
+     */
+    public void addCardToCommittedList(Card p_Card) {
+        d_CommittedCards.add(p_Card);
+    }
+
+    /**
      * following the command to issue order and add the order to order list.
      *
      * @return true if an order is created
@@ -314,6 +355,13 @@ Player extends Observable {
     public void removeTargetCard(Card p_UsedCard) {
         d_Cards.remove(p_UsedCard);
         System.out.println("Notice: Player " + this.d_Colour + " consumes card [" + p_UsedCard.name() + "]");
+    }
+
+    /**
+     * Resets strategy state.
+     */
+    public void resetStrategyState() {
+        d_Strategy.reset();
     }
 
 }

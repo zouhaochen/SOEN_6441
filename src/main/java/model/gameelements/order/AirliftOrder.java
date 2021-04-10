@@ -48,6 +48,8 @@ public class AirliftOrder extends Order {
         l_OrderInfo.setDestination(p_Destination);
         l_OrderInfo.setNumberOfArmy(p_NumberOfArmies);
         setOrderInfo(l_OrderInfo);
+
+        d_DepartureCountry.setCommittedArmies(d_DepartureCountry.getCommittedArmies() + p_NumberOfArmies);
     }
 
     /**
@@ -62,6 +64,8 @@ public class AirliftOrder extends Order {
         d_DestinationCountry = p_OrderInfo.getDestination();
         d_ArmyNumber = p_OrderInfo.getNumberOfArmy();
         d_Player = p_OrderInfo.getInitiator();
+
+        setOrderInfo(p_OrderInfo);
     }
 
     /**

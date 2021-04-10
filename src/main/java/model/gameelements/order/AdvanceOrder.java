@@ -52,6 +52,8 @@ public class AdvanceOrder extends Order {
         l_OrderInfo.setDestination(p_DefenceCountry);
         l_OrderInfo.setNumberOfArmy(p_NumberOfArmies);
         setOrderInfo(l_OrderInfo);
+
+        d_AttackCountry.setCommittedArmies(d_AttackCountry.getCommittedArmies() + p_NumberOfArmies);
     }
 
     /**
@@ -60,7 +62,12 @@ public class AdvanceOrder extends Order {
      * @param p_OrderInfo the order info
      */
     public AdvanceOrder(OrderInfo p_OrderInfo) {
-        this(p_OrderInfo.getInitiator(), p_OrderInfo.getDeparture(), p_OrderInfo.getDestination(), p_OrderInfo.getNumberOfArmy());
+        super();
+        setType("Advance");
+        d_Player = p_OrderInfo.getInitiator();
+        d_AttackCountry = p_OrderInfo.getDeparture();
+        d_DefendCountry = p_OrderInfo.getDestination();
+        d_NumberOfArmies = p_OrderInfo.getNumberOfArmy();
         this.setOrderInfo(p_OrderInfo);
     }
 

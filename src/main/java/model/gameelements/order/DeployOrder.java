@@ -24,6 +24,9 @@ public class DeployOrder extends Order {
         l_OrderInfo.setNumberOfArmy(p_ArmiesToDeploy);
 
         this.setOrderInfo(l_OrderInfo);
+
+        Player l_Initiator = getOrderInfo().getInitiator();
+        l_Initiator.setCommittedReinforcement(l_Initiator.getCommittedReinforcement() + p_ArmiesToDeploy);
     }
 
     /**

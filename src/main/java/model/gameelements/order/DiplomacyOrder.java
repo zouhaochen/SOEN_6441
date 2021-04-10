@@ -63,7 +63,6 @@ public class DiplomacyOrder extends Order {
      */
     public boolean execute() {
         if (!valid()) {
-            System.out.println("Diplomacy invalid, player not exist");
             return false;
         }
 
@@ -90,7 +89,7 @@ public class DiplomacyOrder extends Order {
 
         // Check whether the player has a negotiate card
         if (!d_Player.getCards().contains(Card.NEGOTIATE)) {
-            System.out.println("Player " + d_Player.getColour() + " does not have a diplomacy card");
+            System.out.println("Invalid Diplomacy Order: Player " + d_Player.getColour() + " does not have a diplomacy card.");
             return false;
         }
 
@@ -101,6 +100,7 @@ public class DiplomacyOrder extends Order {
 
             return true;
         } else {
+            System.out.println("Invalid Diplomacy Order: Target player is not valid.");
             return false;
         }
     }
