@@ -75,6 +75,14 @@ Player extends Observable {
     }
 
     /**
+     * current strategy name getter
+     * @return strategy name string
+     */
+    public String getPlayerStrategyName(){
+        return this.d_Strategy.getClass().getSimpleName();
+    }
+
+    /**
      * Reset the unattackable player list
      */
     public void resetPlayerDiplomacy() {
@@ -214,6 +222,7 @@ Player extends Observable {
      */
     public void setStrategy(PlayerStrategy p_Strategy) {
         this.d_Strategy = p_Strategy;
+        System.out.println("Player ["+d_Colour+"] your strategy pattern now is "+getPlayerStrategyName().toUpperCase());
     }
 
     /**

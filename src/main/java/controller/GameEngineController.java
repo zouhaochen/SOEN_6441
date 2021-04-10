@@ -7,7 +7,9 @@ import model.gameelements.Card;
 import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;
+import model.gameelements.strategy.AggressivePattern;
 import model.gameelements.strategy.HumanInteractivePattern;
+import model.gameelements.strategy.RandomPattern;
 
 import java.io.File;
 import java.io.IOException;
@@ -142,6 +144,7 @@ public class GameEngineController {
             for (Card l_Card : p_Player.getCards()) {
                 System.out.print("[" + l_Card.name() + "]");
             }
+            System.out.println("Player Strategy: "+p_Player.getPlayerStrategyName().toUpperCase());
 
 
             System.out.println();
@@ -178,11 +181,10 @@ public class GameEngineController {
     public void gamePlayerCommand() {
         String l_Command;
         String[] l_CommandArr;
-
+        Scanner l_scanner = new Scanner(System.in);
         // validate the command from console
         do {
             System.out.println("\nPlease enter \"gameplayer -add playername -remove playername\" command to create players for the game: ");
-            Scanner l_scanner = new Scanner(System.in);
             l_Command = l_scanner.nextLine();
             l_CommandArr = l_Command.split(" ");
             if (!l_CommandArr[0].equalsIgnoreCase(CommandType.ADD_PLAYER.getLabel())) {
@@ -207,6 +209,40 @@ public class GameEngineController {
 
             l_Index += 2;
         }
+
+        // Now time for user to choose strategy for each player
+        System.out.println("===Now to choose player strategy(human,aggressive,benevolent,random,cheater)===");
+        for (Player l_each:this.d_GameData.getPlayerList()){
+            System.out.println("Player ["+l_each.getColour()+"], choose your strategy:");
+            l_Command = l_scanner.nextLine();
+
+            switch (l_Command.toLowerCase()){
+                case "human":
+                    l_each.setStrategy(new HumanInteractivePattern(l_each,this.d_GameData));
+                    break;
+                case "aggressive" :
+                    l_each.setStrategy(new AggressivePattern(l_each,this.d_GameData));
+                    break;
+                case "benevolent" :
+                    System.out.println("not implement yet");
+//                    l_each.setStrategy(new BenevolentPattern(l_each,this.d_GameData));
+                    l_each.setStrategy(new HumanInteractivePattern(l_each,this.d_GameData));
+                    break;
+                case "random" :
+                    l_each.setStrategy(new RandomPattern(l_each,this.d_GameData));
+                    break;
+                case "cheater" :
+                    System.out.println("not implement yet");
+//                  l_each.setStrategy(new CheaterPattern(l_each,this.d_GameData));
+                    l_each.setStrategy(new HumanInteractivePattern(l_each,this.d_GameData));
+                    break;
+                default:
+                    System.out.println("WARNING: we dont have such strategy pattern, set to random strategy as default");
+                    l_each.setStrategy(new RandomPattern(l_each,this.d_GameData));
+                    break;
+            }
+        }
+
     }
 
     /**
