@@ -126,7 +126,13 @@ public abstract class PlayerStrategy {
      * @return the country
      */
     protected Country moveFrom() {
-        return null;
+        if (getPlayer().getCountriesInControl().size() == 0) {
+            return null;
+        }
+        Random l_Rand = new Random();
+        List<Country> l_Countries = new ArrayList<>(getPlayer().getCountriesInControl().values());
+
+        return l_Countries.get(l_Rand.nextInt(l_Countries.size()));
     }
 
     /**
@@ -161,11 +167,11 @@ public abstract class PlayerStrategy {
     }
 
     /**
-     * Gets target player.
+     * Gets a random opponent player.
      *
-     * @return the target player
+     * @return the opponent player
      */
-    protected Player getTargetPlayer() {
+    protected Player getRandomOpponentPlayer() {
         List<Player> l_Players = d_GameData.getPlayerList();
         Player l_Target;
 

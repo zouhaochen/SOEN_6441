@@ -9,10 +9,6 @@ import model.gameelements.order.AdvanceOrder;
 import model.gameelements.order.DeployOrder;
 import model.gameelements.order.Order;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 /**
  * The type Aggressive pattern.
  */
@@ -46,25 +42,14 @@ public class AggressivePattern extends PlayerStrategy {
 
         Country l_CountryWithMostArmies = null;
         for (Country l_Country : getPlayer().getCountriesInControl().values()) {
-            if (l_CountryWithMostArmies == null || l_Country.getArmies() > l_CountryWithMostArmies.getArmies()) {
+            if (l_CountryWithMostArmies == null
+                    || (l_Country.getArmies() - l_Country.getCommittedArmies())
+                    > (l_CountryWithMostArmies.getArmies() - l_CountryWithMostArmies.getCommittedArmies())) {
                 l_CountryWithMostArmies = l_Country;
             }
         }
 
         return l_CountryWithMostArmies;
-    }
-
-    /**
-     * Move from country.
-     *
-     * @return the country
-     */
-    @Override
-    protected Country moveFrom() {
-        Random l_Rand = new Random();
-        List<Country> l_Countries = new ArrayList<>(getPlayer().getCountriesInControl().values());
-
-        return l_Countries.get(l_Rand.nextInt(l_Countries.size()));
     }
 
     /**
@@ -84,36 +69,56 @@ public class AggressivePattern extends PlayerStrategy {
      */
     @Override
     public Order createOrder() {
-        if (getPlayer().getReinforcementArmies() > 0) {
-            return new DeployOrder(getPlayer(), attackFrom(), getPlayer().getReinforcementArmies());
+        int l_AvailableReinforcement = getPlayer().getReinforcementArmies() - getPlayer().getCommittedReinforcement();
+
+        if (l_AvailableReinforcement > 0) {
+            // option 1: reinforce the strongest country
+            return new DeployOrder(getPlayer(), attackFrom(), l_AvailableReinforcement);
         } else if (!d_AttackedInCurrentTurn) {
+            // option 2: attack with the strongest country
             Country l_AttackFrom = attackFrom();
             d_AttackedInCurrentTurn = true;
-            return new AdvanceOrder(getPlayer(), l_AttackFrom, getRandomNeighborOfCountry(l_AttackFrom), l_AttackFrom.getArmies());
+            return new AdvanceOrder(getPlayer(), l_AttackFrom, getRandomNeighborOfCountry(l_AttackFrom), l_AttackFrom.getArmies() - l_AttackFrom.getCommittedArmies());
         } else if (getPlayer().getCards().size() != 0) {
-            // create Card order
-            Card l_Card = getPlayer().getCards().get(0);
+            // option 3: use card if the player has any
+            Card l_Card = getPlayer().getCards().remove(0);
             Country l_MoveFrom = moveFrom();
-            return CardOrderCreator.createCardOrder(l_Card, getPlayer(), getTargetPlayer(), l_MoveFrom, toDefend(), getRandomNeighbor(), l_MoveFrom.getArmies());
+            int l_ArmiesToMove = l_MoveFrom.getArmies() - l_MoveFrom.getCommittedArmies();
+            return CardOrderCreator.createCardOrder(l_Card, getPlayer(), getRandomOpponentPlayer(), l_MoveFrom, attackFrom(), getRandomNeighbor(), l_ArmiesToMove);
         } else {
-            Country l_AttackFrom = attackFrom();
+            // option 4: move armies to maximize aggregation of forces in one country
+            Country l_MoveTo = attackFrom();
             Country l_MoveFrom = moveFrom();
             int l_Count = 1;
-            while (l_Count < l_AttackFrom.getBorderCountries().size() && !l_AttackFrom.getBorderCountries().containsKey(l_MoveFrom.getName())) {
+            int l_SearchLimit = getPlayer().getCountriesInControl().size() * 2; // limits the times of the search for a valid country
+
+            while (l_Count < l_SearchLimit && isInvalidMoveFromCountry(l_MoveFrom, l_MoveTo)) {
                 l_MoveFrom = moveFrom();
                 l_Count++;
             }
 
-            if (l_Count >= l_AttackFrom.getBorderCountries().size()) {
+            if (isInvalidMoveFromCountry(l_MoveFrom, l_MoveTo)) {
                 return null;
             }
 
-            return new AdvanceOrder(getPlayer(), l_MoveFrom, l_AttackFrom, l_MoveFrom.getArmies());
+            return new AdvanceOrder(getPlayer(), l_MoveFrom, l_MoveTo, l_MoveFrom.getArmies() - l_MoveFrom.getCommittedArmies());
         }
     }
+
 
     @Override
     public void reset() {
         d_AttackedInCurrentTurn = false;
+    }
+
+    /**
+     * Check whether the move-from country is invalid.
+     *
+     * @param p_MoveFrom the move-from country
+     * @param p_MoveTo   the move-to country
+     * @return true if the move-from country is invalid, false otherwise
+     */
+    private boolean isInvalidMoveFromCountry(Country p_MoveFrom, Country p_MoveTo) {
+        return (p_MoveFrom.getArmies() <= p_MoveFrom.getCommittedArmies()) || !p_MoveFrom.getBorderCountries().containsKey(p_MoveTo.getName());
     }
 }

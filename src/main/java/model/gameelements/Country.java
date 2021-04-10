@@ -24,6 +24,10 @@ public class Country extends Territory {
      * Hash Map for all connectivity for current country
      */
     private Map<String, Country> d_BorderCountries;
+    /**
+     * The D committed armies.
+     */
+    private int d_CommittedArmies;
 
     /**
      * Country Object Constructor
@@ -114,6 +118,24 @@ public class Country extends Territory {
      */
     public void setBorderCountries(Map<String, Country> p_BorderCountries) {
         this.d_BorderCountries = p_BorderCountries;
+    }
+
+    /**
+     * Gets committed armies.
+     *
+     * @return the committed armies
+     */
+    public int getCommittedArmies() {
+        return d_CommittedArmies;
+    }
+
+    /**
+     * Sets committed armies.
+     *
+     * @param p_CommittedArmies the committed armies
+     */
+    public void setCommittedArmies(int p_CommittedArmies) {
+        this.d_CommittedArmies = p_CommittedArmies;
     }
 
     /**

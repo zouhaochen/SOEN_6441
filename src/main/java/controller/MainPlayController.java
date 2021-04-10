@@ -182,6 +182,9 @@ public class MainPlayController extends Observable {
      * Execute all orders.
      */
     public void executeAllOrders() {
+        // resets committed data for the execution phase
+        resetCommittedData();
+
         boolean l_MoreOrder;
         do {
             l_MoreOrder = false;
@@ -196,6 +199,8 @@ public class MainPlayController extends Observable {
             }
 
         } while (l_MoreOrder);
+
+        resetPlayerStrategyState();
     }
 
     /**
@@ -233,11 +238,37 @@ public class MainPlayController extends Observable {
     }
 
     /**
-     * Reset attackable state.
+     * Resets attackable state.
      */
     public void resetAttackableState() {
         for (Player l_Player : d_GameData.getPlayerList()) {
             l_Player.resetPlayerDiplomacy();
+        }
+    }
+
+    /**
+     * Resets committed data.
+     */
+    private void resetCommittedData() {
+        // resets all countries
+        for (Country l_Country : d_GameData.getCountryList()) {
+            l_Country.setCommittedArmies(0);
+        }
+        // resets all players
+        for (Player l_Player : d_GameData.getPlayerList()) {
+            l_Player.setCommittedReinforcement(0);
+            l_Player.getCards().addAll(l_Player.getCommittedCards());
+            l_Player.getCommittedCards().clear();
+        }
+    }
+
+    /**
+     * Reset player strategy state.
+     */
+    private void resetPlayerStrategyState() {
+        // resets all players
+        for (Player l_Player : d_GameData.getPlayerList()) {
+            l_Player.resetStrategyState();
         }
     }
 

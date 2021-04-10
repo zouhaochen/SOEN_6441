@@ -20,6 +20,9 @@ public class CardOrderCreator {
      */
     public static Order createCardOrder(Card p_Card, Player p_Initiator, Player p_TargetPlayer, Country p_Departure,
                                         Country p_Destination, Country p_ToAttack, int p_NumberOfArmies) {
+        // add the card to the committed card list
+        p_Initiator.addCardToCommittedList(p_Card);
+
         switch (p_Card) {
             case AIRLIFT:
                 return createAirliftOrder(p_Initiator, p_Departure, p_Destination, p_NumberOfArmies);
@@ -31,7 +34,6 @@ public class CardOrderCreator {
                 return createDiplomacyOrder(p_Initiator, p_TargetPlayer);
             default:
                 return null;
-
         }
     }
 
@@ -46,6 +48,7 @@ public class CardOrderCreator {
      */
     private static Order createAirliftOrder(Player p_Initiator, Country p_Departure,
                                             Country p_Destination, int p_NumberOfArmies) {
+        p_Departure.setCommittedArmies(p_Departure.getCommittedArmies() + p_NumberOfArmies);
         return new AirliftOrder(p_Initiator, p_Departure, p_Destination, p_NumberOfArmies);
     }
 
