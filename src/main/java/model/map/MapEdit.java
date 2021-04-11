@@ -30,7 +30,7 @@ public class MapEdit {
      */
     public static int FLAG = 0;
     
-    private static FileReaderAdapter adapter = new FileReaderAdapter(new JSONFileReader());
+    private static MapFileAdapter adapter = new MapFileAdapter(new ConquestMapReader());
 
     public static void main(String[] args) throws Exception {
 		mapEditLoop();

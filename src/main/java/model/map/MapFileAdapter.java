@@ -9,16 +9,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FileReaderAdapter extends TextFileReader {
+public class MapFileAdapter extends DominationMapReader {
 
-	private JSONFileReader otherFileType;
+	private ConquestMapReader otherFileType;
 
-	public FileReaderAdapter(JSONFileReader p_fr) {
+	public MapFileAdapter(ConquestMapReader p_fr) {
 		// the roundPeg is plugged into the adapter
 		this.otherFileType = p_fr;
 	}
 
-	public FileReaderAdapter() {
+	public MapFileAdapter() {
 	}
 
 	public void textFileToJsonFile(String str) throws IOException {
