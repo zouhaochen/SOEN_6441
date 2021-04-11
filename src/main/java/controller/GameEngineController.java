@@ -240,6 +240,36 @@ public class GameEngineController {
     }
 
     /**
+     * Auto assign all the countries to the players.
+     */
+    public void autoAssignCountries(){
+        // randomly assign countries
+        int l_NumberOfPlayer = d_GameData.getPlayerList().size();
+        int l_NumberOfCountry = d_GameData.getCountryList().size();
+        int l_Quotient = l_NumberOfCountry / l_NumberOfPlayer;
+        Stack<Country> l_CountryStack = new Stack<>();
+        l_CountryStack.addAll(d_GameData.getCountryList());
+        Collections.shuffle(l_CountryStack);
+
+        // first step: try to assign same amounts of countries to each player
+        for (Player l_Player :
+                d_GameData.getPlayerList()) {
+            for (int l_Count = 0; l_Count < l_Quotient; ++l_Count) {
+                l_CountryStack.peek().setOwner(l_Player);
+                l_Player.assignCountry(l_CountryStack.pop());
+            }
+        }
+
+        // second step: if there are any countries left
+        Random l_Random = new Random();
+        while (!l_CountryStack.empty()) {
+            int l_RandomPlayerIndex = l_Random.nextInt(d_GameData.getPlayerList().size());
+            Player l_RandomPlayer = d_GameData.getPlayerList().get(l_RandomPlayerIndex);
+            l_CountryStack.peek().setOwner(l_RandomPlayer);
+            l_RandomPlayer.assignCountry(l_CountryStack.pop());
+        }
+    }
+    /**
      * Randomly assign all the countries to the players.
      */
     public void assignCountries() {

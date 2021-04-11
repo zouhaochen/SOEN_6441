@@ -36,7 +36,6 @@ public class SingleGameController extends MainPlayController{
                 case "play":
                     // Set the state to PlaySetup
                     setPhase(new LoadMap(this));
-
                     break;
                 case "exit":
                     System.out.println("Exiting Warzone Game see you next time!");
