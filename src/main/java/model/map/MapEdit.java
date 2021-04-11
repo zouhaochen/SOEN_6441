@@ -9,7 +9,7 @@ import java.util.Scanner;
  * This is the model.map editor
  *
  * @author Haochen Zou
- * @version 1.0
+ * @version 2.0
  */
 public class MapEdit {
     /**
@@ -24,13 +24,15 @@ public class MapEdit {
      * Map file path
      */
     private static String OPTFILE = "";
-    // flag for junit test
     /**
      * Flag, used to block edit process
      */
     public static int FLAG = 0;
-    
-    private static MapFileAdapter adapter = new MapFileAdapter(new ConquestMapReader());
+    /**
+     * Map file adapter to transform the map
+     * into the right type of map
+     */
+    private static MapFileAdapter ADAPTER = new MapFileAdapter(new ConquestMapReader());
 
     public static void main(String[] args) throws Exception {
 		mapEditLoop();
@@ -109,9 +111,9 @@ public class MapEdit {
         String l_FileName = l_String[1];
         OPTFILE = l_FileName;
         File l_F3 = getFile(l_FileName);
-        //判断文件类型
+        // determine file type
         if(!isDomination(l_FileName)) {
-        	adapter.jsonFileToTextFile(l_FileName);
+            ADAPTER.jsonFileToTextFile(l_FileName);
         }
         // load and show the model.map if the file exists
         if (l_F3.exists()) {
@@ -121,7 +123,6 @@ public class MapEdit {
             // check model.map validation
             MapValidate.check(l_F3);
             FLAG = 2;
-
         }
         // create a new model.map if the file does not exists
         else {
@@ -134,9 +135,9 @@ public class MapEdit {
                     "[borders]");
             l_Bw.flush();
             l_Bw.close();
-            FLAG = 3;
             // check model.map validation
             MapValidate.check(l_F3);
+            FLAG = 3;
         }
     }
 
@@ -405,7 +406,7 @@ public class MapEdit {
             l_ReadFile.delete();
         }
         if(num == 2) {
-        	adapter.textFileToJsonFile(l_FileName);
+            ADAPTER.textFileToJsonFile(l_FileName);
         }
     }
 
@@ -426,14 +427,14 @@ public class MapEdit {
     }
     
     /**
-         * 判断是否是domination类型文件
-     * @param filename: file name
-     * @return
+     * Determine whether it is a domination format map file
+     * @param p_filename: file name
+     * @return false if map file does not exist
      * @throws IOException 
      */
-    public static boolean isDomination(String filename) throws IOException {
-    	File file = getFile(filename);
-    	BufferedReader l_Br = new BufferedReader(new FileReader(file));
+    public static boolean isDomination(String p_filename) throws IOException {
+    	File l_file = getFile(p_filename);
+    	BufferedReader l_Br = new BufferedReader(new FileReader(l_file));
 		String line = "";
 		while((line = l_Br.readLine()) != null) {
 			if("[Territories]".equals(line.trim())) {

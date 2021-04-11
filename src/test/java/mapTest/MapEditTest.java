@@ -39,7 +39,7 @@ public class MapEditTest {
     public void testEditMapNew() throws IOException {
         int l_TestFlag3 = MapEdit.flagEditMap("editmap testnewmap.map");
         assertEquals(2, l_TestFlag3);
-        File l_File = MapEdit.getFile("testnewmap.model.map");
+        File l_File = MapEdit.getFile("testnewmap.map");
         l_File.delete();
     }
 }
