@@ -46,7 +46,7 @@ public class CheaterPattern extends PlayerStrategy {
         for (Country l_CountryInControl : getPlayer().getCountriesInControl().values()) {
             for (Country l_Neighbor : l_CountryInControl.getBorderCountries().values()) {
                 if (l_Neighbor.getOwner().getId() != getPlayer().getId()) {
-                    l_Neighbor.getOwner().getCountriesInControl().remove(l_Neighbor.getName());
+                    l_Neighbor.getOwner().getCountriesInControl().remove(l_Neighbor.getName().toLowerCase());
                     getPlayer().assignCountry(l_Neighbor);
                     l_Neighbor.setOwner(getPlayer());
                     l_Neighbor.setArmies(l_Neighbor.getArmies() * 2);

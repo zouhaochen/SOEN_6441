@@ -67,7 +67,6 @@ public class BlockadeOrder extends Order {
             getOrderInfo().getGameData().setNeutralPlayer(new Player("NEUTRAL"));
         }
         // Set owner to Player NEUTRAL
-        d_TargetCountry.getOwner().getCountriesInControl().remove(d_TargetCountry.getName());
         d_TargetCountry.setOwner(getOrderInfo().getGameData().getNeutralPlayer());
         getOrderInfo().getGameData().getNeutralPlayer().assignCountry(d_TargetCountry);
 
