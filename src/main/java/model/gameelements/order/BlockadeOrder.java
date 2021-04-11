@@ -29,9 +29,11 @@ public class BlockadeOrder extends Order {
         setType("Blockade");
         d_Player = p_Player;
         d_TargetCountry = p_TargetCountry;
-        setOrderInfo(new OrderInfo());
-        getOrderInfo().setInitiator(p_Player);
-        getOrderInfo().setDestination(p_TargetCountry);
+
+        OrderInfo l_OrderInfo = new OrderInfo();
+        l_OrderInfo.setInitiator(p_Player);
+        l_OrderInfo.setDestination(p_TargetCountry);
+        setOrderInfo(l_OrderInfo);
     }
 
     /**
@@ -65,6 +67,7 @@ public class BlockadeOrder extends Order {
             getOrderInfo().getGameData().setNeutralPlayer(new Player("NEUTRAL"));
         }
         // Set owner to Player NEUTRAL
+        d_TargetCountry.getOwner().getCountriesInControl().remove(d_TargetCountry.getName());
         d_TargetCountry.setOwner(getOrderInfo().getGameData().getNeutralPlayer());
         getOrderInfo().getGameData().getNeutralPlayer().assignCountry(d_TargetCountry);
 

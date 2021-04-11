@@ -276,7 +276,7 @@ public class AdvanceOrder extends Order {
         // Check whether player is owner of attack country
         if (!d_AttackCountry.getOwner().equals(d_Player)) {
             System.out.println("Invalid Advance Order: can not do the advance order moving " + d_NumberOfArmies + " armies from " +
-                    d_AttackCountry.getName() + " to " + d_DefendCountry.getName() + " because " + d_Player.getColour() + " does not own " + d_AttackCountry + ".");
+                    d_AttackCountry.getName() + " to " + d_DefendCountry.getName() + " because " + d_Player.getColour() + " does not own " + d_AttackCountry.getName() + ".");
             return false;
         }
 

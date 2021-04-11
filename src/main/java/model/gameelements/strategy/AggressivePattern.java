@@ -77,6 +77,13 @@ public class AggressivePattern extends PlayerStrategy {
         } else if (!d_AttackedInCurrentTurn) {
             // option 2: attack with the strongest country
             Country l_AttackFrom = attackFrom();
+            int l_AvailableArmies = l_AttackFrom.getArmies() - l_AttackFrom.getCommittedArmies();
+
+            // skips one turn to allow reinforcement execute if all the countries have zero army.
+            if (l_AvailableArmies <= 0) {
+                return null;
+            }
+
             d_AttackedInCurrentTurn = true;
             return new AdvanceOrder(getPlayer(), l_AttackFrom, getRandomNeighborOfCountry(l_AttackFrom), l_AttackFrom.getArmies() - l_AttackFrom.getCommittedArmies());
         } else if (getPlayer().getCards().size() != 0) {
