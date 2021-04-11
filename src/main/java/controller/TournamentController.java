@@ -1,6 +1,7 @@
 package controller;
 
 import command.CommandValidator;
+import model.LogEntryBuffer;
 import model.gameelements.Player;
 import model.state.Edit;
 import model.state.End;
@@ -32,12 +33,18 @@ public class TournamentController extends MainPlayController {
 
     private MainPlayController myGame = new MainPlayController();
 
+    /**
+     * game logger
+     */
+    private LogEntryBuffer d_LogEntryBuffer = new LogEntryBuffer();
+
     @Override
     public void Start(){
+        d_LogEntryBuffer.start();
         CommandValidator.setGameData(d_GameData);
         do {
             Scanner l_Scanner = new Scanner(System.in);
-            System.out.println("Welcome to warzone! ");
+            System.out.println("Welcome to tournament mode game! ");
             System.out.println("Do you want to edit map or play game? (Edit/Play/Exit)");
             System.out.println("( Edit for edit map / Play for play the game / Exit for exit the game )");
 
