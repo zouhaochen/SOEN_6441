@@ -54,9 +54,10 @@ public class SingleGameController extends MainPlayController{
                 System.out.println("| 4.  Play:Startup:LoadMap       : loadmap           |");
                 System.out.println("| 5.  Play:Startup:AddPlayer     : addPlayer         |");
                 System.out.println("| 6.  Play:Startup:AssignCountry : assign            |");
-                System.out.println("| 7.  Play:MainPlay:IssueOrder   : issue             |");
-                System.out.println("| 8.  Play:MainPlay:ExecuteOrder : execute           |");
-                System.out.println("| 9.  Any                        : end                |");
+                System.out.println("| 7.  Play:MainPlay:start to play: start             |");
+                System.out.println("| 8.  Play:MainPlay:IssueOrder   : issue (user)      |");
+                System.out.println("| 9.  Play:MainPlay:ExecuteOrder : execute  (user)   |");
+                System.out.println("| 10. Any                        : end              |");
                 System.out.println(" =====================================================");
                 System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase command: ");
                 mycommand = l_Scanner.nextLine();
@@ -94,12 +95,31 @@ public class SingleGameController extends MainPlayController{
                     case "end":
                         gamePhase.endGame();
                         break;
+                    case "start":
+                        int l_RoundCount=1;
+                        while (true){
+                            System.out.println("===== Round "+l_RoundCount+" =====");
+                            gamePhase.issueOrder();
+                            gamePhase.executeOrder();
+                            gamePhase.showMap();
+                            l_RoundCount++;
+                            // set up round limit, prevent from infinity battle round
+                            if (l_RoundCount>=31){
+                                System.out.println("===== Maximum Round Reach =====");
+                                System.out.println("===== DRAW ===== No Winner =====");
+                                gamePhase.endGame();
+                            }
+                            if (gamePhase instanceof End){
+                                break;
+                            }
+                        }
+                        break;
                     default:
                         System.out.println("this command does not exist");
                 }
             } while (!(gamePhase instanceof End));
             d_LogEntryBuffer.updateFile();
-
+            System.out.println("\n");
         } while (!mycommand.equals("end"));
     }
 }

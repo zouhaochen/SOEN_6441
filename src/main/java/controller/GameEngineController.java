@@ -7,9 +7,7 @@ import model.gameelements.Card;
 import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;
-import model.gameelements.strategy.AggressivePattern;
-import model.gameelements.strategy.HumanInteractivePattern;
-import model.gameelements.strategy.RandomPattern;
+import model.gameelements.strategy.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -224,17 +222,13 @@ public class GameEngineController {
                     l_each.setStrategy(new AggressivePattern(l_each,this.d_GameData));
                     break;
                 case "benevolent" :
-                    System.out.println("not implement yet");
-//                    l_each.setStrategy(new BenevolentPattern(l_each,this.d_GameData));
-                    l_each.setStrategy(new HumanInteractivePattern(l_each,this.d_GameData));
+                    l_each.setStrategy(new BenevolentPattern(l_each,this.d_GameData));
                     break;
                 case "random" :
                     l_each.setStrategy(new RandomPattern(l_each,this.d_GameData));
                     break;
                 case "cheater" :
-                    System.out.println("not implement yet");
-//                  l_each.setStrategy(new CheaterPattern(l_each,this.d_GameData));
-                    l_each.setStrategy(new HumanInteractivePattern(l_each,this.d_GameData));
+                    l_each.setStrategy(new CheaterPattern(l_each,this.d_GameData));
                     break;
                 default:
                     System.out.println("WARNING: we dont have such strategy pattern, set to random strategy as default");

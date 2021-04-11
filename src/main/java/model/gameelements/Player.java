@@ -275,6 +275,7 @@ Player extends Observable {
         Order l_Order = this.d_Strategy.createOrder();
         if (l_Order != null) {
             addOrderToList(l_Order);
+            System.out.println(d_Colour+" has issue order ["+l_Order.getType()+"]");
             return true;
         }
 
