@@ -16,19 +16,19 @@ public class TournamentController extends MainPlayController {
     /**
      *  list of map files that players are used.
      */
-    private File listOfMapFiles;
+    private File l_listOfMapFiles;
     /**
      * list of players strategies
      */
-    private Player listofplayerstrategies;
+    private Player l_listofplayerstrategies;
     /**
      *  for how many game that players played
      */
-    private int numberOfGames;
+    public  int l_numberOfGames = 0;
     /**
      * set the max number of turns for each game.
      */
-    private int maxNumberOfTurns;
+    private int l_maxNumberOfTurns;
 
     private MainPlayController myGame = new MainPlayController();
 
@@ -52,6 +52,8 @@ public class TournamentController extends MainPlayController {
                 case "play":
                     // Set the state to PlaySetup
                     setPhase(new LoadMap(this));
+                    l_numberOfGames ++;
+                    System.out.println("Now, the numer of Game is: "+ l_numberOfGames);
                     break;
                 case "exit":
                     System.out.println("Exiting Warzone Game see you next time!");
@@ -69,6 +71,7 @@ public class TournamentController extends MainPlayController {
                 System.out.println("| 4.  Play:Startup:LoadMap       : loadmap           |");
                 System.out.println("| 5.  Play:Startup:AddPlayer     : addPlayer         |");
                 System.out.println("| 6.  Play:Startup:AssignCountry : assign            |");
+                System.out.println("| 7.  Play:MainPlay:start to play: start             |");
                 System.out.println("| 8.  Play:MainPlay:IssueOrder   : issue             |");
                 System.out.println("| 9.  Play:MainPlay:ExecuteOrder : execute           |");
                 System.out.println("| 10. Any                        : end               |");
@@ -93,6 +96,7 @@ public class TournamentController extends MainPlayController {
                         break;
                     case "loadmap":
                         gamePhase.loadMap();
+                        // 如果玩家用的是不同的地图，记录该地图名称
                         break;
                     case "addplayer":
                         gamePhase.setPlayers();
@@ -109,6 +113,26 @@ public class TournamentController extends MainPlayController {
                     case "end":
                         gamePhase.endGame();
                         break;
+                    case "start":
+                        l_maxNumberOfTurns=1;
+                        while (true){
+                            System.out.println("===== Round "+  l_maxNumberOfTurns+" =====");
+                            gamePhase.issueOrder();
+                            gamePhase.executeOrder();
+                            gamePhase.showMap();
+                            l_maxNumberOfTurns++;
+                            // set up round limit, prevent from infinity battle round
+                            if (l_maxNumberOfTurns>=51){
+                                System.out.println("===== Maximum Round Reach =====");
+                                System.out.println("===== DRAW ===== No Winner =====");
+                                gamePhase.endGame();
+                            }
+                            if (gamePhase instanceof End){
+                                System.out.println("the rounds of the this Game is: "+ l_maxNumberOfTurns);
+                                break;
+                            }
+                        }
+                        break;
                     default:
                         System.out.println("this command does not exist");
                 }
@@ -116,5 +140,4 @@ public class TournamentController extends MainPlayController {
             System.out.println("\n");
         } while (!mycommand.equals("end"));
     }
-
 }
