@@ -1,5 +1,6 @@
 import controller.MainPlayController;
 import controller.SingleGameController;
+import controller.TournamentController;
 import view.LogEntryBufferView;
 
 import java.util.Scanner;
@@ -53,7 +54,8 @@ public class GameDriver {
                 case "tournament":
                     // new tournament game
                     System.out.println("*****tournament game mode*****");
-                    System.out.println("not implement yet");
+                    l_GameDriver=new GameDriver(new TournamentController());
+                    l_GameDriver.d_MainPlayController.Start();
                     continue;
                 default:
                     System.out.println("Error: mode not found");

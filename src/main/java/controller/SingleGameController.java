@@ -21,7 +21,7 @@ public class SingleGameController extends MainPlayController{
         CommandValidator.setGameData(d_GameData);
         do {
             Scanner l_Scanner = new Scanner(System.in);
-            System.out.println("Welcome to warzone! ");
+            System.out.println("Welcome to single game mode! ");
             System.out.println("Do you want to edit map or play game? (Edit/Play/Exit)");
             System.out.println("( Edit for edit map / Play for play the game / Exit for exit the game )");
 
