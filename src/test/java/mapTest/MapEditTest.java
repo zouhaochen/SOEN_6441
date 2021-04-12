@@ -30,16 +30,16 @@ public class MapEditTest {
         assertEquals(2, l_TestFlag2);
     }
 
-/*    *//**
+    /**
      * test open new model.map
      *
      * @throws IOException not find file
-     *//*
+     */
     @Test
     public void testEditMapNew() throws IOException {
-        int l_TestFlag3 = MapEdit.flagEditMap("editmap testnewmap.map");
-        assertEquals(3, l_TestFlag3);
         File l_File = MapEdit.getFile("testnewmap.map");
         l_File.delete();
-    }*/
+        int l_TestFlag3 = MapEdit.flagEditMap("editmap testnewmap.map");
+        assertEquals(3, l_TestFlag3);
+    }
 }
