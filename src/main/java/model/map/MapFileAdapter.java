@@ -9,157 +9,172 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Adapter transform the map into the right type of map
+ */
 public class MapFileAdapter extends DominationMapReader {
 
-	private ConquestMapReader otherFileType;
+	private ConquestMapReader d_otherFileType;
 
 	public MapFileAdapter(ConquestMapReader p_fr) {
 		// the roundPeg is plugged into the adapter
-		this.otherFileType = p_fr;
+		this.d_otherFileType = p_fr;
 	}
 
 	public MapFileAdapter() {
 	}
 
-	public void textFileToJsonFile(String str) throws IOException {
-		Map<String, List<String>> map = readFile(str);
-		StringBuffer terr = new StringBuffer("[Territories]\n");
-		List<String> flag = new ArrayList<>();
-		map.get("[borders]").forEach(b -> {
-			StringBuffer te = new StringBuffer();
-			String[] sp = b.split(" ");
-			for (int i = 0; i < sp.length; i++) {
-				String s = sp[i];
-				if (i == 0) {
-					map.get("[countries]").forEach(c -> {
-						if (c.startsWith(s)) {
-							String[] cs = c.split(" ");
-							String con = map.get("[continents]").get(Integer.parseInt(cs[2]) - 1).split(" ")[0];
-							te.append(cs[1] + "," + con + ",");
-							// 判断上一个和当前是否一个大陆
-							if (!flag.isEmpty()) {
-								String dl = flag.get(0);
-								if (!con.equals(dl)) {
-									terr.append("\n");
+	/**
+	 * Transform a domination format map file to a conquest format map file
+	 * @param p_str map file name
+	 * @throws IOException if map file does not exist
+	 */
+	public void textFileToJsonFile(String p_str) throws IOException {
+		Map<String, List<String>> l_map = readFile(p_str);
+		// read content from territories tag in conquest map
+		StringBuffer l_terr = new StringBuffer("[Territories]\n");
+		List<String> l_flag = new ArrayList<>();
+		// read content from territories tag in domination map
+		l_map.get("[borders]").forEach(b -> {
+			StringBuffer l_te = new StringBuffer();
+			String[] l_sp = b.split(" ");
+			for (int l_i = 0; l_i < l_sp.length; l_i++) {
+				String l_s = l_sp[l_i];
+				if (l_i == 0) {
+					// read content from countries tag in domination map
+					l_map.get("[countries]").forEach(c -> {
+						if (c.startsWith(l_s)) {
+							String[] l_cs = c.split(" ");
+							String l_con = l_map.get("[continents]").get(Integer.parseInt(l_cs[2]) - 1).split(" ")[0];
+							l_te.append(l_cs[1] + "," + l_con + ",");
+							// determine whether the previous and present continents are the same
+							if (!l_flag.isEmpty()) {
+								String l_dl = l_flag.get(0);
+								if (!l_con.equals(l_dl)) {
+									l_terr.append("\n");
 								}
-								flag.set(0, con);
+								l_flag.set(0, l_con);
 							} else {
-								flag.add(con);
+								l_flag.add(l_con);
 							}
 						}
 					});
 				} else {
-					map.get("[countries]").forEach(c -> {
-						if (c.startsWith(s)) {
-							String[] cs = c.split(" ");
-							te.append(cs[1] + ",");
+					l_map.get("[countries]").forEach(c -> {
+						if (c.startsWith(l_s)) {
+							String[] l_cs = c.split(" ");
+							l_te.append(l_cs[1] + ",");
 						}
 					});
 				}
-				if (i == sp.length - 1)
-					terr.append(te.toString().substring(0, te.toString().length() - 1));
+				if (l_i == l_sp.length - 1)
+					l_terr.append(l_te.toString().substring(0, l_te.toString().length() - 1));
 			}
-			terr.append("\n");
+			l_terr.append("\n");
 		});
-
-		// 处理[continents],并写入文件中
-		File l_File = getFile(str);
+		// deal with continents and write in map file
+		File l_File = getFile(p_str);
 		BufferedWriter l_Bw = new BufferedWriter(new FileWriter(l_File));
 		l_Bw.write("[continents]\n");
-		map.get("[continents]").forEach(con -> {
-			String s = con.replace(" ", "=");
+		l_map.get("[continents]").forEach(con -> {
+			String l_s = con.replace(" ", "=");
 			try {
-				l_Bw.write(s + "\n");
+				l_Bw.write(l_s + "\n");
 				l_Bw.flush();
-			} catch (IOException e) {
+			} catch (IOException l_e) {
 				try {
 					l_Bw.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
+				} catch (IOException l_e1) {
+					l_e1.printStackTrace();
 				}
-				e.printStackTrace();
+				l_e.printStackTrace();
 			}
 		});
 		l_Bw.write("\n");
-		l_Bw.write(terr.toString());
+		l_Bw.write(l_terr.toString());
 		l_Bw.close();
 	}
 
-	public void jsonFileToTextFile(String str) throws IOException {
-		Map<String, List<String>> map = this.otherFileType.readJSONFileType(str);
-		List<String> list = map.get("[Territories]");
-		String s = "[countries]\n";
-		String s2 = "[borders]\n";
-		// map记录国家编号
-		Map<String, Integer> couId = new LinkedHashMap<>();
-		// 找出国家对应大陆
-		Map<String, Integer> dlId = new LinkedHashMap<>();
-		list.forEach(t -> {
-			String[] cs = t.split(",");
-			int t2 = 0;
-			for (int j = 0; j < cs.length; j++) {
-				if (cs[j].matches("[0-9]*"))
+	/**
+	 * Transform a conquest format map file to a domination format map file
+	 * @param p_str map file name
+	 * @throws IOException if map file does not exist
+	 */
+	public void jsonFileToTextFile(String p_str) throws IOException {
+		Map<String, List<String>> l_map = this.d_otherFileType.readJSONFileType(p_str);
+		// read content from territories tag in conquest map
+		List<String> l_list = l_map.get("[Territories]");
+		String l_s = "[countries]\n";
+		String l_s2 = "[borders]\n";
+		// map records the country number
+		Map<String, Integer> l_couId = new LinkedHashMap<>();
+		// find the continent of the country
+		Map<String, Integer> l_dlId = new LinkedHashMap<>();
+		l_list.forEach(t -> {
+			String[] l_cs = t.split(",");
+			int l_t2 = 0;
+			for (int l_j = 0; l_j < l_cs.length; l_j++) {
+				if (l_cs[l_j].matches("[0-9]*"))
 					continue;
-				t2++;
-				if (t2 == 2) {
-					List<String> list2 = map.get("[continents]");
-					for (int a = 0, len2 = list2.size(); a < len2; a++) {
-						String[] cons = list2.get(a).split("=");
-						if (cs[j].equals(cons[0])) {
-							dlId.put(cs[0], a + 1);
+				l_t2++;
+				if (l_t2 == 2) {
+					List<String> l_list2 = l_map.get("[continents]");
+					for (int l_a = 0, l_len2 = l_list2.size(); l_a < l_len2; l_a++) {
+						String[] l_cons = l_list2.get(l_a).split("=");
+						if (l_cs[l_j].equals(l_cons[0])) {
+							l_dlId.put(l_cs[0], l_a + 1);
 						}
 					}
 				}
 			}
 		});
-		for (int i = 0, len = list.size(); i < len; i++) {
-			String[] cs = list.get(i).split(",");
-			// conNum：记录大陆序号
-			int t = 0;
-			for (int j = 0; j < cs.length; j++) {
-				if (cs[j].matches("[0-9]*"))
+		for (int l_i = 0, l_len = l_list.size(); l_i < l_len; l_i++) {
+			String[] l_cs = l_list.get(l_i).split(",");
+			// conNum：record the continent number
+			int l_t = 0;
+			for (int l_j = 0; l_j < l_cs.length; l_j++) {
+				if (l_cs[l_j].matches("[0-9]*"))
 					continue;
-				t++;
-				if (t != 2) {
-					Integer id = couId.get(cs[j]);
-					if (id == null) {
-						id = 0;
-						for (Map.Entry<String, Integer> en : couId.entrySet()) {
-							id = en.getValue();
+				l_t++;
+				if (l_t != 2) {
+					Integer l_id = l_couId.get(l_cs[l_j]);
+					if (l_id == null) {
+						l_id = 0;
+						for (Map.Entry<String, Integer> en : l_couId.entrySet()) {
+							l_id = en.getValue();
 						}
-						id += 1;
-						couId.put(cs[j], id);
-						s += id + " " + cs[j] + " " + dlId.get(cs[j]) + "\n";
+						l_id += 1;
+						l_couId.put(l_cs[l_j], l_id);
+						l_s += l_id + " " + l_cs[l_j] + " " + l_dlId.get(l_cs[l_j]) + "\n";
 					}
-					s2 += (id + " ");
-					// 去空格
-					if (j == cs.length - 1)
-						s2 = s2.substring(0, s2.length() - 1) + "\n";
+					l_s2 += (l_id + " ");
+					// remove the blank space
+					if (l_j == l_cs.length - 1)
+						l_s2 = l_s2.substring(0, l_s2.length() - 1) + "\n";
 				}
 			}
 		}
-		// 处理[continents],并写入文件中
-		File l_File = getFile(str);
+		// deal with continents and write in map file
+		File l_File = getFile(p_str);
 		BufferedWriter l_Bw = new BufferedWriter(new FileWriter(l_File));
 		l_Bw.write("[continents]\n");
-		map.get("[continents]").forEach(con -> {
-			String c = con.replace("=", " ");
+		l_map.get("[continents]").forEach(con -> {
+			String l_c = con.replace("=", " ");
 			try {
-				l_Bw.write(c + "\n");
+				l_Bw.write(l_c + "\n");
 				l_Bw.flush();
-			} catch (IOException e) {
+			} catch (IOException l_e) {
 				try {
 					l_Bw.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
+				} catch (IOException l_e1) {
+					l_e1.printStackTrace();
 				}
-				e.printStackTrace();
+				l_e.printStackTrace();
 			}
 		});
 		l_Bw.write("\n");
-		l_Bw.write(s+"\n");
-		l_Bw.write(s2);
+		l_Bw.write(l_s+"\n");
+		l_Bw.write(l_s2);
 		l_Bw.close();
-
 	}
 }
