@@ -1,8 +1,6 @@
 package model.gameelements.strategy;
 
 import model.GameData;
-import model.gameelements.Card;
-import model.gameelements.CardOrderCreator;
 import model.gameelements.Country;
 import model.gameelements.Player;
 import model.gameelements.order.AdvanceOrder;
@@ -92,13 +90,7 @@ public class AggressivePattern extends PlayerStrategy {
             return new AdvanceOrder(getPlayer(), l_AttackFrom, getRandomNeighborOfCountry(l_AttackFrom), l_AttackFrom.getArmies() - l_AttackFrom.getCommittedArmies());
         } else if (getPlayer().getCards().size() != 0) {
             // option 3: use card if the player has any
-            Card l_Card = getPlayer().getCards().remove(0);
-            Country l_MoveFrom = moveFrom();
-            if (l_MoveFrom == null) {
-                return null;
-            }
-            int l_ArmiesToMove = l_MoveFrom.getArmies() - l_MoveFrom.getCommittedArmies();
-            return CardOrderCreator.createCardOrder(l_Card, getPlayer(), getRandomOpponentPlayer(), l_MoveFrom, attackFrom(), getRandomNeighbor(), l_ArmiesToMove);
+            return createRandomCardOrder();
         } else {
             // option 4: move armies to maximize aggregation of forces in one country
             Country l_MoveTo = attackFrom();

@@ -1,6 +1,8 @@
 package model.gameelements.strategy;
 
 import model.GameData;
+import model.gameelements.Card;
+import model.gameelements.CardOrderCreator;
 import model.gameelements.Country;
 import model.gameelements.Player;
 import model.gameelements.order.Order;
@@ -184,6 +186,22 @@ public abstract class PlayerStrategy implements Serializable {
         } while (l_Target.getId() == d_Player.getId());
 
         return l_Target;
+    }
+
+    /**
+     * Create random Card order.
+     *
+     * @return the Card order
+     */
+    protected Order createRandomCardOrder() {
+        Card l_Card = getPlayer().getCards().remove(0);
+        Country l_MoveFrom = moveFrom();
+        if (l_MoveFrom == null) {
+            return null;
+        }
+
+        int l_ArmiesToMove = l_MoveFrom.getArmies() - l_MoveFrom.getCommittedArmies();
+        return CardOrderCreator.createCardOrder(l_Card, getPlayer(), getRandomOpponentPlayer(), l_MoveFrom, attackFrom(), getRandomNeighbor(), l_ArmiesToMove);
     }
 
 }
