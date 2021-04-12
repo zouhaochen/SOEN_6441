@@ -62,11 +62,4 @@ public class AddPlayer extends Startup {
         d_Ml.setPhase(new AssignCountry(d_Ml));
     }
 
-    /**
-     * Goes to the previous phase
-     */
-    @Override
-    public void previous() {
-        d_Ml.setPhase(new LoadMap(d_Ml));
-    }
 }

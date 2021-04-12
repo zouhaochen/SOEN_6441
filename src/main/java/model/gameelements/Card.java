@@ -1,5 +1,6 @@
 package model.gameelements;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Random;
 /**
  * Card enum for the various types of cards players can use during gameplay
  */
-public enum Card {
+public enum Card implements Serializable {
     /**
      * BOMB card
      */

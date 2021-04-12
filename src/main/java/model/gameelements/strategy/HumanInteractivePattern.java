@@ -6,12 +6,13 @@ import model.gameelements.Player;
 import model.gameelements.order.Order;
 import model.gameelements.order.OrderFactory;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  * The type Human interactive pattern.
  */
-public class HumanInteractivePattern extends PlayerStrategy {
+public class HumanInteractivePattern extends PlayerStrategy implements Serializable {
     /**
      * Instantiates a new Player strategy.
      *

@@ -11,12 +11,13 @@ import model.gameelements.strategy.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * this is game main controller
  */
-public class GameEngineController {
+public class GameEngineController implements Serializable {
 
 
     /**

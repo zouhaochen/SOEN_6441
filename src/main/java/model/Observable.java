@@ -2,13 +2,14 @@ package model;
 
 import view.Observer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Subject Class, which named Observable
  */
-public class Observable {
+public class Observable implements Serializable {
     private List<Observer> d_ObserverList = new ArrayList<>();
 
     /**

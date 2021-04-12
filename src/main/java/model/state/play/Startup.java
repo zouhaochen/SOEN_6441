@@ -2,10 +2,12 @@ package model.state.play;
 
 import controller.MainPlayController;
 
+import java.io.Serializable;
+
 /**
  * The type Startup.
  */
-public class Startup extends Play {
+public class Startup extends Play implements Serializable {
 
     /**
      * Instantiates a new Startup.

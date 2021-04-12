@@ -1,12 +1,13 @@
 package model.gameelements;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * the continent object that represent in game
  */
-public class Continent extends Territory {
+public class Continent extends Territory implements Serializable {
 
     /**
      * the Continent value

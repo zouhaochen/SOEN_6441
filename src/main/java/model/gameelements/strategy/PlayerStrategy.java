@@ -5,6 +5,7 @@ import model.gameelements.Country;
 import model.gameelements.Player;
 import model.gameelements.order.Order;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -12,7 +13,7 @@ import java.util.Random;
 /**
  * The type Player strategy.
  */
-public abstract class PlayerStrategy {
+public abstract class PlayerStrategy implements Serializable {
 
     /**
      * The game data.

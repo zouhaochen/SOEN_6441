@@ -10,18 +10,19 @@ import model.state.Phase;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * This class is a wrapper class containing the elements and the current states of the game
  */
-public class GameData extends Observable {
+public class GameData extends Observable implements Serializable{
 
     /**
      * Map file
      */
-    File d_MapFile;
+    public File d_MapFile;
 
     /**
      * Map Object,read only
@@ -71,7 +72,7 @@ public class GameData extends Observable {
      */
     private Player d_NeutralPlayer;
 
-
+    private static final long serialVersionUID=2656653232L;
     /**
      * game data constructor
      *

@@ -2,6 +2,8 @@ package view;
 
 import model.Observable;
 
+import java.io.Serializable;
+
 /**
  * Observer interface
  */

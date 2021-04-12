@@ -1,12 +1,13 @@
 package model.gameelements;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * The class to represent a country element in the game.
  */
-public class Country extends Territory {
+public class Country extends Territory implements Serializable {
 
     /**
      * the army number now in this country

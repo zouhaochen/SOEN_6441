@@ -2,10 +2,14 @@ package model.state.play;
 
 import controller.MainPlayController;
 
+import java.io.Serializable;
+
+
+
 /**
  * The type Assign country.
  */
-public class AssignCountry extends Startup {
+public class AssignCountry extends Startup  {
 
     /**
      * Instantiates a new Assign country.

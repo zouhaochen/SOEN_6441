@@ -111,6 +111,7 @@ public class BlockadeOrder extends Order {
             return false;
         }
 
+        printOrder();
         return true;
     }
 

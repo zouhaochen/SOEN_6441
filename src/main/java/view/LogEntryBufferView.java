@@ -3,10 +3,7 @@ package view;
 import model.LogEntryBuffer;
 import model.Observable;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 

@@ -3,6 +3,8 @@ package model.state.play;
 import controller.MainPlayController;
 import model.state.Phase;
 
+import java.io.Serializable;
+
 /**
  * ConcreteState of the State pattern. In this example, defines behavior
  * for commands that are valid in this state, and for the others signifies
@@ -12,7 +14,7 @@ import model.state.Phase;
  * that is common to all the states in its group. All the states in its
  * group need to extend this class.
  */
-public abstract class Play extends Phase {
+public abstract class Play extends Phase implements Serializable {
 
     /**
      * Instantiates a new Play.

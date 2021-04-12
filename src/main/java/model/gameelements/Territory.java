@@ -3,11 +3,13 @@ package model.gameelements;
 
 import model.Observable;
 
+import java.io.Serializable;
+
 /**
  * This is a class to represent the concept of an area on a model.map.
  * This serves as a parent class of Continent and Country.
  */
-public class Territory {
+public class Territory implements Serializable {
 
     /**
      * Territory name

@@ -4,6 +4,7 @@ import model.Observable;
 import model.gameelements.order.Order;
 import model.gameelements.strategy.PlayerStrategy;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -11,7 +12,7 @@ import java.util.*;
  */
 public class
 
-Player extends Observable {
+Player extends Observable implements Serializable {
 
     /**
      * id counter (increment)

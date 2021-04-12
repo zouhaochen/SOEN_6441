@@ -2,6 +2,7 @@ package model.map;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ import java.util.Scanner;
  * @author Zitao Wang
  * @version 1.0.0
  */
-public class MapDetailAccess extends MapGraph {
+public class MapDetailAccess extends MapGraph implements Serializable {
 
 
     /**

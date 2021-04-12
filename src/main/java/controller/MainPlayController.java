@@ -14,13 +14,16 @@ import model.state.Phase;
 import model.state.play.LoadMap;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Scanner;
+
+
 
 /**
  * Context of the State pattern.
  * It contains a State object.
  */
-public class MainPlayController extends Observable {
+public class MainPlayController extends Observable implements Serializable {
     /**
      * State object of the MainLoop
      */
@@ -50,7 +53,7 @@ public class MainPlayController extends Observable {
     /**
      * game logger
      */
-    private LogEntryBuffer d_LogEntryBuffer = new LogEntryBuffer();
+    transient private LogEntryBuffer d_LogEntryBuffer = new LogEntryBuffer();
 
 
     /**
@@ -111,12 +114,14 @@ public class MainPlayController extends Observable {
                 System.out.println("| 1.  Edit                       : editmap           |");
                 System.out.println("| 2.  Edit                       : savemap           |");
                 System.out.println("| 3.  Play except for LoadMap    : showmap           |");
-                System.out.println("| 4.  Play:Startup:LoadMap       : loadmap           |");
-                System.out.println("| 5.  Play:Startup:AddPlayer     : addPlayer         |");
-                System.out.println("| 6.  Play:Startup:AssignCountry : assign            |");
-                System.out.println("| 7.  Play:MainPlay:IssueOrder   : issue             |");
-                System.out.println("| 8.  Play:MainPlay:ExecuteOrder : execute           |");
-                System.out.println("| 9.  Any                        : end                |");
+                System.out.println("| 4.  Play:Load                  : loadmap           |");
+                System.out.println("| 5.  Play:Load                  : loadgame          |");
+                System.out.println("| 6.  Play:Startup:AddPlayer     : addPlayer         |");
+                System.out.println("| 7.  Play:Startup:AssignCountry : assign            |");
+                System.out.println("| 8.  Play:MainPlay:IssueOrder   : issue             |");
+                System.out.println("| 9.  Play:MainPlay:ExecuteOrder : execute           |");
+                System.out.println("| 10. Play:MainPlay:SavaGame     : savegame          |");
+                System.out.println("| 11.  Any                       : end               |");
                 System.out.println(" =====================================================");
                 System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase command: ");
                 mycommand = l_Scanner.nextLine();
@@ -139,6 +144,10 @@ public class MainPlayController extends Observable {
                     case "loadmap":
                         gamePhase.loadMap();
                         break;
+                    case "loadgame":
+                        gamePhase.loadGame();
+                        showMap();
+                        break;
                     case "addplayer":
                         gamePhase.setPlayers();
                         break;
@@ -150,6 +159,9 @@ public class MainPlayController extends Observable {
                         break;
                     case "execute":
                         gamePhase.executeOrder();
+                        break;
+                    case "savegame":
+                        gamePhase.saveGame(d_GameData);
                         break;
                     case "end":
                         gamePhase.endGame();
