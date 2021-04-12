@@ -1,6 +1,9 @@
 package model.state.play;
 
 import controller.MainPlayController;
+import model.gameelements.Country;
+
+import java.util.List;
 
 /**
  * The type Order execution.
@@ -23,9 +26,10 @@ public class OrderExecution extends MainPlay {
     public void executeOrder() {
         d_Ml.executeAllOrders();
 
-        // add NEUTRAL player for Blockade
-        if (d_Ml.d_GameData.getNeutralPlayer() != null && d_Ml.d_GameData.getPlayerByName(d_Ml.d_GameData.getNeutralPlayer().getColour()) == null) {
-            d_Ml.d_GameData.getPlayerList().add(d_Ml.d_GameData.getNeutralPlayer());
+        // if there are any dangling countries, assign them to NEUTRAL player
+        List<Country> l_DanglingCountries = d_Ml.getDanglingCountries();
+        if (!l_DanglingCountries.isEmpty()) {
+            d_Ml.assignDanglingCountriesToNeutralPlayer(l_DanglingCountries);
         }
 
         d_Ml.resetAttackableState();

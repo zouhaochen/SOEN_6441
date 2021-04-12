@@ -8,6 +8,7 @@ import model.Observable;
 import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;
+import model.gameelements.strategy.NeutralPattern;
 import model.state.Edit;
 import model.state.End;
 import model.state.Phase;
@@ -15,6 +16,8 @@ import model.state.play.LoadMap;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -275,12 +278,49 @@ public class MainPlayController extends Observable implements Serializable {
     }
 
     /**
-     * Reset player strategy state.
+     * Resets player strategy state.
      */
     private void resetPlayerStrategyState() {
         // resets all players
         for (Player l_Player : d_GameData.getPlayerList()) {
             l_Player.resetStrategyState();
+        }
+    }
+
+    /**
+     * Gets dangling countries.
+     *
+     * @return the dangling countries
+     */
+    public List<Country> getDanglingCountries() {
+        List<Country> l_DanglingCountries = new ArrayList<>();
+
+        for (Country l_Country :
+                d_GameData.getCountryList()) {
+            if (l_Country.getOwner().getColour().equals("TEMPORARY")) {
+                l_DanglingCountries.add(l_Country);
+            }
+        }
+
+        return l_DanglingCountries;
+    }
+
+    /**
+     * Assign dangling countries to neutral player.
+     *
+     * @param p_DanglingCountries the dangling countries
+     */
+    public void assignDanglingCountriesToNeutralPlayer(List<Country> p_DanglingCountries) {
+        Player l_NeutralPlayer = d_GameData.getPlayerByName("NEUTRAL");
+        if (l_NeutralPlayer == null) {
+            l_NeutralPlayer = new Player("NEUTRAL");
+            l_NeutralPlayer.setStrategy(new NeutralPattern(l_NeutralPlayer, d_GameData));
+            d_GameData.getPlayerList().add(l_NeutralPlayer);
+        }
+
+        for (Country l_DanglingCountry : p_DanglingCountries) {
+            l_DanglingCountry.setOwner(l_NeutralPlayer);
+            l_NeutralPlayer.assignCountry(l_DanglingCountry);
         }
     }
 

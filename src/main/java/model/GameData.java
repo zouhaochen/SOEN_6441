@@ -67,12 +67,8 @@ public class GameData extends Observable implements Serializable{
      */
     private ArrayList<Player> d_PlayerList;
 
-    /**
-     * The neutral player for blockade.
-     */
-    private Player d_NeutralPlayer;
-
     private static final long serialVersionUID=2656653232L;
+    
     /**
      * game data constructor
      *
@@ -87,7 +83,6 @@ public class GameData extends Observable implements Serializable{
         this.d_CountryList = new ArrayList<>();
         this.d_BorderList = new ArrayList<>();
         this.d_MapListing = new MapListing();
-        this.d_NeutralPlayer = null;
     }
 
     /**
@@ -217,24 +212,6 @@ public class GameData extends Observable implements Serializable{
      */
     public void setCurrentPhase(Phase p_currentPhase) {
         d_CurrentPhase = p_currentPhase;
-    }
-
-    /**
-     * Gets neutral player.
-     *
-     * @return the neutral player
-     */
-    public Player getNeutralPlayer() {
-        return d_NeutralPlayer;
-    }
-
-    /**
-     * Sets neutral player.
-     *
-     * @param p_NeutralPlayer the p neutral player
-     */
-    public void setNeutralPlayer(Player p_NeutralPlayer) {
-        this.d_NeutralPlayer = p_NeutralPlayer;
     }
 
     /**

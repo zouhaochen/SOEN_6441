@@ -62,13 +62,10 @@ public class BlockadeOrder extends Order {
         d_TargetCountry.setArmies(d_TargetCountry.getArmies() * 3);
         // Remove target country from controlled countries
         d_TargetCountry.getOwner().getCountriesInControl().remove(d_TargetCountry.getName().toLowerCase());
-        // Check if there is a Player NEUTRAL
-        if (getOrderInfo().getGameData().getNeutralPlayer() == null) {
-            getOrderInfo().getGameData().setNeutralPlayer(new Player("NEUTRAL"));
-        }
-        // Set owner to Player NEUTRAL
-        d_TargetCountry.setOwner(getOrderInfo().getGameData().getNeutralPlayer());
-        getOrderInfo().getGameData().getNeutralPlayer().assignCountry(d_TargetCountry);
+        // Set owner to temporary Player
+        Player l_TempPlayer = new Player("TEMPORARY");
+        d_TargetCountry.setOwner(l_TempPlayer);
+        l_TempPlayer.assignCountry(d_TargetCountry);
 
         // Remove card from player cards list
         d_Player.removeTargetCard(Card.BLOCKADE);
