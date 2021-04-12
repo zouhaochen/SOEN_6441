@@ -174,6 +174,20 @@ public class GameEngineController implements Serializable {
         return l_ProjectPath + "/domination/" + l_CommandArr[1];
     }
 
+    public String getSimpleFilePath() throws IOException {
+        String l_Command;
+        String[] l_CommandArr;
+
+
+        System.out.println("\nPlease enter command to load the map for the game: ");
+        Scanner l_scanner = new Scanner(System.in);
+        l_Command = l_scanner.nextLine();
+        l_CommandArr = l_Command.split(" ");
+
+        String l_ProjectPath = new File("").getCanonicalPath();
+        return l_ProjectPath + "/domination/" + l_CommandArr[1];
+    }
+
     /**
      * Allows the user to create/remove the players for the game by typing command.
      */
