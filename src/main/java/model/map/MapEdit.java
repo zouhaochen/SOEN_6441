@@ -1,6 +1,11 @@
 package model.map;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,14 +34,13 @@ public class MapEdit {
      */
     public static int FLAG = 0;
     /**
-     * Map file adapter to transform the map
-     * into the right type of map
+     * Adapter for map transformation
      */
     private static MapFileAdapter ADAPTER = new MapFileAdapter(new ConquestMapReader());
 
     public static void main(String[] args) throws Exception {
-		mapEditLoop();
-	}
+        mapEditLoop();
+    }
 
     /**
      * Loop read the user input commands
@@ -78,6 +82,7 @@ public class MapEdit {
                 // call the savemap method
             } else if (l_Command.startsWith("savemap ")) {
                 saveMap(l_Command);
+                SC.nextLine();
                 // call the validatemap method
             } else if (l_Command.startsWith("validatemap")) {
                 File l_File = getFile(OPTFILE);
@@ -111,12 +116,12 @@ public class MapEdit {
         String l_FileName = l_String[1];
         OPTFILE = l_FileName;
         File l_F3 = getFile(l_FileName);
-        // determine file type
-        if(!isDomination(l_FileName)) {
-            ADAPTER.jsonFileToTextFile(l_FileName);
-        }
         // load and show the model.map if the file exists
         if (l_F3.exists()) {
+            // determine file type
+            if(!isDomination(l_FileName)) {
+                ADAPTER.jsonFileToTextFile(l_FileName);
+            }
             showMap(l_F3);
             System.out.println("");
             System.out.println("Map validate:");
@@ -135,9 +140,9 @@ public class MapEdit {
                     "[borders]");
             l_Bw.flush();
             l_Bw.close();
+            FLAG = 3;
             // check model.map validation
             MapValidate.check(l_F3);
-            FLAG = 3;
         }
     }
 
@@ -381,8 +386,8 @@ public class MapEdit {
         }
         System.out.println("map file output format: [1] domination [2] conquest");
         int num = 0;
-        while((num = SC.nextInt()) != 1 && num != 2) {        	
-        	System.out.println("map file output format: [1] domination [2] conquest");
+        while((num = SC.nextInt()) != 1 && num != 2) {
+            System.out.println("map file output format: [1] domination [2] conquest");
         }
         String l_FileName = l_S[1];
         // get file name
@@ -425,23 +430,25 @@ public class MapEdit {
         }
         return FLAG;
     }
-    
+
     /**
-     * Determine whether it is a domination format map file
+     * determine whether it is a domination format map file
      * @param p_filename: file name
-     * @return false if map file does not exist
-     * @throws IOException 
+     * @return true if file is a domination format map file
+     * @throws IOException if file does not exist
      */
     public static boolean isDomination(String p_filename) throws IOException {
-    	File l_file = getFile(p_filename);
-    	BufferedReader l_Br = new BufferedReader(new FileReader(l_file));
-		String line = "";
-		while((line = l_Br.readLine()) != null) {
-			if("[Territories]".equals(line.trim())) {
-				return false;
-			}
-		}
-		l_Br.close();
-		return true;
+        File l_file = getFile(p_filename);
+        BufferedReader l_Br = new BufferedReader(new FileReader(l_file));
+        String l_line = "";
+        while((l_line = l_Br.readLine()) != null) {
+            // determine whether a map is in domination format
+            // based on whether it has territories or not
+            if("[Territories]".equals(l_line.trim())) {
+                return false;
+            }
+        }
+        l_Br.close();
+        return true;
     }
 }
