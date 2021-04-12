@@ -153,6 +153,9 @@ public abstract class PlayerStrategy implements Serializable {
      */
     protected Country getRandomNeighborOfCountry(Country p_Departure) {
         List<Country> l_Neighbors = new ArrayList<>(p_Departure.getBorderCountries().values());
+        if (l_Neighbors.isEmpty()) {
+            return null;
+        }
         return l_Neighbors.get(d_Random.nextInt(l_Neighbors.size()));
     }
 

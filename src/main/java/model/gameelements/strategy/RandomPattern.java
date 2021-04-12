@@ -48,29 +48,32 @@ public class RandomPattern extends PlayerStrategy {
         boolean hasCard = l_Player.getCards().size() > 0;
         int l_RandomOrderSelection = hasCard ? getRandom().nextInt(6) : getRandom().nextInt(5);
         Country l_AttackFrom = attackFrom();
+        if (l_AttackFrom == null) {
+            return null;
+        }
         int l_AvailableArmies = Math.max(0, l_AttackFrom.getArmies() - l_AttackFrom.getCommittedArmies());
         int l_Armies = getRandom().nextInt(l_AvailableArmies + 1);
         switch (l_RandomOrderSelection) {
-            case 0:
+            case 0: // Deploy order
                 int l_AvailableReinforcement = l_Player.getReinforcementArmies() - l_Player.getCommittedReinforcement();
                 if (l_AvailableReinforcement <= 0) {
                     return null;
                 }
                 return new DeployOrder(l_Player, l_AttackFrom, getRandom().nextInt(l_AvailableReinforcement) + 1);
-            case 1:
+            case 1: // Advance to a country of opponents
                 if (l_Armies == 0) {
                     return null;
                 }
                 return new AdvanceOrder(l_Player, l_AttackFrom, getRandomNeighborOfCountry(l_AttackFrom), l_Armies);
-            case 2:
+            case 2: // move armies to an country in control
                 if (l_Armies == 0) {
                     return null;
                 }
                 return new AdvanceOrder(l_Player, l_AttackFrom, toDefend(), l_Armies);
-            case 5:
+            case 5: // Card order
                 Card l_Card = l_Player.getCards().remove(0);
                 return CardOrderCreator.createCardOrder(l_Card, l_Player, getRandomOpponentPlayer(), l_AttackFrom, toDefend(), getRandomNeighbor(), l_Armies);
-            default:
+            default: // do not issue order
                 return null;
         }
     }

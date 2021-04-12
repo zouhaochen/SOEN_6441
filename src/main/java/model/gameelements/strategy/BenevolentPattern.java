@@ -62,12 +62,26 @@ public class BenevolentPattern extends PlayerStrategy {
             // option 2: use card if the player has any
             Card l_Card = getPlayer().getCards().remove(0);
             Country l_MoveFrom = moveFrom();
+
+            if (l_MoveFrom == null) {
+                return null;
+            }
+
             int l_ArmiesToMove = l_MoveFrom.getArmies() - l_MoveFrom.getCommittedArmies();
             return CardOrderCreator.createCardOrder(l_Card, getPlayer(), getRandomOpponentPlayer(), l_MoveFrom, attackFrom(), getRandomNeighbor(), l_ArmiesToMove);
         } else {
             // option 3: move armies to reinforce weaker countries
             Country l_MoveFrom = moveFrom();
+
+            if (l_MoveFrom == null) {
+                return null;
+            }
+
             Country l_MoveTo = getRandomNeighborOfCountry(l_MoveFrom);
+            if (l_MoveTo == null) {
+                return null;
+            }
+
             int l_CompareResult = compareArmies(l_MoveFrom, l_MoveTo);
             if (l_CompareResult == 1)  {
                 return new AdvanceOrder(getPlayer(), l_MoveFrom, l_MoveTo, calculateArmiesToMove(l_MoveFrom, l_MoveTo));
