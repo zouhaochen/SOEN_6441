@@ -1,0 +1,10 @@
+[continents]
+Asia=5=yellow
+Africa=3=red
+
+[Territories]
+China,Asia,Japan,SouthAfrica,Egypt
+Japan,Asia,China,SouthAfrica
+
+SouthAfrica,Africa,China,Japan,Egypt
+Egypt,Africa,China,SouthAfrica
