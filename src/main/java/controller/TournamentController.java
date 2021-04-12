@@ -7,15 +7,14 @@ import model.gameelements.Country;
 import model.gameelements.Player;
 import model.gameelements.order.OrderFactory;
 import model.gameelements.strategy.*;
-import model.map.DominationMapReader;
+
 import model.state.Edit;
-import model.state.End;
-import model.state.play.LoadMap;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLOutput;
+
 import java.util.*;
 
 /**
@@ -58,8 +57,8 @@ public class TournamentController extends MainPlayController {
         String[] l_CommandArr;
         Scanner l_Scanner = new Scanner(System.in);
         CommandValidator.setGameData(d_GameData);
-        while (true) {
 
+        while (true) {
 
             System.out.println("Do you want to edit map or play game? (Edit/Play/Back)");
             System.out.println("( Edit for edit map / Play for play the game / Back for return to main menu )");
@@ -118,12 +117,15 @@ public class TournamentController extends MainPlayController {
                         }
                         break;
                     }
+
                     // main play loop
                     int l_GameCounter = 0;
                     while (l_GameCounter < d_NumberOfGames) {
                         loadMap(getNextMap());
                         setPlayers();
                         assignCountries();
+
+                        //get the round loop for each games.
                         int l_RoundCounter = 0;
                         while (l_RoundCounter < d_MaxNumberOfTurns) {
                             issueOrder();
@@ -151,13 +153,12 @@ public class TournamentController extends MainPlayController {
             }
             break;
         }
-
-
-
-
     }
 
 
+    /**
+     * getthe number of player in th game then set strategy for each player.
+     */
     public void setPlayers() {
         System.out.println("Num of Player: " + d_NumOfPlayerStrategies);
         Random l_Random = new Random();
@@ -193,6 +194,9 @@ public class TournamentController extends MainPlayController {
 
     }
 
+    /**
+     * assign countries for each player
+     */
     public void assignCountries() {
         System.out.println("===== assign countries phase =====");
         // randomly assign countries for each player
@@ -202,12 +206,19 @@ public class TournamentController extends MainPlayController {
 
     }
 
+    /**
+     * deploy the order at order issue phase.
+     */
     public void issueOrder() {
         System.out.println("===== issue order phase =====");
         d_GameEngineController.awardReinforcement();
         issueOrders();
     }
 
+    /**
+     * load game map, if the map are not found then track the map file from the top of stack.
+     * @param p_NewMap load the map for current game
+     */
     public void loadMap(File p_NewMap) {
 
         System.out.println("===== load map phase =====");
@@ -223,6 +234,10 @@ public class TournamentController extends MainPlayController {
 
     }
 
+    /**
+     * execute each player`s deplyed order at execute phase.
+     * @return the return value represent if the order can be execute
+     */
     public Boolean executeOrder() {
         System.out.println("===== execute order phase =====");
         executeAllOrders();
