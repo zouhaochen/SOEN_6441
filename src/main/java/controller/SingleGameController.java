@@ -22,8 +22,8 @@ public class SingleGameController extends MainPlayController{
         do {
             Scanner l_Scanner = new Scanner(System.in);
             System.out.println("Welcome to single game mode! ");
-            System.out.println("Do you want to edit map or play game? (Edit/Play/Exit)");
-            System.out.println("( Edit for edit map / Play for play the game / Exit for exit the game )");
+            System.out.println("Do you want to edit map or play game? (Edit/Play/Back)");
+            System.out.println("( Edit for edit map / Play for play the game / Back for return to main menu )");
 
             mystart = l_Scanner.nextLine();
             mycommand = "";
@@ -37,8 +37,8 @@ public class SingleGameController extends MainPlayController{
                     // Set the state to PlaySetup
                     setPhase(new LoadMap(this));
                     break;
-                case "exit":
-                    System.out.println("Exiting Warzone Game see you next time!");
+                case "back":
+                    System.out.println("return to main menu");
                     return;
                 default:
                     continue;
@@ -52,7 +52,7 @@ public class SingleGameController extends MainPlayController{
                 System.out.println("| 3.  Play except for LoadMap    : showmap           |");
                 System.out.println("| 4.  Play:Startup:LoadMap       : loadmap           |");
                 System.out.println("| 5.  Play:Startup:AddPlayer     : addPlayer         |");
-                System.out.println("| 6.  Play:Startup:AssignCountry : assign            |");
+                System.out.println("| 6.  Play:Startup:AssignCountry : assigncountries   |");
                 System.out.println("| 7.  Play:MainPlay:start to play: start             |");
                 System.out.println("| 8.  Play:MainPlay:IssueOrder   : issue (user)      |");
                 System.out.println("| 9.  Play:MainPlay:ExecuteOrder : execute  (user)   |");
@@ -82,7 +82,7 @@ public class SingleGameController extends MainPlayController{
                     case "addplayer":
                         gamePhase.setPlayers();
                         break;
-                    case "assign":
+                    case "assigncountries":
                         gamePhase.assignCountries();
                         break;
                     case "issue":

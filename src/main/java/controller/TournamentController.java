@@ -3,21 +3,21 @@ package controller;
 import command.CommandValidator;
 import model.LogEntryBuffer;
 import model.gameelements.Player;
+import model.map.DominationMapReader;
 import model.state.Edit;
 import model.state.End;
 import model.state.play.LoadMap;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
  *To implement the Tournament game Mode.
  */
 public class TournamentController extends MainPlayController {
-    /**
-     *  list of map files that players are used.
-     */
-    public File[] l_listOfMapFiles;
+
     /**
      * list of players strategies
      */
@@ -31,7 +31,7 @@ public class TournamentController extends MainPlayController {
      */
     public int d_MaxNumberOfTurns;
 
-    private MainPlayController myGame = new MainPlayController();
+
 
     /**
      * game logger
@@ -45,8 +45,8 @@ public class TournamentController extends MainPlayController {
         do {
             Scanner l_Scanner = new Scanner(System.in);
             System.out.println("Welcome to tournament mode game! ");
-            System.out.println("Do you want to edit map or play game? (Edit/Play/Exit)");
-            System.out.println("( Edit for edit map / Play for play the game / Exit for exit the game )");
+            System.out.println("Do you want to edit map or play game? (Edit/Play/Back)");
+            System.out.println("( Edit for edit map / Play for play the game / Back for return to main menu )");
 
             mystart = l_Scanner.nextLine();
             mycommand = "";
@@ -59,15 +59,15 @@ public class TournamentController extends MainPlayController {
                 case "play":
                     // Set the state to PlaySetup
                     setPhase(new LoadMap(this));
-                    d_NumberOfGames ++;
-                    System.out.println("Now, the numer of Game is: "+ d_NumberOfGames);
                     break;
-                case "exit":
-                    System.out.println("Exiting Warzone Game see you next time!");
+                case "back":
+                    System.out.println("return to main menu");
                     return;
                 default:
                     continue;
             }
+
+
             do {
                 System.out.println(" =====================================================");
                 System.out.println("| #   PHASE                       : command           |");
@@ -104,18 +104,9 @@ public class TournamentController extends MainPlayController {
                     case "loadmap":
                         gamePhase.loadMap();
                         break;
-//                        // 记录该地图名称
-//                        System.out.println("please enter which of the map you are going to use: ");
-//                        String l_mapName = l_Scanner.nextLine();
-//
-//                       for (int i = 0; i<=3; i++){
-//                           if(mapPathCheck(p_file)) {
-//                               l_listOfMapFiles[i];
-//                           }
-//                       }
-//                        break;
                     case "addplayer":
                         gamePhase.setPlayers();
+                        System.out.println("===== Assign countries to players =====");
                         gamePhase.assignCountries();
                         break;
 
@@ -124,6 +115,7 @@ public class TournamentController extends MainPlayController {
                         break;
 
                     case "start":
+
                         System.out.println("please enter for how many game in total: ");
                         d_NumberOfGames = l_Scanner.nextInt();
                         int l_GameCount = 1;
@@ -133,9 +125,12 @@ public class TournamentController extends MainPlayController {
 
                         do {
                             System.out.println("===== Game " + l_GameCount + " =====");
+
                             int l_RoundCount = 1;
                             while (true) {
                                 System.out.println("===== Round " + l_RoundCount + " =====");
+                                // load map .next is issueoreder phase if not in startup phase
+                                gamePhase.loadMap();
                                 gamePhase.issueOrder();
                                 gamePhase.executeOrder();
                                 gamePhase.showMap();
@@ -144,7 +139,12 @@ public class TournamentController extends MainPlayController {
                                 if (l_RoundCount >= d_MaxNumberOfTurns) {
                                     System.out.println("===== Maximum Round Reach =====");
                                     System.out.println("===== DRAW ===== No Winner =====");
-                                    gamePhase.endGame();
+                                    if(l_GameCount<=d_NumberOfGames){
+                                        break;
+                                    }else {
+                                        gamePhase.endGame();
+                                    }
+
                                 }
                                 if (gamePhase instanceof End) {
                                     System.out.println("the rounds of this Game is: " + l_RoundCount);
@@ -164,10 +164,7 @@ public class TournamentController extends MainPlayController {
     }
 
 
-    public Boolean mapPathCheck( File p_file){
-        if(p_file.exists()){
-            return true;
-        }
-        return false;
-    }
+
+
+
 }
