@@ -5,7 +5,6 @@ mapname=01.map
 [continents]
 Asia 3
 Europe 4
-Africa 3
 
 [countries]
 1 China 1
@@ -17,5 +16,4 @@ Africa 3
 1 2 4
 2 1 4
 3 4
-4 1 2 3 5
-5 4
+4 1 2 3
