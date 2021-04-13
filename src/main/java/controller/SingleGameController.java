@@ -6,14 +6,15 @@ import model.state.Edit;
 import model.state.End;
 import model.state.play.LoadMap;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class SingleGameController extends MainPlayController{
+public class SingleGameController extends MainPlayController implements Serializable {
 
     /**
      * game logger
      */
-    private LogEntryBuffer d_LogEntryBuffer = new LogEntryBuffer();
+    transient private LogEntryBuffer d_LogEntryBuffer = new LogEntryBuffer();
 
     @Override
     public void Start(){
@@ -51,12 +52,14 @@ public class SingleGameController extends MainPlayController{
                 System.out.println("| 2.  Edit                       : savemap           |");
                 System.out.println("| 3.  Play except for LoadMap    : showmap           |");
                 System.out.println("| 4.  Play:Startup:LoadMap       : loadmap           |");
+                System.out.println("| 4.  Play:Startup:LoadMap       : loadgame          |");
                 System.out.println("| 5.  Play:Startup:AddPlayer     : addPlayer         |");
                 System.out.println("| 6.  Play:Startup:AssignCountry : assigncountries   |");
                 System.out.println("| 7.  Play:MainPlay:start to play: start             |");
                 System.out.println("| 8.  Play:MainPlay:IssueOrder   : issue (user)      |");
                 System.out.println("| 9.  Play:MainPlay:ExecuteOrder : execute  (user)   |");
-                System.out.println("| 10. Any                        : end              |");
+                System.out.println("| 10. Play:MainPlay:SavaGame     : savegame          |");
+                System.out.println("| 11. Any                        : end               |");
                 System.out.println(" =====================================================");
                 System.out.println("enter a " + gamePhase.getClass().getSimpleName() + " phase command: ");
                 mycommand = l_Scanner.nextLine();
@@ -79,6 +82,10 @@ public class SingleGameController extends MainPlayController{
                     case "loadmap":
                         gamePhase.loadMap();
                         break;
+                    case "loadgame":
+                        gamePhase.loadGame();
+                        showMap();
+                        break;
                     case "addplayer":
                         gamePhase.setPlayers();
                         break;
@@ -90,6 +97,9 @@ public class SingleGameController extends MainPlayController{
                         break;
                     case "execute":
                         gamePhase.executeOrder();
+                        break;
+                    case "savegame":
+                        gamePhase.saveGame(d_GameData);
                         break;
                     case "end":
                         gamePhase.endGame();
