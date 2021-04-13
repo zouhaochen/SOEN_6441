@@ -1,6 +1,6 @@
 [continents]
-Asia=5=yellow
-Africa=3=red
+Asia=5
+Africa=3
 
 [Territories]
 China,Asia,Japan,SouthAfrica,Egypt
