@@ -121,19 +121,28 @@ public class TournamentController extends MainPlayController {
                     // main play loop
                     int l_GameCounter = 0;
                     while (l_GameCounter < d_NumberOfGames) {
+                        System.out.println("===== Game "+l_GameCounter+" =====");
                         loadMap(getNextMap());
                         setPlayers();
                         assignCountries();
+                        showMap();
 
                         //get the round loop for each games.
                         int l_RoundCounter = 0;
                         while (l_RoundCounter < d_MaxNumberOfTurns) {
+                            System.out.println("===== Round "+l_RoundCounter+" =====");
                             issueOrder();
-                            if (executeOrder() || d_GameData.getPlayerList().size() == 1) {
+                            boolean l_CheckGameOver=executeOrder();
+                            showMap();
+                            // if check game end or only one player left is true, current game end,break
+                            if (l_CheckGameOver || d_GameData.getPlayerList().size() <= 1) {
+                                System.out.println(d_GameData.getPlayerList().get(0).getColour()+" is Winner");
+                                System.out.println("===== Game "+l_GameCounter+" is Over =====");
                                 break;
                             }
 
                             l_RoundCounter++;
+                            // if round count greater than max turns, draw the game,break
                             if (l_RoundCounter > d_MaxNumberOfTurns) {
                                 System.out.println("===== Maximum Round Reach =====");
                                 System.out.println("===== DRAW ===== No Winner =====");
@@ -313,13 +322,14 @@ public class TournamentController extends MainPlayController {
             d_MapCounter++;
         } else {
             System.out.println("Error: Map List Empty or out of bound");
-            // if just out of bound iterate back to first map in list
+            // if list out of bound, iterate back to first map in list
             if (!d_ListOfMapFiles.isEmpty()) {
                 d_CurrentMap = d_ListOfMapFiles.get(0);
                 // reset counter id 0
                 d_MapCounter = 0;
             }
         }
+        System.out.println("the current map is :"+d_CurrentMap.getName());
         return d_CurrentMap;
     }
 }
