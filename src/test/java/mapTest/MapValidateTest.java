@@ -32,7 +32,7 @@ public class MapValidateTest {
      */
     @Test
     public void testCountryConnection2() {
-        File l_File = new File("domination//test_02.map");
+        File l_File = new File("domination//test_tournament1.map");
         MapValidate l_Case1 = new MapValidate();
         int l_A = l_Case1.validateContinentConnection(l_File);
         assertEquals(1, l_A);
@@ -106,6 +106,18 @@ public class MapValidateTest {
         MapValidate l_Case1 = new MapValidate();
         int l_A = l_Case1.check(l_File);
         assertEquals(5, l_A);
+    }
+
+    /**
+     * This method is test case1 for the Map connectivity.
+     * Map file: test_06_incorrect.model.map
+     */
+    @Test
+    public void testMapValidate4() {
+        File l_File = new File("domination//test_tournament3.map");
+        MapValidate l_Case1 = new MapValidate();
+        int l_A = l_Case1.check(l_File);
+        assertEquals(0, l_A);
     }
 
 }
