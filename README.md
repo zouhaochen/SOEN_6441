@@ -113,7 +113,7 @@ Type **edit** if user  want to get into Map Editor model.
  after that the player for each game will be post at the end. 
  
  Type **back** if user want to back to the main menu, and enter twice to end of the game.
- command: **exit**
+ command: **back**
 
 ## Build 3 Architecture UML
  ![Build3](classesuml/Build3.png)
