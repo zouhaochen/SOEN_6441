@@ -1,5 +1,5 @@
 # Soen 6441 Team_05 Project WarZone
-## Build 2:
+## Build 3:
 
 **Group 5**
 Group Member:
@@ -9,41 +9,39 @@ Group Member:
 - Zitao Wang
 - Haochen Zou
 
-**======================Build 2 ================================**
+**======================Build 3 ================================**
 
 ## Refactoring
 
-**Refactoring of Map package**
-1. Combining classes that are related to get the file information(the country’s storage location), and get the map information(functions that return a list of countries or continents).  
+**Refactor about strategy pattern**
+To make users able to choose various strategies for AI players, we change the createOrder() method in player object to createOrder() method in playerStrategy object. Now the Ai player will based on the strategy that selected by user y to deploy the order.
 
-**Refactoring about State Pattern**
-In gernal, we refactored the game progress in the first version according to the statepattern design mode. As the result, the following refactoring was carried out:
-1. We removed the enum class _GamePhase.java_.  Now, each game phase will base on the user input turning to the specified game phase in the state pattern，
-and remind the user what the current game phase they are in. Also, We changed the if-else statement in the previous version of Demo class _mainloop.java_ to a switch case statement that is more consistent with the state pattern
+**Refactor about Adapter pattern**
+In the previous version, users can only load or edit the maps with the “domination” type. Now we have changed the previous structure of the map class to apply the adapter pattern. So That the adapter can convert the map in conquest type into the domination type for loading and editing.
 
+**common refactor**
+1. We super the parent class Order  and transfer  the value of each methods to the defined variables in AdvanceOder class, instead of  using this() to call another constructor in the same class 
 
-**Refactoring about MVC pattern**
-(we are not fully implement MVC, View part is not complete)
-1. In order to introduce the observer mode in the current version, we move all relevant game elements and game data from the previous version to a package named model as the program data in the model that responds to requests for data about its state. 
-Also, Some classes like (_LogEntryBuffer.java_) in the package model extend Observable.java class that used to allow observers to watch the data change of them. 
+2. We made some rectifications to the main menu of the previous version of mainController class. In single game mode, the user needs to enter the start command to start the game after the play setup phase, and the user will only need to enter command for his/her own turns durning the issue and execute phase.
 
-2. We refactored the GameEngine.java class in the previous version and move it from gameplay package to the package named controller, now the behavior of this class become the role of controller in Observer pattern and named _GameEngineController.java_
+3. We made some rectifications to the main menu of the previous version of mainController class. In single game mode, the user needs to enter the start command to start the game after the play setup phase, and the user will only need to enter command for his/her own turns durning the issue and execute phase.
 
-
-**Refactoring about Command Pattern**
-1. After the refactor, we don't need to pass in an object of Type CommandValidator when we create a Player object. Since the Player class should not include a class member of Type CommandValidator. We should decouple the two classes. 
+4. We adopted a try-catch method to handle the exception, if  the target map files are not found, then we track the map file from the top of stack.
 
 
-
-## To run the Warzone version 2.0
+## To run the Warzone version 3.0
 
 User will first get into option phase as the previous 
 
- Welcome to Warzone.
+ Welcome to WAR-ZONE game.
 user can type the following command in the console.
-command: **edit / play / exit  (ignore-case)**
+you will be ask to select single mode or tournament mode.
+command: single/tournament.
+then you will be ask Do you want to edit map or play game? (Edit/Play/Back)
+command: **edit / play / back  (ignore-case)**
 
 
+**If you are in the single Mode:**
 Type **edit** if user  want to get into Map Editor model.
 
  **if you are in Map Editor model:**
@@ -99,37 +97,23 @@ Type **edit** if user  want to get into Map Editor model.
  
  6. After that, you will get into Issue order phase, and you will be asked to enter following command to issue order for each player.
     enter a IssueOrder phase command:
-    command: **issue**
-    
-    Player XXX(player name ), do you want to create an order? (y/n)
-    command:**y/n**  (if y, continues the following command. if no, skip this round.)
-    
-    if y, you have the following command to enter: 
-    command: **deploy countryID num   (example: deploy china 5)**
-             **advance country(from)  country(to) num   (example: advance china korea 5)**
-             **bomb countryID   (example: bomb korea)**
-             **blockade countryID   (example: blockade china)**
-             **airlift countryID(source) countryID(target) num (example: airlift china japan 5)**
-             **negotiate playerID (example: negotiate china)**
-    (1. Tips:the number of deployed armies cannot over reinforcement armies)
-    (2. Tips:the deployed country must have ownership of current player)
-    (3. Tips:the Bomb card cannot be use to player’s own territory)
-    (4. Tips:the player will randomly get a Function card from (bomb, blockade, airlift, negotiate), and can be use at next round)
-    
-    once all player have entered no for the current round, the game will continue to next phase, Order execution phase.
-             **Issue Order Phase Complete**
+    command: **Start**
+    then each of player will automatically issue and execute order on each phase, and finally return the winner for the game
  
- 7. After each player have already issued their orders, the game will get into  order execution phase. and you will be ask for the following command to execute orders.
-     enter a OrderExecution phase command: 
-     command: **execute**
-     
-     once there exit a player who have already conquered all of the countries in the game, he/she will be the winner for the game. Therefor, the game will be end, and back to start menu. if user does not want to play again, just enter command exit to end the program.
-             **Execute Order Phase Complete**
+ **If you are in the tournament Mode:**
+ you will be ask to enter the following command, in which:
+ M represents map files that will be used on game.
+ P represents player`s strategy. (limit 2 to 4).
+ G represents for how many game on each map are going to be played.
+ D represents the max number of turns for one game.
  
+ command:**tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns**
+ for example: **tournament -m 02.map 03.map -p aggressive benevolent -g 2 -d 10**
  
+ after that the player for each game will be post at the end. 
+ 
+ Type **back** if user want to back to the main menu, and enter twice to end of the game.
+ command: **back**
 
- Type **exit** if user  want to exit the game.
- command: **exit**
-
-## Build 2 Architecture UML
- ![Build2](classesuml/B2_UML.png)
+## Build 3 Architecture UML
+ ![Build3](classesuml/Build3.png)

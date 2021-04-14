@@ -179,7 +179,7 @@ public class TournamentController extends MainPlayController {
 
 //tournament -m 02.map 03.map -p aggressive benevolent -g 2 -d 10
     /**
-     * getthe number of player in th game then set strategy for each player.
+     * get the number of player in th game then set strategy for each player.
      */
     public void setPlayers() {
         System.out.println("Num of Player: " + d_ListOfPlayerStrategies.size());
