@@ -70,7 +70,7 @@ public class LoadMap extends Startup {
             System.out.println("invalid command");
         }
         try {
-            ObjectInputStream ois=new ObjectInputStream(new FileInputStream("gamefile" + "/" + l_filename[1]));
+            ObjectInputStream ois=new ObjectInputStream(new FileInputStream("gamefile" + "/" + l_filename[1] + ".txt"));
             GameData l_GameData=(GameData)ois.readObject();              //读出对象
             d_Ml.d_GameData = l_GameData;
         } catch (FileNotFoundException e) {

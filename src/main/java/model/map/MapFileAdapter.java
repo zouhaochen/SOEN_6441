@@ -1,9 +1,6 @@
 package model.map;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,7 +9,7 @@ import java.util.Map;
 /**
  * Adapter transform the map into the right type of map
  */
-public class MapFileAdapter extends DominationMapReader {
+public class MapFileAdapter extends DominationMapReader implements Serializable {
 
 	private ConquestMapReader d_otherFileType;
 
