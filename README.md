@@ -83,19 +83,30 @@ Type **edit** if user  want to get into Map Editor model.
  
  3. if yes, you will be asked to enter the following **command** to add/remove player to this game (player limit: 2 to 5)
     command: **gameplayer -add PlayerName   (example: gameplayer -add Alice)**
+    
+ 4. then you will be ask to enter the following command to set player`s strategy.(the limit is 2 to 4).
+    command: **aggressive/random/benevolent/cheater**
  
- 4. if no (and the player is not out of bound),  the game will be start. you will be asked to enter the following command to randomly assign countries to all players:
+ 
+ 5. if no (and the player is not out of bound),  the game will be start. you will be asked to enter the following command to randomly assign countries to all players:
  
     enter a AssignCountry phase command: 
     command: **assign**
     Please enter command to randomly assign countries to all players: 
     command: **assigncountries**
  
- 5. then the reinforcement armies and countries ownership will be show up for each player. 
+ 6. then the reinforcement armies and countries ownership will be show up for each player. 
             **Reinforcement phase complete.**
  
+ **if you are going to save the game**
+  ( if you want to save game for current game progress, please enter the following command: (this can only valid at issueOrder phase).
+     command: **savegame**
+  7. then the game will be saved, you can enter command:**end** to end the game, and also if you want to continue to load the previous game you have saved, please enter command:
+     command: **loadgame**
+     command:**loadgame GameFileName**)
  
- 6. After that, you will get into Issue order phase, and you will be asked to enter following command to issue order for each player.
+ 
+ 8. After that, you will get into Issue order phase, and you will be asked to enter following command to issue order for each player.
     enter a IssueOrder phase command:
     command: **Start**
     then each of player will automatically issue and execute order on each phase, and finally return the winner for the game

@@ -42,6 +42,10 @@ public class TournamentController extends MainPlayController {
      */
     private List<File> d_ListOfMapFiles = new ArrayList<>();
     /**
+     * The list of map name.
+     */
+    private List<String> d_TempMapList = new ArrayList<>();
+    /**
      * The map counter.
      */
     private int d_MapCounter = 0;
@@ -113,6 +117,7 @@ public class TournamentController extends MainPlayController {
                                         l_TempMapList.add(l_CommandArr[i + 1]);
                                         i++;
                                     }
+                                    d_TempMapList = l_TempMapList;
                                     stringMapPathInputProcess(l_TempMapList);
                                 } else if (l_CommandArr[i].equalsIgnoreCase("-P")) {
 
@@ -412,8 +417,8 @@ public class TournamentController extends MainPlayController {
     /**
      * Get Map list.
      */
-    public List<File> getMapFiles() {
-        return d_ListOfMapFiles;
+    public List<String> getMapFiles() {
+        return d_TempMapList;
     }
     /**
      * Get player list.
