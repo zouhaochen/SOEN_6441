@@ -206,7 +206,7 @@ public class TournamentController extends MainPlayController {
                     d_MapsToRevert.clear();
                     break;
                 case "back":
-                    System.out.println("return to main menu");
+                    System.out.println("return to the main menu");
                     break;
                 default:
                     System.out.println("wrong input, choose between Edit, Play or Back");
