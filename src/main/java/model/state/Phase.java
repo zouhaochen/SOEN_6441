@@ -179,6 +179,7 @@ public class Phase implements Serializable {
         boolean l_Saved = false;
         Scanner l_Scanner = new Scanner(System.in);
         String l_Command = "";
+        // get file name
         System.out.println("Please type in your command: savegame filename");
         l_Command = l_Scanner.nextLine();
         String[] l_filename = null;
@@ -190,6 +191,7 @@ public class Phase implements Serializable {
         }
         try
         {
+            // write GameData Object
             FileOutputStream l_saveFile=new FileOutputStream(GAMEFILE + "/" + l_filename[1] + ".txt");
             ObjectOutputStream l_Save = new ObjectOutputStream(l_saveFile);
             l_Save.writeObject(p_GameData);

@@ -11,6 +11,7 @@ import model.map.ConquestMapReader;
 import model.map.MapEdit;
 import model.map.MapFileAdapter;
 import model.state.Edit;
+import view.TournamentResultsView;
 
 
 import java.io.File;
@@ -61,6 +62,16 @@ public class TournamentController extends MainPlayController {
      * game logger
      */
     private LogEntryBuffer d_LogEntryBuffer = new LogEntryBuffer();
+
+    /**
+     * game winner
+     */
+    private String d_GameWinner;
+
+    /**
+     * all game winner list
+     */
+    private ArrayList<String[]> d_AllWinnerList = new ArrayList<String[]>();
 
     @Override
     public void Start() {
@@ -146,7 +157,9 @@ public class TournamentController extends MainPlayController {
                         System.out.println("===== Preload map =====");
                         loadMap(getNextMap());
                         int l_GameCounter = 1;
+                        String[] l_WinnerList = new String[d_NumberOfGames];
                         while (l_GameCounter <= d_NumberOfGames) {
+
                             System.out.println("===== Game " + l_GameCounter + " =====");
                             //reset map
                             loadMap(d_CurrentMap);
@@ -163,6 +176,11 @@ public class TournamentController extends MainPlayController {
                                 showMap();
                                 // if check game end or only one player left is true, current game end,break
                                 if (l_CheckGameOver || d_GameData.getPlayerList().size() <= 1) {
+
+                                    d_GameWinner = d_GameData.getPlayerList().get(0).getColour();
+                                    String[] l_winner = d_GameWinner.split(" ");
+                                    d_GameWinner = l_winner[0];
+                                    l_WinnerList[l_GameCounter-1] = d_GameWinner;
                                     System.out.println(d_GameData.getPlayerList().get(0).getColour() + " is Winner");
                                     System.out.println("===== Game " + l_GameCounter + " is Over =====");
                                     break;
@@ -176,11 +194,16 @@ public class TournamentController extends MainPlayController {
                                     break;
                                 }
                             }
+                            for(int i = 0;i<l_WinnerList.length;i++){
+                                System.out.println(l_WinnerList[i]);
+                            }
+
+                            d_AllWinnerList.add(l_WinnerList);
                             l_GameCounter++;
                         }
                         l_MapCount++;
                     }
-
+                    TournamentResultsView.printTournamentResults(this);
                     revertMaps();
                     d_MapsToRevert.clear();
                     break;
@@ -295,6 +318,7 @@ public class TournamentController extends MainPlayController {
 
         if (d_GameEngineController.checkGameIsOver()) {
             // game ends
+
             return true;
 
         } else {
@@ -384,5 +408,38 @@ public class TournamentController extends MainPlayController {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    /**
+     * Get Map list.
+     */
+    public List<File> getMapFiles() {
+        return d_ListOfMapFiles;
+    }
+    /**
+     * Get player list.
+     */
+    public List<String>  getPlayerStrategies() {
+        return d_ListOfPlayerStrategies;
+    }
+    /**
+     * Get number of games
+     */
+    public int getNumberOfGames() {
+        return d_NumberOfGames;
+    }
+    /**
+     * Get the max turns
+     */
+    public int getMaxTurns() {
+        return d_MaxNumberOfTurns;
+    }
+
+    /**
+     * Get the results
+     */
+    public ArrayList<String[]> getResults() {
+        return d_AllWinnerList;
     }
 }

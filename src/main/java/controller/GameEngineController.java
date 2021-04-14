@@ -37,6 +37,11 @@ public class GameEngineController implements Serializable {
     private boolean d_RevertRequired;
 
     /**
+     * game winner
+     */
+    private String d_GameWinner = "No winner";
+
+    /**
      * GameEngineController Constructor
      *
      * @param p_GameData you should pass reference that Game Data you used
@@ -427,6 +432,7 @@ public class GameEngineController implements Serializable {
         if (d_GameData.getPlayerList().size() == 1) {
             System.out.println("=====Game is Over=====");
             System.out.println("The winner is: Player " + d_GameData.getPlayerList().get(0).getColour());
+            d_GameWinner = d_GameData.getPlayerList().get(0).getColour();
             return true;
         }
         return false;
@@ -440,5 +446,9 @@ public class GameEngineController implements Serializable {
      */
     public void revertDominationToConquest(String p_FileName) throws IOException {
         d_MapFileAdapter.dominationFileToConquestFile(p_FileName);
+    }
+
+    public String getGameWinner(){
+        return d_GameWinner;
     }
 }

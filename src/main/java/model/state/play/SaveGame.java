@@ -28,8 +28,7 @@ public class SaveGame implements Serializable {
             FileOutputStream l_saveFile=new FileOutputStream("save.txt");
             ObjectOutputStream l_save = new ObjectOutputStream(l_saveFile);
             GameElements l_gameElements = new GameElements();
-
-
+            // write GameData Object
             l_save.writeObject(p_GameData);
             l_save.flush();
             l_save.close();

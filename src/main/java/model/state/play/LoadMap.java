@@ -69,6 +69,7 @@ public class LoadMap extends Startup {
         else{
             System.out.println("invalid command");
         }
+        //get file name
         try {
             ObjectInputStream ois=new ObjectInputStream(new FileInputStream("gamefile" + "/" + l_filename[1] + ".txt"));
             GameData l_GameData=(GameData)ois.readObject();              //读出对象
