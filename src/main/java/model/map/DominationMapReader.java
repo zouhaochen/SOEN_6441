@@ -26,7 +26,6 @@ public class DominationMapReader {
 	 * @throws IOException if map does not exist
 	 */
 	public Map<String, List<String>> readFile(String p_str) throws IOException {
-		System.out.println("DominationMapReader.readFile(): " + p_str);
 		// set up a hash map file
 		Map<String, List<String>> l_createdMap = new HashMap<String, List<String>>();
 		// read the file and create the map object

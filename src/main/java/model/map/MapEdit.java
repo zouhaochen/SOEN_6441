@@ -125,7 +125,7 @@ public class MapEdit {
         if (l_F3.exists()) {
             // determine file type
             if(!isDomination(l_FileName)) {
-                ADAPTER.jsonFileToTextFile(l_FileName);
+                ADAPTER.conquestFileToDominationFile(l_FileName);
             }
             showMap(l_F3);
             System.out.println("");
@@ -416,7 +416,7 @@ public class MapEdit {
             l_ReadFile.delete();
         }
         if(num == 2) {
-            ADAPTER.textFileToJsonFile(l_FileName);
+            ADAPTER.dominationFileToConquestFile(l_FileName);
         }
     }
 

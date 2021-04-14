@@ -33,13 +33,20 @@ public class LoadMap extends Startup {
             e.printStackTrace();
         }
 
+        boolean l_MapRevertRequired = d_Ml.d_GameEngineController.isRevertRequired();
+
         d_Ml.d_GameData = new GameData(d_Ml.d_MapFile);
         d_Ml.d_GameData.setCurrentPhase(this);
         d_Ml.d_GameEngineController = new GameEngineController(d_Ml.d_GameData);
         OrderFactory.setGameData(d_Ml.d_GameData);
         try {
             d_Ml.d_GameData.loadMap();
-        } catch (FileNotFoundException e) {
+
+            // revert domination map to conquest map
+            if (l_MapRevertRequired) {
+                d_Ml.d_GameEngineController.revertDominationToConquest(d_Ml.d_GameData.d_MapFile.getName());
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
         d_Ml.getDLogEntryBuffer().updateFile();

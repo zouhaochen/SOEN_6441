@@ -4,10 +4,12 @@ import command.CommandValidator;
 import model.GameData;
 import model.LogEntryBuffer;
 import model.gameelements.Country;
-import model.gameelements.Player;
 import model.gameelements.order.OrderFactory;
 import model.gameelements.strategy.*;
 
+import model.map.ConquestMapReader;
+import model.map.MapEdit;
+import model.map.MapFileAdapter;
 import model.state.Edit;
 
 
@@ -34,20 +36,26 @@ public class TournamentController extends MainPlayController {
      * set the max number of turns for each game.
      */
     private int d_MaxNumberOfTurns;
-
-
     /**
-     *  list the map files
+     * The list of map files.
      */
     private List<File> d_ListOfMapFiles = new ArrayList<>();
     /**
-     * count for how many map are going to be used.
+     * The map counter.
      */
     private int d_MapCounter = 0;
     /**
-     * get current map file.
+     * The current map.
      */
     private File d_CurrentMap;
+    /**
+     * The map file adapter.
+     */
+    private MapFileAdapter d_MapFileAdapter = new MapFileAdapter(new ConquestMapReader());
+    /**
+     * The Maps to revert.
+     */
+    private List<String> d_MapsToRevert = new ArrayList<>();
 
     /**
      * game logger
@@ -173,7 +181,8 @@ public class TournamentController extends MainPlayController {
                         l_MapCount++;
                     }
 
-
+                    revertMaps();
+                    d_MapsToRevert.clear();
                     break;
                 case "back":
                     System.out.println("return to main menu");
@@ -187,6 +196,7 @@ public class TournamentController extends MainPlayController {
     }
 
 //tournament -m 02.map 03.map -p aggressive benevolent -g 2 -d 10
+
     /**
      * get the number of player in th game then set strategy for each player.
      */
@@ -293,14 +303,22 @@ public class TournamentController extends MainPlayController {
         }
     }
 
-
     /**
      * get user map path list string input and store as real map file in tournament game map list
-     * @param p_MapPathList get map file path list as string.
+     *
+     * @param p_MapPathList the p map path list
      */
     public void stringMapPathInputProcess(List<String> p_MapPathList) {
         for (String l_EachMap : p_MapPathList) {
             try {
+                // check if transformation of map format is needed
+                if (!MapEdit.isDomination(l_EachMap)) {
+                    // convert format
+                    d_MapFileAdapter.conquestFileToDominationFile(l_EachMap);
+                    if (!d_MapsToRevert.contains(l_EachMap)) {
+                        d_MapsToRevert.add(l_EachMap);
+                    }
+                }
                 //preprocess path
                 File l_NewMap = new File(d_GameEngineController.getSimpleFilePath(l_EachMap));
                 // use map file getter to get the map and add to the map list
@@ -332,7 +350,8 @@ public class TournamentController extends MainPlayController {
 
     /**
      * get next map to play in map list
-     * @return  return next map file.
+     *
+     * @return the next map
      */
     public File getNextMap() {
         // check whether list is empty or counter out of bound
@@ -351,5 +370,19 @@ public class TournamentController extends MainPlayController {
         }
 
         return d_CurrentMap;
+    }
+
+    /**
+     * Revert maps back to conquest format if needed.
+     */
+    public void revertMaps() {
+        for (String l_MapFileName :
+                d_MapsToRevert) {
+            try {
+                d_MapFileAdapter.dominationFileToConquestFile(l_MapFileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

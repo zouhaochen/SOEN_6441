@@ -36,7 +36,7 @@ public class MapFileAdapter extends DominationMapReader {
 	 * @param p_str map file name
 	 * @throws IOException if map file does not exist
 	 */
-	public void textFileToJsonFile(String p_str) throws IOException {
+	public void dominationFileToConquestFile(String p_str) throws IOException {
 		Map<String, List<String>> l_map = readFile(p_str);
 		// read content from territories tag in conquest map
 		StringBuffer l_terr = new StringBuffer("[Territories]\n");
@@ -107,7 +107,7 @@ public class MapFileAdapter extends DominationMapReader {
 	 * @param p_str map file name
 	 * @throws IOException if map file does not exist
 	 */
-	public void jsonFileToTextFile(String p_str) throws IOException {
+	public void conquestFileToDominationFile(String p_str) throws IOException {
 		Map<String, List<String>> l_map = this.d_otherFileType.readJSONFileType(p_str);
 		// read content from territories tag in conquest map
 		List<String> l_list = l_map.get("[Territories]");
