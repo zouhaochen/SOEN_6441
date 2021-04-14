@@ -36,8 +36,17 @@ public class TournamentController extends MainPlayController {
     private int d_MaxNumberOfTurns;
 
 
+    /**
+     *  list the map files
+     */
     private List<File> d_ListOfMapFiles = new ArrayList<>();
+    /**
+     * count for how many map are going to be used.
+     */
     private int d_MapCounter = 0;
+    /**
+     * get current map file.
+     */
     private File d_CurrentMap;
 
     /**
@@ -284,8 +293,10 @@ public class TournamentController extends MainPlayController {
         }
     }
 
+
     /**
      * get user map path list string input and store as real map file in tournament game map list
+     * @param p_MapPathList get map file path list as string.
      */
     public void stringMapPathInputProcess(List<String> p_MapPathList) {
         for (String l_EachMap : p_MapPathList) {
@@ -321,6 +332,7 @@ public class TournamentController extends MainPlayController {
 
     /**
      * get next map to play in map list
+     * @return  return next map file.
      */
     public File getNextMap() {
         // check whether list is empty or counter out of bound

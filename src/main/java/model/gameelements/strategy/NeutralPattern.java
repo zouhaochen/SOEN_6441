@@ -4,6 +4,9 @@ import model.GameData;
 import model.gameelements.Player;
 import model.gameelements.order.Order;
 
+/**
+ *  implement player strategy as Neutral type.
+ */
 public class NeutralPattern extends PlayerStrategy{
     /**
      * Instantiates a new Player strategy.

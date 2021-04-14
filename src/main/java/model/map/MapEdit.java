@@ -38,6 +38,11 @@ public class MapEdit {
      */
     private static MapFileAdapter ADAPTER = new MapFileAdapter(new ConquestMapReader());
 
+    /**
+     * main function
+     * @param args  arguments
+     * @throws Exception if command is invalid.
+     */
     public static void main(String[] args) throws Exception {
         mapEditLoop();
     }

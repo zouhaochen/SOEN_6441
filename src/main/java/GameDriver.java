@@ -18,8 +18,10 @@ public class GameDriver {
      */
     LogEntryBufferView d_LogEntryBufferView;
 
+
     /**
-     * constructor
+     * game driver constructor.
+     * @param p_MainPlayController  get main play countroller as object.
      */
     public GameDriver(MainPlayController p_MainPlayController) {
         // setup controller

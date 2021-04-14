@@ -16,6 +16,12 @@ public class DeployOrder extends Order {
         setType("Deploy");
     }
 
+    /**
+     * implement order deploy
+     * @param p_Initiator  Starting point of the order
+     * @param p_Destination end point of the order
+     * @param p_ArmiesToDeploy for how many armies are going to deploy
+     */
     public DeployOrder(Player p_Initiator, Country p_Destination, int p_ArmiesToDeploy) {
         this();
         OrderInfo l_OrderInfo = new OrderInfo();

@@ -9,14 +9,14 @@ public class CardOrderCreator {
 
     /**
      * Create card order.
-     *
-     * @param p_Card           the card
-     * @param p_Initiator      the initiator
-     * @param p_TargetPlayer   the target player
-     * @param p_Departure      the departure
-     * @param p_Destination    the destination
-     * @param p_NumberOfArmies the number of armies
-     * @return the order
+     * @param p_Card            thecard
+     * @param p_Initiator       the initiator
+     * @param p_TargetPlayer    the target player
+     * @param p_Departure       the departure
+     * @param p_Destination     the destination
+     * @param p_ToAttack        the attack target
+     * @param p_NumberOfArmies  the number of armies
+     * @return return the order that have already created.
      */
     public static Order createCardOrder(Card p_Card, Player p_Initiator, Player p_TargetPlayer, Country p_Departure,
                                         Country p_Destination, Country p_ToAttack, int p_NumberOfArmies) {

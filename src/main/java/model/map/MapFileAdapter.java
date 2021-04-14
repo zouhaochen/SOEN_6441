@@ -16,11 +16,18 @@ public class MapFileAdapter extends DominationMapReader {
 
 	private ConquestMapReader d_otherFileType;
 
+	/**
+	 * implement map file adapter.
+	 * @param p_fr file reader.
+	 */
 	public MapFileAdapter(ConquestMapReader p_fr) {
 		// the roundPeg is plugged into the adapter
 		this.d_otherFileType = p_fr;
 	}
 
+	/**
+	 * Map File Adapter
+	 */
 	public MapFileAdapter() {
 	}
 

@@ -10,6 +10,9 @@ import java.util.List;
  * Subject Class, which named Observable
  */
 public class Observable implements Serializable {
+    /**
+     * get the observer list.
+     */
     private List<Observer> d_ObserverList = new ArrayList<>();
 
     /**

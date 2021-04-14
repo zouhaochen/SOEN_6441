@@ -12,6 +12,9 @@ import model.gameelements.order.Order;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * implement player strategy as random type.
+ */
 public class RandomPattern extends PlayerStrategy {
     /**
      * Instantiates a new Player strategy.

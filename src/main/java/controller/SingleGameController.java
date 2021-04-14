@@ -9,6 +9,9 @@ import model.state.play.LoadMap;
 import java.io.Serializable;
 import java.util.Scanner;
 
+/**
+ * to implemnt single game mode.
+ */
 public class SingleGameController extends MainPlayController implements Serializable {
 
     /**

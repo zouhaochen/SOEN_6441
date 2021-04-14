@@ -13,8 +13,11 @@ import java.io.*;
 
 public class SaveGame implements Serializable {
 
+
     /**
      * This method is to save the game
+     * @param p_GameData  get game data as object
+     * @return return trure if current game can be saved.
      */
     public static boolean saveGame(GameData p_GameData){
 
@@ -41,6 +44,10 @@ public class SaveGame implements Serializable {
         return saved;
     }
 
+    /**
+     * to get the object from file.
+     * @return return null.
+     */
     public GameData getObjFromFile(){
 
         try {

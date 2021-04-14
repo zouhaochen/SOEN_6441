@@ -167,8 +167,11 @@ public class Phase implements Serializable {
         printInvalidCommandMessage();
     }
 
+
     /**
-     * Save Game.
+     * save game
+     * @param p_GameData get game data as object
+     * @return return true if current game can be saved
      */
     public boolean saveGame(GameData p_GameData) {
 

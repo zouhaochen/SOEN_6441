@@ -174,6 +174,12 @@ public class GameEngineController implements Serializable {
         return l_ProjectPath + "/domination/" + l_CommandArr[1];
     }
 
+    /**
+     *  get the map file path.
+     * @param p_MapPath  get the map file path
+     * @return retrun map file path as string.
+     * @throws IOException exception handling.
+     */
     public String getSimpleFilePath(String p_MapPath) throws IOException {
 
         String l_ProjectPath = new File("").getCanonicalPath();
