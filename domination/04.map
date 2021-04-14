@@ -3,8 +3,8 @@ author=haochen zou
 mapname=02.map
 
 [continents]
-Eastern Europe 2
-Western Europe 3
+EasternEurope 2
+WesternEurope 3
 
 [countries]
 1 Germany 1
