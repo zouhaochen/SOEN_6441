@@ -11,6 +11,12 @@ import model.gameelements.order.Order;
  * The type Benevolent pattern.
  */
 public class BenevolentPattern extends PlayerStrategy {
+
+    /**
+     * The count of move order issued.
+     */
+    private int d_AdvanceOrderCount;
+
     /**
      * Instantiates a new Player strategy.
      *
@@ -61,6 +67,11 @@ public class BenevolentPattern extends PlayerStrategy {
             return createRandomCardOrder();
         } else {
             // option 3: move armies to reinforce weaker countries
+            // limit the number of Advance orders that Benevolent play issues
+            if (d_AdvanceOrderCount >= getPlayer().getCountriesInControl().size() * 2) {
+                return null;
+            }
+
             Country l_MoveFrom = moveFrom();
 
             if (l_MoveFrom == null) {
@@ -74,6 +85,7 @@ public class BenevolentPattern extends PlayerStrategy {
 
             int l_CompareResult = compareArmies(l_MoveFrom, l_MoveTo);
             if (l_CompareResult == 1)  {
+                d_AdvanceOrderCount++;
                 return new AdvanceOrder(getPlayer(), l_MoveFrom, l_MoveTo, calculateArmiesToMove(l_MoveFrom, l_MoveTo));
             } else {
                 return null;
@@ -86,7 +98,7 @@ public class BenevolentPattern extends PlayerStrategy {
      */
     @Override
     public void reset() {
-
+        d_AdvanceOrderCount = 0;
     }
 
     /**
