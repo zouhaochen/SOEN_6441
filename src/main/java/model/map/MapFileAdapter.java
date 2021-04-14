@@ -11,6 +11,9 @@ import java.util.Map;
  */
 public class MapFileAdapter extends DominationMapReader implements Serializable {
 
+	/**
+	 *  get other file types
+	 */
 	private ConquestMapReader d_otherFileType;
 
 	/**

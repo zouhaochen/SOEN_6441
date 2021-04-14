@@ -448,6 +448,10 @@ public class GameEngineController implements Serializable {
         d_MapFileAdapter.dominationFileToConquestFile(p_FileName);
     }
 
+    /**
+     * get the winner for each game
+     * @return return the winner player
+     */
     public String getGameWinner(){
         return d_GameWinner;
     }

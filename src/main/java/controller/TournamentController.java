@@ -415,25 +415,30 @@ public class TournamentController extends MainPlayController {
 
 
     /**
-     * Get Map list.
+     * Get map list
+     * @return  return the temporary map list
      */
     public List<String> getMapFiles() {
         return d_TempMapList;
     }
+
     /**
      * Get player list.
+     * @return  return the List Of Player Strategies
      */
     public List<String>  getPlayerStrategies() {
         return d_ListOfPlayerStrategies;
     }
     /**
      * Get number of games
+     * @return  return the number Of games
      */
     public int getNumberOfGames() {
         return d_NumberOfGames;
     }
     /**
      * Get the max turns
+     * @return  return max number of turns
      */
     public int getMaxTurns() {
         return d_MaxNumberOfTurns;
@@ -441,6 +446,7 @@ public class TournamentController extends MainPlayController {
 
     /**
      * Get the results
+     * @return  return All winner list.
      */
     public ArrayList<String[]> getResults() {
         return d_AllWinnerList;
