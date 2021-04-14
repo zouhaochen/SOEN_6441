@@ -8,10 +8,11 @@ import model.gameelements.Continent;
 import model.gameelements.Country;
 import model.gameelements.Player;
 import model.gameelements.strategy.*;
+import model.map.ConquestMapReader;
+import model.map.MapEdit;
+import model.map.MapFileAdapter;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -26,6 +27,16 @@ public class GameEngineController implements Serializable {
     public GameData d_GameData;
 
     /**
+     * The map file adapter.
+     */
+    private MapFileAdapter d_MapFileAdapter;
+
+    /**
+     * The revert required.
+     */
+    private boolean d_RevertRequired;
+
+    /**
      * GameEngineController Constructor
      *
      * @param p_GameData you should pass reference that Game Data you used
@@ -34,10 +45,21 @@ public class GameEngineController implements Serializable {
 
         // new gameData here
         d_GameData = p_GameData;
+
+        d_MapFileAdapter = new MapFileAdapter(new ConquestMapReader());
+        d_RevertRequired = false;
         // command validator initialize here
         CommandValidator.setGameData(p_GameData);
     }
 
+    /**
+     * Is revert required boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isRevertRequired() {
+        return d_RevertRequired;
+    }
 
     /**
      * add new player to the game
@@ -170,10 +192,23 @@ public class GameEngineController implements Serializable {
             l_CommandArr = l_Command.split(" ");
         } while (!CommandValidator.validate(l_Command));
 
+        String l_MapFileName = l_CommandArr[1];
+        if (!MapEdit.isDomination(l_MapFileName)) {
+            d_MapFileAdapter.conquestFileToDominationFile(l_MapFileName);
+            d_RevertRequired = true;
+        }
+
         String l_ProjectPath = new File("").getCanonicalPath();
-        return l_ProjectPath + "/domination/" + l_CommandArr[1];
+        return l_ProjectPath + "/domination/" + l_MapFileName;
     }
 
+    /**
+     * Gets simple file path.
+     *
+     * @param p_MapPath the p map path
+     * @return the simple file path
+     * @throws IOException the io exception
+     */
     public String getSimpleFilePath(String p_MapPath) throws IOException {
 
         String l_ProjectPath = new File("").getCanonicalPath();
@@ -276,6 +311,7 @@ public class GameEngineController implements Serializable {
             l_RandomPlayer.assignCountry(l_CountryStack.pop());
         }
     }
+
     /**
      * Randomly assign all the countries to the players.
      */
@@ -396,5 +432,13 @@ public class GameEngineController implements Serializable {
         return false;
     }
 
-
+    /**
+     * Revert domination to conquest.
+     *
+     * @param p_FileName the p file name
+     * @throws IOException the io exception
+     */
+    public void revertDominationToConquest(String p_FileName) throws IOException {
+        d_MapFileAdapter.dominationFileToConquestFile(p_FileName);
+    }
 }
