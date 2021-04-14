@@ -9,7 +9,7 @@ Group Member:
 - Zitao Wang
 - Haochen Zou
 
-**======================Build 2 ================================**
+**======================Build 3 ================================**
 
 ## Refactoring
 
@@ -35,15 +35,19 @@ Also, Some classes like (_LogEntryBuffer.java_) in the package model extend Obse
 
 
 
-## To run the Warzone version 2.0
+## To run the Warzone version 3.0
 
 User will first get into option phase as the previous 
 
- Welcome to Warzone.
+ Welcome to WAR-ZONE game.
 user can type the following command in the console.
-command: **edit / play / exit  (ignore-case)**
+you will be ask to select single mode or tournament mode.
+command: single/tournament.
+then you will be ask Do you want to edit map or play game? (Edit/Play/Back)
+command: **edit / play / back  (ignore-case)**
 
 
+**If you are in the single Mode:**
 Type **edit** if user  want to get into Map Editor model.
 
  **if you are in Map Editor model:**
@@ -99,37 +103,23 @@ Type **edit** if user  want to get into Map Editor model.
  
  6. After that, you will get into Issue order phase, and you will be asked to enter following command to issue order for each player.
     enter a IssueOrder phase command:
-    command: **issue**
-    
-    Player XXX(player name ), do you want to create an order? (y/n)
-    command:**y/n**  (if y, continues the following command. if no, skip this round.)
-    
-    if y, you have the following command to enter: 
-    command: **deploy countryID num   (example: deploy china 5)**
-             **advance country(from)  country(to) num   (example: advance china korea 5)**
-             **bomb countryID   (example: bomb korea)**
-             **blockade countryID   (example: blockade china)**
-             **airlift countryID(source) countryID(target) num (example: airlift china japan 5)**
-             **negotiate playerID (example: negotiate china)**
-    (1. Tips:the number of deployed armies cannot over reinforcement armies)
-    (2. Tips:the deployed country must have ownership of current player)
-    (3. Tips:the Bomb card cannot be use to player’s own territory)
-    (4. Tips:the player will randomly get a Function card from (bomb, blockade, airlift, negotiate), and can be use at next round)
-    
-    once all player have entered no for the current round, the game will continue to next phase, Order execution phase.
-             **Issue Order Phase Complete**
+    command: **Start**
+    then each of player will automatically issue and execute order on each phase, and finally return the winner for the game
  
- 7. After each player have already issued their orders, the game will get into  order execution phase. and you will be ask for the following command to execute orders.
-     enter a OrderExecution phase command: 
-     command: **execute**
-     
-     once there exit a player who have already conquered all of the countries in the game, he/she will be the winner for the game. Therefor, the game will be end, and back to start menu. if user does not want to play again, just enter command exit to end the program.
-             **Execute Order Phase Complete**
+ **If you are in the tournament Mode:**
+ you will be ask to enter the following command, in which:
+ M represents map files that will be used on game.
+ P represents player`s strategy. (limit 2 to 4).
+ G represents for how many game on each map are going to be played.
+ D represents the max number of turns for one game.
  
+ command:**tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns**
+ for example: **tournament -m 02.map 03.map -p aggressive benevolent -g 2 -d 10**
  
-
- Type **exit** if user  want to exit the game.
+ after that the player for each game will be post at the end. 
+ 
+ Type **back** if user want to back to the main menu, and enter twice to end of the game.
  command: **exit**
 
-## Build 2 Architecture UML
- ![Build2](classesuml/B2_UML.png)
+## Build 3 Architecture UML
+ ![Build3](classesuml/Build3.png)
