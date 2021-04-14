@@ -66,7 +66,7 @@ public class TournamentController extends MainPlayController {
     /**
      * game winner
      */
-    private String d_GameWinner;
+    private String d_GameWinner = "No Winner";
 
     /**
      * all game winner list
@@ -189,13 +189,11 @@ public class TournamentController extends MainPlayController {
                                 l_RoundCounter++;
                                 // if round count greater than max turns, draw the game,break
                                 if (l_RoundCounter > d_MaxNumberOfTurns) {
+                                    l_WinnerList[l_GameCounter-1] = d_GameWinner;
                                     System.out.println("===== Maximum Round Reach =====");
                                     System.out.println("===== DRAW ===== No Winner =====\n");
                                     break;
                                 }
-                            }
-                            for(int i = 0;i<l_WinnerList.length;i++){
-                                System.out.println(l_WinnerList[i]);
                             }
 
                             d_AllWinnerList.add(l_WinnerList);
