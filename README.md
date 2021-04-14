@@ -101,6 +101,7 @@ Type **edit** if user  want to get into Map Editor model.
  **if you are going to save the game**
   ( if you want to save game for current game progress, please enter the following command: (this can only valid at issueOrder phase).
      command: **savegame**
+     
   7. then the game will be saved, you can enter command:**end** to end the game, and also if you want to continue to load the previous game you have saved, please enter command:
      command: **loadgame**
      command:**loadgame GameFileName**)
