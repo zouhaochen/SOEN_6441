@@ -25,7 +25,7 @@ public class TournamentController extends MainPlayController {
     /**
      * Num of players strategies
      */
-    private int d_NumOfPlayerStrategies;
+    private List<String> d_ListOfPlayerStrategies = new ArrayList<>();
     /**
      * for how many game that players played
      */
@@ -35,10 +35,6 @@ public class TournamentController extends MainPlayController {
      */
     private int d_MaxNumberOfTurns;
 
-    /**
-     * Num of map to play in tournament
-     */
-    private int d_NumOfMap;
 
     private List<File> d_ListOfMapFiles = new ArrayList<>();
     private int d_MapCounter = 0;
@@ -71,9 +67,6 @@ public class TournamentController extends MainPlayController {
                     setPhase(new Edit(this));
                     break;
                 case "play":
-                    // ask user to insert map to map list
-                    stringMapPathInputProcess();
-
                     // tournament command validator
                     while (true) {
                         System.out.println("Please enter tournament command: tournament -M -P -G -D");
@@ -87,12 +80,22 @@ public class TournamentController extends MainPlayController {
                         try {
                             for (int i = 1; i < l_CommandArr.length; i++) {
                                 if (l_CommandArr[i].equalsIgnoreCase("-M")) {
-                                    // pass in number of map
-                                    d_NumOfMap = Integer.parseInt(l_CommandArr[i + 1]);
+                                    List<String> l_TempMapList = new ArrayList<>();
+                                    while (!l_CommandArr[i + 1].equalsIgnoreCase("-P") && l_TempMapList.size() <= 5) {
+                                        l_TempMapList.add(l_CommandArr[i + 1]);
+                                        i++;
+                                    }
+                                    stringMapPathInputProcess(l_TempMapList);
                                 } else if (l_CommandArr[i].equalsIgnoreCase("-P")) {
-                                    // pass in number of Player strategies
-                                    d_NumOfPlayerStrategies = Integer.parseInt(l_CommandArr[i + 1]);
-                                    if (d_NumOfPlayerStrategies >= 4 || d_NumOfPlayerStrategies < 2) {
+
+                                    List<String> l_TempPlayerStraList = new ArrayList<>();
+                                    while (!l_CommandArr[i + 1].equalsIgnoreCase("-G") && l_TempPlayerStraList.size() <= 4) {
+                                        l_TempPlayerStraList.add(l_CommandArr[i + 1]);
+                                        i++;
+                                    }
+                                    d_ListOfPlayerStrategies = l_TempPlayerStraList;
+                                    // check number of Player strategies
+                                    if (d_ListOfPlayerStrategies.size() >= 4 || d_ListOfPlayerStrategies.size() < 2) {
                                         System.out.println("ERROR: player number should between 2-4");
                                         continue;
                                     }
@@ -119,38 +122,48 @@ public class TournamentController extends MainPlayController {
                     }
 
                     // main play loop
-                    int l_GameCounter = 0;
-                    while (l_GameCounter < d_NumberOfGames) {
-                        System.out.println("===== Game "+l_GameCounter+" =====");
+                    int l_MapCount = 0;
+                    while (l_MapCount < d_ListOfMapFiles.size()) {
+
+                        // load map
+                        System.out.println("===== Preload map =====");
                         loadMap(getNextMap());
-                        setPlayers();
-                        assignCountries();
-                        showMap();
-
-                        //get the round loop for each games.
-                        int l_RoundCounter = 0;
-                        while (l_RoundCounter < d_MaxNumberOfTurns) {
-                            System.out.println("===== Round "+l_RoundCounter+" =====");
-                            issueOrder();
-                            boolean l_CheckGameOver=executeOrder();
+                        int l_GameCounter = 1;
+                        while (l_GameCounter <= d_NumberOfGames) {
+                            System.out.println("===== Game " + l_GameCounter + " =====");
+                            //reset map
+                            loadMap(d_CurrentMap);
+                            setPlayers();
+                            assignCountries();
                             showMap();
-                            // if check game end or only one player left is true, current game end,break
-                            if (l_CheckGameOver || d_GameData.getPlayerList().size() <= 1) {
-                                System.out.println(d_GameData.getPlayerList().get(0).getColour()+" is Winner");
-                                System.out.println("===== Game "+l_GameCounter+" is Over =====");
-                                break;
-                            }
 
-                            l_RoundCounter++;
-                            // if round count greater than max turns, draw the game,break
-                            if (l_RoundCounter > d_MaxNumberOfTurns) {
-                                System.out.println("===== Maximum Round Reach =====");
-                                System.out.println("===== DRAW ===== No Winner =====");
-                                break;
+                            //get the round loop for each games.
+                            int l_RoundCounter = 1;
+                            while (l_RoundCounter <= d_MaxNumberOfTurns) {
+                                System.out.println("===== Round " + l_RoundCounter + " =====");
+                                issueOrder();
+                                boolean l_CheckGameOver = executeOrder();
+                                showMap();
+                                // if check game end or only one player left is true, current game end,break
+                                if (l_CheckGameOver || d_GameData.getPlayerList().size() <= 1) {
+                                    System.out.println(d_GameData.getPlayerList().get(0).getColour() + " is Winner");
+                                    System.out.println("===== Game " + l_GameCounter + " is Over =====");
+                                    break;
+                                }
+
+                                l_RoundCounter++;
+                                // if round count greater than max turns, draw the game,break
+                                if (l_RoundCounter > d_MaxNumberOfTurns) {
+                                    System.out.println("===== Maximum Round Reach =====");
+                                    System.out.println("===== DRAW ===== No Winner =====\n");
+                                    break;
+                                }
                             }
+                            l_GameCounter++;
                         }
-                        l_GameCounter++;
+                        l_MapCount++;
                     }
+
 
                     break;
                 case "back":
@@ -164,41 +177,39 @@ public class TournamentController extends MainPlayController {
         }
     }
 
-
+//tournament -m 02.map 03.map -p aggressive benevolent -g 2 -d 10
     /**
      * getthe number of player in th game then set strategy for each player.
      */
     public void setPlayers() {
-        System.out.println("Num of Player: " + d_NumOfPlayerStrategies);
-        Random l_Random = new Random();
-        int l_count = 0;
-        while (l_count < d_NumOfPlayerStrategies) {
-            String l_AutoPlayerName = new String(" Player " + (l_count + 1));
+        System.out.println("Num of Player: " + d_ListOfPlayerStrategies.size());
+        //first add player to player list
+        for (String l_PlayerStra : d_ListOfPlayerStrategies) {
+            String l_AutoPlayerName = l_PlayerStra + " Player ";
             d_GameEngineController.addNewPlayer(l_AutoPlayerName);
-            l_count++;
-        }
-        for (Player l_each : d_GameData.getPlayerList()) {
 
-            int l_StrategyRandom = l_Random.nextInt(4) + 1;
-            switch (l_StrategyRandom) {
-                case 1:
-                    l_each.setStrategy(new AggressivePattern(l_each, this.d_GameData));
+            // give each player his strategy
+            switch (l_PlayerStra.toLowerCase()) {
+                case "aggressive":
+                    d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName).setStrategy(new AggressivePattern(d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName), this.d_GameData));
                     break;
-                case 2:
-                    l_each.setStrategy(new BenevolentPattern(l_each, this.d_GameData));
+                case "benevolent":
+                    d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName).setStrategy(new BenevolentPattern(d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName), this.d_GameData));
                     break;
-                case 3:
-                    l_each.setStrategy(new RandomPattern(l_each, this.d_GameData));
+                case "random":
+                    d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName).setStrategy(new RandomPattern(d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName), this.d_GameData));
                     break;
-                case 4:
-                    l_each.setStrategy(new CheaterPattern(l_each, this.d_GameData));
+                case "cheater":
+                    d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName).setStrategy(new CheaterPattern(d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName), this.d_GameData));
                     break;
                 default:
-                    System.out.println("WARNING: we dont have such strategy pattern, set to random strategy as default");
-                    l_each.setStrategy(new RandomPattern(l_each, this.d_GameData));
+                    System.out.println("WARNING: we dont have such strategy pattern, '" + l_PlayerStra + "' set to aggressive strategy as default");
+                    d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName).setStrategy(new AggressivePattern(d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName), this.d_GameData));
                     break;
             }
         }
+
+
         getDLogEntryBuffer().updateFile();
 
     }
@@ -226,6 +237,7 @@ public class TournamentController extends MainPlayController {
 
     /**
      * load game map, if the map are not found then track the map file from the top of stack.
+     *
      * @param p_NewMap load the map for current game
      */
     public void loadMap(File p_NewMap) {
@@ -239,12 +251,14 @@ public class TournamentController extends MainPlayController {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        System.out.println("the current map is :" + d_CurrentMap.getName());
         getDLogEntryBuffer().updateFile();
 
     }
 
     /**
      * execute each player`s deplyed order at execute phase.
+     *
      * @return the return value represent if the order can be execute
      */
     public Boolean executeOrder() {
@@ -273,27 +287,21 @@ public class TournamentController extends MainPlayController {
     /**
      * get user map path list string input and store as real map file in tournament game map list
      */
-    public void stringMapPathInputProcess() {
-        System.out.println("===== please insert map to map list =====");
-        // local key-in scanner
-        Scanner l_Scanner = new Scanner(System.in);
-
-        while (d_ListOfMapFiles.size() <= 5) {
+    public void stringMapPathInputProcess(List<String> p_MapPathList) {
+        for (String l_EachMap : p_MapPathList) {
             try {
                 //preprocess path
-                File l_NewMap = new File(d_GameEngineController.getSimpleFilePath());
-
+                File l_NewMap = new File(d_GameEngineController.getSimpleFilePath(l_EachMap));
                 // use map file getter to get the map and add to the map list
                 d_ListOfMapFiles.add(l_NewMap);
             } catch (IOException e) {
+                System.out.println("Error: Your input [" + l_EachMap + "] map file not found ");
                 e.printStackTrace();
             }
-            System.out.println("===== Insert Map to list, 'n' to stop insert map, 'y' to keep insert =====");
-            String keyin = l_Scanner.nextLine();
-            if (keyin.equalsIgnoreCase("n")) {
-                break;
-            }
+
         }
+
+
         System.out.println("Successfully insert [" + d_ListOfMapFiles.size() + "] Map in game");
         showCurrentMapList();
 
@@ -316,7 +324,7 @@ public class TournamentController extends MainPlayController {
      */
     public File getNextMap() {
         // check whether list is empty or counter out of bound
-        if (!d_ListOfMapFiles.isEmpty() && d_MapCounter < d_ListOfMapFiles.size() && d_MapCounter <= d_NumOfMap) {
+        if (!d_ListOfMapFiles.isEmpty() && d_MapCounter < d_ListOfMapFiles.size() && d_MapCounter <= d_ListOfMapFiles.size()) {
             // get obj index next one
             d_CurrentMap = d_ListOfMapFiles.get(d_MapCounter);
             d_MapCounter++;
@@ -329,7 +337,7 @@ public class TournamentController extends MainPlayController {
                 d_MapCounter = 0;
             }
         }
-        System.out.println("the current map is :"+d_CurrentMap.getName());
+
         return d_CurrentMap;
     }
 }
