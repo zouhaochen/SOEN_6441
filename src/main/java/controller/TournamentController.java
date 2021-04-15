@@ -4,20 +4,21 @@ import command.CommandValidator;
 import model.GameData;
 import model.LogEntryBuffer;
 import model.gameelements.Country;
+import model.gameelements.Player;
 import model.gameelements.order.OrderFactory;
-import model.gameelements.strategy.*;
-
+import model.gameelements.strategy.AggressivePattern;
+import model.gameelements.strategy.BenevolentPattern;
+import model.gameelements.strategy.CheaterPattern;
+import model.gameelements.strategy.RandomPattern;
 import model.map.ConquestMapReader;
 import model.map.MapEdit;
 import model.map.MapFileAdapter;
 import model.state.Edit;
 import view.TournamentResultsView;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import java.util.*;
 
 /**
@@ -25,6 +26,10 @@ import java.util.*;
  */
 public class TournamentController extends MainPlayController {
 
+    /**
+     * The PossibleStrategies.
+     */
+    private static final Set<String> D_PossibleStrategies = new HashSet<>(Arrays.asList("aggressive", "benevolent", "random", "cheater"));
     /**
      * Num of players strategies
      */
@@ -75,7 +80,7 @@ public class TournamentController extends MainPlayController {
     /**
      * all game winner list
      */
-    private ArrayList<String[]> d_AllWinnerList = new ArrayList<String[]>();
+    private ArrayList<String[]> d_AllWinnerList = new ArrayList<>();
 
     @Override
     public void Start() {
@@ -183,9 +188,9 @@ public class TournamentController extends MainPlayController {
                                 if (l_CheckGameOver || d_GameData.getPlayerList().size() <= 1) {
 
                                     d_GameWinner = d_GameData.getPlayerList().get(0).getColour();
-                                    String[] l_winner = d_GameWinner.split(" ");
-                                    d_GameWinner = l_winner[0];
-                                    l_WinnerList[l_GameCounter-1] = d_GameWinner;
+//                                    String[] l_winner = d_GameWinner.split(" ");
+//                                    d_GameWinner = l_winner[0];
+                                    l_WinnerList[l_GameCounter - 1] = d_GameWinner;
                                     System.out.println(d_GameData.getPlayerList().get(0).getColour() + " is Winner");
                                     System.out.println("===== Game " + l_GameCounter + " is Over =====");
                                     break;
@@ -229,32 +234,42 @@ public class TournamentController extends MainPlayController {
     public void setPlayers() {
         System.out.println("Num of Player: " + d_ListOfPlayerStrategies.size());
         //first add player to player list
+        int l_Count = 1;
         for (String l_PlayerStra : d_ListOfPlayerStrategies) {
-            String l_AutoPlayerName = l_PlayerStra + " Player ";
+            String l_AutoPlayerName;
+            if (!D_PossibleStrategies.contains(l_PlayerStra.toLowerCase())) {
+                l_PlayerStra = "aggressive";
+            }
+            l_AutoPlayerName = l_Count + " - " + l_PlayerStra;
             d_GameEngineController.addNewPlayer(l_AutoPlayerName);
+            l_Count++;
+        }
+
+        for (int i = 0; i < d_GameData.getPlayerList().size(); i++) {
+            String l_Strategy = d_ListOfPlayerStrategies.get(i);
+            Player l_Player = d_GameData.getPlayerList().get(i);
 
             // give each player his strategy
-            switch (l_PlayerStra.toLowerCase()) {
+            switch (l_Strategy.toLowerCase()) {
                 case "aggressive":
-                    d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName).setStrategy(new AggressivePattern(d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName), this.d_GameData));
+                    l_Player.setStrategy(new AggressivePattern(l_Player, this.d_GameData));
                     break;
                 case "benevolent":
-                    d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName).setStrategy(new BenevolentPattern(d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName), this.d_GameData));
+                    l_Player.setStrategy(new BenevolentPattern(l_Player, this.d_GameData));
                     break;
                 case "random":
-                    d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName).setStrategy(new RandomPattern(d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName), this.d_GameData));
+                    l_Player.setStrategy(new RandomPattern(l_Player, this.d_GameData));
                     break;
                 case "cheater":
-                    d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName).setStrategy(new CheaterPattern(d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName), this.d_GameData));
+                    l_Player.setStrategy(new CheaterPattern(l_Player, this.d_GameData));
                     break;
                 default:
-                    System.out.println("WARNING: we dont have such strategy pattern, '" + l_PlayerStra + "' set to aggressive strategy as default");
-                    d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName).setStrategy(new AggressivePattern(d_GameEngineController.d_GameData.getPlayerByName(l_AutoPlayerName), this.d_GameData));
+                    System.out.println("WARNING: we dont have such strategy pattern, '" + l_Strategy + "' set to aggressive strategy as default");
+                    d_ListOfPlayerStrategies.set(i, "aggressive"); // update with aggressive
+                    l_Player.setStrategy(new AggressivePattern(l_Player, this.d_GameData));
                     break;
             }
         }
-
-
         getDLogEntryBuffer().updateFile();
 
     }
@@ -319,15 +334,9 @@ public class TournamentController extends MainPlayController {
         resetAttackableState();
         getDLogEntryBuffer().updateFile();
 
-        if (d_GameEngineController.checkGameIsOver()) {
-            // game ends
-
-            return true;
-
-        } else {
-            // go back to issueOrder phase for current build
-            return false;
-        }
+        // game ends
+        // OR go back to issueOrder phase for current build
+        return d_GameEngineController.checkGameIsOver();
     }
 
     /**
@@ -371,7 +380,7 @@ public class TournamentController extends MainPlayController {
         for (File l_EachMapFile : d_ListOfMapFiles) {
             System.out.print(l_EachMapFile.getName() + " ");
         }
-        System.out.println("");
+        System.out.println();
     }
 
 
@@ -416,7 +425,8 @@ public class TournamentController extends MainPlayController {
 
     /**
      * Get map list
-     * @return  return the temporary map list
+     *
+     * @return return the temporary map list
      */
     public List<String> getMapFiles() {
         return d_TempMapList;
@@ -424,21 +434,26 @@ public class TournamentController extends MainPlayController {
 
     /**
      * Get player list.
-     * @return  return the List Of Player Strategies
+     *
+     * @return return the List Of Player Strategies
      */
     public List<String>  getPlayerStrategies() {
         return d_ListOfPlayerStrategies;
     }
+
     /**
      * Get number of games
-     * @return  return the number Of games
+     *
+     * @return return the number Of games
      */
     public int getNumberOfGames() {
         return d_NumberOfGames;
     }
+
     /**
      * Get the max turns
-     * @return  return max number of turns
+     *
+     * @return return max number of turns
      */
     public int getMaxTurns() {
         return d_MaxNumberOfTurns;
@@ -446,7 +461,8 @@ public class TournamentController extends MainPlayController {
 
     /**
      * Get the results
-     * @return  return All winner list.
+     *
+     * @return return All winner list.
      */
     public ArrayList<String[]> getResults() {
         return d_AllWinnerList;

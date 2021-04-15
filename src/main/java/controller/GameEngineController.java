@@ -12,7 +12,9 @@ import model.map.ConquestMapReader;
 import model.map.MapEdit;
 import model.map.MapFileAdapter;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -105,7 +107,7 @@ public class GameEngineController implements Serializable {
 
 
         if (l_Result) {
-            System.out.println("NOTICE: New Player " + l_NewPlayer.getId() + " [" + l_NewPlayer.getColour() + "] has been added to the game.");
+            System.out.println("NOTICE: New Player [" + l_NewPlayer.getColour() + "] has been added to the game.");
         } else {
             System.out.println("Warning: Fail to create Player " + p_Colour + ".");
         }
