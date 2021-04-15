@@ -310,7 +310,7 @@ public class TournamentController extends MainPlayController {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("the current map is :" + d_CurrentMap.getName());
+        System.out.println("the current map is: " + d_GameData.d_MapFile.getName());
         getDLogEntryBuffer().updateFile();
 
     }
@@ -465,5 +465,14 @@ public class TournamentController extends MainPlayController {
      */
     public ArrayList<String[]> getResults() {
         return d_AllWinnerList;
+    }
+
+    /**
+     * Gets d list of map files.
+     *
+     * @return the d list of map files
+     */
+    public List<File> getListOfMapFiles() {
+        return d_ListOfMapFiles;
     }
 }
