@@ -170,6 +170,7 @@ public class TournamentController extends MainPlayController {
                         String[] l_WinnerList = new String[d_NumberOfGames];
                         while (l_GameCounter <= d_NumberOfGames) {
 
+                            d_GameWinner = "No Winner"; // reset the winner
                             System.out.println("===== Game " + l_GameCounter + " =====");
                             //reset map
                             loadMap(d_CurrentMap);
@@ -188,8 +189,6 @@ public class TournamentController extends MainPlayController {
                                 if (l_CheckGameOver || d_GameData.getPlayerList().size() <= 1) {
 
                                     d_GameWinner = d_GameData.getPlayerList().get(0).getColour();
-//                                    String[] l_winner = d_GameWinner.split(" ");
-//                                    d_GameWinner = l_winner[0];
                                     l_WinnerList[l_GameCounter - 1] = d_GameWinner;
                                     System.out.println(d_GameData.getPlayerList().get(0).getColour() + " is Winner");
                                     System.out.println("===== Game " + l_GameCounter + " is Over =====");
@@ -206,9 +205,9 @@ public class TournamentController extends MainPlayController {
                                 }
                             }
 
-                            d_AllWinnerList.add(l_WinnerList);
                             l_GameCounter++;
                         }
+                        d_AllWinnerList.add(l_WinnerList);
                         l_MapCount++;
                     }
                     TournamentResultsView.printTournamentResults(this);
@@ -240,7 +239,7 @@ public class TournamentController extends MainPlayController {
             if (!D_PossibleStrategies.contains(l_PlayerStra.toLowerCase())) {
                 l_PlayerStra = "aggressive";
             }
-            l_AutoPlayerName = l_Count + " - " + l_PlayerStra;
+            l_AutoPlayerName = l_Count + "-" + l_PlayerStra;
             d_GameEngineController.addNewPlayer(l_AutoPlayerName);
             l_Count++;
         }
