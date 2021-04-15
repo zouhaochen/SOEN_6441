@@ -194,7 +194,13 @@ public abstract class PlayerStrategy implements Serializable {
 
     /**
      * Create random Card order.
-     *
+     * @param
+     * @return the Card order
+     */
+    /**
+     * Create random Card order.
+     * @param l_MoveFrom get the Starting point
+     * @param p_MoveTo get the target point
      * @return the Card order
      */
     protected Order createRandomCardOrder(Country l_MoveFrom, Country p_MoveTo) {
