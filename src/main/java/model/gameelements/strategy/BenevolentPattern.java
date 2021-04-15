@@ -64,7 +64,7 @@ public class BenevolentPattern extends PlayerStrategy {
             return new DeployOrder(getPlayer(), toDefend(), l_AvailableReinforcement);
         } else if (getPlayer().getCards().size() != 0) {
             // option 2: use card if the player has any
-            return createRandomCardOrder();
+            return createRandomCardOrder(moveFrom(), toDefend());
         } else {
             // option 3: move armies to reinforce weaker countries
             // limit the number of Advance orders that Benevolent play issues
@@ -84,7 +84,7 @@ public class BenevolentPattern extends PlayerStrategy {
             }
 
             int l_CompareResult = compareArmies(l_MoveFrom, l_MoveTo);
-            if (l_CompareResult == 1)  {
+            if (l_CompareResult > 0) {
                 d_AdvanceOrderCount++;
                 return new AdvanceOrder(getPlayer(), l_MoveFrom, l_MoveTo, calculateArmiesToMove(l_MoveFrom, l_MoveTo));
             } else {
@@ -113,13 +113,7 @@ public class BenevolentPattern extends PlayerStrategy {
         int l_AvailableArmiesFromA = p_CountryA.getArmies() - p_CountryA.getCommittedArmies();
         int l_AvailableArmiesFromB = p_CountryB.getArmies() - p_CountryB.getCommittedArmies();
 
-        if (l_AvailableArmiesFromA < l_AvailableArmiesFromB) {
-            return -1;
-        } else if (l_AvailableArmiesFromA > l_AvailableArmiesFromB) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return Integer.compare(l_AvailableArmiesFromA, l_AvailableArmiesFromB);
     }
 
     /**
