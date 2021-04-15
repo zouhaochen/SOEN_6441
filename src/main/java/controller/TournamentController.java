@@ -105,13 +105,22 @@ public class TournamentController extends MainPlayController {
                     break;
                 case "play":
                     // tournament command validator
-                    while (true) {
+                    boolean l_StayInLoop = true;
+                    while (l_StayInLoop) {
+                        l_StayInLoop = false;
                         System.out.println("Please enter tournament command: tournament -M -P -G -D");
                         l_Command = l_Scanner.nextLine();
                         l_CommandArr = l_Command.split(" ");
+                        // check if all options are included
+                        if (!allOptionsIncluded(l_CommandArr)) {
+                            System.out.println("ERROR: wrong command format, at least one option is missing.");
+                            l_StayInLoop = true;
+                            continue;
+                        }
                         // check header and size of command , command should complete when input
                         if (!l_CommandArr[0].equalsIgnoreCase("tournament") && l_CommandArr.length == 8) {
                             System.out.println("ERROR: wrong command format, should start with 'tournament'");
+                            l_StayInLoop = true;
                             continue;
                         }
                         try {
@@ -135,28 +144,38 @@ public class TournamentController extends MainPlayController {
                                     // check number of Player strategies
                                     if (d_ListOfPlayerStrategies.size() >= 4 || d_ListOfPlayerStrategies.size() < 2) {
                                         System.out.println("ERROR: player number should between 2-4");
-                                        continue;
+                                        l_StayInLoop = true;
                                     }
                                 } else if (l_CommandArr[i].equalsIgnoreCase("-G")) {
-                                    // pass in number of Player strategies
-                                    d_NumberOfGames = Integer.parseInt(l_CommandArr[i + 1]);
-                                    if (d_NumberOfGames < 1 || d_NumberOfGames > 5) {
-                                        System.out.println("ERROR: Game play should between 1-5");
-                                        continue;
+                                    // pass in number of games
+                                    try {
+                                        d_NumberOfGames = Integer.parseInt(l_CommandArr[i + 1]);
+                                        if (d_NumberOfGames < 1 || d_NumberOfGames > 5) {
+                                            System.out.println("ERROR: Game play should between 1-5");
+                                            l_StayInLoop = true;
+                                        }
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("ERROR: Game play should be an integer");
+                                        l_StayInLoop = true;
                                     }
                                 } else if (l_CommandArr[i].equalsIgnoreCase("-D")) {
-                                    // pass in number of Player strategies
-                                    d_MaxNumberOfTurns = Integer.parseInt(l_CommandArr[i + 1]);
-                                    if (d_MaxNumberOfTurns < 10 || d_MaxNumberOfTurns > 50) {
-                                        System.out.println("ERROR: min and max round should between 10-50");
-                                        continue;
+                                    // pass in maximum number of turns
+                                    try {
+                                        d_MaxNumberOfTurns = Integer.parseInt(l_CommandArr[i + 1]);
+                                        if (d_MaxNumberOfTurns < 10 || d_MaxNumberOfTurns > 50) {
+                                            System.out.println("ERROR: min and max round should between 10-50");
+                                            l_StayInLoop = true;
+                                        }
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("ERROR: min and max round should be an integer");
+                                        l_StayInLoop = true;
                                     }
                                 }
                             }
                         } catch (Exception e) {
                             System.out.println("ERROR: tournament command not completed, try again\n");
                         }
-                        break;
+//                        break;
                     }
 
                     // main play loop
@@ -198,7 +217,7 @@ public class TournamentController extends MainPlayController {
                                 l_RoundCounter++;
                                 // if round count greater than max turns, draw the game,break
                                 if (l_RoundCounter > d_MaxNumberOfTurns) {
-                                    l_WinnerList[l_GameCounter-1] = d_GameWinner;
+                                    l_WinnerList[l_GameCounter - 1] = d_GameWinner;
                                     System.out.println("===== Maximum Round Reach =====");
                                     System.out.println("===== DRAW ===== No Winner =====\n");
                                     break;
@@ -421,6 +440,19 @@ public class TournamentController extends MainPlayController {
         }
     }
 
+    /**
+     * All arguments included boolean.
+     *
+     * @param p_CommandArr the p command arr
+     * @return the boolean
+     */
+    private boolean allOptionsIncluded(String[] p_CommandArr) {
+        return Arrays.stream(p_CommandArr).anyMatch("-m"::equalsIgnoreCase)
+                && Arrays.stream(p_CommandArr).anyMatch("-p"::equalsIgnoreCase)
+                && Arrays.stream(p_CommandArr).anyMatch("-g"::equalsIgnoreCase)
+                && Arrays.stream(p_CommandArr).anyMatch("-d"::equalsIgnoreCase);
+    }
+
 
     /**
      * Get map list
@@ -436,7 +468,7 @@ public class TournamentController extends MainPlayController {
      *
      * @return return the List Of Player Strategies
      */
-    public List<String>  getPlayerStrategies() {
+    public List<String> getPlayerStrategies() {
         return d_ListOfPlayerStrategies;
     }
 
