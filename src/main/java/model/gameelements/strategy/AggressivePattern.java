@@ -90,7 +90,7 @@ public class AggressivePattern extends PlayerStrategy {
             return new AdvanceOrder(getPlayer(), l_AttackFrom, getRandomNeighborOfCountry(l_AttackFrom), l_AttackFrom.getArmies() - l_AttackFrom.getCommittedArmies());
         } else if (getPlayer().getCards().size() != 0) {
             // option 3: use card if the player has any
-            return createRandomCardOrder();
+            return createRandomCardOrder(moveFrom(), attackFrom());
         } else {
             // option 4: move armies to maximize aggregation of forces in one country
             Country l_MoveTo = attackFrom();

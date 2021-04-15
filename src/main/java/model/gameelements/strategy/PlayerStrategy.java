@@ -169,6 +169,10 @@ public abstract class PlayerStrategy implements Serializable {
     protected Country getRandomNeighbor() {
         List<Country> l_CountriesInControl = new ArrayList<>(d_Player.getCountriesInControl().values());
         List<Country> l_RandomNeighbors = new ArrayList<>(l_CountriesInControl.get(d_Random.nextInt(l_CountriesInControl.size())).getBorderCountries().values());
+        l_RandomNeighbors.removeAll(l_CountriesInControl);
+        if (l_RandomNeighbors.size() == 0) {
+            return null;
+        }
         return l_RandomNeighbors.get(d_Random.nextInt(l_RandomNeighbors.size()));
     }
 
@@ -193,15 +197,15 @@ public abstract class PlayerStrategy implements Serializable {
      *
      * @return the Card order
      */
-    protected Order createRandomCardOrder() {
+    protected Order createRandomCardOrder(Country l_MoveFrom, Country p_MoveTo) {
         Card l_Card = getPlayer().getCards().remove(0);
-        Country l_MoveFrom = moveFrom();
+//        Country l_MoveFrom = moveFrom();
         if (l_MoveFrom == null) {
             return null;
         }
 
         int l_ArmiesToMove = l_MoveFrom.getArmies() - l_MoveFrom.getCommittedArmies();
-        return CardOrderCreator.createCardOrder(l_Card, getPlayer(), getRandomOpponentPlayer(), l_MoveFrom, attackFrom(), getRandomNeighbor(), l_ArmiesToMove);
+        return CardOrderCreator.createCardOrder(l_Card, getPlayer(), getRandomOpponentPlayer(), l_MoveFrom, p_MoveTo, getRandomNeighbor(), l_ArmiesToMove);
     }
 
 }
