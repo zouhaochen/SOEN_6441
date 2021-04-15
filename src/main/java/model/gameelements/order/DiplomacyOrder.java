@@ -25,7 +25,7 @@ public class DiplomacyOrder extends Order {
      */
     public DiplomacyOrder(Player p_Player, Player p_TargetPlayer) {
         super();
-        setType("Diplomacy");
+        setType("Negotiate");
         d_TargetPlayer = p_TargetPlayer;
         d_Player = p_Player;
     }
