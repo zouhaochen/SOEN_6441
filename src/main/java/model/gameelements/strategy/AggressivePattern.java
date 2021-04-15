@@ -87,7 +87,7 @@ public class AggressivePattern extends PlayerStrategy {
             }
 
             d_AttackedInCurrentTurn = true;
-            return new AdvanceOrder(getPlayer(), l_AttackFrom, getRandomNeighborOfCountry(l_AttackFrom), l_AttackFrom.getArmies() - l_AttackFrom.getCommittedArmies());
+            return new AdvanceOrder(getPlayer(), l_AttackFrom, getRandomNeighborOpponentOfCountry(l_AttackFrom), l_AttackFrom.getArmies() - l_AttackFrom.getCommittedArmies());
         } else if (getPlayer().getCards().size() != 0) {
             // option 3: use card if the player has any
             return createRandomCardOrder(moveFrom(), attackFrom());

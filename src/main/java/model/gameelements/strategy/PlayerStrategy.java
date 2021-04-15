@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * The type Player strategy.
@@ -148,6 +149,30 @@ public abstract class PlayerStrategy implements Serializable {
     }
 
     /**
+     * Gets random neighboring opponent of country.
+     *
+     * @param p_Departure the p departure
+     * @return the random neighboring opponent of country
+     */
+    protected Country getRandomNeighborOpponentOfCountry(Country p_Departure) {
+        List<Country> l_Neighbors = new ArrayList<>(p_Departure.getBorderCountries().values());
+        if (l_Neighbors.isEmpty()) {
+            return null;
+        }
+
+        Set<String> l_CountriesInControl = getPlayer().getCountriesInControl().keySet();
+        List<Country> l_Options = new ArrayList<>();
+        for (Country l_Neighbor :
+                l_Neighbors) {
+            if (!l_CountriesInControl.contains(l_Neighbor.getName())) {
+                l_Options.add(l_Neighbor);
+            }
+        }
+
+        return l_Options.size() > 0 ? l_Options.get(d_Random.nextInt(l_Options.size())) : null;
+    }
+
+    /**
      * Gets random neighbor of country.
      *
      * @param p_Departure the p departure
@@ -158,7 +183,17 @@ public abstract class PlayerStrategy implements Serializable {
         if (l_Neighbors.isEmpty()) {
             return null;
         }
-        return l_Neighbors.get(d_Random.nextInt(l_Neighbors.size()));
+
+        Set<String> l_CountriesInControl = getPlayer().getCountriesInControl().keySet();
+        List<Country> l_Options = new ArrayList<>();
+        for (Country l_Neighbor :
+                l_Neighbors) {
+            if (l_CountriesInControl.contains(l_Neighbor.getName())) {
+                l_Options.add(l_Neighbor);
+            }
+        }
+
+        return l_Options.size() > 0 ? l_Options.get(d_Random.nextInt(l_Options.size())) : null;
     }
 
     /**
@@ -195,11 +230,12 @@ public abstract class PlayerStrategy implements Serializable {
     /**
      * Create random Card order.
      *
+     * @param l_MoveFrom the l move from
+     * @param p_MoveTo   the p move to
      * @return the Card order
      */
     protected Order createRandomCardOrder(Country l_MoveFrom, Country p_MoveTo) {
         Card l_Card = getPlayer().getCards().remove(0);
-//        Country l_MoveFrom = moveFrom();
         if (l_MoveFrom == null) {
             return null;
         }

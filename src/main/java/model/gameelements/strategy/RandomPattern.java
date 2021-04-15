@@ -67,7 +67,7 @@ public class RandomPattern extends PlayerStrategy {
                 if (l_Armies == 0) {
                     return null;
                 }
-                return new AdvanceOrder(l_Player, l_AttackFrom, getRandomNeighborOfCountry(l_AttackFrom), l_Armies);
+                return new AdvanceOrder(l_Player, l_AttackFrom, getRandomNeighborOpponentOfCountry(l_AttackFrom), l_Armies);
             case 2: // move armies to an country in control
                 if (l_Armies == 0) {
                     return null;
