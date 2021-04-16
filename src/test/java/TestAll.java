@@ -1,4 +1,5 @@
 
+import controller.SaveGameTest;
 import gamePlayTest.GameDataTest;
 import gamePlayTest.GameEngineTest;
 import mapTest.*;
@@ -25,6 +26,7 @@ import org.junit.runners.Suite.SuiteClasses;
         GameEngineTest.class,
         PlayerTest.class,
         StateTest.class,
+        SaveGameTest.class,
 
 
 })
