@@ -142,7 +142,7 @@ public class TournamentController extends MainPlayController {
                                     }
                                     d_ListOfPlayerStrategies = l_TempPlayerStraList;
                                     // check number of Player strategies
-                                    if (d_ListOfPlayerStrategies.size() >= 4 || d_ListOfPlayerStrategies.size() < 2) {
+                                    if (d_ListOfPlayerStrategies.size() > 4 || d_ListOfPlayerStrategies.size() < 2) {
                                         System.out.println("ERROR: player number should between 2-4");
                                         l_StayInLoop = true;
                                     }

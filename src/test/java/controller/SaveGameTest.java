@@ -10,6 +10,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * save game test
+ */
 public class SaveGameTest {
 
     /**
@@ -49,7 +52,6 @@ public class SaveGameTest {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
 
